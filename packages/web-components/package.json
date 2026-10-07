@@ -1,6 +1,6 @@
 {
   "name": "@eduportdesign/web-components",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Lit web components for the Eduport Design System (<ep-button>, <ep-text-field>, …). Works in any framework.",
   "license": "MIT",
   "repository": {

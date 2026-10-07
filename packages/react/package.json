@@ -1,6 +1,6 @@
 {
   "name": "@eduportdesign/react",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "React components for the Eduport Design System: @lit/react wrappers around @eduportdesign/web-components.",
   "license": "MIT",
   "repository": {

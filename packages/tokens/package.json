@@ -1,6 +1,6 @@
 {
   "name": "@eduportdesign/tokens",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Design tokens for the Eduport Design System: color, type, space, radius, shadow and motion, with light/dark themes and soft/sharp corner modes.",
   "license": "MIT",
   "repository": {
