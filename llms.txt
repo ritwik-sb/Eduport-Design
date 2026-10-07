@@ -13,6 +13,7 @@ Start with the AI guide. It has setup, every component's tag, props, slots and e
 - [Component gallery](https://ritwik-sb.github.io/Eduport-Design/): every component, live, with theme and corner switches
 - [Storybook](https://ritwik-sb.github.io/Eduport-Design/storybook/): per-component controls and stories
 - [Tokens](packages/tokens/README.md): CSS, SCSS and JS outputs, theme files
+- [Logos](packages/logos/README.md): every logo file, which one to use where, clear space, minimum size and theme switching
 
 ## Optional
 

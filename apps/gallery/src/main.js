@@ -3,6 +3,7 @@ import '@eduportdesign/tokens/css';
 import '@eduportdesign/tokens/css/theme-dark';
 import '@eduportdesign/tokens/css/corners-sharp';
 import { iconNames, toast } from '@eduportdesign/web-components';
+import logoManifest from '@eduportdesign/logos/logos.json';
 import './gallery.css';
 
 const root = document.documentElement;
@@ -100,6 +101,39 @@ for (const name of iconNames()) {
   const figure = document.createElement('figure');
   figure.innerHTML = `<ep-icon name="${name}"></ep-icon><figcaption>${name}</figcaption>`;
   grid.append(figure);
+}
+
+// Logos, generated from the package manifest
+const logoGroups = [
+  ['core', 'Core marks', 'The logo on a transparent background. Use these in most places.'],
+  ['icon', 'App icons and tiles', 'For app launchers, favicons, system avatars and square placeholders.'],
+  ['social', 'Social avatars', 'Extra padding so the mark survives a circular crop.'],
+  ['card', 'Cards', 'A plate for photos and busy backgrounds. The sizes differ only in how much of the card the wordmark fills.'],
+  ['badge', 'Pills', "Badges, stickers and 'powered by Eduport' marks."],
+  ['tab', 'Hanging tabs', 'Hang from the top edge of a page, letterhead or slide.'],
+];
+const logoUrls = import.meta.glob('../../../packages/logos/svg/*.svg', { query: '?url', import: 'default', eager: true });
+const logoUrl = (name) => logoUrls[`../../../packages/logos/svg/${name}.svg`];
+const logoHost = document.getElementById('logo-groups');
+for (const [group, title, description] of logoGroups) {
+  const block = document.createElement('div');
+  block.className = 'demo logo-group';
+  block.innerHTML = `<h3>${title}</h3><p>${description}</p><div class="logo-grid"></div>`;
+  for (const logo of logoManifest.logos.filter((l) => l.group === group)) {
+    const figure = document.createElement('figure');
+    figure.className = 'logo-card';
+    figure.innerHTML = `
+      <div class="logo-preview" data-preview="${logo.preview ?? 'neutral'}" data-mark="${logo.mark}">
+        <img src="${logoUrl(logo.name)}" alt="" />
+      </div>
+      <figcaption>
+        <strong>${logo.title}</strong>
+        <span>${logo.use}</span>
+        <a href="${logoUrl(logo.name)}" download="eduport-${logo.name}.svg"><ep-icon name="download"></ep-icon>${logo.name}.svg</a>
+      </figcaption>`;
+    block.querySelector('.logo-grid').append(figure);
+  }
+  logoHost.append(block);
 }
 
 // Highlight the section in view

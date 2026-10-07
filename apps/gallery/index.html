@@ -9,7 +9,7 @@
   <body>
     <header class="topbar">
       <div class="brand">
-        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--ep-color-interactive-primary-default)"/><path d="M10 9h12v3H13.5v2.5H21v3h-7.5V20H22v3H10z" fill="var(--ep-color-text-on-color)"/></svg>
+        <img class="logo" src="./favicon.svg" alt="" />
         <span>Eduport<span class="long"> Design System</span> <small>Components</small></span>
       </div>
       <div class="controls">
@@ -33,6 +33,10 @@
         <h2>Overview</h2>
         <ul>
           <li><a href="#example">Example screen</a></li>
+        </ul>
+        <h2>Brand</h2>
+        <ul>
+          <li><a href="#logos">Logos</a></li>
         </ul>
         <h2>Actions</h2>
         <ul>
@@ -129,6 +133,17 @@
               </form>
             </ep-card>
           </div>
+        </section>
+
+        <!-- Logos -->
+        <section class="component" id="logos" aria-labelledby="logos-title">
+          <div class="component-header"><h2 id="logos-title">Logos</h2><code>@eduportdesign/logos</code></div>
+          <p>
+            Every Eduport logo as an SVG file. Start with the orange wordmark on light backgrounds and the white one on
+            orange or dark backgrounds. Keep clear space of half the wordmark's height around it, don't go below 80&nbsp;px
+            wide (24&nbsp;px for the symbol), and never recolor, stretch or add effects. Each file can be downloaded.
+          </p>
+          <div id="logo-groups"></div>
         </section>
 
         <!-- Button -->

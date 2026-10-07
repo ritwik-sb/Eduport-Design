@@ -343,6 +343,33 @@ registerIcons({ 'brand-github': '<path d="…"/>' });
 
 Don't import another icon library, and don't inline SVGs in markup. A full icon package (`@eduportdesign/icons`) is planned.
 
+### Logos
+
+Logo files live in `@eduportdesign/logos` (in the repo; not on npm yet). Never redraw the logo, set "eduport" in a font, or recolor an SVG; pick a file. The full list with use cases is in [packages/logos/README.md](../packages/logos/README.md) and machine-readable in `packages/logos/logos.json`.
+
+| Where | File |
+|---|---|
+| Header or sign-in screen, light theme | `wordmark-orange.svg` |
+| Header, dark theme, or on brand orange | `wordmark-white.svg` |
+| Collapsed sidebar, tight space | `symbol-orange.svg` / `symbol-white.svg` |
+| App icon, favicon, PWA manifest | `symbol-tile-brand.svg` |
+| Eduport as the sender (notifications, chat avatar) | `symbol-circle-brand.svg` |
+| Over a photo or busy background | `wordmark-card-light-*.svg` or `wordmark-pill-light.svg` |
+| One-color print | `wordmark-black.svg` |
+
+```html
+<!-- Do: an image with alt="Eduport", swapped with the theme -->
+<a href="/" class="home-link">
+  <img class="logo-light" src="/brand/wordmark-orange.svg" alt="Eduport" height="32" />
+  <img class="logo-dark" src="/brand/wordmark-white.svg" alt="Eduport" height="32" />
+</a>
+<style>
+  [data-theme='dark'] .logo-light, :root:not([data-theme='dark']) .logo-dark { display: none; }
+</style>
+```
+
+Keep clear space of half the wordmark's height around it, and don't show the wordmark under 80 px wide or the symbol under 24 px.
+
 ## 7. Accessibility (WCAG 2.1 AA is a requirement)
 
 The components handle keyboard support, focus rings, ARIA roles and `forced-colors` themselves. Generated code still has to:
