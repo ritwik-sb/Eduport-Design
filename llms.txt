@@ -10,6 +10,8 @@ Start with the AI guide. It has setup, every component's tag, props, slots and e
 - [README](README.md): overview, install from npm or GitHub Packages, development and release
 - [Web components](packages/web-components/README.md): component table and conventions
 - [React](packages/react/README.md): wrapper names, props and event props
+- [Component gallery](https://ritwik-sb.github.io/Eduport-Design/): every component, live, with theme and corner switches
+- [Storybook](https://ritwik-sb.github.io/Eduport-Design/storybook/): per-component controls and stories
 - [Tokens](packages/tokens/README.md): CSS, SCSS and JS outputs, theme files
 
 ## Optional

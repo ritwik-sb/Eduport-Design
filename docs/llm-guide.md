@@ -4,6 +4,8 @@ This file is written for LLM coding assistants (Claude Code, Cursor, Copilot, Co
 
 If something you need is not listed here, it does not exist yet. Don't invent tags, props, events or tokens. Build it from the tokens in this file and flag it as a gap.
 
+Visual reference: the [component gallery](https://ritwik-sb.github.io/Eduport-Design/) shows every component in both themes and corner modes, and [Storybook](https://ritwik-sb.github.io/Eduport-Design/storybook/) has each one's controls.
+
 Status: pre-release (0.x). Names can still change before 1.0.
 
 ## 1. The rules (read these first)
