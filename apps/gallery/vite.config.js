@@ -14,5 +14,9 @@ export default defineConfig(({ mode }) => ({
   server: { open: true },
   // `pnpm build:single` inlines everything into one HTML file for sharing.
   plugins: mode === 'single' ? [viteSingleFile()] : [],
-  build: { outDir: mode === 'single' ? 'dist-single' : 'dist' },
+  build: {
+    outDir: mode === 'single' ? 'dist-single' : 'dist',
+    // Logo files stay real files, so their download links give a clean .svg.
+    assetsInlineLimit: (file) => (mode !== 'single' && file.includes('/packages/logos/') ? false : undefined),
+  },
 }));

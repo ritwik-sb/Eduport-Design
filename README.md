@@ -23,6 +23,7 @@ A reusable design system for Eduport products, in the spirit of IBM Carbon and t
 | [`@eduportdesign/tokens`](packages/tokens) | Design tokens (color, type, space, radius, shadow, motion) as CSS variables, SCSS and JS | In this repo |
 | [`@eduportdesign/web-components`](packages/web-components) | Lit 3 components (`<ep-button>`, `<ep-text-field>`, …) | In this repo |
 | [`@eduportdesign/react`](packages/react) | React wrappers (`<Button>`, `<TextField>`, …) | In this repo |
+| [`@eduportdesign/logos`](packages/logos) | Eduport logo SVGs with a manifest of where to use each one | In this repo, not published yet |
 | `@eduportdesign/icons` | Icon package based on [Tabler Icons](https://tabler.io/icons) | Planned |
 
 ## Quick start
@@ -140,6 +141,7 @@ apps/
   gallery/      one page with every component (Vite)
   storybook/    Storybook workbench with the accessibility addon
 packages/
+  logos/            logo SVGs and logos.json (use cases)
   tokens/           design tokens
   web-components/   src/components/<name>/<name>.ts, index.ts (registers the tag)
   react/            src/<name>.ts, one @lit/react wrapper per component

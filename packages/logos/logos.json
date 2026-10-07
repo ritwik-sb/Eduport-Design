@@ -1,0 +1,188 @@
+{
+  "$comment": "Every Eduport logo file in svg/. `use` says where each one belongs; the gallery and docs are generated from this list.",
+  "color": "#ff6518",
+  "logos": [
+    {
+      "name": "wordmark-orange",
+      "group": "core",
+      "mark": "wordmark",
+      "title": "Wordmark, orange",
+      "preview": "light",
+      "use": "The primary logo. Use it whenever the background is white or a light neutral: app and website headers, sign-in screens, emails, documents and slides."
+    },
+    {
+      "name": "wordmark-white",
+      "group": "core",
+      "mark": "wordmark",
+      "title": "Wordmark, white",
+      "preview": "brand",
+      "use": "On brand orange, dark surfaces (dark theme headers) and dark photos or video. Check the background behind it is dark enough to read the cap and tassel."
+    },
+    {
+      "name": "wordmark-black",
+      "group": "core",
+      "mark": "wordmark",
+      "title": "Wordmark, black",
+      "preview": "light",
+      "use": "One-color reproduction only: black-and-white print, stamps, engraving and embossing, fax, and partner lockups that require a mono logo."
+    },
+    {
+      "name": "symbol-orange",
+      "group": "core",
+      "mark": "symbol",
+      "title": "Symbol, orange",
+      "preview": "light",
+      "derived": true,
+      "use": "The cap-and-e mark alone, for tight spaces where Eduport is already named nearby: a collapsed sidebar, a loading screen, a watermark."
+    },
+    {
+      "name": "symbol-white",
+      "group": "core",
+      "mark": "symbol",
+      "title": "Symbol, white",
+      "preview": "brand",
+      "derived": true,
+      "use": "The symbol on brand orange or dark surfaces, for the same tight spaces as the orange symbol."
+    },
+    {
+      "name": "symbol-tile-brand",
+      "group": "icon",
+      "mark": "symbol",
+      "title": "App icon, orange",
+      "use": "The default app icon: iOS and Android launcher icons, PWA manifest icons, favicons, and app store listings."
+    },
+    {
+      "name": "symbol-tile-light",
+      "group": "icon",
+      "mark": "symbol",
+      "title": "App icon, white",
+      "use": "Alternate app icon for orange or dark backgrounds where the orange tile would disappear, such as a tile on a brand-colored page or a dark-mode home screen preview."
+    },
+    {
+      "name": "symbol-circle-brand",
+      "group": "icon",
+      "mark": "symbol",
+      "title": "Round icon, orange",
+      "use": "Eduport as the sender inside a product: the avatar on system messages, notifications, comments and chat, and map pins."
+    },
+    {
+      "name": "symbol-circle-light",
+      "group": "icon",
+      "mark": "symbol",
+      "title": "Round icon, white",
+      "use": "The round icon on orange or dark backgrounds, for example a system avatar inside an orange banner."
+    },
+    {
+      "name": "wordmark-tile-brand",
+      "group": "icon",
+      "mark": "wordmark",
+      "title": "Wordmark tile, orange",
+      "use": "Square spaces big enough to read the name: default cover images for courses and videos, square ads, social post templates and end cards."
+    },
+    {
+      "name": "wordmark-tile-light",
+      "group": "icon",
+      "mark": "wordmark",
+      "title": "Wordmark tile, white",
+      "use": "The wordmark tile on orange or dark backgrounds, or where a lighter placeholder image reads better."
+    },
+    {
+      "name": "symbol-avatar-brand",
+      "group": "social",
+      "mark": "symbol",
+      "title": "Social avatar, symbol",
+      "use": "Profile pictures on platforms that crop to a circle and show them small: WhatsApp, YouTube, Instagram, X. The extra padding keeps the mark inside the circle."
+    },
+    {
+      "name": "wordmark-avatar-brand",
+      "group": "social",
+      "mark": "wordmark",
+      "title": "Social avatar, wordmark",
+      "use": "Profile pictures shown large enough to read the name, such as a LinkedIn or Facebook page. Safe for circular crops."
+    },
+    {
+      "name": "wordmark-card-light-lg",
+      "group": "card",
+      "mark": "wordmark",
+      "title": "White card, large mark",
+      "use": "Places the logo on photos, colored or busy backgrounds where it needs its own plate. Use the large mark when the card is shown small, such as a partner logo strip or a sponsor row."
+    },
+    {
+      "name": "wordmark-card-light-md",
+      "group": "card",
+      "mark": "wordmark",
+      "title": "White card, medium mark",
+      "use": "The same white card at mid size, such as a logo on an event banner or certificate."
+    },
+    {
+      "name": "wordmark-card-light-sm",
+      "group": "card",
+      "mark": "wordmark",
+      "title": "White card, small mark",
+      "use": "The white card shown large, where the generous padding reads as breathing room: a hero banner or a printed backdrop."
+    },
+    {
+      "name": "wordmark-card-brand-lg",
+      "group": "card",
+      "mark": "wordmark",
+      "title": "Orange card, large mark",
+      "use": "A solid brand block on white, neutral or dark backgrounds. Use the large mark when the card is shown small, such as an email header or a footer."
+    },
+    {
+      "name": "wordmark-card-brand-md",
+      "group": "card",
+      "mark": "wordmark",
+      "title": "Orange card, medium mark",
+      "use": "The orange card at mid size, such as a presentation title slide or a web banner."
+    },
+    {
+      "name": "wordmark-card-brand-sm",
+      "group": "card",
+      "mark": "wordmark",
+      "title": "Orange card, small mark",
+      "use": "The orange card shown large, where the padding reads as breathing room: a hero, a stage screen or a printed backdrop."
+    },
+    {
+      "name": "wordmark-pill-light",
+      "group": "badge",
+      "mark": "wordmark",
+      "title": "White pill",
+      "use": "A floating badge over photos and video, a 'powered by Eduport' mark on partner pages, and stickers or merchandise."
+    },
+    {
+      "name": "wordmark-pill-brand",
+      "group": "badge",
+      "mark": "wordmark",
+      "title": "Orange pill",
+      "use": "The pill on white or neutral backgrounds, for the same badge, sticker and co-branding uses."
+    },
+    {
+      "name": "wordmark-tab-brand",
+      "group": "tab",
+      "mark": "wordmark",
+      "title": "Orange tab",
+      "use": "Hangs from the top edge of a page: landing page headers, letterheads, certificates and slide masters. Align its flat top edge with the edge of the page."
+    },
+    {
+      "name": "wordmark-tab-light",
+      "group": "tab",
+      "mark": "wordmark",
+      "title": "White tab",
+      "use": "The hanging tab on orange, dark or photo backgrounds."
+    },
+    {
+      "name": "wordmark-tab-angled-brand",
+      "group": "tab",
+      "mark": "wordmark",
+      "title": "Orange angled tab",
+      "use": "A more expressive hanging tab for marketing: posters, social graphics, event banners and campaign pages. Keep it out of product UI."
+    },
+    {
+      "name": "wordmark-tab-angled-light",
+      "group": "tab",
+      "mark": "wordmark",
+      "title": "White angled tab",
+      "use": "The angled tab on orange, dark or photo backgrounds, for the same marketing uses."
+    }
+  ]
+}
