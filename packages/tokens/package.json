@@ -3,8 +3,26 @@
   "version": "0.0.0",
   "description": "Design tokens for the Eduport Design System: color, type, space, radius, shadow and motion, with light/dark themes and soft/sharp corner modes.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ritwik-sb/Eduport-Design.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://github.com/ritwik-sb/Eduport-Design/tree/main/packages/tokens#readme",
+  "bugs": "https://github.com/ritwik-sb/Eduport-Design/issues",
+  "keywords": [
+    "design-tokens",
+    "design-system",
+    "eduport",
+    "css-variables"
+  ],
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     "./css": "./dist/css/tokens.css",
     "./css/theme-dark": "./dist/css/theme-dark.css",
@@ -13,7 +31,12 @@
     ".": {
       "types": "./dist/js/tokens.d.ts",
       "default": "./dist/js/tokens.js"
-    }
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "node build.mjs",
