@@ -1,6 +1,6 @@
 {
   "name": "@eduportdesign/logos",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Eduport logo files (wordmark, symbol and contained versions) as optimized SVGs, with a manifest of where to use each one.",
   "license": "MIT",
