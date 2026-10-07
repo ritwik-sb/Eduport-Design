@@ -1,0 +1,19 @@
+# Eduport Design System
+
+> Design tokens, Lit web components (`<ep-*>`) and React wrappers for Eduport apps. Packages: @eduportdesign/tokens, @eduportdesign/web-components, @eduportdesign/react. Light/dark themes via `data-theme`, soft/sharp corners via `data-corners`. Style custom UI only with semantic `--ep-*` tokens; WCAG 2.1 AA is required.
+
+Start with the AI guide. It has setup, every component's tag, props, slots and events, the token list, accessibility rules and do/don't examples in one file.
+
+## Docs
+
+- [AI coding assistant guide](docs/llm-guide.md): the full reference for generating UI with this design system
+- [README](README.md): overview, install from npm or GitHub Packages, development and release
+- [Web components](packages/web-components/README.md): component table and conventions
+- [React](packages/react/README.md): wrapper names, props and event props
+- [Tokens](packages/tokens/README.md): CSS, SCSS and JS outputs, theme files
+
+## Optional
+
+- [Foundations](docs/foundations.md): how the color scales, type, radius and icon choices were made, with contrast results
+- [Token sources](packages/tokens/src): DTCG JSON for primitives, themes and corner modes
+- [Component sources](packages/web-components/src/components): Lit source with JSDoc `@slot`, `@csspart` and `@fires` tags
