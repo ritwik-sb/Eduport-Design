@@ -1,0 +1,49 @@
+{
+  "name": "@eduportdesign/react",
+  "version": "0.0.0",
+  "description": "React components for the Eduport Design System: @lit/react wrappers around @eduportdesign/web-components.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ritwik-sb/Eduport-Design.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/ritwik-sb/Eduport-Design/tree/main/packages/react#readme",
+  "bugs": "https://github.com/ritwik-sb/Eduport-Design/issues",
+  "keywords": [
+    "react",
+    "design-system",
+    "eduport"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@eduportdesign/web-components": "workspace:^",
+    "@lit/react": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "typescript": "^7.0.0"
+  }
+}

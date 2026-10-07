@@ -8,6 +8,8 @@
     "node": ">=20"
   },
   "scripts": {
+    "dev": "pnpm --filter @eduportdesign/tokens build && pnpm --filter @eduportdesign/gallery dev",
+    "storybook": "pnpm --filter @eduportdesign/tokens build && pnpm --filter @eduportdesign/storybook dev",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "changeset": "changeset",

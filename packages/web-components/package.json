@@ -1,0 +1,59 @@
+{
+  "name": "@eduportdesign/web-components",
+  "version": "0.0.0",
+  "description": "Lit web components for the Eduport Design System (<ep-button>, <ep-text-field>, \u2026). Works in any framework.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ritwik-sb/Eduport-Design.git",
+    "directory": "packages/web-components"
+  },
+  "homepage": "https://github.com/ritwik-sb/Eduport-Design/tree/main/packages/web-components#readme",
+  "bugs": "https://github.com/ritwik-sb/Eduport-Design/issues",
+  "keywords": [
+    "web-components",
+    "lit",
+    "design-system",
+    "eduport"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "./dist/index.js",
+    "./dist/components/*/index.js",
+    "./src/index.ts",
+    "./src/components/*/index.ts"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*/index.d.ts",
+      "default": "./dist/components/*/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "icons": "node scripts/generate-icons.mjs"
+  },
+  "peerDependencies": {
+    "@eduportdesign/tokens": "workspace:^"
+  },
+  "dependencies": {
+    "lit": "^3.3.0"
+  },
+  "devDependencies": {
+    "@eduportdesign/tokens": "workspace:^",
+    "@tabler/icons": "^3.49.0",
+    "typescript": "^7.0.0"
+  }
+}
