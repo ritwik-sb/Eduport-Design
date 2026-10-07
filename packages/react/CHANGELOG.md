@@ -1,6 +1,6 @@
 # @eduportdesign/react
 
-## 1.0.0
+## 0.1.0
 
 ### Minor Changes
 
@@ -9,4 +9,4 @@
 ### Patch Changes
 
 - Updated dependencies [421ca16]
-  - @eduportdesign/web-components@1.0.0
+  - @eduportdesign/web-components@0.1.0
