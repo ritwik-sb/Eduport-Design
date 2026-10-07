@@ -1,0 +1,209 @@
+{
+  "color": {
+    "$type": "color",
+    "white": {
+      "$value": "#ffffff"
+    },
+    "black": {
+      "$value": "#000000"
+    },
+    "brand": {
+      "$description": "Eduport orange. Step 50 is the exact brand color #fb6514.",
+      "10": {
+        "$value": "#fff6f3"
+      },
+      "20": {
+        "$value": "#ffe7de"
+      },
+      "30": {
+        "$value": "#ffcbb7"
+      },
+      "40": {
+        "$value": "#ff9f79"
+      },
+      "50": {
+        "$value": "#fb6514"
+      },
+      "60": {
+        "$value": "#c64b00"
+      },
+      "70": {
+        "$value": "#983800"
+      },
+      "80": {
+        "$value": "#762900"
+      },
+      "90": {
+        "$value": "#561b00"
+      },
+      "100": {
+        "$value": "#2b0a00"
+      }
+    },
+    "gray": {
+      "$description": "Warm neutral, tinted toward the brand hue.",
+      "10": {
+        "$value": "#faf7f6"
+      },
+      "20": {
+        "$value": "#eeebea"
+      },
+      "30": {
+        "$value": "#d9d5d2"
+      },
+      "40": {
+        "$value": "#bab6b4"
+      },
+      "50": {
+        "$value": "#95918f"
+      },
+      "60": {
+        "$value": "#767270"
+      },
+      "70": {
+        "$value": "#5a5654"
+      },
+      "80": {
+        "$value": "#45413f"
+      },
+      "90": {
+        "$value": "#312d2b"
+      },
+      "100": {
+        "$value": "#171412"
+      }
+    },
+    "red": {
+      "$description": "Danger.",
+      "10": {
+        "$value": "#fff6f6"
+      },
+      "20": {
+        "$value": "#ffe6e5"
+      },
+      "30": {
+        "$value": "#ffc9c7"
+      },
+      "40": {
+        "$value": "#ff9c99"
+      },
+      "50": {
+        "$value": "#ff565e"
+      },
+      "60": {
+        "$value": "#d73240"
+      },
+      "70": {
+        "$value": "#a91e2d"
+      },
+      "80": {
+        "$value": "#811922"
+      },
+      "90": {
+        "$value": "#5c1218"
+      },
+      "100": {
+        "$value": "#310306"
+      }
+    },
+    "green": {
+      "$description": "Success.",
+      "10": {
+        "$value": "#ebfded"
+      },
+      "20": {
+        "$value": "#d1f5d7"
+      },
+      "30": {
+        "$value": "#a3e5b0"
+      },
+      "40": {
+        "$value": "#69cb82"
+      },
+      "50": {
+        "$value": "#2ca756"
+      },
+      "60": {
+        "$value": "#00853c"
+      },
+      "70": {
+        "$value": "#00652c"
+      },
+      "80": {
+        "$value": "#004d20"
+      },
+      "90": {
+        "$value": "#013614"
+      },
+      "100": {
+        "$value": "#001906"
+      }
+    },
+    "amber": {
+      "$description": "Warning.",
+      "10": {
+        "$value": "#fff8e5"
+      },
+      "20": {
+        "$value": "#fdeabf"
+      },
+      "30": {
+        "$value": "#f6d283"
+      },
+      "40": {
+        "$value": "#e7ae2c"
+      },
+      "50": {
+        "$value": "#c08800"
+      },
+      "60": {
+        "$value": "#996a00"
+      },
+      "70": {
+        "$value": "#774f00"
+      },
+      "80": {
+        "$value": "#5d3b00"
+      },
+      "90": {
+        "$value": "#442800"
+      },
+      "100": {
+        "$value": "#221000"
+      }
+    },
+    "blue": {
+      "$description": "Information.",
+      "10": {
+        "$value": "#f4f8ff"
+      },
+      "20": {
+        "$value": "#e0edff"
+      },
+      "30": {
+        "$value": "#bbd9ff"
+      },
+      "40": {
+        "$value": "#85baff"
+      },
+      "50": {
+        "$value": "#4093f8"
+      },
+      "60": {
+        "$value": "#2272cf"
+      },
+      "70": {
+        "$value": "#1157a3"
+      },
+      "80": {
+        "$value": "#0f427d"
+      },
+      "90": {
+        "$value": "#0b2e58"
+      },
+      "100": {
+        "$value": "#011430"
+      }
+    }
+  }
+}

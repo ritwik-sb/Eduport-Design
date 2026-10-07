@@ -1,0 +1,9 @@
+{
+  "radius": {
+    "$type": "dimension",
+    "indicator": { "$value": "{radius.none}" },
+    "control": { "$value": "{radius.none}" },
+    "container": { "$value": "{radius.none}" },
+    "round": { "$value": "{radius.full}" }
+  }
+}

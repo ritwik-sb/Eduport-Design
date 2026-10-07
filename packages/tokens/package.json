@@ -1,0 +1,25 @@
+{
+  "name": "@eduportdesign/tokens",
+  "version": "0.0.0",
+  "description": "Design tokens for the Eduport Design System: color, type, space, radius, shadow and motion, with light/dark themes and soft/sharp corner modes.",
+  "license": "MIT",
+  "type": "module",
+  "files": ["dist"],
+  "exports": {
+    "./css": "./dist/css/tokens.css",
+    "./css/theme-dark": "./dist/css/theme-dark.css",
+    "./css/corners-sharp": "./dist/css/corners-sharp.css",
+    "./scss": "./dist/scss/_tokens.scss",
+    ".": {
+      "types": "./dist/js/tokens.d.ts",
+      "default": "./dist/js/tokens.js"
+    }
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node scripts/check-contrast.mjs"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.0.0"
+  }
+}

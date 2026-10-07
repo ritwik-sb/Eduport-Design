@@ -1,0 +1,169 @@
+{
+  "color": {
+    "$type": "color",
+    "background": {
+      "default": {
+        "$value": "{color.white}"
+      },
+      "subtle": {
+        "$value": "{color.gray.10}"
+      },
+      "inverse": {
+        "$value": "{color.gray.100}"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.white}"
+      },
+      "raised": {
+        "$value": "{color.white}"
+      },
+      "overlay": {
+        "$value": "{color.white}"
+      },
+      "sunken": {
+        "$value": "{color.gray.10}"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{color.gray.100}"
+      },
+      "secondary": {
+        "$value": "{color.gray.70}"
+      },
+      "disabled": {
+        "$value": "{color.gray.50}"
+      },
+      "inverse": {
+        "$value": "{color.white}"
+      },
+      "on-color": {
+        "$value": "{color.white}",
+        "$description": "Text and icons on interactive primary, secondary and danger fills. White in both themes."
+      },
+      "link": {
+        "$value": "{color.brand.70}"
+      },
+      "success": {
+        "$value": "{color.green.70}"
+      },
+      "warning": {
+        "$value": "{color.amber.70}"
+      },
+      "danger": {
+        "$value": "{color.red.70}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.gray.30}"
+      },
+      "strong": {
+        "$value": "{color.gray.60}",
+        "$description": "Meets 3:1 against backgrounds. Use for input and control boundaries."
+      },
+      "focus": {
+        "$value": "{color.brand.60}"
+      },
+      "danger": {
+        "$value": "{color.red.60}"
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "{color.brand.60}",
+        "$description": "Non-text marks: selected indicators, progress, active tab underline. brand.60 in light (the brand color itself is under 3:1 on tinted backgrounds); dark uses the exact brand orange."
+      },
+      "subtle": {
+        "$value": "{color.brand.10}",
+        "$description": "Selected or highlighted rows and cards."
+      }
+    },
+    "interactive": {
+      "primary": {
+        "default": {
+          "$value": "{color.brand.60}",
+          "$description": "Darker than the brand color so white text passes AA (4.76:1)."
+        },
+        "hover": {
+          "$value": "{color.brand.70}"
+        },
+        "active": {
+          "$value": "{color.brand.80}"
+        }
+      },
+      "secondary": {
+        "default": {
+          "$value": "{color.gray.80}"
+        },
+        "hover": {
+          "$value": "{color.gray.90}"
+        },
+        "active": {
+          "$value": "{color.gray.100}"
+        }
+      },
+      "ghost": {
+        "default": {
+          "$value": "#ffffff00"
+        },
+        "hover": {
+          "$value": "{color.gray.20}"
+        },
+        "active": {
+          "$value": "{color.gray.30}"
+        }
+      },
+      "danger": {
+        "default": {
+          "$value": "{color.red.60}"
+        },
+        "hover": {
+          "$value": "{color.red.70}"
+        },
+        "active": {
+          "$value": "{color.red.80}"
+        }
+      },
+      "disabled": {
+        "$value": "{color.gray.20}"
+      }
+    },
+    "feedback": {
+      "info": {
+        "background": {
+          "$value": "{color.blue.10}"
+        },
+        "border": {
+          "$value": "{color.blue.50}"
+        }
+      },
+      "success": {
+        "background": {
+          "$value": "{color.green.10}"
+        },
+        "border": {
+          "$value": "{color.green.50}"
+        }
+      },
+      "warning": {
+        "background": {
+          "$value": "{color.amber.10}"
+        },
+        "border": {
+          "$value": "{color.amber.50}"
+        }
+      },
+      "danger": {
+        "background": {
+          "$value": "{color.red.10}"
+        },
+        "border": {
+          "$value": "{color.red.50}"
+        }
+      }
+    }
+  }
+}

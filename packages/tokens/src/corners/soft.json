@@ -1,0 +1,9 @@
+{
+  "radius": {
+    "$type": "dimension",
+    "indicator": { "$value": "{radius.md}", "$description": "Small marks: checkbox, tag, badge, tooltip." },
+    "control": { "$value": "{radius.lg}", "$description": "Interactive controls: button, text field, select, menu item." },
+    "container": { "$value": "{radius.xl}", "$description": "Surfaces that hold content: card, popover, modal, toast." },
+    "round": { "$value": "{radius.full}", "$description": "Always circular or pill-shaped in every corner mode: avatar, radio, switch." }
+  }
+}

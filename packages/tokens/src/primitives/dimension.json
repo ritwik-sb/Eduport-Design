@@ -1,0 +1,32 @@
+{
+  "space": {
+    "$type": "dimension",
+    "$description": "4px base grid. Steps are named in hundredths of 8px (100 = 8px).",
+    "0": { "$value": "0px" },
+    "25": { "$value": "2px" },
+    "50": { "$value": "4px" },
+    "100": { "$value": "8px" },
+    "150": { "$value": "12px" },
+    "200": { "$value": "16px" },
+    "300": { "$value": "24px" },
+    "400": { "$value": "32px" },
+    "500": { "$value": "40px" },
+    "600": { "$value": "48px" },
+    "800": { "$value": "64px" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$description": "Raw radius values. Components use the semantic radius.* tokens from src/corners, never these.",
+    "none": { "$value": "0px" },
+    "sm": { "$value": "2px" },
+    "md": { "$value": "4px" },
+    "lg": { "$value": "6px" },
+    "xl": { "$value": "10px" },
+    "full": { "$value": "9999px" }
+  },
+  "border-width": {
+    "$type": "dimension",
+    "thin": { "$value": "1px" },
+    "thick": { "$value": "2px" }
+  }
+}
