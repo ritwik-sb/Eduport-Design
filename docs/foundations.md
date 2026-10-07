@@ -36,10 +36,10 @@ Every hue has ten steps, `10` (lightest) to `100` (darkest), generated in OKLCH 
 
 White text on `#fb6514` is **3.01:1**, which fails WCAG AA for normal text (4.5:1). There are two ways to keep AA:
 
-1. **Darker fill, white text (current default).** Primary buttons use `brand.60` `#c64b00` with white text (4.76:1). The exact brand orange is used in dark mode for accents.
+1. **Darker fill, white text (chosen 2026-10-07).** Primary buttons use `brand.60` `#c64b00` with white text (4.76:1). The exact brand orange is used in dark mode for accents.
 2. **Exact brand fill, dark text.** Primary buttons use `#fb6514` with near-black text (`gray.100`, 6.09:1). The UI shows the true brand color, at the cost of a less conventional dark-on-orange button.
 
-Option 1 is implemented. Switching to option 2 is a change to `interactive.primary.*` and a new `text.on-primary` token.
+Decision: option 1. Option 2 is kept here for the record.
 
 ### Semantic tokens
 
