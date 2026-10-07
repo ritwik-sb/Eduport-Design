@@ -2,7 +2,11 @@
 
 A reusable design system for Eduport products, in the spirit of IBM Carbon and the Atlassian Design System. Components are written once as web components and work in any framework, with React wrappers on top.
 
-> **Status:** pre-release. The first release will be v0.1.0. This repository currently holds the design tokens (`@eduportdesign/tokens`). The component packages are on the [roadmap](#roadmap).
+> **Status:** pre-release. The first release will be v0.1.0. This repository holds the design tokens, a starter set of 18 components, and React wrappers for them.
+
+**Using an AI coding assistant?** Point it at [docs/llm-guide.md](docs/llm-guide.md) (or [llms.txt](llms.txt)). It has setup, every component API, the token rules and accessibility requirements in one file, plus a snippet to paste into your app's `AGENTS.md` or `CLAUDE.md`.
+
+**See every component:** run `pnpm install && pnpm dev`. A gallery opens in your browser with light/dark and soft/sharp switches.
 
 ## Highlights
 
@@ -17,8 +21,8 @@ A reusable design system for Eduport products, in the spirit of IBM Carbon and t
 | Package | What it is | Status |
 |---|---|---|
 | [`@eduportdesign/tokens`](packages/tokens) | Design tokens (color, type, space, radius, shadow, motion) as CSS variables, SCSS and JS | In this repo |
-| `@eduportdesign/web-components` | Lit 3 components (`<ep-button>`, …) | Planned |
-| `@eduportdesign/react` | React wrappers (`<Button>`, …) | Planned |
+| [`@eduportdesign/web-components`](packages/web-components) | Lit 3 components (`<ep-button>`, `<ep-text-field>`, …) | In this repo |
+| [`@eduportdesign/react`](packages/react) | React wrappers (`<Button>`, `<TextField>`, …) | In this repo |
 | `@eduportdesign/icons` | Icon package based on [Tabler Icons](https://tabler.io/icons) | Planned |
 
 ## Quick start
@@ -89,7 +93,22 @@ Sass and JS are also available:
 import * as tokens from '@eduportdesign/tokens';
 ```
 
-Component packages will install the same way once they exist.
+Components install the same way:
+
+```js
+import '@eduportdesign/web-components';                       // every component
+import '@eduportdesign/web-components/components/button';     // or one at a time
+```
+
+```jsx
+import { Button, TextField } from '@eduportdesign/react';
+
+<Button variant="primary" onClick={save}>Save</Button>
+```
+
+## Components
+
+Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch, Badge, Tag, Avatar, Card, Icon, Tabs, Alert, Toast, Tooltip and Modal. See [packages/web-components](packages/web-components/README.md) for the tag names and APIs.
 
 ## Foundations
 
@@ -110,9 +129,23 @@ Requires Node 20 or later and pnpm (run `corepack enable` once to get the pinned
 
 ```bash
 pnpm install
-pnpm build   # writes packages/*/dist (CSS, SCSS, JS)
-pnpm test    # WCAG 2.1 AA contrast check across all themes
+pnpm dev        # component gallery at http://localhost:5173
+pnpm storybook  # Storybook at http://localhost:6006
+pnpm build      # writes packages/*/dist and builds the gallery and Storybook
+pnpm test       # WCAG 2.1 AA contrast check across all themes
 ```
+
+```
+apps/
+  gallery/      one page with every component (Vite)
+  storybook/    Storybook workbench with the accessibility addon
+packages/
+  tokens/           design tokens
+  web-components/   src/components/<name>/<name>.ts, index.ts (registers the tag)
+  react/            src/<name>.ts, one @lit/react wrapper per component
+```
+
+The gallery and Storybook read components from source, so edits show up straight away.
 
 Token sources are [DTCG](https://www.designtokens.org/) JSON files:
 
@@ -145,9 +178,9 @@ Publishing only runs when the repository variable `PUBLISH_ENABLED` is `true`. U
 
 1. ✅ Tokens with light and dark themes and soft and sharp corners
 2. ✅ CI (build, contrast check) and releases to npm and GitHub Packages via Changesets
-3. ⬜ Web components and React wrappers, starting with Button
-4. ⬜ Icon package, typography styles and a Figma library
-5. ⬜ Core components: TextField, Checkbox, Radio, Select, Modal, Tooltip, Toast, Link
+3. ✅ Web components and React wrappers: a starter set of 18 components, a gallery page and Storybook
+4. ⬜ Icon package (all Tabler icons, tree-shakable), typography styles and a Figma library
+5. ⬜ More components: Link, Menu, Popover, Table, Pagination, Progress, Skeleton, Breadcrumb; component tests
 6. ⬜ Docs site, contribution guide and versioning policy
 7. ⬜ v0.1, then a pilot in an Eduport app, then v1.0
 

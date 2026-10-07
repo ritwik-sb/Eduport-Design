@@ -23,7 +23,7 @@ const contrast = (a, b) => {
 };
 
 const BACKGROUNDS = ['background.default', 'background.subtle', 'surface.raised', 'surface.overlay'];
-const TEXT = ['primary', 'secondary', 'link', 'success', 'warning', 'danger'].map((t) => `text.${t}`);
+const TEXT = ['primary', 'secondary', 'link', 'info', 'success', 'warning', 'danger'].map((t) => `text.${t}`);
 const NON_TEXT = ['border.strong', 'border.focus', 'border.danger', 'accent.default'];
 const FILLS = ['primary', 'secondary', 'danger'].flatMap((v) =>
   ['default', 'hover', 'active'].map((s) => `interactive.${v}.${s}`),
@@ -39,9 +39,12 @@ const pairs = [
   ['interactive.primary.default', 'background.default', 3],
   ...['hover', 'active'].map((s) => ['text.primary', `interactive.ghost.${s}`, 4.5]),
   ['text.inverse', 'background.inverse', 4.5],
+  // Accent tint: tertiary button hover, accent badge and tag, avatar initials.
+  ['text.link', 'accent.subtle', 4.5],
+  ['text.primary', 'accent.subtle', 4.5],
   ...FEEDBACK.flatMap((f) => [
     ['text.primary', `feedback.${f}.background`, 4.5],
-    [`text.${f === 'info' ? 'primary' : f}`, `feedback.${f}.background`, 4.5],
+    [`text.${f}`, `feedback.${f}.background`, 4.5],
   ]),
 ];
 

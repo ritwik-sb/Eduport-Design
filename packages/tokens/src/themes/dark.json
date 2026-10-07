@@ -10,6 +10,10 @@
       },
       "inverse": {
         "$value": "{color.gray.10}"
+      },
+      "scrim": {
+        "$value": "#000000b8",
+        "$description": "Backdrop behind modal dialogs."
       }
     },
     "surface": {
@@ -44,6 +48,9 @@
       },
       "link": {
         "$value": "{color.brand.40}"
+      },
+      "info": {
+        "$value": "{color.blue.40}"
       },
       "success": {
         "$value": "{color.green.40}"

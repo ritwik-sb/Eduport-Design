@@ -1,0 +1,20 @@
+// Registers every component. To load only what you use, import from '@eduportdesign/web-components/components/<name>'.
+export * from './components/icon/index.js';
+export * from './components/button/index.js';
+export * from './components/icon-button/index.js';
+export * from './components/text-field/index.js';
+export * from './components/textarea/index.js';
+export * from './components/select/index.js';
+export * from './components/checkbox/index.js';
+export * from './components/radio/index.js';
+export * from './components/switch/index.js';
+export * from './components/badge/index.js';
+export * from './components/tag/index.js';
+export * from './components/avatar/index.js';
+export * from './components/alert/index.js';
+export * from './components/card/index.js';
+export * from './components/tabs/index.js';
+export * from './components/tooltip/index.js';
+export * from './components/modal/index.js';
+export * from './components/toast/index.js';
+export type { FeedbackVariant } from './styles/feedback.js';
