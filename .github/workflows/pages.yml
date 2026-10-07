@@ -1,0 +1,44 @@
+name: Pages
+
+# Publishes the component gallery to GitHub Pages, with Storybook under /storybook/.
+# The site is pushed to the gh-pages branch; Pages serves that branch.
+
+on:
+  push:
+    branches: [main, claude/project-thread-cj20qx]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: write # push to gh-pages
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @eduportdesign/tokens build
+      - run: pnpm --filter @eduportdesign/gallery build
+      - run: pnpm --filter @eduportdesign/storybook build
+      - name: Assemble site
+        run: |
+          mkdir site
+          cp -r apps/gallery/dist/. site/
+          cp -r apps/storybook/dist site/storybook
+          touch site/.nojekyll
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: Deploy component gallery
