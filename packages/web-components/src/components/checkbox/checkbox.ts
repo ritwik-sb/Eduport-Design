@@ -41,6 +41,8 @@ export class EpCheckbox extends LitElement {
         line-height: 20px;
         color: var(--ep-color-text-primary);
         cursor: pointer;
+        /* Rows grow to the minimum touch target; the 20px line stays centered in it. */
+        padding-block: max(0px, calc((var(--ep-size-target-min) - 20px) / 2));
       }
 
       .control {
@@ -68,7 +70,7 @@ export class EpCheckbox extends LitElement {
 
       input:checked,
       input:indeterminate {
-        border-color: var(--ep-color-interactive-primary-default);
+        border-color: var(--ep-color-accent-default);
         background: var(--ep-color-interactive-primary-default);
       }
 
@@ -81,7 +83,7 @@ export class EpCheckbox extends LitElement {
         inset: 0;
         margin: auto;
         font-size: 12px;
-        color: var(--ep-color-text-on-color);
+        color: var(--ep-color-text-on-primary);
         pointer-events: none;
         --ep-icon-stroke-width: 3;
       }

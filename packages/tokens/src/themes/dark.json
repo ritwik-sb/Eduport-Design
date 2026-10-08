@@ -21,13 +21,17 @@
         "$value": "{color.gray.100}"
       },
       "raised": {
-        "$value": "{color.gray.90}"
+        "$value": "{color.gray.80}",
+        "$description": "Elevated cards. A full step above background.subtle, because shadows don't show on a dark page."
       },
       "overlay": {
         "$value": "{color.gray.80}"
       },
       "sunken": {
         "$value": "{color.gray.100}"
+      },
+      "muted": {
+        "$value": "{color.gray.90}"
       }
     },
     "text": {
@@ -45,6 +49,9 @@
       },
       "on-color": {
         "$value": "{color.white}"
+      },
+      "on-primary": {
+        "$value": "{color.gray.100}"
       },
       "link": {
         "$value": "{color.brand.40}"
@@ -87,21 +94,22 @@
     "interactive": {
       "primary": {
         "default": {
-          "$value": "{color.brand.60}"
+          "$value": "{color.brand.50}"
         },
         "hover": {
-          "$value": "{color.brand.70}"
+          "$value": "{color.brand.40}",
+          "$description": "Lighter on hover in dark, so the button gains emphasis instead of fading into the page."
         },
         "active": {
-          "$value": "{color.brand.80}"
+          "$value": "{color.brand.30}"
         }
       },
       "secondary": {
         "default": {
-          "$value": "{color.gray.60}"
+          "$value": "#ffffff00"
         },
         "hover": {
-          "$value": "{color.gray.70}"
+          "$value": "{color.gray.90}"
         },
         "active": {
           "$value": "{color.gray.80}"

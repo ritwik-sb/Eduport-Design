@@ -26,6 +26,9 @@ importers:
       '@fontsource-variable/inter':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource-variable/noto-sans-malayalam':
+        specifier: ^5.3.0
+        version: 5.3.0
     devDependencies:
       vite:
         specifier: ^8.0.0
@@ -362,6 +365,9 @@ packages:
 
   '@fontsource-variable/inter@5.3.0':
     resolution: {integrity: sha512-OupL48va4JNofb97w6NYeF9S7W/kHNKM0Er8Dem5nqi4jeOLrVJDoE8tZEpnMJmtkvNbB1EIPPwHcdkF6b1oUA==}
+
+  '@fontsource-variable/noto-sans-malayalam@5.3.0':
+    resolution: {integrity: sha512-SKo5dwznLLyLC97M3d8FVmgUylNzI3TkVUshjFM1InaRvRI9S/GGRfWzSs2DlL/9tZU1/fU1GsQi+PjkQlMQGQ==}
 
   '@inquirer/external-editor@1.0.3':
     resolution: {integrity: sha512-RWbSrDiYmO4LbejWY7ttpxczuwQyZLBUyygsA9Nsv95hpzUWwnNTVQmAq3xuh7vNwCp07UTmE5i11XAEExx4RA==}
@@ -2320,6 +2326,8 @@ snapshots:
     optional: true
 
   '@fontsource-variable/inter@5.3.0': {}
+
+  '@fontsource-variable/noto-sans-malayalam@5.3.0': {}
 
   '@inquirer/external-editor@1.0.3':
     dependencies:

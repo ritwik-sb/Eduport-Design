@@ -1,6 +1,7 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { baseStyles } from '../../styles/shared.js';
 import { feedbackIcons, type FeedbackVariant } from '../../styles/feedback.js';
+import { onModalChange, topModal } from '../../utils/modal-stack.js';
 import '../icon/index.js';
 import '../icon-button/index.js';
 
@@ -71,7 +72,7 @@ export class EpToast extends LitElement {
       .icon {
         flex: none;
         margin-top: 2px;
-        font-size: 18px;
+        font-size: var(--ep-size-icon-md);
         color: var(--_icon);
       }
 
@@ -129,13 +130,14 @@ export class EpToast extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.#remaining = this.duration;
+    // The toaster moves in and out of open modals; keep the time already counted down across those moves.
+    if (!this.hasUpdated) this.#remaining = this.duration;
     this.#resume();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    clearTimeout(this.#timer);
+    this.#pause();
   }
 
   #pause = () => {
@@ -171,9 +173,15 @@ export class EpToast extends LitElement {
   }
 }
 
+const supportsPopover = typeof HTMLElement !== 'undefined' && 'showPopover' in HTMLElement.prototype;
+
 /**
  * The fixed corner region that holds toasts. `toast()` creates one on first use; you only need to add it
  * yourself to change `placement`.
+ *
+ * The toaster sits in the browser's top layer (as a manual popover), above dialogs and tooltips. While an
+ * `<ep-modal>` is open it moves inside that modal, because a modal makes the rest of the page inert, and moves
+ * back when the modal closes. So a "Couldn't save" raised from a modal form stays visible and clickable.
  *
  * @tag ep-toaster
  * @slot - `<ep-toast>` elements.
@@ -186,8 +194,17 @@ export class EpToaster extends LitElement {
   static styles = css`
     :host {
       position: fixed;
-      z-index: 1000;
+      z-index: var(--ep-z-index-toast);
       inset: auto var(--ep-space-300) var(--ep-space-300) auto;
+      /* Reset the browser's popover box. */
+      width: auto;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      overflow: visible;
       display: flex;
       flex-direction: column-reverse;
       gap: var(--ep-space-150);
@@ -212,16 +229,54 @@ export class EpToaster extends LitElement {
     this.placement = 'bottom-end';
   }
 
+  #home: ParentNode | null = null;
+  #stopListening?: () => void;
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'region');
     this.setAttribute('aria-label', 'Notifications');
     this.setAttribute('aria-live', 'polite');
     this.setAttribute('aria-relevant', 'additions');
+    if (supportsPopover) this.setAttribute('popover', 'manual');
+    if (!this.#stopListening) {
+      this.#home = this.parentNode;
+      this.#stopListening = onModalChange(() => this.#place());
+    }
+    this.#place();
+    this.#raise();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    // Moving between the page and a modal reconnects straight away; only a real removal stops listening.
+    queueMicrotask(() => {
+      if (this.isConnected) return;
+      this.#stopListening?.();
+      this.#stopListening = undefined;
+    });
+  }
+
+  /** Moves the toaster into the newest open modal, or back where it started. */
+  #place() {
+    const modal = topModal();
+    const target = modal ?? this.#home;
+    if (!target || this.parentNode === target) return;
+    if (modal) this.slot = 'toaster';
+    else this.removeAttribute('slot');
+    target.append(this);
+  }
+
+  /** Shows the toaster on top of the top layer, above any dialog opened since. */
+  #raise() {
+    if (!supportsPopover || !this.isConnected) return;
+    if (this.matches(':popover-open')) this.hidePopover();
+    this.showPopover();
   }
 
   render() {
-    return html`<slot></slot>`;
+    // Each new toast re-raises the toaster above anything opened since the last one.
+    return html`<slot @slotchange=${() => this.#raise()}></slot>`;
   }
 }
 

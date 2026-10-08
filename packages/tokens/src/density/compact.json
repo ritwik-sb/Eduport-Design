@@ -1,0 +1,26 @@
+{
+  "size": {
+    "$type": "dimension",
+    "control": {
+      "$description": "Height of buttons, text fields and selects. Compact suits mouse and trackpad.",
+      "sm": { "$value": "32px" },
+      "md": { "$value": "40px" },
+      "lg": { "$value": "48px" }
+    },
+    "target": {
+      "min": {
+        "$value": "24px",
+        "$description": "Smallest hit area for any control. 24px meets WCAG 2.2 target size (minimum)."
+      }
+    }
+  },
+  "font": {
+    "size": {
+      "$type": "dimension",
+      "input": {
+        "$value": "{font.size.200}",
+        "$description": "Text typed into fields at sm and md sizes."
+      }
+    }
+  }
+}

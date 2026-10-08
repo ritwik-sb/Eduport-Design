@@ -27,6 +27,8 @@ export class EpRadio extends LitElement {
         color: var(--ep-color-text-primary);
         cursor: pointer;
         outline: none;
+        /* Rows grow to the minimum touch target; the 20px line stays centered in it. */
+        padding-block: max(0px, calc((var(--ep-size-target-min) - 20px) / 2));
       }
 
       .control {
@@ -47,6 +49,7 @@ export class EpRadio extends LitElement {
 
       :host([checked]) .control {
         border: 5px solid var(--ep-color-interactive-primary-default);
+        box-shadow: 0 0 0 var(--ep-border-width-thin) var(--ep-color-accent-default);
       }
 
       :host(:focus-visible) .control {
@@ -65,6 +68,7 @@ export class EpRadio extends LitElement {
 
       :host([disabled][checked]) .control {
         border-color: var(--ep-color-text-disabled);
+        box-shadow: none;
       }
 
       @media (forced-colors: active) {

@@ -52,6 +52,11 @@ export class EpSelect extends LitElement {
         pointer-events: none;
       }
 
+      /* An empty select shows its placeholder in the placeholder color, like a text field. */
+      .control.placeholder {
+        color: var(--ep-color-text-secondary);
+      }
+
       .control option {
         background: var(--ep-color-surface-overlay);
         color: var(--ep-color-text-primary);
@@ -159,7 +164,7 @@ export class EpSelect extends LitElement {
         <select
           part="select"
           id="select"
-          class="control"
+          class="control ${this.placeholder && !this.value ? 'placeholder' : ''}"
           name=${this.name || nothing}
           ?disabled=${this.disabled}
           ?required=${this.required}

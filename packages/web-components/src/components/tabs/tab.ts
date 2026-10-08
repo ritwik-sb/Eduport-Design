@@ -30,7 +30,7 @@ export class EpTab extends LitElement {
         display: inline-flex;
         align-items: center;
         gap: var(--ep-space-100);
-        height: 40px;
+        height: var(--ep-size-control-md);
         padding: 0 var(--ep-space-200);
         border-radius: var(--ep-radius-control) var(--ep-radius-control) 0 0;
         color: var(--ep-color-text-secondary);
@@ -78,7 +78,7 @@ export class EpTab extends LitElement {
       }
 
       ::slotted(ep-icon) {
-        font-size: 18px;
+        font-size: var(--ep-size-icon-md);
       }
 
       @media (forced-colors: active) {

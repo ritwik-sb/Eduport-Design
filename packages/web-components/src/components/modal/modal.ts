@@ -1,11 +1,16 @@
 import { LitElement, css, html } from 'lit';
 import { baseStyles } from '../../styles/shared.js';
 import { HasSlotController } from '../../utils/slots.js';
+import { modalClosed, modalOpened } from '../../utils/modal-stack.js';
 import '../icon-button/index.js';
 
 /**
  * A dialog that interrupts the page for a focused task or a decision. Built on the native `<dialog>`, so focus
- * moves into it, stays inside while it is open, and returns to the trigger when it closes. Escape closes it.
+ * moves into it, stays inside while it is open, and returns to the trigger when it closes. Escape and the close
+ * button close it. A click on the backdrop does not, on purpose: a stray tap shouldn't throw away a half-filled
+ * form or dismiss a confirmation the user hasn't answered.
+ *
+ * Toasts raised while the modal is open appear above it and stay clickable.
  *
  * @tag ep-modal
  * @slot - The body.
@@ -86,7 +91,6 @@ export class EpModal extends LitElement {
         flex: 1;
         overflow-y: auto;
         padding: var(--ep-space-200) var(--ep-space-300) var(--ep-space-300);
-        color: var(--ep-color-text-secondary);
       }
 
       footer {
@@ -141,8 +145,17 @@ export class EpModal extends LitElement {
   updated(changed: Map<string, unknown>) {
     if (!changed.has('open')) return;
     const dialog = this.#dialog;
-    if (this.open && !dialog.open) dialog.showModal();
+    if (this.open && !dialog.open) {
+      dialog.showModal();
+      modalOpened(this);
+    }
     if (!this.open && dialog.open) dialog.close();
+    if (!this.open) modalClosed(this);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    modalClosed(this);
   }
 
   #onClose() {
@@ -158,6 +171,7 @@ export class EpModal extends LitElement {
       </header>
       <div class="body"><slot></slot></div>
       <footer ?hidden=${!this.#slots.test('footer')}><slot name="footer"></slot></footer>
+      <slot name="toaster"></slot>
     </dialog>`;
   }
 }

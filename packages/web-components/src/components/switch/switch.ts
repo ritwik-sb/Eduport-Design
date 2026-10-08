@@ -47,6 +47,8 @@ export class EpSwitch extends LitElement {
         line-height: 20px;
         text-align: start;
         cursor: pointer;
+        /* Rows grow to the minimum touch target; the 20px line stays centered in it. */
+        padding-block: max(0px, calc((var(--ep-size-target-min) - 20px) / 2));
       }
 
       .track {
@@ -72,13 +74,13 @@ export class EpSwitch extends LitElement {
       }
 
       .base[aria-checked='true'] .track {
-        border-color: var(--ep-color-interactive-primary-default);
+        border-color: var(--ep-color-accent-default);
         background: var(--ep-color-interactive-primary-default);
       }
 
       .base[aria-checked='true'] .thumb {
         transform: translateX(16px);
-        background: var(--ep-color-text-on-color);
+        background: var(--ep-color-text-on-primary);
       }
 
       .base:hover .track {
@@ -87,7 +89,7 @@ export class EpSwitch extends LitElement {
 
       .base[aria-checked='true']:hover .track {
         background: var(--ep-color-interactive-primary-hover);
-        border-color: var(--ep-color-interactive-primary-hover);
+        border-color: var(--ep-color-accent-default);
       }
 
       .base:focus-visible {

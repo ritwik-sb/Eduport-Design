@@ -47,7 +47,7 @@ export class EpAlert extends LitElement {
       .icon {
         flex: none;
         margin-top: 2px;
-        font-size: 18px;
+        font-size: var(--ep-size-icon-md);
         color: var(--_icon);
       }
 
