@@ -22,7 +22,7 @@ Every hue has ten steps, `10` (lightest) to `100` (darkest), generated in OKLCH 
 | | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | brand | `#fff6f3` | `#ffe7de` | `#ffcbb7` | `#ff9f79` | `#fb6514` | `#c64b00` | `#983800` | `#762900` | `#561b00` | `#2b0a00` |
-| gray | `#faf7f6` | `#eeebea` | `#d9d5d2` | `#bab6b4` | `#95918f` | `#767270` | `#5a5654` | `#45413f` | `#312d2b` | `#171412` |
+| gray | `#faf7f6` | `#eeebea` | `#d9d5d2` | `#bab6b4` | `#95918f` | `#767270` | `#5a5654` | `#3d3b3a` | `#262423` | `#110f0e` |
 | red | `#fff6f6` | `#ffe6e5` | `#ffc9c7` | `#ff9c99` | `#ff565e` | `#d73240` | `#a91e2d` | `#811922` | `#5c1218` | `#310306` |
 | green | `#ebfded` | `#d1f5d7` | `#a3e5b0` | `#69cb82` | `#2ca756` | `#00853c` | `#00652c` | `#004d20` | `#013614` | `#001906` |
 | amber | `#fff8e5` | `#fdeabf` | `#f6d283` | `#e7ae2c` | `#c08800` | `#996a00` | `#774f00` | `#5d3b00` | `#442800` | `#221000` |
@@ -65,7 +65,9 @@ Components use only these (`--ep-color-*`). Values per theme are in `src/themes/
 
 `text.on-primary` is near-black in both themes and goes on every primary fill state. `text.on-color` is white in both themes and goes on the danger fill. The secondary button is outlined (`border.strong` edge, `text.primary` label, clear fill), so it never outweighs the primary button and never reads as disabled in dark.
 
-In dark, the three card styles are three distinct steps: outlined is the page color with a border, filled is `surface.muted` (`gray.90`), and elevated is `surface.raised` (`gray.80`). Shadows don't show on a dark page, so elevation relies on the lighter surface.
+In dark, the three card styles are three distinct steps: outlined is the page color (`gray.100`) with a border, filled is `surface.muted` (`gray.95`), and elevated is `surface.raised` (`gray.90`). Shadows don't show on a dark page, so elevation relies on the lighter surface.
+
+The dark end of the gray scale (80, 90, the extra `gray.95` step, and 100) is nearly neutral and kept close together. A warm tint at low lightness reads as brown, and big jumps between dark surfaces look flat and grey, especially on phones (changed 2026-10-08).
 
 ### Contrast results
 

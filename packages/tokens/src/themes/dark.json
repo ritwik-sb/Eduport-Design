@@ -6,7 +6,7 @@
         "$value": "{color.gray.100}"
       },
       "subtle": {
-        "$value": "{color.gray.90}"
+        "$value": "{color.gray.95}"
       },
       "inverse": {
         "$value": "{color.gray.10}"
@@ -21,17 +21,17 @@
         "$value": "{color.gray.100}"
       },
       "raised": {
-        "$value": "{color.gray.80}",
-        "$description": "Elevated cards. A full step above background.subtle, because shadows don't show on a dark page."
+        "$value": "{color.gray.90}",
+        "$description": "Elevated cards. Two steps above the page, because shadows don't show on a dark page."
       },
       "overlay": {
-        "$value": "{color.gray.80}"
+        "$value": "{color.gray.90}"
       },
       "sunken": {
         "$value": "{color.gray.100}"
       },
       "muted": {
-        "$value": "{color.gray.90}"
+        "$value": "{color.gray.95}"
       }
     },
     "text": {
