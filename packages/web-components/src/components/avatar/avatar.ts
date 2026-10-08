@@ -55,7 +55,7 @@ export class EpAvatar extends LitElement {
         height: var(--_size);
         overflow: hidden;
         border-radius: var(--ep-radius-round);
-        background: var(--ep-color-accent-subtle);
+        background: var(--ep-color-surface-muted);
         color: var(--ep-color-text-primary);
         font-size: var(--_font-size);
         font-weight: var(--ep-font-weight-semibold);

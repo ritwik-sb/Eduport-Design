@@ -32,7 +32,7 @@ export class EpCard extends LitElement {
         overflow: hidden;
         border: var(--ep-border-width-thin) solid var(--ep-color-border-default);
         border-radius: var(--ep-radius-container);
-        background: var(--ep-color-surface-raised);
+        background: var(--ep-color-surface-default);
         color: var(--ep-color-text-primary);
         font-size: var(--ep-font-size-200);
         line-height: var(--ep-font-line-height-normal);
@@ -40,12 +40,13 @@ export class EpCard extends LitElement {
 
       :host([variant='elevated']) .base {
         border-color: transparent;
+        background: var(--ep-color-surface-raised);
         box-shadow: var(--ep-shadow-md);
       }
 
       :host([variant='filled']) .base {
         border-color: transparent;
-        background: var(--ep-color-background-subtle);
+        background: var(--ep-color-surface-muted);
       }
 
       .media ::slotted(*) {
@@ -71,7 +72,6 @@ export class EpCard extends LitElement {
       .body {
         flex: 1;
         padding: var(--ep-space-200);
-        color: var(--ep-color-text-secondary);
       }
 
       .header:not([hidden]) + .body {
@@ -99,7 +99,7 @@ export class EpCard extends LitElement {
     `,
   ];
 
-  /** `outlined` has a border, `elevated` a shadow, `filled` a tinted background. */
+  /** `outlined` has a border, `elevated` a lifted surface and a shadow, `filled` a tinted background. Each is a distinct step in both themes. */
   declare variant: 'outlined' | 'elevated' | 'filled';
 
   #slots = new HasSlotController(this, 'media', 'heading', 'header-actions', 'footer');

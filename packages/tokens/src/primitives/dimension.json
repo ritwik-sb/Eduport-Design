@@ -28,5 +28,19 @@
     "$type": "dimension",
     "thin": { "$value": "1px" },
     "thick": { "$value": "2px" }
+  },
+  "size": {
+    "$type": "dimension",
+    "icon": {
+      "$description": "Icon sizes inside controls. Control heights and touch targets live in src/density.",
+      "sm": { "$value": "16px" },
+      "md": { "$value": "18px" },
+      "lg": { "$value": "20px" }
+    }
+  },
+  "z-index": {
+    "$type": "number",
+    "$description": "Stacking for fixed layers that can't use the browser top layer.",
+    "toast": { "$value": 1000 }
   }
 }

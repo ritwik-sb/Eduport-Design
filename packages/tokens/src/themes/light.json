@@ -28,6 +28,10 @@
       },
       "sunken": {
         "$value": "{color.gray.10}"
+      },
+      "muted": {
+        "$value": "{color.gray.20}",
+        "$description": "Tinted fill that stays visible on the page: filled cards, avatars."
       }
     },
     "text": {
@@ -45,7 +49,11 @@
       },
       "on-color": {
         "$value": "{color.white}",
-        "$description": "Text and icons on interactive primary, secondary and danger fills. White in both themes."
+        "$description": "Text and icons on the danger fill. White in both themes."
+      },
+      "on-primary": {
+        "$value": "{color.gray.100}",
+        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. Near-black in both themes: 6.09:1 on the brand color, where white is only 3.01:1."
       },
       "link": {
         "$value": "{color.brand.70}"
@@ -81,7 +89,7 @@
     "accent": {
       "default": {
         "$value": "{color.brand.60}",
-        "$description": "Non-text marks: selected indicators, progress, active tab underline. brand.60 in light (the brand color itself is under 3:1 on tinted backgrounds); dark uses the exact brand orange."
+        "$description": "Non-text marks and the boundary of checked controls: progress, active tab underline, checkbox and radio edges. brand.60 in light, because the brand color itself is under 3:1 on tinted backgrounds; dark uses the exact brand orange."
       },
       "subtle": {
         "$value": "{color.brand.10}",
@@ -91,25 +99,26 @@
     "interactive": {
       "primary": {
         "default": {
-          "$value": "{color.brand.60}",
-          "$description": "Darker than the brand color so white text passes AA (4.76:1)."
+          "$value": "{color.brand.50}",
+          "$description": "The exact brand color. Pair with text.on-primary (6.09:1)."
         },
         "hover": {
-          "$value": "{color.brand.70}"
+          "$value": "{color.brand.55}"
         },
         "active": {
-          "$value": "{color.brand.80}"
+          "$value": "{color.brand.57}"
         }
       },
       "secondary": {
         "default": {
-          "$value": "{color.gray.80}"
+          "$value": "#ffffff00",
+          "$description": "Secondary buttons are outlined: a border.strong edge and text.primary label on a clear fill, so they never outweigh the primary button and never read as disabled."
         },
         "hover": {
-          "$value": "{color.gray.90}"
+          "$value": "{color.gray.20}"
         },
         "active": {
-          "$value": "{color.gray.100}"
+          "$value": "{color.gray.30}"
         }
       },
       "ghost": {

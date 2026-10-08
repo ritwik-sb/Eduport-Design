@@ -22,22 +22,22 @@ const contrast = (a, b) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-const BACKGROUNDS = ['background.default', 'background.subtle', 'surface.raised', 'surface.overlay'];
+const BACKGROUNDS = ['background.default', 'background.subtle', 'surface.raised', 'surface.overlay', 'surface.muted'];
 const TEXT = ['primary', 'secondary', 'link', 'info', 'success', 'warning', 'danger'].map((t) => `text.${t}`);
 const NON_TEXT = ['border.strong', 'border.focus', 'border.danger', 'accent.default'];
-const FILLS = ['primary', 'secondary', 'danger'].flatMap((v) =>
-  ['default', 'hover', 'active'].map((s) => `interactive.${v}.${s}`),
-);
+const STATES = ['default', 'hover', 'active'];
 const FEEDBACK = ['info', 'success', 'warning', 'danger'];
 
 // [foreground, background, minimum ratio]
 const pairs = [
   ...TEXT.flatMap((fg) => BACKGROUNDS.map((bg) => [fg, bg, 4.5])),
   ...NON_TEXT.flatMap((fg) => BACKGROUNDS.map((bg) => [fg, bg, 3])),
-  ...FILLS.map((bg) => ['text.on-color', bg, 4.5]),
+  ...STATES.map((s) => ['text.on-primary', `interactive.primary.${s}`, 4.5]),
+  ...STATES.map((s) => ['text.on-color', `interactive.danger.${s}`, 4.5]),
   // Labelled buttons don't strictly need a 3:1 boundary (1.4.11), but the primary fill should still stand out on the page.
   ['interactive.primary.default', 'background.default', 3],
-  ...['hover', 'active'].map((s) => ['text.primary', `interactive.ghost.${s}`, 4.5]),
+  // Outlined secondary: text.primary on the page or on its hover and active tints, inside a border.strong edge.
+  ...['ghost', 'secondary'].flatMap((v) => ['hover', 'active'].map((s) => ['text.primary', `interactive.${v}.${s}`, 4.5])),
   ['text.inverse', 'background.inverse', 4.5],
   // Accent tint: tertiary button hover, accent badge and tag, avatar initials.
   ['text.link', 'accent.subtle', 4.5],

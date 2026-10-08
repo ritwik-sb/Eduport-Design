@@ -1,0 +1,26 @@
+{
+  "size": {
+    "$type": "dimension",
+    "control": {
+      "$description": "Touch density for phones and tablets: md is 44px, the iOS and WCAG 2.5.5 target size.",
+      "sm": { "$value": "36px" },
+      "md": { "$value": "44px" },
+      "lg": { "$value": "52px" }
+    },
+    "target": {
+      "min": {
+        "$value": "44px",
+        "$description": "Small controls and checkbox, radio and switch rows extend their hit area to at least this."
+      }
+    }
+  },
+  "font": {
+    "size": {
+      "$type": "dimension",
+      "input": {
+        "$value": "{font.size.300}",
+        "$description": "16px, so iOS Safari doesn't zoom the page when a field gets focus."
+      }
+    }
+  }
+}

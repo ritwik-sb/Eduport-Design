@@ -1,19 +1,21 @@
 // Builds CSS, SCSS and JS from the DTCG token sources.
 //
-// tokens.css         primitives + light theme on :root, then soft corners on :root
+// tokens.css         primitives + light theme on :root, then soft corners and compact density on :root,
+//                    then touch density under [data-density="touch"] and, unless compact is forced, on coarse pointers
 // theme-dark.css     semantic color overrides under [data-theme="dark"]
 // corners-sharp.css  semantic radius overrides under [data-corners="sharp"]
 //
-// Color theme and corner mode are independent axes, so any theme combines with any corner mode.
+// Color theme, corner mode and density are independent axes, so any combination works.
 import { readFile, rm, appendFile } from 'node:fs/promises';
 import StyleDictionary from 'style-dictionary';
 
 const PREFIX = 'ep';
 const isSemantic = (token) => !token.filePath.includes('/primitives/');
 const isCorner = (token) => token.filePath.includes('/corners/');
+const isDensity = (token) => token.filePath.includes('/density/');
 
 const base = new StyleDictionary({
-  source: ['src/primitives/*.json', 'src/themes/light.json', 'src/corners/soft.json'],
+  source: ['src/primitives/*.json', 'src/themes/light.json', 'src/corners/soft.json', 'src/density/compact.json'],
   usesDtcg: true,
   platforms: {
     css: {
@@ -24,7 +26,7 @@ const base = new StyleDictionary({
         {
           destination: 'tokens.css',
           format: 'css/variables',
-          filter: (token) => !isCorner(token),
+          filter: (token) => !isCorner(token) && !isDensity(token),
           options: { selector: ':root, [data-theme="light"]', outputReferences: true },
         },
         // Separate block so [data-theme] and [data-corners] never reset each other. Appended to tokens.css below.
@@ -33,6 +35,12 @@ const base = new StyleDictionary({
           format: 'css/variables',
           filter: isCorner,
           options: { selector: ':root, [data-corners="soft"]', outputReferences: true },
+        },
+        {
+          destination: 'density-compact.css',
+          format: 'css/variables',
+          filter: isDensity,
+          options: { selector: ':root, [data-density="compact"]', outputReferences: true },
         },
       ],
     },
@@ -71,8 +79,21 @@ const override = (source, destination, selector) =>
     },
   });
 
+// Moves a generated block into tokens.css, so one import carries every default.
+const inline = async (file, wrap = (css) => css) => {
+  await appendFile('dist/css/tokens.css', '\n' + wrap(await readFile(`dist/css/${file}`, 'utf8')));
+  await rm(`dist/css/${file}`);
+};
+
 await base.buildAllPlatforms();
-await appendFile('dist/css/tokens.css', '\n' + (await readFile('dist/css/corners-soft.css', 'utf8')));
-await rm('dist/css/corners-soft.css');
+await inline('corners-soft.css');
+await inline('density-compact.css');
+await override('src/density/touch.json', 'density-touch.css', '[data-density="touch"]').buildAllPlatforms();
+// Phones and tablets get touch density on their own; data-density="compact" opts out, "touch" opts in anywhere.
+await inline('density-touch.css', (css) => {
+  const block = css.slice(css.indexOf('[data-density'));
+  const coarse = block.replace('[data-density="touch"]', ':root:not([data-density="compact"])');
+  return `${css}\n@media (pointer: coarse) {\n${coarse.replace(/^/gm, '  ').trimEnd()}\n}\n`;
+});
 await override('src/themes/dark.json', 'theme-dark.css', '[data-theme="dark"]').buildAllPlatforms();
 await override('src/corners/sharp.json', 'corners-sharp.css', '[data-corners="sharp"]').buildAllPlatforms();

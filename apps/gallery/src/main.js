@@ -1,4 +1,5 @@
 import '@fontsource-variable/inter';
+import '@fontsource-variable/noto-sans-malayalam';
 import '@eduportdesign/tokens/css';
 import '@eduportdesign/tokens/css/theme-dark';
 import '@eduportdesign/tokens/css/corners-sharp';

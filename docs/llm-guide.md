@@ -284,16 +284,18 @@ All tokens are CSS custom properties on `:root`. Full source: `packages/tokens/s
 | Purpose | Tokens |
 |---|---|
 | Page background | `--ep-color-background-default`, `-subtle`, `-inverse`, `-scrim` (modal backdrop) |
-| Surfaces (cards, panels, menus) | `--ep-color-surface-default`, `-raised`, `-sunken`, `-overlay` |
-| Text | `--ep-color-text-primary`, `-secondary`, `-disabled`, `-inverse`, `-on-color` (on filled interactive/accent colors), `-link`, `-info`, `-success`, `-warning`, `-danger` |
+| Surfaces (cards, panels, menus) | `--ep-color-surface-default`, `-raised`, `-sunken`, `-overlay`, `-muted` (tinted fill) |
+| Text | `--ep-color-text-primary`, `-secondary`, `-disabled`, `-inverse`, `-on-primary` (on the brand-orange primary fill), `-on-color` (on the danger fill), `-link`, `-info`, `-success`, `-warning`, `-danger` |
 | Borders | `--ep-color-border-default`, `-strong`, `-focus`, `-danger` |
 | Interactive fills | `--ep-color-interactive-{primary,secondary,ghost,danger}-{default,hover,active}`, `--ep-color-interactive-disabled` |
 | Feedback boxes | `--ep-color-feedback-{info,success,warning,danger}-{background,border}` |
 | Brand accent (decoration, selected states, highlights) | `--ep-color-accent-default`, `--ep-color-accent-subtle` |
 
 Pairing rules. These are the pairs the contrast check covers in both themes; stick to them:
-- Text (`text-primary`, `-secondary`, `-link`, and the status colors `-info`, `-success`, `-warning`, `-danger`) on `background-default`, `background-subtle`, `surface-raised` or `surface-overlay`.
-- `text-on-color` on the filled `interactive-{primary,secondary,danger}-{default,hover,active}` colors.
+- Text (`text-primary`, `-secondary`, `-link`, and the status colors `-info`, `-success`, `-warning`, `-danger`) on `background-default`, `background-subtle`, `surface-raised`, `surface-overlay` or `surface-muted`.
+- `text-on-primary` (near-black) on `interactive-primary-{default,hover,active}`. Never white text on the brand orange: it is 3.01:1.
+- `text-on-color` (white) on `interactive-danger-{default,hover,active}`.
+- `text-primary` on `interactive-{secondary,ghost}-{hover,active}`. The secondary button is outlined, with a clear fill.
 - `text-inverse` on `background-inverse`.
 - `text-primary` or `text-link` on `accent-subtle`.
 - `text-primary` or the matching status text on `feedback-*-background`.
@@ -306,6 +308,17 @@ If no token fits, don't hard-code a color and don't use a primitive. Note the ga
 
 `--ep-space-{0,25,50,100,150,200,300,400,500,600,800}` = 0, 2, 4, 8, 12, 16, 24, 32, 40, 48, 64px. Use them for padding, margin and gap.
 
+### Size and density
+
+| Token | Use for | Compact (default) | Touch |
+|---|---|---|---|
+| `--ep-size-control-{sm,md,lg}` | Height of custom buttons, inputs and similar controls | 32 / 40 / 48px | 36 / 44 / 52px |
+| `--ep-size-target-min` | Minimum hit area for anything clickable | 24px | 44px |
+| `--ep-font-size-input` | Text typed into custom inputs | 14px | 16px |
+| `--ep-size-icon-{sm,md,lg}` | Icons inside controls | 16 / 18 / 20px | same |
+
+Touch density applies on its own on phones and tablets (`pointer: coarse`); `data-density="touch|compact"` on `<html>` or a subtree forces one. Custom inputs must use `--ep-font-size-input`, or iOS Safari zooms the page on focus.
+
 ### Radius (semantic, follows the corner mode)
 
 | Token | Use for | Soft | Sharp |
@@ -317,7 +330,7 @@ If no token fits, don't hard-code a color and don't use a primitive. Note the ga
 
 ### Typography
 
-- Families: `--ep-font-family-sans` (Inter, UI text), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
+- Families: `--ep-font-family-sans` (Inter for UI text, falling back to Noto Sans Malayalam for Malayalam), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
 - Sizes: `--ep-font-size-{100..900}` = 12, 14, 16, 18, 20, 24, 28, 32, 40px. Body text is `300` (16px); dense UI and secondary text `200` (14px); captions `100` (12px).
 - Weights: `--ep-font-weight-{regular,medium,semibold,bold}`. Line heights: `--ep-font-line-height-{tight,snug,normal}` (tight for headings, normal for paragraphs).
 - There are no heading components yet. Use real `<h1>`–`<h6>` elements in order and style them with these tokens.

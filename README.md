@@ -115,12 +115,13 @@ Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch
 
 | | |
 |---|---|
-| **Color** | Six 10–100 scales (brand, gray, red, green, amber, blue). Step 60 of every hue takes white text at AA contrast. Primary actions use `#c64b00`, a darker brand orange, with white text. |
-| **Type** | [Inter](https://rsms.me/inter/) for UI text, JetBrains Mono for code and IDs. |
+| **Color** | Six 10–100 scales (brand, gray, red, green, amber, blue). Step 60 of every hue takes white text at AA contrast. Primary actions use the exact brand orange `#fb6514` with near-black text (6.09:1). |
+| **Type** | [Inter](https://rsms.me/inter/) for UI text, Noto Sans Malayalam for Malayalam, JetBrains Mono for code and IDs. |
 | **Radius** | Semantic tokens `indicator`, `control`, `container` and `round`, set by the corner mode. |
+| **Density** | Compact for mouse and trackpad, touch (44px controls, 16px input text) for phones and tablets. Touch turns on by itself on touch screens; `data-density` overrides it. |
 | **Icons** | Tabler Icons (MIT, 5,000+ icons). |
 
-Components use **semantic tokens only** (`--ep-color-text-primary`, `--ep-radius-control`), never raw primitives or hard-coded values. That rule is what makes themes and corner modes work.
+Components use **semantic tokens** for color, radius, control heights and icon sizes (`--ep-color-text-primary`, `--ep-radius-control`, `--ep-size-control-md`), never raw color or radius primitives. That rule is what makes themes, corner modes and touch density work. Fixed geometry that belongs to one component, like avatar diameters or the switch track, stays in that component.
 
 The full reasoning, including the color tables and the contrast results, is in [docs/foundations.md](docs/foundations.md).
 

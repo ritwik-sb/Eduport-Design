@@ -59,6 +59,7 @@ export class EpTag extends LitElement {
       }
 
       .remove {
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -72,6 +73,13 @@ export class EpTag extends LitElement {
         color: inherit;
         font-size: 14px;
         cursor: pointer;
+      }
+
+      /* The button stays small to fit the tag; its hit area grows to the minimum target. */
+      .remove::before {
+        content: '';
+        position: absolute;
+        inset: min(0px, calc((var(--_height) - 8px - var(--ep-size-target-min)) / 2));
       }
 
       .remove:hover {

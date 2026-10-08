@@ -117,7 +117,7 @@
             </div>
             <ep-card>
               <h3 slot="heading">Ask a doubt</h3>
-              <form class="stack" id="doubt-form" style="color: var(--ep-color-text-primary)">
+              <form class="stack" id="doubt-form">
                 <ep-select label="Subject" name="subject" placeholder="Choose a subject" required>
                   <option value="physics">Physics</option>
                   <option value="chemistry">Chemistry</option>
@@ -603,7 +603,7 @@
             <ep-button slot="footer" variant="danger" data-close data-toast="danger-deleted">Delete course</ep-button>
           </ep-modal>
           <ep-modal id="modal-form" heading="Invite a student">
-            <div class="stack" style="color: var(--ep-color-text-primary)">
+            <div class="stack">
               <ep-text-field label="Email" type="email" placeholder="student@school.edu" required></ep-text-field>
               <ep-select label="Class" value="11">
                 <option value="10">Class 10</option>

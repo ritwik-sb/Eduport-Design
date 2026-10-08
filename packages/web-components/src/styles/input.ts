@@ -5,18 +5,19 @@ import { focusRing } from './shared.js';
 export const inputStyles = css`
   :host {
     display: block;
-    --_height: 40px;
+    --_height: var(--ep-size-control-md);
     --_padding: var(--ep-space-150);
-    --_font-size: var(--ep-font-size-200);
+    /* 16px on touch screens at every size, so iOS Safari doesn't zoom the page on focus. */
+    --_font-size: var(--ep-font-size-input);
   }
 
   :host([size='sm']) {
-    --_height: 32px;
+    --_height: var(--ep-size-control-sm);
     --_padding: var(--ep-space-100);
   }
 
   :host([size='lg']) {
-    --_height: 48px;
+    --_height: var(--ep-size-control-lg);
     --_padding: var(--ep-space-200);
     --_font-size: var(--ep-font-size-300);
   }
@@ -82,7 +83,7 @@ export const inputStyles = css`
 
   .box ::slotted(ep-icon),
   .box > ep-icon {
-    font-size: 18px;
+    font-size: var(--ep-size-icon-md);
     color: var(--ep-color-text-secondary);
   }
 
