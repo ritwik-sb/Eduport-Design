@@ -94,13 +94,13 @@ importers:
 
   packages/web-components:
     dependencies:
+      '@eduportdesign/tokens':
+        specifier: workspace:^
+        version: link:../tokens
       lit:
         specifier: ^3.3.0
         version: 3.3.3
     devDependencies:
-      '@eduportdesign/tokens':
-        specifier: workspace:^
-        version: link:../tokens
       '@tabler/icons':
         specifier: ^3.49.0
         version: 3.49.0

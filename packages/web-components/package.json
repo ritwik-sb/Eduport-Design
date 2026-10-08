@@ -45,14 +45,11 @@
     "build": "tsc -p tsconfig.json",
     "icons": "node scripts/generate-icons.mjs"
   },
-  "peerDependencies": {
-    "@eduportdesign/tokens": "workspace:^"
-  },
   "dependencies": {
+    "@eduportdesign/tokens": "workspace:^",
     "lit": "^3.3.0"
   },
   "devDependencies": {
-    "@eduportdesign/tokens": "workspace:^",
     "@tabler/icons": "^3.49.0",
     "typescript": "^7.0.0"
   }
