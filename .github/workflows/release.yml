@@ -19,7 +19,7 @@ permissions:
   contents: write       # version commits and git tags
   pull-requests: write  # the "Version packages" PR
   packages: write       # GitHub Packages
-  id-token: write       # npm provenance
+  id-token: write       # npm trusted publishing (OIDC) and provenance
 
 jobs:
   release:
@@ -32,6 +32,8 @@ jobs:
           node-version: 22
           cache: pnpm
           registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1+. pnpm publish hands off to this npm.
+      - run: npm install -g npm@latest
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm test
@@ -45,9 +47,9 @@ jobs:
           title: Version packages
           commit: Version packages
         env:
+          # No npm token: npm authenticates with GitHub's OIDC token through
+          # the trusted publisher set up on each package at npmjs.com.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to GitHub Packages
         if: steps.changesets.outputs.published == 'true'
