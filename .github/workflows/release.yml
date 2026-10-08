@@ -51,8 +51,10 @@ jobs:
           # the trusted publisher set up on each package at npmjs.com.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Also runs on a manual dispatch, to catch up GitHub Packages when the npm
+      # publish already happened. Versions already there are skipped.
       - name: Publish to GitHub Packages
-        if: steps.changesets.outputs.published == 'true'
+        if: steps.changesets.outputs.published == 'true' || (github.event_name == 'workflow_dispatch' && vars.PUBLISH_ENABLED == 'true')
         run: |
           npm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
           pnpm release:github
