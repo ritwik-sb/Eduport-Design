@@ -1,5 +1,15 @@
 # @eduportdesign/storybook
 
+## 0.2.0
+
+### Patch Changes
+
+- Updated dependencies [4440ad0]
+- Updated dependencies [9a727d5]
+- Updated dependencies [8d721b2]
+  - @eduportdesign/tokens@0.2.0
+  - @eduportdesign/web-components@0.2.0
+
 ## 0.1.0
 
 ### Patch Changes
