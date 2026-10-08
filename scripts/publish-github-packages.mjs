@@ -67,5 +67,7 @@ for (const dir of readdirSync(join(root, 'packages'))) {
   writeFileSync(join(staged, 'package.json'), JSON.stringify(manifest, null, 2) + '\n');
 
   console.log(`publish ${target}@${pkg.version}${dryRun ? ' (dry run)' : ''}`);
-  run('npm', ['publish', '--registry', REGISTRY, ...(dryRun ? ['--dry-run'] : [])], staged);
+  // --tag latest: npm won't move `latest` to a lower version implicitly (a 1.0.0
+  // published by mistake still sits on GitHub Packages).
+  run('npm', ['publish', '--registry', REGISTRY, '--tag', 'latest', ...(dryRun ? ['--dry-run'] : [])], staged);
 }
