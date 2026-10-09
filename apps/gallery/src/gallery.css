@@ -246,6 +246,11 @@ main {
   font-size: var(--ep-font-size-400);
 }
 
+.getting-started h4 {
+  margin: var(--ep-space-300) 0 var(--ep-space-100);
+  font-size: var(--ep-font-size-300);
+}
+
 .getting-started p,
 .getting-started ul {
   margin: 0 0 var(--ep-space-200);
