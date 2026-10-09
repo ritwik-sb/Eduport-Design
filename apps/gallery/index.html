@@ -3,8 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eduport Components</title>
+    <title>Eduport Design System: components, design tokens and usage guide</title>
+    <meta
+      name="description"
+      content="The Eduport Design System: accessible web components and React wrappers, design tokens, light and dark themes. Live examples and install instructions for @eduportdesign/tokens, web-components and react."
+    />
+    <link rel="canonical" href="https://ritwik-sb.github.io/Eduport-Design/" />
     <link rel="icon" href="./favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Eduport Design System" />
+    <meta property="og:title" content="Eduport Design System" />
+    <meta
+      property="og:description"
+      content="Accessible web components, React wrappers and design tokens for Eduport products, with live examples and install instructions."
+    />
+    <meta property="og:url" content="https://ritwik-sb.github.io/Eduport-Design/" />
+    <meta property="og:image" content="https://ritwik-sb.github.io/Eduport-Design/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Eduport Design System" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Eduport Design System",
+        "url": "https://ritwik-sb.github.io/Eduport-Design/",
+        "description": "Accessible web components, React wrappers and design tokens for Eduport products."
+      }
+    </script>
   </head>
   <body>
     <header class="topbar">
@@ -37,6 +64,7 @@
       <nav class="toc" aria-label="Components">
         <h2>Overview</h2>
         <ul>
+          <li><a href="#getting-started">Getting started</a></li>
           <li><a href="#example">Example screen</a></li>
         </ul>
         <h2>Foundations</h2>
@@ -86,13 +114,69 @@
 
       <main>
         <div class="intro">
-          <h1>Components</h1>
+          <h1>Eduport Design System</h1>
           <p>
-            Every component in the Eduport Design System, built on the foundation tokens. Switch the theme and corner
-            style at the top to see how each one adapts. Everything here is live, so you can click, type and tab
-            through it.
+            Accessible web components, React wrappers and design tokens for Eduport products. Every component on this
+            page is live, so you can click, type and tab through it. Switch the theme and corner style at the top to see
+            how each one adapts.
           </p>
         </div>
+
+        <!-- Getting started -->
+        <section id="getting-started" class="getting-started" aria-labelledby="getting-started-title">
+          <div class="component-header"><h2 id="getting-started-title">Getting started</h2></div>
+          <p>
+            The design system is published to npm as three packages. Components are Lit web components, so they work in
+            any framework or none, and the React package wraps them with typed props and events.
+          </p>
+          <ul>
+            <li><code>@eduportdesign/tokens</code>: colors, type, spacing, radius, shadow and motion as CSS variables, SCSS and JS.</li>
+            <li><code>@eduportdesign/web-components</code>: the components, as custom elements like <code>&lt;ep-button&gt;</code>.</li>
+            <li><code>@eduportdesign/react</code>: React wrappers like <code>&lt;Button&gt;</code>.</li>
+          </ul>
+
+          <h3>1. Install</h3>
+          <pre><code>npm install @eduportdesign/tokens @eduportdesign/web-components
+# React apps also need
+npm install @eduportdesign/react</code></pre>
+
+          <h3>2. Load the theme CSS</h3>
+          <p>Import it once, at your app's entry point.</p>
+          <pre><code>import '@eduportdesign/tokens/css';                 // light theme, soft corners
+import '@eduportdesign/tokens/css/theme-dark';      // optional: dark theme
+import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners</code></pre>
+
+          <h3>3. Pick a theme and corner style</h3>
+          <p>
+            Set <code>data-theme</code> (<code>light</code> or <code>dark</code>) and <code>data-corners</code>
+            (<code>soft</code> or <code>sharp</code>) on the root element. Both are optional and can change at runtime.
+          </p>
+          <pre><code>&lt;html data-theme="dark" data-corners="sharp"&gt;</code></pre>
+
+          <h3>4. Use the components</h3>
+          <p>In plain HTML or any framework:</p>
+          <pre><code>import '@eduportdesign/web-components';                     // every component
+import '@eduportdesign/web-components/components/button';   // or one at a time
+
+&lt;ep-button variant="primary"&gt;Save&lt;/ep-button&gt;</code></pre>
+          <p>In React:</p>
+          <pre><code>import { Button, TextField } from '@eduportdesign/react';
+
+&lt;Button variant="primary" onClick={save}&gt;Save&lt;/Button&gt;</code></pre>
+
+          <h3>5. Style your own UI with the tokens</h3>
+          <pre><code>.card {
+  background: var(--ep-color-surface-raised);
+  color: var(--ep-color-text-primary);
+  border-radius: var(--ep-radius-container);
+}</code></pre>
+
+          <p>
+            More: every prop, slot and event in <a href="./storybook/">Storybook</a>, the full setup in the
+            <a href="https://github.com/ritwik-sb/Eduport-Design#readme">README</a>, and a single-file reference for AI
+            coding assistants in <a href="https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md">docs/llm-guide.md</a>.
+          </p>
+        </section>
 
         <!-- Example screen -->
         <section id="example" aria-labelledby="example-title">

@@ -235,6 +235,38 @@ main {
   font-size: var(--ep-font-size-300);
 }
 
+/* Getting started */
+.getting-started {
+  max-width: 720px;
+  margin-bottom: var(--ep-space-500);
+}
+
+.getting-started h3 {
+  margin: var(--ep-space-400) 0 var(--ep-space-100);
+  font-size: var(--ep-font-size-400);
+}
+
+.getting-started p,
+.getting-started ul {
+  margin: 0 0 var(--ep-space-200);
+  color: var(--ep-color-text-secondary);
+}
+
+.getting-started li + li {
+  margin-top: var(--ep-space-50);
+}
+
+.getting-started pre {
+  overflow-x: auto;
+  margin: 0 0 var(--ep-space-200);
+  padding: var(--ep-space-200);
+  border: 1px solid var(--ep-color-border-default);
+  border-radius: var(--ep-radius-container);
+  background: var(--ep-color-background-subtle);
+  color: var(--ep-color-text-primary);
+  line-height: var(--ep-font-line-height-normal);
+}
+
 /* Component sections */
 section.component {
   padding-top: var(--ep-space-500);
