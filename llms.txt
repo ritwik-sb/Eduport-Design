@@ -17,6 +17,7 @@ Start with the AI guide. It has setup, every component's tag, props, slots and e
 
 ## Optional
 
+- [Spacing and layout](docs/layout.md): space scale and when to use each step, layout grid, breakpoints, content widths and page structure
 - [Foundations](docs/foundations.md): how the color scales, type, radius and icon choices were made, with contrast results
 - [Token sources](packages/tokens/src): DTCG JSON for primitives, themes and corner modes
 - [Component sources](packages/web-components/src/components): Lit source with JSDoc `@slot`, `@csspart` and `@fires` tags

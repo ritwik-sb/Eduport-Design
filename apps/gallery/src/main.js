@@ -137,6 +137,58 @@ for (const [group, title, description] of logoGroups) {
   logoHost.append(block);
 }
 
+// Spacing scale
+const spaceScale = [
+  ['0', '0', 'Resetting; flush edges'],
+  ['25', '2px', 'Optical nudges, badge and tag padding'],
+  ['50', '4px', 'Icon to text in small items; label to helper text'],
+  ['100', '8px', 'Icon to text in buttons; between buttons in a group; label to field'],
+  ['150', '12px', 'Padding in menus, tooltips and list rows'],
+  ['200', '16px', 'Card padding; related controls in a row; phone margin and gutter'],
+  ['300', '24px', 'Between form fields; heading to its content'],
+  ['400', '32px', 'Between groups inside a section; phone section gap'],
+  ['500', '40px', 'Page header to content on large screens; tablet section gap'],
+  ['600', '48px', 'Between major page sections on desktop; between form sections'],
+  ['800', '64px', 'Empty states; generous page padding'],
+];
+const scaleBody = document.getElementById('space-scale');
+for (const [step, value, use] of spaceScale) {
+  const row = scaleBody.insertRow();
+  row.innerHTML = `<td><code>--ep-space-${step}</code></td><td>${value}</td><td><span class="space-bar" style="width: var(--ep-space-${step})"></span></td><td>${use}</td>`;
+}
+
+// Layout grid readout, following the same breakpoints as the tokens
+const breakpoints = [
+  ['xl', matchMedia('(min-width: 1440px)')],
+  ['lg', matchMedia('(min-width: 1024px)')],
+  ['md', matchMedia('(min-width: 600px)')],
+];
+const overlay = document.getElementById('grid-overlay');
+const readout = document.getElementById('grid-readout');
+function updateGrid() {
+  const current = breakpoints.find(([, query]) => query.matches)?.[0] ?? 'base';
+  const style = getComputedStyle(root);
+  const read = (name) => style.getPropertyValue(`--ep-layout-${name}`).trim();
+  const columns = Number(read('columns'));
+  overlay.replaceChildren(
+    ...Array.from({ length: columns }, (_, i) => Object.assign(document.createElement('span'), { textContent: i + 1 })),
+  );
+  // Layout tokens reference space tokens, so measure resolved lengths instead of printing var(...).
+  const probe = Object.assign(document.createElement('div'), { style: 'position:absolute;visibility:hidden' });
+  document.body.append(probe);
+  const px = (name) => {
+    probe.style.width = `var(--ep-layout-${name})`;
+    return `${Math.round(probe.getBoundingClientRect().width)}px`;
+  };
+  readout.textContent = `Breakpoint ${current}: ${columns} columns, ${px('margin')} margin, ${px('gutter')} gutter, ${px('section-gap')} section gap.`;
+  probe.remove();
+  for (const row of document.querySelectorAll('.token-table tr[data-bp]')) {
+    row.toggleAttribute('data-active', row.dataset.bp === current);
+  }
+}
+for (const [, query] of breakpoints) query.addEventListener('change', updateGrid);
+updateGrid();
+
 // Highlight the section in view
 const links = new Map([...document.querySelectorAll('.toc a')].map((a) => [a.hash.slice(1), a]));
 const observer = new IntersectionObserver(

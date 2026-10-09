@@ -39,6 +39,12 @@
         <ul>
           <li><a href="#example">Example screen</a></li>
         </ul>
+        <h2>Foundations</h2>
+        <ul>
+          <li><a href="#spacing">Spacing</a></li>
+          <li><a href="#layout-grid">Layout grid</a></li>
+          <li><a href="#page-structure">Page structure</a></li>
+        </ul>
         <h2>Actions</h2>
         <ul>
           <li><a href="#button">Button</a></li>
@@ -137,6 +143,135 @@
                 </div>
               </form>
             </ep-card>
+          </div>
+        </section>
+
+        <!-- Spacing -->
+        <section class="component" id="spacing" aria-labelledby="spacing-title">
+          <div class="component-header"><h2 id="spacing-title">Spacing</h2><code>--ep-space-*</code></div>
+          <p>
+            Every margin, padding and gap is a step on this 4px-based scale. Small steps are for the inside of components;
+            page layout uses multiples of 8px. Full rules in <a href="https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/layout.md">docs/layout.md</a>.
+          </p>
+          <div class="demo">
+            <div class="demo-row full">
+              <table class="space-scale">
+                <caption class="visually-hidden">Space scale</caption>
+                <thead>
+                  <tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col" class="bar-col"><span class="visually-hidden">Size</span></th><th scope="col">Use for</th></tr>
+                </thead>
+                <tbody id="space-scale"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="demo">
+            <div class="demo-row top">
+              <span class="label">Proximity</span>
+              <div class="grid-2">
+                <figure class="proximity">
+                  <div class="proximity-form even" role="img" aria-label="A form where labels, fields and helper text are all 12 pixels apart, so nothing groups">
+                    <span class="mock-label">Full name</span><span class="mock-field"></span>
+                    <span class="mock-label">Email</span><span class="mock-field"></span><span class="mock-help">We'll send the receipt here</span>
+                    <span class="mock-label">Phone</span><span class="mock-field"></span>
+                  </div>
+                  <figcaption><ep-badge variant="danger">Don't</ep-badge> Everything 12px apart. Which label goes with which field?</figcaption>
+                </figure>
+                <figure class="proximity">
+                  <div class="proximity-form grouped" role="img" aria-label="A form where each label sits 4 pixels from its field and fields are 24 pixels apart, so each field reads as one group">
+                    <span class="mock-group"><span class="mock-label">Full name</span><span class="mock-field"></span></span>
+                    <span class="mock-group"><span class="mock-label">Email</span><span class="mock-field"></span><span class="mock-help">We'll send the receipt here</span></span>
+                    <span class="mock-group"><span class="mock-label">Phone</span><span class="mock-field"></span></span>
+                  </div>
+                  <figcaption><ep-badge variant="success">Do</ep-badge> 4px inside each field group, 24px between groups.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Layout grid -->
+        <section class="component" id="layout-grid" aria-labelledby="layout-grid-title">
+          <div class="component-header"><h2 id="layout-grid-title">Layout grid</h2><code>--ep-layout-*</code></div>
+          <p>
+            Pages sit on a 4, 8 or 12 column grid. The columns, page margin, gutter and section gap change at each breakpoint
+            by themselves, so a page written once adapts. Resize the window to watch this one change.
+          </p>
+          <div class="demo">
+            <div class="demo-row full">
+              <p class="grid-readout" id="grid-readout"></p>
+              <div class="grid-overlay" id="grid-overlay" aria-hidden="true"></div>
+              <div class="grid-spans" aria-hidden="true">
+                <div class="span-card span-full">Full width</div>
+                <div class="span-card span-half">Half from md</div>
+                <div class="span-card span-half">Half from md</div>
+                <div class="span-card span-third">Third from lg</div>
+                <div class="span-card span-third">Third from lg</div>
+                <div class="span-card span-third">Third from lg</div>
+              </div>
+            </div>
+            <div class="demo-row full subtle">
+              <div class="table-scroll">
+                <table class="token-table">
+                  <caption class="visually-hidden">Breakpoints and layout tokens</caption>
+                  <thead>
+                    <tr><th scope="col">Breakpoint</th><th scope="col">Min width</th><th scope="col">Columns</th><th scope="col">Margin</th><th scope="col">Gutter</th><th scope="col">Section gap</th><th scope="col">Header</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr data-bp="base"><th scope="row">base</th><td>0</td><td>4</td><td>16px</td><td>16px</td><td>32px</td><td>56px</td></tr>
+                    <tr data-bp="md"><th scope="row"><code>md</code></th><td>600px</td><td>8</td><td>24px</td><td>24px</td><td>40px</td><td>64px</td></tr>
+                    <tr data-bp="lg"><th scope="row"><code>lg</code></th><td>1024px</td><td>12</td><td>32px</td><td>24px</td><td>48px</td><td>64px</td></tr>
+                    <tr data-bp="xl"><th scope="row"><code>xl</code></th><td>1440px</td><td>12</td><td>40px</td><td>32px</td><td>48px</td><td>64px</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="demo-row top">
+              <span class="label">Content widths</span>
+              <div class="stack widths">
+                <div class="width-bar" style="max-width: var(--ep-layout-width-form)"><code>--ep-layout-width-form</code> 560px · forms, settings</div>
+                <div class="width-bar" style="max-width: var(--ep-layout-width-prose)"><code>--ep-layout-width-prose</code> 68ch · running text</div>
+                <div class="width-bar" style="max-width: var(--ep-layout-width-page)"><code>--ep-layout-width-page</code> 1280px · page content</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page structure -->
+        <section class="component" id="page-structure" aria-labelledby="page-structure-title">
+          <div class="component-header"><h2 id="page-structure-title">Page structure</h2></div>
+          <p>
+            Most screens share one shell: a top bar, side navigation from <code>lg</code> (a drawer below it), then a page header and
+            sections. The wireframe below responds to its own width with a container query, the way a reusable layout should.
+          </p>
+          <div class="demo">
+            <div class="demo-row full">
+              <div class="shell" role="img" aria-label="Wireframe of a page: top bar, side navigation, page header with breadcrumb, title and actions, then two sections of cards">
+                <div class="shell-top"><span class="wf-chip">Top bar · <code>header-height</code></span></div>
+                <div class="shell-body">
+                  <div class="shell-side"><span class="wf-chip">Side nav · <code>sidebar-width</code></span><span class="wf-line"></span><span class="wf-line"></span><span class="wf-line short"></span></div>
+                  <div class="shell-main">
+                    <div class="wf-header">
+                      <div class="wf-titles">
+                        <span class="wf-line short xs"></span>
+                        <span class="wf-title">Page title</span>
+                        <span class="wf-line"></span>
+                      </div>
+                      <div class="wf-actions"><span class="wf-button"></span><span class="wf-button primary"></span></div>
+                    </div>
+                    <span class="wf-gap">space-300 / 400</span>
+                    <div class="wf-section">
+                      <span class="wf-title sm">Section</span>
+                      <div class="wf-cards"><span></span><span></span><span></span></div>
+                    </div>
+                    <span class="wf-gap">section-gap</span>
+                    <div class="wf-section">
+                      <span class="wf-title sm">Section</span>
+                      <div class="wf-cards"><span></span><span></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
