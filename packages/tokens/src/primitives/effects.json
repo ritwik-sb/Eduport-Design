@@ -1,9 +1,9 @@
 {
   "shadow": {
     "$type": "shadow",
-    "sm": { "$value": { "color": "#1714121f", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px" } },
-    "md": { "$value": { "color": "#17141229", "offsetX": "0px", "offsetY": "4px", "blur": "8px", "spread": "-2px" } },
-    "lg": { "$value": { "color": "#17141233", "offsetX": "0px", "offsetY": "12px", "blur": "24px", "spread": "-4px" } }
+    "sm": { "$value": { "color": "#0f0f0f1f", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px" } },
+    "md": { "$value": { "color": "#0f0f0f29", "offsetX": "0px", "offsetY": "4px", "blur": "8px", "spread": "-2px" } },
+    "lg": { "$value": { "color": "#0f0f0f33", "offsetX": "0px", "offsetY": "12px", "blur": "24px", "spread": "-4px" } }
   },
   "motion": {
     "duration": {
