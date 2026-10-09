@@ -1,12 +1,14 @@
 # Eduport Design System
 
+**[Live gallery](https://ritwik-sb.github.io/Eduport-Design/)** · **[Storybook](https://ritwik-sb.github.io/Eduport-Design/storybook/)** · **[npm](https://www.npmjs.com/package/@eduportdesign/web-components)**
+
 A reusable design system for Eduport products, in the spirit of IBM Carbon and the Atlassian Design System. Components are written once as web components and work in any framework, with React wrappers on top.
 
-> **Status:** pre-release. The first release will be v0.1.0. This repository holds the design tokens, a starter set of 18 components, and React wrappers for them.
+> **Status:** pre-1.0. Packages are on npm at 0.x, so APIs may still change between minor versions. This repository holds the design tokens, a starter set of 18 components, and React wrappers for them.
 
 **Using an AI coding assistant?** Point it at [docs/llm-guide.md](docs/llm-guide.md) (or [llms.txt](llms.txt)). It has setup, every component API, the token rules and accessibility requirements in one file, plus a snippet to paste into your app's `AGENTS.md` or `CLAUDE.md`.
 
-**See every component:** run `pnpm install && pnpm dev`. A gallery opens in your browser with light/dark and soft/sharp switches.
+**See every component:** open the [live gallery](https://ritwik-sb.github.io/Eduport-Design/), with light/dark and soft/sharp switches and install steps. To run it locally with your own edits, use `pnpm install && pnpm dev`.
 
 ## Highlights
 
