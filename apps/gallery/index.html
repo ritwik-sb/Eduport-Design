@@ -64,7 +64,7 @@
       <nav class="toc" aria-label="Components">
         <h2>Overview</h2>
         <ul>
-          <li><a href="#getting-started">Getting started</a></li>
+          <li><a href="#getting-started">Use it in your project</a></li>
           <li><a href="#example">Example screen</a></li>
         </ul>
         <h2>Foundations</h2>
@@ -124,10 +124,10 @@
 
         <!-- Getting started -->
         <section id="getting-started" class="getting-started" aria-labelledby="getting-started-title">
-          <div class="component-header"><h2 id="getting-started-title">Getting started</h2></div>
+          <div class="component-header"><h2 id="getting-started-title">Use it in your project</h2></div>
           <p>
-            The design system is published to npm as three packages. Components are Lit web components, so they work in
-            any framework or none, and the React package wraps them with typed props and events.
+            These steps work for a new app or an existing one. Components are Lit web components, so they run in any
+            framework or none. React apps get wrappers with typed props and events. Everything is on npm:
           </p>
           <ul>
             <li><code>@eduportdesign/tokens</code>: colors, type, spacing, radius, shadow and motion as CSS variables, SCSS and JS.</li>
@@ -135,46 +135,144 @@
             <li><code>@eduportdesign/react</code>: React wrappers like <code>&lt;Button&gt;</code>.</li>
           </ul>
 
-          <h3>1. Install</h3>
-          <pre><code>npm install @eduportdesign/tokens @eduportdesign/web-components
-# React apps also need
-npm install @eduportdesign/react</code></pre>
+          <h3>1. Install the packages</h3>
+          <pre><code># Plain HTML, Vue, Svelte, Angular or any other framework
+npm install @eduportdesign/tokens @eduportdesign/web-components
 
-          <h3>2. Load the theme CSS</h3>
-          <p>Import it once, at your app's entry point.</p>
-          <pre><code>import '@eduportdesign/tokens/css';                 // light theme, soft corners
+# React (the wrappers bring the web components with them)
+npm install @eduportdesign/tokens @eduportdesign/react
+
+# The Inter font (recommended; without it text falls back to the system font)
+npm install @fontsource-variable/inter</code></pre>
+
+          <h3>2. Load the CSS once</h3>
+          <p>
+            Import these at your app's entry point (<code>main.js</code>, <code>main.tsx</code> or similar), before any
+            component renders. Without <code>tokens.css</code> the components have no colors.
+          </p>
+          <pre><code>import '@fontsource-variable/inter';
+import '@eduportdesign/tokens/css';                 // required: light theme, soft corners
 import '@eduportdesign/tokens/css/theme-dark';      // optional: dark theme
 import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners</code></pre>
+          <p>The tokens don't style the page itself. Add this to your global CSS so the background and text follow the theme:</p>
+          <pre><code>body {
+  margin: 0;
+  background: var(--ep-color-background-default);
+  color: var(--ep-color-text-primary);
+  font-family: var(--ep-font-family-sans);
+  font-size: var(--ep-font-size-300);
+  line-height: var(--ep-font-line-height-normal);
+}</code></pre>
 
           <h3>3. Pick a theme and corner style</h3>
           <p>
             Set <code>data-theme</code> (<code>light</code> or <code>dark</code>) and <code>data-corners</code>
-            (<code>soft</code> or <code>sharp</code>) on the root element. Both are optional and can change at runtime.
+            (<code>soft</code> or <code>sharp</code>) on the root element. Both are optional, default to light and soft,
+            and can change at runtime.
           </p>
           <pre><code>&lt;html data-theme="dark" data-corners="sharp"&gt;</code></pre>
+          <p>To follow the operating system's light or dark setting:</p>
+          <pre><code>const dark = matchMedia('(prefers-color-scheme: dark)');
+const apply = () =&gt; (document.documentElement.dataset.theme = dark.matches ? 'dark' : 'light');
+apply();
+dark.addEventListener('change', apply);</code></pre>
 
           <h3>4. Use the components</h3>
-          <p>In plain HTML or any framework:</p>
-          <pre><code>import '@eduportdesign/web-components';                     // every component
-import '@eduportdesign/web-components/components/button';   // or one at a time
+
+          <h4>Plain HTML or JavaScript (with Vite or any bundler)</h4>
+          <pre><code>// main.js
+import '@eduportdesign/web-components';                     // every component
+import '@eduportdesign/web-components/components/button';   // or only the ones you use
+
+&lt;!-- index.html --&gt;
+&lt;ep-text-field label="Email" name="email" type="email" required&gt;&lt;/ep-text-field&gt;
+&lt;ep-button variant="primary" type="submit"&gt;Sign up&lt;/ep-button&gt;</code></pre>
+          <p>
+            Attributes are kebab-case (<code>helper-text</code>); the matching JS properties are camelCase
+            (<code>helperText</code>). Events bubble, so read new values from <code>event.target</code>. Form controls
+            work inside a native <code>&lt;form&gt;</code> with no extra wiring.
+          </p>
+
+          <h4>No build step</h4>
+          <p>For a prototype or a static page, load everything from the jsDelivr CDN:</p>
+          <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eduportdesign/tokens@%EP_VERSION%/dist/css/tokens.css"&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@eduportdesign/web-components@%EP_VERSION%/+esm"&gt;&lt;/script&gt;
 
 &lt;ep-button variant="primary"&gt;Save&lt;/ep-button&gt;</code></pre>
-          <p>In React:</p>
-          <pre><code>import { Button, TextField } from '@eduportdesign/react';
 
-&lt;Button variant="primary" onClick={save}&gt;Save&lt;/Button&gt;</code></pre>
+          <h4>React</h4>
+          <p>Component names drop the prefix and use PascalCase: <code>ep-text-field</code> becomes <code>TextField</code>.</p>
+          <pre><code>import { useState } from 'react';
+import { Button, TextField } from '@eduportdesign/react';
+
+export function SignUp() {
+  const [email, setEmail] = useState('');
+  return (
+    &lt;form onSubmit={(e) =&gt; { e.preventDefault(); save(email); }}&gt;
+      &lt;TextField label="Email" type="email" value={email} onInput={(e) =&gt; setEmail(e.target.value)} /&gt;
+      &lt;Button variant="primary" type="submit"&gt;Sign up&lt;/Button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+          <p>In Next.js, put <code>'use client'</code> at the top of files that use the components.</p>
+
+          <h4>Vue</h4>
+          <p>Tell Vue that <code>ep-</code> tags are custom elements, then use them in templates as in plain HTML.</p>
+          <pre><code>// vite.config.js
+import vue from '@vitejs/plugin-vue';
+
+export default {
+  plugins: [vue({ template: { compilerOptions: { isCustomElement: (tag) =&gt; tag.startsWith('ep-') } } })],
+};</code></pre>
+
+          <h4>Angular</h4>
+          <p>
+            Add the CSS to <code>styles</code> in <code>angular.json</code>, import the components in
+            <code>main.ts</code>, and allow custom elements in each component that uses them.
+          </p>
+          <pre><code>// angular.json → projects.&lt;app&gt;.architect.build.options
+"styles": ["node_modules/@eduportdesign/tokens/dist/css/tokens.css", "src/styles.css"]
+
+// main.ts
+import '@eduportdesign/web-components';
+
+// any.component.ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA], template: '&lt;ep-button&gt;Save&lt;/ep-button&gt;' })
+export class AnyComponent {}</code></pre>
+
+          <h4>Svelte</h4>
+          <p>No setup beyond steps 1 to 3. Import the components in <code>main.js</code> and use the tags directly.</p>
 
           <h3>5. Style your own UI with the tokens</h3>
+          <p>
+            Use the semantic <code>--ep-*</code> variables instead of hex values, so your screens switch theme and corner
+            style along with the components.
+          </p>
           <pre><code>.card {
   background: var(--ep-color-surface-raised);
   color: var(--ep-color-text-primary);
   border-radius: var(--ep-radius-container);
+  padding: var(--ep-space-300);
 }</code></pre>
 
+          <h3>Adding it to an existing app</h3>
+          <ul>
+            <li>Import only the components you need, one path at a time, to keep bundles small.</li>
+            <li>
+              The theme attributes work on any element, so you can adopt it one screen at a time with
+              <code>&lt;section data-theme="light"&gt;</code>.
+            </li>
+            <li>The tokens are namespaced <code>--ep-*</code> and the tags <code>ep-*</code>, so they won't clash with your existing styles.</li>
+          </ul>
+
+          <h3>Next steps</h3>
           <p>
-            More: every prop, slot and event in <a href="./storybook/">Storybook</a>, the full setup in the
-            <a href="https://github.com/ritwik-sb/Eduport-Design#readme">README</a>, and a single-file reference for AI
-            coding assistants in <a href="https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md">docs/llm-guide.md</a>.
+            Browse every component below, or every prop, slot and event in <a href="./storybook/">Storybook</a>. The
+            <a href="https://github.com/ritwik-sb/Eduport-Design#readme">README</a> covers installing from GitHub Packages.
+            If you use an AI coding assistant, point it at
+            <a href="https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md">docs/llm-guide.md</a>.
           </p>
         </section>
 
