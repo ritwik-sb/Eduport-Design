@@ -1,5 +1,12 @@
 # @eduportdesign/tokens
 
+## 0.3.0
+
+### Minor Changes
+
+- b39d213: Neutral color scheme: the gray scale is now true neutral (no brand tint), so whites, off-whites and greys look clean on screen. Red, green and blue move to standard hues. Brand orange stays where it is used on purpose: primary actions, accent marks, selected states and `accent.subtle`. Token names are unchanged; values change. The scrim and shadows use the neutral near-black too.
+- ac56da8: Add spacing and layout guidelines and layout tokens. New breakpoints `--ep-breakpoint-{md,lg,xl}` (600, 1024, 1440px) and responsive `--ep-layout-{columns,margin,gutter,section-gap,header-height}` that change inside min-width media queries in `tokens.css`, plus `--ep-layout-sidebar-width` and `--ep-layout-width-{prose,form,page}`. SCSS and JS export the breakpoints for media queries. See docs/layout.md.
+
 ## 0.2.0
 
 ### Minor Changes

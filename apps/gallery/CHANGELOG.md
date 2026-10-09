@@ -1,5 +1,15 @@
 # @eduportdesign/gallery
 
+## 0.3.0
+
+### Patch Changes
+
+- Updated dependencies [b39d213]
+- Updated dependencies [ac56da8]
+  - @eduportdesign/tokens@0.3.0
+  - @eduportdesign/web-components@0.3.0
+  - @eduportdesign/logos@0.3.0
+
 ## 0.2.0
 
 ### Patch Changes
