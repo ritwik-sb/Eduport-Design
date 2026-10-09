@@ -105,6 +105,8 @@ Touch density turns on by itself on phones and tablets (`@media (pointer: coarse
 - Small buttons, the tag remove button, and checkbox, radio and switch rows keep their look but extend their hit area to `--ep-size-target-min`.
 - Icon sizes inside controls are `--ep-size-icon-{sm,md,lg}` (16, 18, 20px). The toast layer's fallback stacking is `--ep-z-index-toast`.
 
+Spacing, the layout grid, breakpoints and page structure have their own guide: [layout.md](./layout.md).
+
 ## Radius and corner modes
 
 Components never use raw radius values. They use four **semantic** radius tokens, which a corner mode sets:

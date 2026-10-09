@@ -1,0 +1,6 @@
+{
+  "layout": {
+    "margin": { "$type": "dimension", "$value": "{space.500}" },
+    "gutter": { "$type": "dimension", "$value": "{space.400}" }
+  }
+}

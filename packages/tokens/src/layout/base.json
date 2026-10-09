@@ -1,0 +1,47 @@
+{
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Min-widths for mobile-first media queries. CSS variables can't be read inside @media, so use the SCSS or JS export, or the literal value.",
+    "md": { "$value": "600px", "$description": "Large phones in landscape, small tablets, narrow windows." },
+    "lg": { "$value": "1024px", "$description": "Tablets in landscape, laptops. The side navigation shows inline from here." },
+    "xl": { "$value": "1440px", "$description": "Large desktop monitors." }
+  },
+  "layout": {
+    "columns": {
+      "$type": "number",
+      "$value": 4,
+      "$description": "Columns in the page grid: 4 below md, 8 from md, 12 from lg."
+    },
+    "margin": {
+      "$type": "dimension",
+      "$value": "{space.200}",
+      "$description": "Inline padding between the viewport edge and page content."
+    },
+    "gutter": {
+      "$type": "dimension",
+      "$value": "{space.200}",
+      "$description": "Gap between grid columns, and between cards laid out on the grid."
+    },
+    "section-gap": {
+      "$type": "dimension",
+      "$value": "{space.400}",
+      "$description": "Vertical space between the major sections of a page."
+    },
+    "header-height": {
+      "$type": "dimension",
+      "$value": "56px",
+      "$description": "Height of the app's top bar. Use it for sticky offsets and scroll-padding-top."
+    },
+    "sidebar-width": {
+      "$type": "dimension",
+      "$value": "256px",
+      "$description": "Width of the side navigation when it shows inline (lg and up)."
+    },
+    "width": {
+      "$type": "dimension",
+      "prose": { "$value": "68ch", "$description": "Longest comfortable line for running text: articles, descriptions, help." },
+      "form": { "$value": "560px", "$description": "Single-column forms and settings pages." },
+      "page": { "$value": "1280px", "$description": "Default max width for page content. Data-heavy screens may go full width." }
+    }
+  }
+}

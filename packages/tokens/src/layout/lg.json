@@ -1,0 +1,7 @@
+{
+  "layout": {
+    "columns": { "$type": "number", "$value": 12 },
+    "margin": { "$type": "dimension", "$value": "{space.400}" },
+    "section-gap": { "$type": "dimension", "$value": "{space.600}" }
+  }
+}

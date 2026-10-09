@@ -1,0 +1,9 @@
+{
+  "layout": {
+    "columns": { "$type": "number", "$value": 8 },
+    "margin": { "$type": "dimension", "$value": "{space.300}" },
+    "gutter": { "$type": "dimension", "$value": "{space.300}" },
+    "section-gap": { "$type": "dimension", "$value": "{space.500}" },
+    "header-height": { "$type": "dimension", "$value": "64px" }
+  }
+}

@@ -119,6 +119,7 @@ Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch
 | **Type** | [Inter](https://rsms.me/inter/) for UI text, Noto Sans Malayalam for Malayalam, JetBrains Mono for code and IDs. |
 | **Radius** | Semantic tokens `indicator`, `control`, `container` and `round`, set by the corner mode. |
 | **Density** | Compact for mouse and trackpad, touch (44px controls, 16px input text) for phones and tablets. Touch turns on by itself on touch screens; `data-density` overrides it. |
+| **Spacing and layout** | 4px-based space scale; a 4 / 8 / 12 column grid whose margin, gutter and section gap grow at the `md` (600px), `lg` (1024px) and `xl` (1440px) breakpoints. See [docs/layout.md](docs/layout.md). |
 | **Icons** | Tabler Icons (MIT, 5,000+ icons). |
 
 Components use **semantic tokens** for color, radius, control heights and icon sizes (`--ep-color-text-primary`, `--ep-radius-control`, `--ep-size-control-md`), never raw color or radius primitives. That rule is what makes themes, corner modes and touch density work. Fixed geometry that belongs to one component, like avatar diameters or the switch track, stays in that component.

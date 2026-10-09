@@ -13,7 +13,7 @@ Status: pre-release (0.x). Names can still change before 1.0.
 1. **Use a component when one exists.** `<ep-button>`, not a styled `<button>`. `<ep-text-field>`, not a bare `<input>`. See the list in section 4.
 2. **Style everything else with semantic `--ep-*` tokens.** Never hard-code colors, and never use primitive color tokens (`--ep-color-brand-60`, `--ep-color-gray-20`, …). Use `--ep-color-text-primary`, `--ep-color-surface-raised` and so on. This is what makes dark mode and the corner modes work.
 3. **Use the semantic radius tokens** (`--ep-radius-control`, `--ep-radius-container`, …), not `--ep-radius-md` or `px` values, so sharp-corner mode works.
-4. **Use the space, type, shadow and motion tokens** instead of raw numbers.
+4. **Use the space, layout, type, shadow and motion tokens** instead of raw numbers. Space inside a group is smaller than the space around it, and pages sit on the layout grid (section 5, Space and layout).
 5. **Give every control an accessible name.** Form controls take `label`. `<ep-icon-button>` requires `label`. Meaningful `<ep-icon>`s take `label`. See section 7.
 6. **Don't reach into shadow DOM.** Style components only through their attributes, `::part()` and the tokens. Don't override internal classes, and don't rely on `--_*` private properties.
 7. **One primary button per view or dialog.** Other actions are `secondary`, `tertiary` or `ghost`. Destructive actions are `danger`.
@@ -304,9 +304,44 @@ Pairing rules. These are the pairs the contrast check covers in both themes; sti
 
 If no token fits, don't hard-code a color and don't use a primitive. Note the gap and propose a new semantic token for both `light.json` and `dark.json`.
 
-### Space
+### Space and layout
 
-`--ep-space-{0,25,50,100,150,200,300,400,500,600,800}` = 0, 2, 4, 8, 12, 16, 24, 32, 40, 48, 64px. Use them for padding, margin and gap.
+Full rules: `docs/layout.md`.
+
+`--ep-space-{0,25,50,100,150,200,300,400,500,600,800}` = 0, 2, 4, 8, 12, 16, 24, 32, 40, 48, 64px. Use them for padding, margin and gap; prefer `gap` over margins between siblings.
+
+| Step | Use for |
+|---|---|
+| `50` (4px) | Icon to text in small items, label to helper text |
+| `100` (8px) | Icon to text in buttons, between buttons in a group, between tags |
+| `150` (12px) | Padding in menus, tooltips, list rows |
+| `200` (16px) | Card padding, related controls in a row |
+| `300` (24px) | Between form fields, heading to its content |
+| `400` (32px) | Between groups inside a section |
+| `600` (48px) | Between form sections |
+
+Layout tokens change with viewport width on their own (mobile first, breakpoints `md` 600px, `lg` 1024px, `xl` 1440px):
+
+| Token | base / md / lg / xl |
+|---|---|
+| `--ep-layout-columns` | 4 / 8 / 12 / 12 |
+| `--ep-layout-margin` (page inline padding) | 16 / 24 / 32 / 40px |
+| `--ep-layout-gutter` (gap between columns and cards) | 16 / 24 / 24 / 32px |
+| `--ep-layout-section-gap` (between page sections) | 32 / 40 / 48 / 48px |
+| `--ep-layout-header-height` (top bar, sticky offsets) | 56 / 64 / 64 / 64px |
+| `--ep-layout-sidebar-width` (inline side nav, lg and up) | 256px |
+| `--ep-layout-width-{prose,form,page}` (max widths) | 68ch, 560px, 1280px |
+
+```css
+.page { display: flex; flex-direction: column; gap: var(--ep-layout-section-gap); max-width: calc(var(--ep-layout-width-page) + 2 * var(--ep-layout-margin)); margin-inline: auto; padding-inline: var(--ep-layout-margin); }
+.grid { display: grid; grid-template-columns: repeat(var(--ep-layout-columns), minmax(0, 1fr)); gap: var(--ep-layout-gutter); }
+.form { display: flex; flex-direction: column; gap: var(--ep-space-300); max-width: var(--ep-layout-width-form); }
+```
+
+- CSS variables don't work inside `@media`; write `@media (min-width: 1024px)` or use `$ep-breakpoint-lg` (SCSS) / `BreakpointLg` (JS).
+- Breakpoints decide layout; `pointer: coarse` (density) decides control size. Never use one for the other.
+- Forms are one column. Paragraphs cap at `--ep-layout-width-prose`. Nothing scrolls sideways at 320px wide except data tables.
+- No layout classes or layout components ship yet; write the CSS above in your app.
 
 ### Size and density
 
@@ -409,7 +444,10 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
 .panel { background: var(--ep-color-gray-10); }            /* primitive: breaks dark mode */
 .panel { border-radius: var(--ep-radius-lg); }             /* primitive: ignores sharp corners */
 
+.form > * + * { margin-top: 20px; }                       /* off-scale, and margins instead of gap */
+
 /* Do */
+.form { display: flex; flex-direction: column; gap: var(--ep-space-300); }
 .panel {
   background: var(--ep-color-surface-raised);
   color: var(--ep-color-text-primary);
@@ -455,6 +493,6 @@ Paste this into your app's `AGENTS.md`, `CLAUDE.md`, `.cursor/rules` or `.github
 This app uses the Eduport Design System (@eduportdesign/tokens, @eduportdesign/web-components, @eduportdesign/react).
 Before writing UI, read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md and follow it.
 - Use <ep-*> components (React: @eduportdesign/react) whenever one exists; never invent props or tags.
-- Style custom UI only with semantic --ep-* tokens (color, radius-indicator/control/container/round, space, font, shadow, motion). No hex values, no primitive tokens like --ep-color-brand-60.
+- Style custom UI only with semantic --ep-* tokens (color, radius-indicator/control/container/round, space, layout, font, shadow, motion). No hex values, no primitive tokens like --ep-color-brand-60.
 - Every control has an accessible name; WCAG 2.1 AA is required.
 ```
