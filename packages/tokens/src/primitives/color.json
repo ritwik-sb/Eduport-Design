@@ -26,11 +26,11 @@
       },
       "55": {
         "$value": "#ea5b0d",
-        "$description": "Hover shade of the brand color. Keeps 5.24:1 with near-black text."
+        "$description": "Hover shade of the brand color. Keeps 5.48:1 with near-black text."
       },
       "57": {
         "$value": "#dc5309",
-        "$description": "Pressed shade of the brand color. Keeps 4.61:1 with near-black text."
+        "$description": "Pressed shade of the brand color. Keeps 4.82:1 with near-black text."
       },
       "60": {
         "$value": "#c64b00"
@@ -49,73 +49,73 @@
       }
     },
     "gray": {
-      "$description": "Warm neutral, tinted toward the brand hue. The dark end (80 to 100) is kept nearly neutral, because a warm tint at low lightness reads as brown.",
+      "$description": "True neutral, no tint. Brand color is used on purpose (primary actions, accent marks, selected states), never as a tint on every surface.",
       "10": {
-        "$value": "#faf7f6"
+        "$value": "#f8f8f8"
       },
       "20": {
-        "$value": "#eeebea"
+        "$value": "#ececec"
       },
       "30": {
-        "$value": "#d9d5d2"
+        "$value": "#d6d6d6"
       },
       "40": {
-        "$value": "#bab6b4"
+        "$value": "#b7b7b7"
       },
       "50": {
-        "$value": "#95918f"
+        "$value": "#929292"
       },
       "60": {
-        "$value": "#767270"
+        "$value": "#737373"
       },
       "70": {
-        "$value": "#5a5654"
+        "$value": "#575757"
       },
       "80": {
-        "$value": "#3d3b3a"
+        "$value": "#3b3b3b"
       },
       "90": {
-        "$value": "#262423"
+        "$value": "#242424"
       },
       "95": {
-        "$value": "#1b1a19",
+        "$value": "#1a1a1a",
         "$description": "Extra dark-theme step between the page and raised surfaces."
       },
       "100": {
-        "$value": "#110f0e"
+        "$value": "#0f0f0f"
       }
     },
     "red": {
-      "$description": "Danger.",
+      "$description": "Danger. A standard red.",
       "10": {
-        "$value": "#fff6f6"
+        "$value": "#fff6f5"
       },
       "20": {
-        "$value": "#ffe6e5"
+        "$value": "#ffe6e3"
       },
       "30": {
-        "$value": "#ffc9c7"
+        "$value": "#ffcac3"
       },
       "40": {
-        "$value": "#ff9c99"
+        "$value": "#ff9d92"
       },
       "50": {
-        "$value": "#ff565e"
+        "$value": "#fe5950"
       },
       "60": {
-        "$value": "#d73240"
+        "$value": "#d73431"
       },
       "70": {
-        "$value": "#a91e2d"
+        "$value": "#a9201f"
       },
       "80": {
-        "$value": "#811922"
+        "$value": "#811a19"
       },
       "90": {
-        "$value": "#5c1218"
+        "$value": "#5c1311"
       },
       "100": {
-        "$value": "#310306"
+        "$value": "#310303"
       }
     },
     "green": {
@@ -124,31 +124,31 @@
         "$value": "#ebfded"
       },
       "20": {
-        "$value": "#d1f5d7"
+        "$value": "#d1f5d6"
       },
       "30": {
-        "$value": "#a3e5b0"
+        "$value": "#a4e5af"
       },
       "40": {
-        "$value": "#69cb82"
+        "$value": "#6ccb80"
       },
       "50": {
-        "$value": "#2ca756"
+        "$value": "#31a753"
       },
       "60": {
-        "$value": "#00853c"
+        "$value": "#0d853a"
       },
       "70": {
-        "$value": "#00652c"
+        "$value": "#08652a"
       },
       "80": {
-        "$value": "#004d20"
+        "$value": "#044d1e"
       },
       "90": {
-        "$value": "#013614"
+        "$value": "#023613"
       },
       "100": {
-        "$value": "#001906"
+        "$value": "#011906"
       }
     },
     "amber": {
@@ -190,31 +190,31 @@
         "$value": "#f4f8ff"
       },
       "20": {
-        "$value": "#e0edff"
+        "$value": "#e2ecfe"
       },
       "30": {
-        "$value": "#bbd9ff"
+        "$value": "#c1d7ff"
       },
       "40": {
-        "$value": "#85baff"
+        "$value": "#90b7ff"
       },
       "50": {
-        "$value": "#4093f8"
+        "$value": "#568ffa"
       },
       "60": {
-        "$value": "#2272cf"
+        "$value": "#3b6ed0"
       },
       "70": {
-        "$value": "#1157a3"
+        "$value": "#2a53a4"
       },
       "80": {
-        "$value": "#0f427d"
+        "$value": "#1f3f7e"
       },
       "90": {
-        "$value": "#0b2e58"
+        "$value": "#152c59"
       },
       "100": {
-        "$value": "#011430"
+        "$value": "#051331"
       }
     }
   }

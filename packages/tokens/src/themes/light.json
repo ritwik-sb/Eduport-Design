@@ -12,7 +12,7 @@
         "$value": "{color.gray.100}"
       },
       "scrim": {
-        "$value": "#171412a3",
+        "$value": "#0f0f0fa3",
         "$description": "Backdrop behind modal dialogs."
       }
     },
@@ -53,7 +53,7 @@
       },
       "on-primary": {
         "$value": "{color.gray.100}",
-        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. Near-black in both themes: 6.09:1 on the brand color, where white is only 3.01:1."
+        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. Near-black in both themes: 6.37:1 on the brand color, where white is only 3.01:1."
       },
       "link": {
         "$value": "{color.brand.70}"
@@ -100,7 +100,7 @@
       "primary": {
         "default": {
           "$value": "{color.brand.50}",
-          "$description": "The exact brand color. Pair with text.on-primary (6.09:1)."
+          "$description": "The exact brand color. Pair with text.on-primary (6.37:1)."
         },
         "hover": {
           "$value": "{color.brand.55}"

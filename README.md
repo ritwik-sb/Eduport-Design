@@ -115,7 +115,7 @@ Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch
 
 | | |
 |---|---|
-| **Color** | Six 10–100 scales (brand, gray, red, green, amber, blue). Step 60 of every hue takes white text at AA contrast. Primary actions use the exact brand orange `#fb6514` with near-black text (6.09:1). |
+| **Color** | Six 10–100 scales (brand, gray, red, green, amber, blue). Step 60 of every hue takes white text at AA contrast. Primary actions use the exact brand orange `#fb6514` with near-black text (6.37:1). |
 | **Type** | [Inter](https://rsms.me/inter/) for UI text, Noto Sans Malayalam for Malayalam, JetBrains Mono for code and IDs. |
 | **Radius** | Semantic tokens `indicator`, `control`, `container` and `round`, set by the corner mode. |
 | **Density** | Compact for mouse and trackpad, touch (44px controls, 16px input text) for phones and tablets. Touch turns on by itself on touch screens; `data-density` overrides it. |

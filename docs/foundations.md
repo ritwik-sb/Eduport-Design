@@ -22,14 +22,15 @@ Every hue has ten steps, `10` (lightest) to `100` (darkest), generated in OKLCH 
 | | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | brand | `#fff6f3` | `#ffe7de` | `#ffcbb7` | `#ff9f79` | `#fb6514` | `#c64b00` | `#983800` | `#762900` | `#561b00` | `#2b0a00` |
-| gray | `#faf7f6` | `#eeebea` | `#d9d5d2` | `#bab6b4` | `#95918f` | `#767270` | `#5a5654` | `#3d3b3a` | `#262423` | `#110f0e` |
-| red | `#fff6f6` | `#ffe6e5` | `#ffc9c7` | `#ff9c99` | `#ff565e` | `#d73240` | `#a91e2d` | `#811922` | `#5c1218` | `#310306` |
-| green | `#ebfded` | `#d1f5d7` | `#a3e5b0` | `#69cb82` | `#2ca756` | `#00853c` | `#00652c` | `#004d20` | `#013614` | `#001906` |
+| gray | `#f8f8f8` | `#ececec` | `#d6d6d6` | `#b7b7b7` | `#929292` | `#737373` | `#575757` | `#3b3b3b` | `#242424` | `#0f0f0f` |
+| red | `#fff6f5` | `#ffe6e3` | `#ffcac3` | `#ff9d92` | `#fe5950` | `#d73431` | `#a9201f` | `#811a19` | `#5c1311` | `#310303` |
+| green | `#ebfded` | `#d1f5d6` | `#a4e5af` | `#6ccb80` | `#31a753` | `#0d853a` | `#08652a` | `#044d1e` | `#023613` | `#011906` |
 | amber | `#fff8e5` | `#fdeabf` | `#f6d283` | `#e7ae2c` | `#c08800` | `#996a00` | `#774f00` | `#5d3b00` | `#442800` | `#221000` |
-| blue | `#f4f8ff` | `#e0edff` | `#bbd9ff` | `#85baff` | `#4093f8` | `#2272cf` | `#1157a3` | `#0f427d` | `#0b2e58` | `#011430` |
+| blue | `#f4f8ff` | `#e2ecfe` | `#c1d7ff` | `#90b7ff` | `#568ffa` | `#3b6ed0` | `#2a53a4` | `#1f3f7e` | `#152c59` | `#051331` |
 
-- **Gray** is slightly warm (tinted toward the brand hue) so it sits comfortably next to orange.
-- **Red** is pushed toward crimson so danger never reads as brand orange. **Amber** leans yellow for the same reason.
+- **Gray** is true neutral, with no tint. An earlier warm gray, tinted toward the brand hue, made whites and greys look dingy on screen (changed 2026-10-09). Gray also has an extra `gray.95` step (`#1a1a1a`) for dark-theme surfaces.
+- **Red, green and blue** are standard hues. **Amber** leans yellow so warnings never read as brand orange.
+- **Brand color is used with intent**: primary actions, accent marks such as the tab underline and progress, selected states and `accent.subtle` highlights. It is never a tint on every surface.
 - **Blue** is new: the brief had no info hue, and orange, red and amber are too close to carry "info" as well.
 
 ### The brand-orange accessibility problem
@@ -37,17 +38,17 @@ Every hue has ten steps, `10` (lightest) to `100` (darkest), generated in OKLCH 
 White text on `#fb6514` is **3.01:1**, which fails WCAG AA for normal text (4.5:1). There are two ways to keep AA:
 
 1. **Darker fill, white text.** Primary buttons use `brand.60` `#c64b00` with white text (4.76:1). Next to the logo, this reads as rust rather than Eduport orange.
-2. **Exact brand fill, dark text (chosen 2026-10-08).** Primary buttons use `#fb6514` with near-black text (`text.on-primary`, `gray.100`, 6.09:1), in both themes. The UI shows the true brand color.
+2. **Exact brand fill, dark text (chosen 2026-10-08).** Primary buttons use `#fb6514` with near-black text (`text.on-primary`, `gray.100`, 6.37:1), in both themes. The UI shows the true brand color.
 
 Decision: option 2, after the design critique showed the option 1 orange reads as rust next to the logo. Option 1 was the choice from 2026-10-07 to 2026-10-08.
 
 What option 2 means in practice:
 
 - **Labels on orange are near-black, never white.** Use `text.on-primary` for anything on an `interactive.primary` fill, including checkmarks and switch thumbs.
-- **Hover and pressed shades.** Light theme darkens to `brand.55` `#ea5b0d` (5.24:1) and `brand.57` `#dc5309` (4.61:1); `brand.60` would drop dark text to 3.85:1. Dark theme lightens to `brand.40` and `brand.30`, so the button gains emphasis instead of sinking into the page.
+- **Hover and pressed shades.** Light theme darkens to `brand.55` `#ea5b0d` (5.48:1) and `brand.57` `#dc5309` (4.82:1); `brand.60` would drop dark text to 3.85:1. Dark theme lightens to `brand.40` and `brand.30`, so the button gains emphasis instead of sinking into the page.
 - **Orange text stays darker.** `#fb6514` as text on white is 3.01:1, so links and the tertiary button label keep `text.link` (`brand.70` in light).
 - **Thin marks stay darker in light.** The tab underline, progress bar and the edge of checked controls use `accent.default`, which is `brand.60` in light: the brand color is 2.82:1 on `background.subtle`, under the 3:1 non-text minimum. Checked checkboxes, radios and switches are filled with the brand orange inside that edge. Dark uses the exact brand orange for all of them.
-- **The button against the page** is 3.01:1 on white and 6.09:1 on the dark page.
+- **The button against the page** is 3.01:1 on white and 6.37:1 on the dark page.
 
 ### Semantic tokens
 
@@ -67,7 +68,7 @@ Components use only these (`--ep-color-*`). Values per theme are in `src/themes/
 
 In dark, the three card styles are three distinct steps: outlined is the page color (`gray.100`) with a border, filled is `surface.muted` (`gray.95`), and elevated is `surface.raised` (`gray.90`). Shadows don't show on a dark page, so elevation relies on the lighter surface.
 
-The dark end of the gray scale (80, 90, the extra `gray.95` step, and 100) is nearly neutral and kept close together. A warm tint at low lightness reads as brown, and big jumps between dark surfaces look flat and grey, especially on phones (changed 2026-10-08).
+The dark end of the gray scale (80, 90, the extra `gray.95` step, and 100) is kept close together, because big jumps between dark surfaces look flat and grey, especially on phones (changed 2026-10-08).
 
 ### Contrast results
 
