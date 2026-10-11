@@ -36,6 +36,8 @@ jobs:
       - run: npm install -g npm@latest
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      # Component and Storybook tests run in headless Chromium.
+      - run: pnpm --filter @eduportdesign/web-components exec playwright install --with-deps chromium
       - run: pnpm test
 
       - name: Version PR or publish to npm

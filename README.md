@@ -137,8 +137,10 @@ pnpm install
 pnpm dev        # component gallery at http://localhost:5173
 pnpm storybook  # Storybook at http://localhost:6006
 pnpm build      # writes packages/*/dist and builds the gallery and Storybook
-pnpm test       # WCAG 2.1 AA contrast check across all themes
+pnpm test       # contrast check, component tests and an axe check of every story
 ```
+
+`pnpm test` runs the component tests (`packages/web-components/test`) and every Storybook story in headless Chromium, and fails on any axe accessibility violation. Run `pnpm --filter @eduportdesign/web-components exec playwright install chromium` once to get the browser.
 
 ```
 apps/

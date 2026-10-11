@@ -48,15 +48,28 @@ export class EpButton extends LitElement {
     this.fullWidth = false;
   }
 
+  /** Set by the browser when the element or an ancestor `<fieldset>` is disabled. Kept apart from `disabled` so
+   * re-enabling the fieldset doesn't clear the author's own value. */
+  #formDisabled = false;
+
+  formDisabledCallback(disabled: boolean) {
+    this.#formDisabled = disabled;
+    this.requestUpdate();
+  }
+
+  get #isDisabled() {
+    return this.disabled || this.#formDisabled;
+  }
+
   #onClick() {
     const form = this.#internals.form;
-    if (this.disabled || !form) return;
+    if (this.#isDisabled || !form) return;
     if (this.type === 'submit') form.requestSubmit();
     if (this.type === 'reset') form.reset();
   }
 
   render() {
-    return html`<button part="base" class="button" type="button" ?disabled=${this.disabled} @click=${this.#onClick}>
+    return html`<button part="base" class="button" type="button" ?disabled=${this.#isDisabled} @click=${this.#onClick}>
       <slot name="prefix"></slot>
       <slot></slot>
       <slot name="suffix"></slot>

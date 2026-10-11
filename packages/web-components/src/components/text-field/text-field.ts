@@ -16,6 +16,8 @@ export type TextFieldType = 'text' | 'email' | 'password' | 'search' | 'tel' | '
  * @csspart input - The native `<input>`.
  * @fires input - When the value changes as the user types.
  * @fires change - When the user commits a change.
+ *
+ * Inside a `<form>`, pressing Enter submits it, unless the form's first submit button is disabled.
  */
 export class EpTextField extends LitElement {
   static formAssociated = true;
@@ -94,8 +96,17 @@ export class EpTextField extends LitElement {
     this.value = this.#defaultValue;
   }
 
+  /** Set by the browser when the element or an ancestor `<fieldset>` is disabled. Kept apart from `disabled` so
+   * re-enabling the fieldset doesn't clear the author's own value. */
+  #formDisabled = false;
+
   formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
+    this.#formDisabled = disabled;
+    this.requestUpdate();
+  }
+
+  get #isDisabled() {
+    return this.disabled || this.#formDisabled;
   }
 
   updated() {
@@ -114,6 +125,25 @@ export class EpTextField extends LitElement {
     this.value = (event.target as HTMLInputElement).value;
   }
 
+  // The native `change` event doesn't leave the shadow root, so send our own.
+  #onChange() {
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+  }
+
+  // Enter submits the form, like a native input. The inner <input> has no form of its own, so do it here.
+  #onKeyDown(event: KeyboardEvent) {
+    const form = this.#internals.form;
+    if (event.key !== 'Enter' || event.isComposing || event.defaultPrevented || !form) return;
+    const submitter = [...form.elements].find((el) => (el as HTMLButtonElement).type === 'submit') as
+      | HTMLElement
+      | undefined;
+    if (submitter?.matches(':disabled')) return;
+    event.preventDefault();
+    // requestSubmit() only takes native submit buttons; an <ep-button> submits the same way without one.
+    const native = submitter instanceof HTMLButtonElement || submitter instanceof HTMLInputElement;
+    form.requestSubmit(native ? submitter : undefined);
+  }
+
   render() {
     const invalid = Boolean(this.errorText);
     const describedBy = [this.helperText && 'helper', invalid && 'error'].filter(Boolean).join(' ');
@@ -123,7 +153,7 @@ export class EpTextField extends LitElement {
             >${this.label}${this.required ? html`<span class="required" aria-hidden="true">*</span>` : nothing}</label
           >`
         : nothing}
-      <div part="base" class="box ${invalid ? 'invalid' : ''} ${this.disabled ? 'disabled' : ''}">
+      <div part="base" class="box ${invalid ? 'invalid' : ''} ${this.#isDisabled ? 'disabled' : ''}">
         <slot name="prefix"></slot>
         <input
           part="input"
@@ -134,12 +164,14 @@ export class EpTextField extends LitElement {
           .value=${live(this.value)}
           placeholder=${this.placeholder || nothing}
           autocomplete=${(this.autocomplete || nothing) as never}
-          ?disabled=${this.disabled}
+          ?disabled=${this.#isDisabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
           aria-invalid=${invalid ? 'true' : nothing}
           aria-describedby=${describedBy || nothing}
           @input=${this.#onInput}
+          @change=${this.#onChange}
+          @keydown=${this.#onKeyDown}
         />
         <slot name="suffix"></slot>
       </div>

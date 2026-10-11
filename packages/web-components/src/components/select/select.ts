@@ -129,8 +129,17 @@ export class EpSelect extends LitElement {
     this.value = this.#defaultValue;
   }
 
+  /** Set by the browser when the element or an ancestor `<fieldset>` is disabled. Kept apart from `disabled` so
+   * re-enabling the fieldset doesn't clear the author's own value. */
+  #formDisabled = false;
+
   formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
+    this.#formDisabled = disabled;
+    this.requestUpdate();
+  }
+
+  get #isDisabled() {
+    return this.disabled || this.#formDisabled;
   }
 
   updated() {
@@ -160,13 +169,13 @@ export class EpSelect extends LitElement {
             >${this.label}${this.required ? html`<span class="required" aria-hidden="true">*</span>` : nothing}</label
           >`
         : nothing}
-      <div part="base" class="box ${invalid ? 'invalid' : ''} ${this.disabled ? 'disabled' : ''}">
+      <div part="base" class="box ${invalid ? 'invalid' : ''} ${this.#isDisabled ? 'disabled' : ''}">
         <select
           part="select"
           id="select"
           class="control ${this.placeholder && !this.value ? 'placeholder' : ''}"
           name=${this.name || nothing}
-          ?disabled=${this.disabled}
+          ?disabled=${this.#isDisabled}
           ?required=${this.required}
           aria-invalid=${invalid ? 'true' : nothing}
           aria-describedby=${describedBy || nothing}

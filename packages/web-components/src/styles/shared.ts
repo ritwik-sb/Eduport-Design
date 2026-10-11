@@ -89,7 +89,7 @@ export const fieldStyles = css`
     font-size: 14px;
   }
 
-  :host([disabled]) .label {
+  :host(:is([disabled], :disabled)) .label {
     color: var(--ep-color-text-disabled);
   }
 `;
