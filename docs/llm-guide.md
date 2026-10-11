@@ -224,6 +224,16 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - Size it with `font-size`; change stroke with `--ep-icon-stroke-width`.
 - Only a curated set is bundled (see section 6). Add others with `registerIcons()`.
 
+**`<ep-empty-state>` → `EmptyState`**: what to show when a list, table or page has nothing in it yet.
+- `heading` (what's empty), `heading-level` (`headingLevel`, **2**; match the page outline), `icon` (icon name), `size`: `sm` (cards, panels) | **`md`** (page, table)
+- Slots: default (one or two sentences on why it's empty), `actions` (one primary button), `media` (an illustration instead of the icon)
+- Say why it's empty and what to do next. For "no search results", offer to clear filters.
+
+**`<ep-skeleton>` → `Skeleton`**: a placeholder in the shape of loading content.
+- `variant`: **`text`** | `rect` | `circle`; `lines` (**1**, for `text`; the last of several is shorter)
+- Size it with CSS `width`/`height`. Text skeletons follow the surrounding `font-size`.
+- Skeletons are hidden from screen readers. Put `aria-busy="true"` on the region that is loading and remove it when the content arrives.
+
 ### Navigation
 
 **`<ep-tabs>` + `<ep-tab>` + `<ep-tab-panel>` → `Tabs` + `Tab` + `TabPanel`**: switch between views in place.
@@ -238,6 +248,27 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
   <ep-tab-panel name="overview">…</ep-tab-panel>
   <ep-tab-panel name="lessons">…</ep-tab-panel>
 </ep-tabs>
+```
+
+**`<ep-breadcrumbs>` + `<ep-breadcrumb-item>` → `Breadcrumbs` + `BreadcrumbItem`**: where the page sits in the app.
+- Breadcrumbs: `label` (landmark name, **`Breadcrumb`**)
+- Item: `href`; default slot is the page name. The last item is the current page: it gets `aria-current="page"` and isn't a link, so leave its `href` empty.
+- Long names truncate with an ellipsis; keep them short.
+
+```html
+<ep-breadcrumbs>
+  <ep-breadcrumb-item href="/courses">Courses</ep-breadcrumb-item>
+  <ep-breadcrumb-item>Physics for Class 11</ep-breadcrumb-item>
+</ep-breadcrumbs>
+```
+
+**`<ep-pagination>` → `Pagination`**: move between pages of a long list or table.
+- `page` (1-based), `total-pages` (`totalPages`), `label` (landmark name, **`Pagination`**; name it after the list, like "Students")
+- Event: `change` (`onChange`); read `page` and load that page. It doesn't fetch anything itself.
+- Renders buttons, not links. Below 400px of container width it collapses to "Page 3 of 12" with previous and next.
+
+```jsx
+<Pagination label="Students" page={page} totalPages={pages} onChange={(e) => setPage(e.target.page)} />
 ```
 
 ### Feedback and overlays
@@ -270,6 +301,16 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
   <Button slot="footer" variant="danger" onClick={remove}>Delete</Button>
 </Modal>
 ```
+
+**`<ep-progress-bar>` → `ProgressBar`**: how far a task has got.
+- `label` (**required**, the accessible name; shown above the bar), `value` (0 to `max`; **leave unset for indeterminate**), `max` (**100**)
+- `show-value` (`showValue`, shows the percentage), `hide-label` (`hideLabel`), `helper-text` (`helperText`, like "2 of 5 MB")
+- `variant`: **`default`** | `success` | `danger` (finished or failed); `size`: `sm` (4px) | **`md`** (8px)
+
+**`<ep-spinner>` → `Spinner`**: a short wait of unknown length.
+- `label` (**`Loading`**; set `label=""` when nearby text already says it, like a button that reads "Saving"), `size`: `sm` | **`md`** | `lg`
+- In a button: `<ep-button disabled><ep-spinner slot="prefix" size="sm" label=""></ep-spinner>Saving</ep-button>`
+- Use a skeleton for loading page content, a progress bar when you know how much is left, and a spinner only for short waits.
 
 ### Styling a component from outside
 
@@ -482,7 +523,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
 
 ## 9. What doesn't exist yet
 
-Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), menus and dropdowns, popovers, tables, pagination, progress bars and spinners, skeletons, breadcrumbs, date pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
+Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), menus and dropdowns, popovers, tables, accordions, date pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
 
 ## 10. Add this to your app's agent instructions
 
