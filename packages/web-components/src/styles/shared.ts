@@ -1,6 +1,11 @@
 import { css } from 'lit';
 
-/** Applied to every component: box sizing, the system font, and `hidden` support on the host. */
+/**
+ * Applied to every component: box sizing, the system font, and `hidden` support on the host.
+ *
+ * Reduced motion is handled by the --ep-motion-* tokens, not here: under prefers-reduced-motion or
+ * data-motion="reduced" the distance and move tokens drop to zero and durations cap at 100ms, so fades still run.
+ */
 export const baseStyles = css`
   :host {
     box-sizing: border-box;
@@ -16,15 +21,6 @@ export const baseStyles = css`
   *::before,
   *::after {
     box-sizing: inherit;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      transition-duration: 0.01ms !important;
-      animation-duration: 0.01ms !important;
-    }
   }
 `;
 

@@ -2,6 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { baseStyles } from '../../styles/shared.js';
 import { feedbackIcons, type FeedbackVariant } from '../../styles/feedback.js';
 import { onModalChange, topModal } from '../../utils/modal-stack.js';
+import { motionDuration } from '../../utils/motion.js';
 import '../icon/index.js';
 import '../icon-button/index.js';
 
@@ -9,8 +10,9 @@ import '../icon-button/index.js';
  * A brief notification that confirms an action, like "Assignment submitted". Use `toast()` to show one;
  * it puts the toast in a live region so screen readers announce it.
  *
- * Toasts close on their own after `duration` milliseconds, and the timer pauses while the pointer or focus is
- * on the toast. Set `duration` to 0 for messages the user must act on.
+ * Toasts close on their own after 6 seconds, plus 1 second for every 20 words over 20, and the timer pauses while
+ * the pointer or focus is on the toast. A toast with an `action` (like "Undo") stays until it is dismissed, and so
+ * does one with `duration` set to 0. Never put the only copy of important information in a toast.
  *
  * @tag ep-toast
  * @slot - The message.
@@ -65,7 +67,7 @@ export class EpToast extends LitElement {
       @keyframes enter {
         from {
           opacity: 0;
-          transform: translateY(12px);
+          transform: translateY(var(--ep-motion-distance-md));
         }
       }
 
@@ -110,18 +112,22 @@ export class EpToast extends LitElement {
 
   declare variant: FeedbackVariant;
   declare heading: string;
-  /** Milliseconds before the toast closes. 0 keeps it open until dismissed. */
-  declare duration: number;
+  /**
+   * Milliseconds before the toast closes. 0 keeps it open until dismissed. Leave unset for the default: 6 seconds,
+   * plus 1 second for every 20 words over 20.
+   */
+  declare duration: number | undefined;
 
   #timer?: ReturnType<typeof setTimeout>;
   #remaining = 0;
   #startedAt = 0;
+  #closing = false;
 
   constructor() {
     super();
     this.variant = 'info';
     this.heading = '';
-    this.duration = 5000;
+    this.duration = undefined;
     this.addEventListener('pointerenter', this.#pause);
     this.addEventListener('pointerleave', this.#resume);
     this.addEventListener('focusin', this.#pause);
@@ -131,13 +137,20 @@ export class EpToast extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     // The toaster moves in and out of open modals; keep the time already counted down across those moves.
-    if (!this.hasUpdated) this.#remaining = this.duration;
+    if (!this.hasUpdated) this.#remaining = this.#lifetime;
     this.#resume();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#pause();
+  }
+
+  /** How long this toast stays, in milliseconds. 0 means until dismissed. */
+  get #lifetime(): number {
+    if (this.querySelector(':scope > [slot="action"]')) return 0;
+    if (this.duration !== undefined) return this.duration;
+    return readingTime(`${this.heading} ${this.textContent ?? ''}`);
   }
 
   #pause = () => {
@@ -148,14 +161,27 @@ export class EpToast extends LitElement {
   };
 
   #resume = () => {
-    if (this.duration <= 0 || this.#timer || this.matches(':focus-within')) return;
+    if (this.#lifetime <= 0 || this.#timer || this.matches(':focus-within')) return;
     this.#startedAt = Date.now();
     this.#timer = setTimeout(() => this.close(), Math.max(this.#remaining, 1000));
   };
 
-  /** Closes and removes the toast. */
-  close() {
+  /** Fades the toast out, then removes it. */
+  async close() {
+    if (this.#closing) return;
+    this.#closing = true;
     clearTimeout(this.#timer);
+    const base = this.renderRoot.querySelector<HTMLElement>('.base');
+    const duration = motionDuration(this, 'normal');
+    if (base && duration > 0 && typeof base.animate === 'function') {
+      // Exits are fade only and faster than the enter, so the stack below isn't left waiting.
+      const exit = base.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration,
+        easing: getComputedStyle(this).getPropertyValue('--ep-motion-easing-exit').trim() || 'ease-in',
+        fill: 'forwards',
+      });
+      await exit.finished.catch(() => {});
+    }
     this.dispatchEvent(new CustomEvent('ep-close', { bubbles: true, composed: true }));
     this.remove();
   }
@@ -171,6 +197,12 @@ export class EpToast extends LitElement {
       <ep-icon-button icon="x" label="Dismiss notification" size="sm" @click=${() => this.close()}></ep-icon-button>
     </div>`;
   }
+}
+
+/** The default toast lifetime: 6 seconds, plus 1 second for every 20 words over 20. */
+function readingTime(text: string): number {
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  return 6000 + Math.ceil(Math.max(0, words - 20) / 20) * 1000;
 }
 
 const supportsPopover = typeof HTMLElement !== 'undefined' && 'showPopover' in HTMLElement.prototype;
@@ -284,7 +316,7 @@ export interface ToastOptions {
   message: string;
   heading?: string;
   variant?: FeedbackVariant;
-  /** Milliseconds before the toast closes. 0 keeps it open. Default 5000. */
+  /** Milliseconds before the toast closes. 0 keeps it open. Default: 6 seconds, plus 1 second per 20 words over 20. */
   duration?: number;
 }
 
@@ -298,7 +330,7 @@ export function toast(options: ToastOptions): EpToast {
   const element = document.createElement('ep-toast');
   element.variant = options.variant ?? 'info';
   element.heading = options.heading ?? '';
-  element.duration = options.duration ?? 5000;
+  element.duration = options.duration;
   element.textContent = options.message;
   // Wait a frame so a just-created live region is in the accessibility tree before content arrives.
   requestAnimationFrame(() => toaster!.append(element));

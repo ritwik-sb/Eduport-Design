@@ -26,10 +26,37 @@ export const Toast = {
   </div>`,
 };
 
+/** A toast with an action stays until it is dismissed. */
+export const ToastWithUndo = {
+  render: () => html`<ep-button
+    variant="secondary"
+    @click=${() => {
+      const element = toast({ variant: 'success', message: 'Course deleted.' });
+      const undo = document.createElement('ep-button');
+      undo.slot = 'action';
+      undo.size = 'sm';
+      undo.variant = 'ghost';
+      undo.textContent = 'Undo';
+      undo.addEventListener('click', () => element.close());
+      element.append(undo);
+    }}
+    >Delete course</ep-button
+  >`,
+};
+
 export const Tooltip = {
   render: () => html`<div class="sb-row" style="padding: 48px">
     ${['top', 'bottom', 'left', 'right'].map(
       (p) => html`<ep-tooltip content=${`Shown on ${p}`} placement=${p}><ep-button variant="secondary">${p}</ep-button></ep-tooltip>`,
+    )}
+  </div>`,
+};
+
+/** Hover waits 500ms; once one is open, moving to a neighbor opens it at once. Keyboard focus never waits. */
+export const TooltipToolbar = {
+  render: () => html`<div class="sb-row" style="padding: 48px; gap: 4px" role="toolbar" aria-label="Formatting">
+    ${['edit', 'copy', 'link', 'trash'].map(
+      (icon) => html`<ep-tooltip content=${icon}><ep-icon-button icon=${icon} label=${icon}></ep-icon-button></ep-tooltip>`,
     )}
   </div>`,
 };
