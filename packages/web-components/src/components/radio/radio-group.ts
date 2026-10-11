@@ -78,7 +78,6 @@ export class EpRadioGroup extends LitElement {
     this.orientation = 'vertical';
     this.disabled = false;
     this.required = false;
-    this.#internals.role = 'radiogroup';
     this.addEventListener('click', this.#onClick);
     this.addEventListener('keydown', this.#onKeyDown);
   }
@@ -96,15 +95,24 @@ export class EpRadioGroup extends LitElement {
     this.value = this.#defaultValue;
   }
 
+  /** Set by the browser when the element or an ancestor `<fieldset>` is disabled. Kept apart from `disabled` so
+   * re-enabling the fieldset doesn't clear the author's own value. */
+  #formDisabled = false;
+
   formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
+    this.#formDisabled = disabled;
+    this.requestUpdate();
+  }
+
+  get #isDisabled() {
+    return this.disabled || this.#formDisabled;
   }
 
   get #radios(): EpRadio[] {
     return [...this.querySelectorAll<EpRadio>('ep-radio')];
   }
 
-  #isEnabled = (radio: EpRadio) => !radio.disabled && !this.disabled;
+  #isEnabled = (radio: EpRadio) => !radio.disabled && !this.#isDisabled;
 
   #select(radio: EpRadio, focus: boolean) {
     if (!this.#isEnabled(radio)) return;
@@ -145,11 +153,8 @@ export class EpRadioGroup extends LitElement {
     for (const radio of radios) {
       radio.checked = radio === checked;
       radio.tabIndex = radio === tabStop ? 0 : -1;
-      if (this.disabled) radio.setAttribute('aria-disabled', 'true');
+      radio.requestUpdate(); // so it picks up the group's disabled state
     }
-    this.#internals.ariaLabel = this.label;
-    this.#internals.ariaRequired = String(this.required);
-    this.#internals.ariaInvalid = String(Boolean(this.errorText));
     this.#internals.setFormValue(this.value || null);
     if (this.errorText) this.#internals.setValidity({ customError: true }, this.errorText);
     else if (this.required && !this.value) this.#internals.setValidity({ valueMissing: true }, 'Select an option.');
@@ -158,17 +163,28 @@ export class EpRadioGroup extends LitElement {
 
   render() {
     const invalid = Boolean(this.errorText);
-    return html`<div class="field">
+    const describedBy = invalid ? 'error' : this.helperText ? 'helper' : '';
+    // The radiogroup role lives in the shadow root so it can point at the label, helper and error text there.
+    // Slotted <ep-radio>s are its children in the accessibility tree.
+    return html`<div
+      class="field"
+      role="radiogroup"
+      aria-labelledby=${this.label ? 'label' : nothing}
+      aria-describedby=${describedBy || nothing}
+      aria-required=${this.required ? 'true' : nothing}
+      aria-invalid=${invalid ? 'true' : nothing}
+      aria-disabled=${this.#isDisabled ? 'true' : nothing}
+    >
       ${this.label
-        ? html`<span class="label" aria-hidden="true"
-            >${this.label}${this.required ? html`<span class="required">*</span>` : nothing}</span
+        ? html`<span class="label" id="label" aria-hidden="true"
+            >${this.label}${this.required ? html`<span class="required" aria-hidden="true">*</span>` : nothing}</span
           >`
         : nothing}
       <div part="options" class="options">
         <slot @slotchange=${() => this.requestUpdate()}></slot>
       </div>
-      ${this.helperText && !invalid ? html`<p class="helper">${this.helperText}</p>` : nothing}
-      ${invalid ? html`<p class="error"><ep-icon name="alert-circle"></ep-icon>${this.errorText}</p>` : nothing}
+      ${this.helperText && !invalid ? html`<p class="helper" id="helper">${this.helperText}</p>` : nothing}
+      ${invalid ? html`<p class="error" id="error"><ep-icon name="alert-circle"></ep-icon>${this.errorText}</p>` : nothing}
     </div>`;
   }
 }

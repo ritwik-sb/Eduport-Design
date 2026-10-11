@@ -112,8 +112,17 @@ export class EpTextarea extends LitElement {
     this.value = this.#defaultValue;
   }
 
+  /** Set by the browser when the element or an ancestor `<fieldset>` is disabled. Kept apart from `disabled` so
+   * re-enabling the fieldset doesn't clear the author's own value. */
+  #formDisabled = false;
+
   formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
+    this.#formDisabled = disabled;
+    this.requestUpdate();
+  }
+
+  get #isDisabled() {
+    return this.disabled || this.#formDisabled;
   }
 
   updated() {
@@ -132,6 +141,11 @@ export class EpTextarea extends LitElement {
     this.value = (event.target as HTMLTextAreaElement).value;
   }
 
+  // The native `change` event doesn't leave the shadow root, so send our own.
+  #onChange() {
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+  }
+
   render() {
     const invalid = Boolean(this.errorText);
     const describedBy = invalid ? 'error' : this.helperText ? 'helper' : '';
@@ -142,7 +156,7 @@ export class EpTextarea extends LitElement {
             >${this.label}${this.required ? html`<span class="required" aria-hidden="true">*</span>` : nothing}</label
           >`
         : nothing}
-      <div part="base" class="box ${invalid ? 'invalid' : ''} ${this.disabled ? 'disabled' : ''}">
+      <div part="base" class="box ${invalid ? 'invalid' : ''} ${this.#isDisabled ? 'disabled' : ''}">
         <textarea
           part="textarea"
           id="textarea"
@@ -152,12 +166,13 @@ export class EpTextarea extends LitElement {
           maxlength=${this.maxlength ?? nothing}
           .value=${live(this.value)}
           placeholder=${this.placeholder || nothing}
-          ?disabled=${this.disabled}
+          ?disabled=${this.#isDisabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
           aria-invalid=${invalid ? 'true' : nothing}
           aria-describedby=${describedBy || nothing}
           @input=${this.#onInput}
+          @change=${this.#onChange}
         ></textarea>
       </div>
       ${showFooter

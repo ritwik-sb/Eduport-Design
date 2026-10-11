@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 /** @type {import('@storybook/web-components-vite').StorybookConfig} */
 export default {
   stories: ['../stories/**/*.stories.js'],
-  addons: ['@storybook/addon-a11y'],
+  addons: ['@storybook/addon-a11y', '@storybook/addon-vitest'],
   framework: '@storybook/web-components-vite',
   // Read components from source so edits show up without a rebuild.
   viteFinal: (config) => {

@@ -99,17 +99,17 @@ export class EpCheckbox extends LitElement {
         color: var(--ep-color-text-secondary);
       }
 
-      :host([disabled]) .base {
+      :host(:is([disabled], :disabled)) .base {
         color: var(--ep-color-text-disabled);
         cursor: not-allowed;
       }
 
-      :host([disabled]) input {
+      :host(:is([disabled], :disabled)) input {
         border-color: var(--ep-color-border-default);
         background: var(--ep-color-interactive-disabled);
       }
 
-      :host([disabled]) .mark {
+      :host(:is([disabled], :disabled)) .mark {
         color: var(--ep-color-text-disabled);
       }
 
@@ -168,8 +168,17 @@ export class EpCheckbox extends LitElement {
     this.checked = this.#defaultChecked;
   }
 
+  /** Set by the browser when the element or an ancestor `<fieldset>` is disabled. Kept apart from `disabled` so
+   * re-enabling the fieldset doesn't clear the author's own value. */
+  #formDisabled = false;
+
   formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
+    this.#formDisabled = disabled;
+    this.requestUpdate();
+  }
+
+  get #isDisabled() {
+    return this.disabled || this.#formDisabled;
   }
 
   updated() {
@@ -198,7 +207,7 @@ export class EpCheckbox extends LitElement {
           type="checkbox"
           .checked=${live(this.checked)}
           .indeterminate=${this.indeterminate}
-          ?disabled=${this.disabled}
+          ?disabled=${this.#isDisabled}
           ?required=${this.required}
           aria-describedby=${this.helperText ? 'helper' : nothing}
           @change=${this.#onChange}

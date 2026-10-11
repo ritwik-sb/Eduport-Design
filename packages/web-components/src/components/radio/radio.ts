@@ -56,17 +56,17 @@ export class EpRadio extends LitElement {
         ${focusRing}
       }
 
-      :host([disabled]) {
+      :host([aria-disabled='true']) {
         color: var(--ep-color-text-disabled);
         cursor: not-allowed;
       }
 
-      :host([disabled]) .control {
+      :host([aria-disabled='true']) .control {
         border-color: var(--ep-color-border-default);
         background: var(--ep-color-interactive-disabled);
       }
 
-      :host([disabled][checked]) .control {
+      :host([aria-disabled='true'][checked]) .control {
         border-color: var(--ep-color-text-disabled);
         box-shadow: none;
       }
@@ -80,7 +80,7 @@ export class EpRadio extends LitElement {
           border-color: Highlight;
         }
 
-        :host([disabled]) .control {
+        :host([aria-disabled='true']) .control {
           border-color: GrayText;
         }
       }
@@ -103,7 +103,11 @@ export class EpRadio extends LitElement {
 
   updated() {
     this.#internals.ariaChecked = String(this.checked);
-    this.#internals.ariaDisabled = String(this.disabled);
+    // Set as an attribute rather than through ElementInternals so testing tools like axe see it. A disabled group
+    // (or a disabled fieldset around it) disables its options too.
+    const disabled = this.disabled || Boolean(this.closest('ep-radio-group')?.matches(':disabled'));
+    if (disabled) this.setAttribute('aria-disabled', 'true');
+    else this.removeAttribute('aria-disabled');
   }
 
   render() {

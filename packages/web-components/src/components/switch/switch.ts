@@ -180,8 +180,17 @@ export class EpSwitch extends LitElement {
     this.checked = this.#defaultChecked;
   }
 
+  /** Set by the browser when the element or an ancestor `<fieldset>` is disabled. Kept apart from `disabled` so
+   * re-enabling the fieldset doesn't clear the author's own value. */
+  #formDisabled = false;
+
   formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
+    this.#formDisabled = disabled;
+    this.requestUpdate();
+  }
+
+  get #isDisabled() {
+    return this.disabled || this.#formDisabled;
   }
 
   updated() {
@@ -189,7 +198,7 @@ export class EpSwitch extends LitElement {
   }
 
   #onClick() {
-    if (this.disabled) return;
+    if (this.#isDisabled) return;
     this.checked = !this.checked;
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
@@ -202,7 +211,7 @@ export class EpSwitch extends LitElement {
       role="switch"
       aria-checked=${String(this.checked)}
       aria-describedby=${this.helperText ? 'helper' : nothing}
-      ?disabled=${this.disabled}
+      ?disabled=${this.#isDisabled}
       @click=${this.#onClick}
     >
       <span part="track" class="track"><span part="thumb" class="thumb"></span></span>
