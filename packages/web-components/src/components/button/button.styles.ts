@@ -130,6 +130,39 @@ export const buttonStyles = css`
     font-size: var(--_icon-size);
   }
 
+  slot[hidden] {
+    display: none;
+  }
+
+  :host([loading]) .button {
+    cursor: progress;
+  }
+
+  /* A progress indicator, so it keeps turning under reduced motion: it's the only sign that work is happening. */
+  .spinner {
+    flex: none;
+    width: var(--_icon-size);
+    height: var(--_icon-size);
+    border: 2px solid currentColor;
+    border-inline-end-color: transparent;
+    border-radius: 50%;
+    animation:
+      spinner-in var(--ep-motion-duration-fast) var(--ep-motion-easing-enter),
+      spinner-turn 1s linear infinite;
+  }
+
+  @keyframes spinner-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes spinner-turn {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
   @media (forced-colors: active) {
     .button {
       border-color: ButtonText;

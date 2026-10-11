@@ -6,6 +6,9 @@
 // theme-dark.css     semantic color overrides under [data-theme="dark"]
 // corners-sharp.css  semantic radius overrides under [data-corners="sharp"]
 //
+// tokens.css also carries the motion tokens, with reduced values under prefers-reduced-motion and
+// [data-motion="reduced"]: movement drops to zero and durations cap at 100ms, so fades stay and nothing slides.
+//
 // Color theme, corner mode and density are independent axes, so any combination works. Layout follows the
 // viewport width only, never the theme, corner mode or pointer.
 import { readFile, rm, appendFile } from 'node:fs/promises';
@@ -16,9 +19,10 @@ const isSemantic = (token) => !token.filePath.includes('/primitives/');
 const isCorner = (token) => token.filePath.includes('/corners/');
 const isDensity = (token) => token.filePath.includes('/density/');
 const isLayout = (token) => token.filePath.includes('/layout/');
+const isMotion = (token) => token.filePath.includes('/motion/');
 
 const base = new StyleDictionary({
-  source: ['src/primitives/*.json', 'src/themes/light.json', 'src/corners/soft.json', 'src/density/compact.json', 'src/layout/base.json'],
+  source: ['src/primitives/*.json', 'src/themes/light.json', 'src/corners/soft.json', 'src/density/compact.json', 'src/layout/base.json', 'src/motion/full.json'],
   usesDtcg: true,
   platforms: {
     css: {
@@ -29,7 +33,7 @@ const base = new StyleDictionary({
         {
           destination: 'tokens.css',
           format: 'css/variables',
-          filter: (token) => !isCorner(token) && !isDensity(token) && !isLayout(token),
+          filter: (token) => !isCorner(token) && !isDensity(token) && !isLayout(token) && !isMotion(token),
           options: { selector: ':root, [data-theme="light"]', outputReferences: true },
         },
         // Separate block so [data-theme] and [data-corners] never reset each other. Appended to tokens.css below.
@@ -44,6 +48,12 @@ const base = new StyleDictionary({
           format: 'css/variables',
           filter: isDensity,
           options: { selector: ':root, [data-density="compact"]', outputReferences: true },
+        },
+        {
+          destination: 'motion-full.css',
+          format: 'css/variables',
+          filter: isMotion,
+          options: { selector: ':root', outputReferences: true },
         },
         // Plain :root, so a nested [data-theme] or [data-density] never resets the breakpoint values.
         {
@@ -98,6 +108,16 @@ const inline = async (file, wrap = (css) => css) => {
 await base.buildAllPlatforms();
 await inline('corners-soft.css');
 await inline('density-compact.css');
+await inline('motion-full.css');
+// The OS setting reduces motion everywhere; data-motion="reduced" lets an app offer its own setting, on the page
+// or on any subtree. There is no opt-out of the OS setting on purpose.
+await override('src/motion/reduced.json', 'motion-reduced.css', '[data-motion="reduced"]').buildAllPlatforms();
+await inline('motion-reduced.css', (css) => {
+  const header = css.slice(0, css.indexOf('[data-motion'));
+  const block = css.slice(css.indexOf('[data-motion'));
+  const media = block.replace('[data-motion="reduced"]', ':root');
+  return `${header}@media (prefers-reduced-motion: reduce) {\n${media.replace(/^/gm, '  ').trimEnd()}\n}\n\n${block}`;
+});
 await override('src/density/touch.json', 'density-touch.css', '[data-density="touch"]').buildAllPlatforms();
 // Phones and tablets get touch density on their own; data-density="compact" opts out, "touch" opts in anywhere.
 await inline('density-touch.css', (css) => {

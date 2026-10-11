@@ -1,0 +1,27 @@
+{
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "slower": {
+        "$value": "400ms",
+        "$description": "Drawers and page-level panels only. Nothing inside a component runs longer than slow (300ms)."
+      },
+      "move": {
+        "$value": "{motion.duration.normal}",
+        "$description": "Movement inside a control: switch thumb, tab indicator, chevron rotate. 0ms under reduced motion, so the part jumps."
+      }
+    },
+    "distance": {
+      "$type": "dimension",
+      "sm": { "$value": "4px", "$description": "Enter offset for small overlays: tooltip, menu, popover." },
+      "md": { "$value": "8px", "$description": "Enter offset for toasts and other larger surfaces." }
+    },
+    "scale": {
+      "enter": {
+        "$type": "number",
+        "$value": 0.98,
+        "$description": "Starting scale for a modal entering. Never smaller."
+      }
+    }
+  }
+}

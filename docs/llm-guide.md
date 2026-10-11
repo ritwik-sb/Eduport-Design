@@ -67,18 +67,21 @@ body {
 }
 ```
 
-### Theme and corners
+### Theme, corners and motion
 
-Two independent attributes on the root element. Both are optional and can change at runtime.
+Independent attributes on the root element. All are optional and can change at runtime.
 
 ```html
-<html data-theme="dark" data-corners="sharp">
+<html data-theme="dark" data-corners="sharp" data-motion="reduced">
 ```
 
 | Attribute | Values | Default (attribute absent) | Needs |
 |---|---|---|---|
 | `data-theme` | `light`, `dark` | `light` | `theme-dark` CSS for `dark` |
 | `data-corners` | `soft`, `sharp` | `soft` | `corners-sharp` CSS for `sharp` |
+| `data-motion` | `reduced` | full motion, unless the OS asks for reduced motion | nothing extra |
+
+Use `data-motion="reduced"` for an in-app "Reduce motion" setting. The OS setting (`prefers-reduced-motion`) already applies on its own, and nothing overrides it.
 
 To follow the OS setting:
 
@@ -151,6 +154,7 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - `size`: `sm` (32px) | **`md`** (40px) | `lg` (48px)
 - `type`: **`button`** | `submit` | `reset`
 - `disabled`, `full-width` (`fullWidth`)
+- `loading`: set while the action runs. Presses are ignored, `aria-busy` is set, and a spinner replaces the `prefix` icon if loading lasts over 400ms (then stays at least 500ms). Keep the label, or change it to a verb like "Saving…". Announce the result with `toast()` or inline text, not on the button. Prefer `loading` over `disabled` for in-progress actions.
 - Slots: default (label), `prefix`, `suffix` (for `<ep-icon>`)
 - Event: native `click`
 
@@ -248,13 +252,14 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - An alert present at page load is not announced. If you insert one later and it must be announced, add `role="status"` (or `role="alert"` for urgent errors) before inserting it.
 
 **`toast()` and `<ep-toast>` → `toast()` and `Toast`**: a brief, non-blocking notification.
-- Prefer the function: `toast({ message, heading?, variant?, duration? })`. `variant` is `info` | `success` | `warning` | `danger`; `duration` is ms, default 5000, `0` keeps it open. It returns the element.
+- Prefer the function: `toast({ message, heading?, variant?, duration? })`. `variant` is `info` | `success` | `warning` | `danger`; `duration` is ms; leave it out for the default (6s, plus 1s per 20 words over 20); `0` keeps it open. A toast with an `action` slot never closes on its own. It returns the element.
 - Import from `@eduportdesign/web-components/components/toast` or `@eduportdesign/react`.
 - Toasts are announced politely. Never put the only copy of important information, or a required action, in a toast.
 - To change position, add `<ep-toaster placement="top-end">` (`bottom-end` default, `top-end`, `bottom-center`) once to the page.
 
 **`<ep-tooltip>` → `Tooltip`**: a short text label on hover or focus.
 - `content` (text), `placement`: **`top`** | `bottom` | `left` | `right`
+- Opens 500ms after hover (at once on keyboard focus, or when moving from another tooltip). Don't build your own delay.
 - Wrap the trigger element: `<ep-tooltip content="Edit"><ep-icon-button icon="edit" label="Edit"></ep-icon-button></ep-tooltip>`
 - Only plain text. Never put links, buttons or essential information in a tooltip. Don't use it on disabled elements.
 
@@ -374,7 +379,10 @@ Touch density applies on its own on phones and tablets (`pointer: coarse`); `dat
 
 - `--ep-border-width-thin`, `--ep-border-width-thick`
 - `--ep-shadow-sm` (raised), `-md` (popovers, tooltips), `-lg` (modals)
-- `--ep-motion-duration-fast` (100ms), `-normal` (200ms), `-slow` (300ms); `--ep-motion-easing-standard`, `-enter`, `-exit`
+- `--ep-motion-duration-fast` (100ms), `-normal` (200ms), `-slow` (300ms), `-slower` (400ms, drawers only), `-move` (200ms, movement inside a control); `--ep-motion-easing-standard`, `-enter`, `-exit`
+- `--ep-motion-distance-sm` (4px, overlay enter offset), `-md` (8px, toast enter offset); `--ep-motion-scale-enter` (0.98, modal)
+- Under reduced motion (OS setting or `data-motion="reduced"`) distances become 0, `-move` becomes 0ms and every duration caps at 100ms, so write `transform: translateY(var(--ep-motion-distance-sm))` and the slide disappears on its own while the fade stays.
+- Motion only explains a change: state change, enter/exit, spatial continuity or progress. No bounce, shake, ripple, press scale-down, hover lift or animated counters. Full rules: [docs/motion.md](motion.md).
 
 ## 6. Icons
 
@@ -433,7 +441,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
   ```
 - **Don't rely on color alone.** Pair status colors with text or an icon.
 - **Announce dynamic changes.** Use `toast()` for transient confirmations, `role="status"` on inserted alerts, and `error-text` for field errors (it is wired to `aria-describedby` and `aria-invalid`).
-- **Respect reduced motion.** The components already do. For your own animation, use the motion tokens, animate only `opacity` and `transform`, keep it at or under 300ms, and disable movement under `@media (prefers-reduced-motion: reduce)`.
+- **Respect reduced motion.** The components already do. For your own animation, use the motion tokens (durations, easings, and `distance`/`scale` for movement), animate only `opacity` and `transform`, and keep it at or under 300ms. The tokens then handle reduced motion for you. A loading spinner is the one thing that keeps moving.
 - **Support Windows High Contrast.** If you draw custom borders or indicators with `background`, add an `@media (forced-colors: active)` rule that uses system colors (`CanvasText`, `Highlight`, `ButtonText`).
 
 ## 8. Do and don't
@@ -482,7 +490,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
 
 ## 9. What doesn't exist yet
 
-Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), menus and dropdowns, popovers, tables, pagination, progress bars and spinners, skeletons, breadcrumbs, date pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
+Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), menus and dropdowns, popovers, tables, pagination, progress bars and standalone spinners (use `<ep-button loading>` for a busy button), skeletons, breadcrumbs, date pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
 
 ## 10. Add this to your app's agent instructions
 
@@ -495,4 +503,5 @@ Before writing UI, read https://github.com/ritwik-sb/Eduport-Design/blob/main/do
 - Use <ep-*> components (React: @eduportdesign/react) whenever one exists; never invent props or tags.
 - Style custom UI only with semantic --ep-* tokens (color, radius-indicator/control/container/round, space, layout, font, shadow, motion). No hex values, no primitive tokens like --ep-color-brand-60.
 - Every control has an accessible name; WCAG 2.1 AA is required.
+- Animate only with --ep-motion-* tokens (opacity and transform, 300ms max); see docs/motion.md.
 ```

@@ -122,6 +122,7 @@ Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch
 | **Radius** | Semantic tokens `indicator`, `control`, `container` and `round`, set by the corner mode. |
 | **Density** | Compact for mouse and trackpad, touch (44px controls, 16px input text) for phones and tablets. Touch turns on by itself on touch screens; `data-density` overrides it. |
 | **Spacing and layout** | 4px-based space scale; a 4 / 8 / 12 column grid whose margin, gutter and section gap grow at the `md` (600px), `lg` (1024px) and `xl` (1440px) breakpoints. See [docs/layout.md](docs/layout.md). |
+| **Motion** | 100 / 200 / 300ms durations, enter offsets and a modal scale that drop to zero under reduced motion (the OS setting or `data-motion="reduced"`), so fades stay and nothing slides. Tooltips open after 500ms, button spinners wait 400ms, toasts stay 6s. See [docs/motion.md](docs/motion.md). |
 | **Icons** | Tabler Icons (MIT, 5,000+ icons). |
 
 Components use **semantic tokens** for color, radius, control heights and icon sizes (`--ep-color-text-primary`, `--ep-radius-control`, `--ep-size-control-md`), never raw color or radius primitives. That rule is what makes themes, corner modes and touch density work. Fixed geometry that belongs to one component, like avatar diameters or the switch track, stays in that component.
@@ -162,6 +163,7 @@ packages/tokens/src/
   primitives/   raw values: color scales, space, radius, type, shadow, motion
   themes/       semantic colors: light.json, dark.json
   corners/      semantic radius: soft.json, sharp.json
+  motion/       motion tokens with their reduced-motion values: full.json, reduced.json
 ```
 
 To add a theme, add a JSON file to `src/themes/`. If a component needs a color that doesn't exist yet, add a semantic token to both `light.json` and `dark.json` and run the contrast check. Don't hard-code the value.

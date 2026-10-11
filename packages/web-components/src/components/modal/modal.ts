@@ -63,12 +63,19 @@ export class EpModal extends LitElement {
 
       dialog::backdrop {
         background: var(--ep-color-background-scrim, rgb(0 0 0 / 0.6));
+        animation: fade var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
       }
 
       @keyframes enter {
         from {
           opacity: 0;
-          transform: translateY(8px) scale(0.98);
+          transform: scale(var(--ep-motion-scale-enter));
+        }
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0;
         }
       }
 

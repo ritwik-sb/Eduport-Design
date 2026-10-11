@@ -1,0 +1,19 @@
+{
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "normal": { "$value": "100ms", "$description": "Capped at 100ms under reduced motion, so fades stay short." },
+      "slow": { "$value": "100ms", "$description": "Capped at 100ms under reduced motion, so fades stay short." },
+      "slower": { "$value": "100ms", "$description": "Capped at 100ms under reduced motion, so fades stay short." },
+      "move": { "$value": "0ms", "$description": "Movement inside a control jumps under reduced motion." }
+    },
+    "distance": {
+      "$type": "dimension",
+      "sm": { "$value": "0px" },
+      "md": { "$value": "0px" }
+    },
+    "scale": {
+      "enter": { "$type": "number", "$value": 1 }
+    }
+  }
+}
