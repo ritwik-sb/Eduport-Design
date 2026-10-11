@@ -62,6 +62,26 @@ export class EpPopover extends LitElement {
         display: none;
       }
 
+      /* Fade and a small offset from the trigger on open; the tokens drop the offset under reduced motion. */
+      .panel:popover-open {
+        opacity: 1;
+        translate: 0 0;
+        transition:
+          opacity var(--ep-motion-duration-fast) var(--ep-motion-easing-enter),
+          translate var(--ep-motion-duration-fast) var(--ep-motion-easing-enter);
+      }
+
+      @starting-style {
+        .panel:popover-open {
+          opacity: 0;
+          translate: 0 calc(-1 * var(--ep-motion-distance-sm));
+        }
+
+        .panel:popover-open[data-side='top'] {
+          translate: 0 var(--ep-motion-distance-sm);
+        }
+      }
+
       @media (forced-colors: active) {
         .panel {
           border-color: CanvasText;

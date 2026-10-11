@@ -78,7 +78,7 @@ export class EpAccordionItem extends LitElement {
         flex: none;
         font-size: var(--ep-size-icon-md);
         color: var(--ep-color-text-secondary);
-        transition: transform var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
+        transition: transform var(--ep-motion-duration-move) var(--ep-motion-easing-standard);
       }
 
       :host([open]) .chevron {

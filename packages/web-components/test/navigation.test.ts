@@ -70,6 +70,31 @@ describe('ep-progress-bar', () => {
   });
 });
 
+describe('reduced motion', () => {
+  it('stops the skeleton pulse and the sliding progress segment under data-motion="reduced"', async () => {
+    const wrapper = await fixture(`<div data-motion="reduced">
+      <ep-skeleton></ep-skeleton>
+      <ep-progress-bar label="Preparing"></ep-progress-bar>
+    </div>`);
+    const line = shadow(wrapper.querySelector('ep-skeleton')!, '.line');
+    expect(parseFloat(getComputedStyle(line).animationDuration)).toBe(0);
+    const track = shadow(wrapper.querySelector('ep-progress-bar')!, '.track');
+    const indicator = track.querySelector('.indicator')!;
+    expect(getComputedStyle(indicator).animationName).toBe('none');
+    expect(getComputedStyle(indicator).backgroundImage).toContain('repeating-linear-gradient');
+  });
+
+  it('animates both by default', async () => {
+    const wrapper = await fixture(
+      `<div><ep-skeleton></ep-skeleton><ep-progress-bar label="Preparing"></ep-progress-bar></div>`,
+    );
+    const line = shadow(wrapper.querySelector('ep-skeleton')!, '.line');
+    expect(parseFloat(getComputedStyle(line).animationDuration)).toBeGreaterThan(1);
+    const indicator = shadow(wrapper.querySelector('ep-progress-bar')!, '.indicator');
+    expect(getComputedStyle(indicator).animationName).toBe('slide');
+  });
+});
+
 describe('ep-spinner and ep-skeleton', () => {
   it('names the spinner, or hides it when the label is empty', async () => {
     const wrapper = await fixture(

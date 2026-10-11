@@ -46,7 +46,9 @@ export class EpSkeleton extends LitElement {
         border-radius: var(--ep-radius-indicator);
         /* border-default rather than surface-muted, which is nearly invisible on the dark page. */
         background: var(--ep-color-border-default);
-        animation: pulse 1.6s var(--ep-motion-easing-standard) infinite;
+        /* 1.6s normally. The move token is 0 under reduced motion (OS setting or data-motion="reduced"), which
+           stops the pulse and leaves a static skeleton. */
+        animation: pulse calc(var(--ep-motion-duration-move) * 8) var(--ep-motion-easing-standard) infinite;
       }
 
       .line:last-child:not(:first-child) {
@@ -66,12 +68,6 @@ export class EpSkeleton extends LitElement {
       @keyframes pulse {
         50% {
           opacity: 0.5;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .line {
-          animation: none;
         }
       }
 
