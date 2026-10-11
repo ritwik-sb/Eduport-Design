@@ -72,6 +72,7 @@
           <li><a href="#spacing">Spacing</a></li>
           <li><a href="#layout-grid">Layout grid</a></li>
           <li><a href="#page-structure">Page structure</a></li>
+          <li><a href="#motion">Motion and timing</a></li>
         </ul>
         <h2>Actions</h2>
         <ul>
@@ -466,6 +467,101 @@ export class AnyComponent {}</code></pre>
           </div>
         </section>
 
+        <!-- Motion -->
+        <section class="component" id="motion" aria-labelledby="motion-title">
+          <div class="component-header"><h2 id="motion-title">Motion and timing</h2><code>--ep-motion-*</code> <code>data-motion</code></div>
+          <p>
+            Interactions are fast, quiet and predictable. Motion only explains a change: a state changing, something
+            entering or leaving, where something moved, or that work is in progress. Nothing in a component runs longer than
+            300ms, only <code>opacity</code> and <code>transform</code> animate, and reduced motion keeps the fades but drops the movement.
+            Turn on <strong>Reduce motion</strong> below to compare. Full policy in
+            <a href="https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/motion.md">docs/motion.md</a>.
+          </p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">This page</span>
+              <div class="stack" style="gap: var(--ep-space-100)">
+                <ep-switch id="reduce-motion">Reduce motion</ep-switch>
+                <p class="hint">Sets <code>data-motion="reduced"</code> on the page, the way an app's own setting would. Your operating system's reduced-motion setting applies too, and this can't turn it off.</p>
+              </div>
+            </div>
+            <div class="demo-row full subtle">
+              <div class="table-scroll">
+                <table class="token-table">
+                  <caption class="visually-hidden">Motion tokens</caption>
+                  <thead>
+                    <tr><th scope="col">Token</th><th scope="col">Default</th><th scope="col">Reduced</th><th scope="col">Use for</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row"><code>--ep-motion-duration-fast</code></th><td>100ms</td><td>100ms</td><td>Color, border and opacity changes; tooltips</td></tr>
+                    <tr><th scope="row"><code>--ep-motion-duration-normal</code></th><td>200ms</td><td>100ms</td><td>Modals entering; anything leaving</td></tr>
+                    <tr><th scope="row"><code>--ep-motion-duration-slow</code></th><td>300ms</td><td>100ms</td><td>Toasts entering; the most any component uses</td></tr>
+                    <tr><th scope="row"><code>--ep-motion-duration-slower</code></th><td>400ms</td><td>100ms</td><td>Drawers and page-level panels only</td></tr>
+                    <tr><th scope="row"><code>--ep-motion-duration-move</code></th><td>200ms</td><td>0ms</td><td>Movement inside a control: switch thumb, tab indicator</td></tr>
+                    <tr><th scope="row"><code>--ep-motion-distance-sm</code></th><td>4px</td><td>0</td><td>Tooltip, menu and popover enter offset</td></tr>
+                    <tr><th scope="row"><code>--ep-motion-distance-md</code></th><td>8px</td><td>0</td><td>Toast enter offset</td></tr>
+                    <tr><th scope="row"><code>--ep-motion-scale-enter</code></th><td>0.98</td><td>1</td><td>Modal enter scale</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Tooltip delay</span>
+              <div class="stack" style="gap: var(--ep-space-100)">
+                <div class="row" style="gap: var(--ep-space-50)" role="toolbar" aria-label="Lesson actions">
+                  <ep-tooltip content="Edit lesson"><ep-icon-button icon="edit" label="Edit lesson"></ep-icon-button></ep-tooltip>
+                  <ep-tooltip content="Duplicate"><ep-icon-button icon="copy" label="Duplicate"></ep-icon-button></ep-tooltip>
+                  <ep-tooltip content="Copy link"><ep-icon-button icon="link" label="Copy link"></ep-icon-button></ep-tooltip>
+                  <ep-tooltip content="Delete lesson"><ep-icon-button icon="trash" label="Delete lesson"></ep-icon-button></ep-tooltip>
+                </div>
+                <p class="hint">Hover waits 500ms. Once one is open, slide along the row and the next opens at once. Tab to them and they open with no wait.</p>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Loading button</span>
+              <div class="stack" style="gap: var(--ep-space-100)">
+                <div class="row">
+                  <ep-button data-fake-save="250"><ep-icon slot="prefix" name="check"></ep-icon>Quick save</ep-button>
+                  <ep-button variant="secondary" data-fake-save="2500"><ep-icon slot="prefix" name="upload"></ep-icon>Slow upload</ep-button>
+                </div>
+                <p class="hint">The quick one finishes in 250ms, so no spinner flashes. The slow one shows a spinner after 400ms. Extra presses while busy are ignored.</p>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Toast timing</span>
+              <div class="stack" style="gap: var(--ep-space-100)">
+                <div class="row">
+                  <ep-button variant="secondary" data-toast="invite">Short message</ep-button>
+                  <ep-button variant="secondary" data-toast="long">Long message</ep-button>
+                  <ep-button variant="secondary" data-toast-undo>Delete with undo</ep-button>
+                </div>
+                <p class="hint">Toasts stay 6 seconds, plus 1 second for every 20 words over 20. A toast with an action stays until you dismiss it. Hover or focus pauses the timer.</p>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Enter and state</span>
+              <div class="row">
+                <ep-switch checked>Email me when a student submits</ep-switch>
+                <ep-button variant="secondary" data-open="motion-modal">Open modal</ep-button>
+              </div>
+            </div>
+            <div class="demo-row top">
+              <span class="label">Not allowed</span>
+              <ul class="plain-list">
+                <li>Shake on error, ripple, press scale-down or hover lift</li>
+                <li>Bounce, spring or overshoot easing</li>
+                <li>Animated number counters, typewriter text, parallax, auto-playing carousels</li>
+                <li>Animated or pulsing focus rings</li>
+              </ul>
+            </div>
+          </div>
+          <ep-modal id="motion-modal" heading="Publish grades?" size="sm">
+            Students and parents will see the grades for Physics, Class 11 straight away.
+            <ep-button slot="footer" variant="ghost" data-close>Cancel</ep-button>
+            <ep-button slot="footer" data-close>Publish grades</ep-button>
+          </ep-modal>
+        </section>
+
         <!-- Button -->
         <section class="component" id="button" aria-labelledby="button-title">
           <div class="component-header"><h2 id="button-title">Button</h2><code>&lt;ep-button&gt;</code></div>
@@ -505,6 +601,13 @@ export class AnyComponent {}</code></pre>
                 <ep-button variant="secondary" disabled>Secondary</ep-button>
                 <ep-button variant="tertiary" disabled>Tertiary</ep-button>
                 <ep-button variant="ghost" disabled>Ghost</ep-button>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Loading</span>
+              <div class="row">
+                <ep-button data-fake-save="2000"><ep-icon slot="prefix" name="check"></ep-icon>Save changes</ep-button>
+                <ep-button variant="secondary" loading>Uploading…</ep-button>
               </div>
             </div>
             <div class="demo-row">
@@ -1067,7 +1170,7 @@ export class AnyComponent {}</code></pre>
             </div>
             <div class="demo-row">
               <span class="label">In a button</span>
-              <ep-button disabled><ep-spinner slot="prefix" size="sm" label=""></ep-spinner>Saving</ep-button>
+              <ep-button loading>Saving…</ep-button>
             </div>
           </div>
         </section>

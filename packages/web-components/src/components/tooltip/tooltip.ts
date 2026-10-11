@@ -1,11 +1,19 @@
 import { LitElement, css, html } from 'lit';
 import { baseStyles } from '../../styles/shared.js';
 
+/** Pointer hover waits this long before opening, so moving across a toolbar doesn't flash tooltips. */
+const OPEN_DELAY = 500;
+/** After a tooltip closes, a neighbor opens with no delay for this long, so scanning a toolbar stays quick. */
+const SKIP_DELAY_WINDOW = 300;
 const HIDE_DELAY = 100;
 const GAP = 6;
 
+let lastClosedAt = -Infinity;
+const openTooltips = new Set<EpTooltip>();
+
 /**
- * A short text label that appears when the wrapped element is hovered or focused. Escape closes it, and the
+ * A short text label that appears when the wrapped element is hovered or focused. Keyboard focus opens it at once;
+ * hover opens it after 500ms, or at once when another tooltip closed in the last 300ms. Escape closes it, and the
  * pointer can move onto it without it closing (WCAG 1.4.13).
  *
  * The text is added to the trigger's accessible description. For an `<ep-icon-button>`, whose `label`
@@ -44,13 +52,37 @@ export class EpTooltip extends LitElement {
         line-height: var(--ep-font-line-height-snug);
         box-shadow: var(--ep-shadow-md);
         pointer-events: auto;
-        opacity: 0;
-        transition: opacity var(--ep-motion-duration-fast) var(--ep-motion-easing-enter);
         overflow: visible;
+        /* Enters with a fade and a small slide away from the trigger. The slide is 0 under reduced motion. */
+        --_dx: 0px;
+        --_dy: 0px;
       }
 
       .tooltip.open {
-        opacity: 1;
+        animation: tooltip-enter var(--ep-motion-duration-fast) var(--ep-motion-easing-enter);
+      }
+
+      .tooltip[data-side='top'] {
+        --_dy: var(--ep-motion-distance-sm);
+      }
+
+      .tooltip[data-side='bottom'] {
+        --_dy: calc(-1 * var(--ep-motion-distance-sm));
+      }
+
+      .tooltip[data-side='left'] {
+        --_dx: var(--ep-motion-distance-sm);
+      }
+
+      .tooltip[data-side='right'] {
+        --_dx: calc(-1 * var(--ep-motion-distance-sm));
+      }
+
+      @keyframes tooltip-enter {
+        from {
+          opacity: 0;
+          transform: translate(var(--_dx), var(--_dy));
+        }
       }
 
       .tooltip:not(.open):not(:popover-open) {
@@ -72,13 +104,14 @@ export class EpTooltip extends LitElement {
   declare _open: boolean;
 
   #hideTimer?: ReturnType<typeof setTimeout>;
+  #openTimer?: ReturnType<typeof setTimeout>;
 
   constructor() {
     super();
     this.content = '';
     this.placement = 'top';
     this._open = false;
-    this.addEventListener('pointerenter', this.#show);
+    this.addEventListener('pointerenter', this.#scheduleShow);
     this.addEventListener('pointerleave', this.#scheduleHide);
     this.addEventListener('focusin', this.#show);
     this.addEventListener('focusout', this.#hide);
@@ -92,6 +125,9 @@ export class EpTooltip extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('keydown', this.#onKeyDown);
+    clearTimeout(this.#openTimer);
+    clearTimeout(this.#hideTimer);
+    openTooltips.delete(this);
   }
 
   get #trigger(): HTMLElement | undefined {
@@ -104,15 +140,27 @@ export class EpTooltip extends LitElement {
 
   #show = () => {
     clearTimeout(this.#hideTimer);
+    clearTimeout(this.#openTimer);
     if (this.content) this._open = true;
   };
 
+  #scheduleShow = () => {
+    clearTimeout(this.#hideTimer);
+    // A neighbor that is still open (it closes 100ms after the pointer leaves) counts too.
+    if (this._open || openTooltips.size > 0 || performance.now() - lastClosedAt < SKIP_DELAY_WINDOW) return this.#show();
+    clearTimeout(this.#openTimer);
+    this.#openTimer = setTimeout(this.#show, OPEN_DELAY);
+  };
+
   #scheduleHide = () => {
+    clearTimeout(this.#openTimer);
     this.#hideTimer = setTimeout(this.#hide, HIDE_DELAY);
   };
 
   #hide = () => {
     clearTimeout(this.#hideTimer);
+    clearTimeout(this.#openTimer);
+    if (this._open) lastClosedAt = performance.now();
     this._open = false;
   };
 
@@ -144,6 +192,7 @@ export class EpTooltip extends LitElement {
       left = side === 'left' ? t.left - b.width - GAP : t.right + GAP;
     }
     left = Math.min(Math.max(4, left), innerWidth - b.width - 4);
+    bubble.dataset.side = side;
     bubble.style.top = `${Math.round(top)}px`;
     bubble.style.left = `${Math.round(left)}px`;
   }
@@ -162,6 +211,8 @@ export class EpTooltip extends LitElement {
         if (this._open && !bubble.matches(':popover-open')) bubble.showPopover();
         if (!this._open && bubble.matches(':popover-open')) bubble.hidePopover();
       }
+      if (this._open) openTooltips.add(this);
+      else openTooltips.delete(this);
       if (this._open) this.#position();
     }
   }

@@ -974,3 +974,20 @@ footer.page-footer {
     gap: var(--ep-space-100);
   }
 }
+
+/* Motion */
+.hint {
+  margin: 0;
+  max-width: var(--ep-layout-width-prose);
+  font-size: var(--ep-font-size-100);
+  color: var(--ep-color-text-secondary);
+}
+
+.plain-list {
+  margin: 0;
+  padding-inline-start: var(--ep-space-300);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ep-space-50);
+  font-size: var(--ep-font-size-200);
+}

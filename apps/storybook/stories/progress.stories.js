@@ -36,6 +36,6 @@ export const Spinner = {
       <ep-spinner size="sm"></ep-spinner>
       <ep-spinner></ep-spinner>
       <ep-spinner size="lg" label="Loading results"></ep-spinner>
-      <ep-button disabled><ep-spinner slot="prefix" size="sm" label=""></ep-spinner>Saving</ep-button>
+      <ep-button loading>Saving…</ep-button>
     </div>`,
 };

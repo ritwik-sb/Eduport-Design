@@ -39,10 +39,25 @@ const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
 apply('theme', store.get('ep-gallery-theme') ?? root.dataset.theme ?? (prefersDark ? 'dark' : 'light'));
 apply('corners', store.get('ep-gallery-corners') ?? 'soft');
 
+// Turning it off removes the attribute, so the OS reduced-motion setting still applies underneath.
+const reduceMotion = document.getElementById('reduce-motion');
+function applyMotion(reduced) {
+  if (reduced) root.dataset.motion = 'reduced';
+  else delete root.dataset.motion;
+  reduceMotion.checked = reduced;
+  store.set('ep-gallery-motion', reduced ? 'reduced' : 'full');
+}
+applyMotion(store.get('ep-gallery-motion') === 'reduced');
+reduceMotion.addEventListener('change', () => applyMotion(reduceMotion.checked));
+
 document.addEventListener('click', (event) => {
-  const target = event.target.closest('[data-set-theme], [data-set-corners], [data-open], [data-close], [data-toast]');
+  const target = event.target.closest(
+    '[data-set-theme], [data-set-corners], [data-open], [data-close], [data-toast], [data-toast-undo], [data-fake-save]',
+  );
   if (!target) return;
   if (target.dataset.setTheme) apply('theme', target.dataset.setTheme);
+  if (target.dataset.fakeSave) fakeSave(target, Number(target.dataset.fakeSave));
+  if (target.hasAttribute('data-toast-undo')) showUndoToast();
   if (target.dataset.setCorners) apply('corners', target.dataset.setCorners);
   if (target.dataset.open) document.getElementById(target.dataset.open).show();
   if (target.hasAttribute('data-close')) target.closest('ep-modal').close();
@@ -56,7 +71,36 @@ const toasts = {
   danger: { variant: 'danger', heading: "Couldn't save", message: 'Check your connection and try again.', duration: 0 },
   'danger-deleted': { variant: 'success', message: 'Course deleted.' },
   invite: { variant: 'success', heading: 'Invite sent', message: 'They will get an email with a join link.' },
+  long: {
+    variant: 'info',
+    heading: 'Timetable updated',
+    message:
+      'Physics for Class 11 moves from Monday to Wednesday at 10 AM starting next week. Students and parents have been told by email, and the change shows in everyone\'s calendar. Lab sessions stay on Friday as before.',
+  },
 };
+
+// Loading buttons for the motion demos. The click listener only runs while the button isn't loading.
+function fakeSave(button, ms) {
+  button.loading = true;
+  setTimeout(() => {
+    button.loading = false;
+    toast({ variant: 'success', message: 'Saved.' });
+  }, ms);
+}
+
+function showUndoToast() {
+  const element = toast({ variant: 'success', message: 'Lesson deleted.' });
+  const undo = document.createElement('ep-button');
+  undo.slot = 'action';
+  undo.size = 'sm';
+  undo.variant = 'ghost';
+  undo.textContent = 'Undo';
+  undo.addEventListener('click', () => {
+    element.close();
+    toast({ variant: 'info', message: 'Lesson restored.' });
+  });
+  element.append(undo);
+}
 
 function showToast(kind) {
   if (toasts[kind]) toast(toasts[kind]);

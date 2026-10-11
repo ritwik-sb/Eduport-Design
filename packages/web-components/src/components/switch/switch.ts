@@ -59,7 +59,7 @@ export class EpSwitch extends LitElement {
         border: var(--ep-border-width-thin) solid var(--ep-color-border-strong);
         border-radius: var(--ep-radius-round);
         background: var(--ep-color-surface-default);
-        transition: background-color var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
+        transition: background-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
       }
 
       .thumb {
@@ -70,7 +70,7 @@ export class EpSwitch extends LitElement {
         height: 14px;
         border-radius: var(--ep-radius-round);
         background: var(--ep-color-border-strong);
-        transition: transform var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
+        transition: transform var(--ep-motion-duration-move) var(--ep-motion-easing-standard);
       }
 
       .base[aria-checked='true'] .track {

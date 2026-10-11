@@ -16,12 +16,18 @@ export default {
       description: 'Corner style',
       toolbar: { title: 'Corners', icon: 'component', items: ['soft', 'sharp'], dynamicTitle: true },
     },
+    motion: {
+      description: 'Motion (reduced sets data-motion="reduced")',
+      toolbar: { title: 'Motion', icon: 'play', items: ['full', 'reduced'], dynamicTitle: true },
+    },
   },
-  initialGlobals: { theme: 'light', corners: 'soft' },
+  initialGlobals: { theme: 'light', corners: 'soft', motion: 'full' },
   decorators: [
     (story, { globals }) => {
       document.documentElement.dataset.theme = globals.theme;
       document.documentElement.dataset.corners = globals.corners;
+      if (globals.motion === 'reduced') document.documentElement.dataset.motion = 'reduced';
+      else delete document.documentElement.dataset.motion;
       return story();
     },
   ],
