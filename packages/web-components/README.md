@@ -37,6 +37,12 @@ To keep bundles small, import only what you use: `import '@eduportdesign/web-com
 | `<ep-toast>` + `toast()` | Brief notification | `variant`, `heading`, `duration` (0 = stays open) | `ep-close` |
 | `<ep-tooltip>` | Label on hover or focus | `content`, `placement` (top, bottom, left, right) | |
 | `<ep-modal>` | Focused task or decision | `open`, `heading`, `size` (sm, md, lg); slot `footer`; `show()`, `close()` | `ep-close` |
+| `<ep-breadcrumbs>` + `<ep-breadcrumb-item>` | Where the page sits | breadcrumbs: `label`; item: `href` (the last item is the current page) | |
+| `<ep-pagination>` | Moving between pages | `page`, `total-pages`, `label` | `change` |
+| `<ep-progress-bar>` | Progress of a task | `label` (required), `value` (unset = indeterminate), `max`, `show-value`, `hide-label`, `helper-text`, `variant` (default, success, danger), `size` (sm, md) | |
+| `<ep-spinner>` | A short wait | `label`, `size` (sm, md, lg) | |
+| `<ep-skeleton>` | Placeholder while loading | `variant` (text, rect, circle), `lines` | |
+| `<ep-empty-state>` | Nothing to show yet | `heading`, `heading-level`, `icon`, `size` (sm, md); slots `actions`, `media` | |
 
 Form controls are form-associated: they submit with a surrounding `<form>`, reset with it, and report validity.
 

@@ -94,15 +94,21 @@
           <li><a href="#avatar">Avatar</a></li>
           <li><a href="#card">Card</a></li>
           <li><a href="#icon">Icon</a></li>
+          <li><a href="#empty-state">Empty state</a></li>
+          <li><a href="#skeleton">Skeleton</a></li>
         </ul>
         <h2>Navigation</h2>
         <ul>
           <li><a href="#tabs">Tabs</a></li>
+          <li><a href="#breadcrumbs">Breadcrumbs</a></li>
+          <li><a href="#pagination">Pagination</a></li>
         </ul>
         <h2>Feedback and overlays</h2>
         <ul>
           <li><a href="#alert">Alert</a></li>
           <li><a href="#toast">Toast</a></li>
+          <li><a href="#progress-bar">Progress bar</a></li>
+          <li><a href="#spinner">Spinner</a></li>
           <li><a href="#tooltip">Tooltip</a></li>
           <li><a href="#modal">Modal</a></li>
         </ul>
@@ -819,6 +825,47 @@ export class AnyComponent {}</code></pre>
           </div>
         </section>
 
+        <!-- Empty state -->
+        <section class="component" id="empty-state" aria-labelledby="empty-state-title">
+          <div class="component-header"><h2 id="empty-state-title">Empty state</h2><code>&lt;ep-empty-state&gt;</code></div>
+          <p>What to show when a list or page has nothing in it yet. Say why it's empty and offer the next step.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Page</span>
+              <ep-empty-state icon="clipboard-list" heading="No assignments yet" heading-level="3">
+                Assignments your teachers post will show up here.
+                <ep-button slot="actions">Browse courses</ep-button>
+              </ep-empty-state>
+            </div>
+            <div class="demo-row">
+              <span class="label">Small, no results</span>
+              <ep-empty-state icon="search" heading="No students match “Rahul”" heading-level="3" size="sm">
+                Check the spelling or clear the filters.
+                <ep-button slot="actions" variant="secondary" size="sm">Clear filters</ep-button>
+              </ep-empty-state>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skeleton -->
+        <section class="component" id="skeleton" aria-labelledby="skeleton-title">
+          <div class="component-header"><h2 id="skeleton-title">Skeleton</h2><code>&lt;ep-skeleton&gt;</code></div>
+          <p>Placeholders in the shape of content that is loading, so the page doesn't jump. Mark the loading region with <code>aria-busy="true"</code>.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Card</span>
+              <div class="stack" role="group" aria-label="Loading course" aria-busy="true" style="max-width: 360px">
+                <ep-skeleton variant="rect" style="height: 120px"></ep-skeleton>
+                <div class="row" style="flex-wrap: nowrap">
+                  <ep-skeleton variant="circle"></ep-skeleton>
+                  <ep-skeleton style="flex: 1"></ep-skeleton>
+                </div>
+                <ep-skeleton lines="3"></ep-skeleton>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- Tabs -->
         <section class="component" id="tabs" aria-labelledby="tabs-title">
           <div class="component-header"><h2 id="tabs-title">Tabs</h2><code>&lt;ep-tabs&gt;</code> <code>&lt;ep-tab&gt;</code> <code>&lt;ep-tab-panel&gt;</code></div>
@@ -836,6 +883,39 @@ export class AnyComponent {}</code></pre>
                 <ep-tab-panel name="tests">Three practice tests and one final test. You can retake practice tests as often as you like.</ep-tab-panel>
                 <ep-tab-panel name="certificate">Finish every lesson to unlock your certificate.</ep-tab-panel>
               </ep-tabs>
+            </div>
+          </div>
+        </section>
+
+        <!-- Breadcrumbs -->
+        <section class="component" id="breadcrumbs" aria-labelledby="breadcrumbs-title">
+          <div class="component-header"><h2 id="breadcrumbs-title">Breadcrumbs</h2><code>&lt;ep-breadcrumbs&gt;</code> <code>&lt;ep-breadcrumb-item&gt;</code></div>
+          <p>Where the page sits in the app, with a link to each level above. The last item is the current page.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Default</span>
+              <ep-breadcrumbs>
+                <ep-breadcrumb-item href="#breadcrumbs">Home</ep-breadcrumb-item>
+                <ep-breadcrumb-item href="#breadcrumbs">Courses</ep-breadcrumb-item>
+                <ep-breadcrumb-item href="#breadcrumbs">Physics for Class 11</ep-breadcrumb-item>
+                <ep-breadcrumb-item>Motion in a straight line</ep-breadcrumb-item>
+              </ep-breadcrumbs>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pagination -->
+        <section class="component" id="pagination" aria-labelledby="pagination-title">
+          <div class="component-header"><h2 id="pagination-title">Pagination</h2><code>&lt;ep-pagination&gt;</code></div>
+          <p>Moves between pages of a long list. Listen for <code>change</code> and load the page in <code>page</code>. In narrow containers the numbers collapse to "Page 4 of 12".</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Default</span>
+              <ep-pagination label="Students" page="4" total-pages="12"></ep-pagination>
+            </div>
+            <div class="demo-row">
+              <span class="label">Narrow</span>
+              <div style="max-width: 320px"><ep-pagination label="Results" page="4" total-pages="12"></ep-pagination></div>
             </div>
           </div>
         </section>
@@ -885,6 +965,49 @@ export class AnyComponent {}</code></pre>
                   <ep-button slot="action" size="sm" variant="ghost">Undo</ep-button>
                 </ep-toast>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress bar -->
+        <section class="component" id="progress-bar" aria-labelledby="progress-bar-title">
+          <div class="component-header"><h2 id="progress-bar-title">Progress bar</h2><code>&lt;ep-progress-bar&gt;</code></div>
+          <p>How far a task has got. Leave out <code>value</code> when the amount of work isn't known.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Determinate</span>
+              <div class="stack" style="max-width: 480px">
+                <ep-progress-bar label="Course completion" value="64" show-value helper-text="16 of 25 lessons"></ep-progress-bar>
+                <ep-progress-bar label="Upload complete" value="100" variant="success" show-value></ep-progress-bar>
+                <ep-progress-bar label="Upload failed" value="40" variant="danger" helper-text="The connection dropped. Try again."></ep-progress-bar>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Indeterminate</span>
+              <div class="stack" style="max-width: 480px">
+                <ep-progress-bar label="Preparing your report"></ep-progress-bar>
+                <ep-progress-bar label="Syncing" hide-label size="sm"></ep-progress-bar>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Spinner -->
+        <section class="component" id="spinner" aria-labelledby="spinner-title">
+          <div class="component-header"><h2 id="spinner-title">Spinner</h2><code>&lt;ep-spinner&gt;</code></div>
+          <p>A short wait of unknown length. Set <code>label=""</code> when nearby text already says what's happening.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Sizes</span>
+              <div class="row">
+                <ep-spinner size="sm"></ep-spinner>
+                <ep-spinner></ep-spinner>
+                <ep-spinner size="lg" label="Loading results"></ep-spinner>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">In a button</span>
+              <ep-button disabled><ep-spinner slot="prefix" size="sm" label=""></ep-spinner>Saving</ep-button>
             </div>
           </div>
         </section>
