@@ -20,4 +20,4 @@ export function Profile() {
 }
 ```
 
-Props match the web component properties in camelCase (`helperText`, `errorText`, `fullWidth`). Events: `onChange` and `onInput` on form controls, `onChange` on `Tabs` and `Pagination`, `onRemove` on `Tag`, `onClose` on `Alert`, `Modal` and `Toast`, `onSelect`, `onOpen` and `onClose` on `Menu`, and `onOpen` and `onClose` on `Popover` and `AccordionItem`.
+Props match the web component properties in camelCase (`helperText`, `errorText`, `fullWidth`). Events: `onChange` and `onInput` on form controls, `onChange` on `Tabs`, `Pagination`, `DatePicker` and `Calendar`, `onRemove` on `Tag`, `onClose` on `Alert`, `Modal` and `Toast`, `onSelect`, `onOpen` and `onClose` on `Menu`, and `onOpen` and `onClose` on `Popover` and `AccordionItem`.

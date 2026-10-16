@@ -45,6 +45,9 @@ To keep bundles small, import only what you use: `import '@eduportdesign/web-com
 | `<ep-accordion>` + `<ep-accordion-item>` | Collapsible sections | accordion: `single`; item: `heading`, `heading-level`, `open`, `disabled` | `ep-open`, `ep-close` |
 | `<ep-menu>` + `<ep-menu-item>` + `<ep-menu-divider>` | Actions from a button | menu: `open`, `placement`, `label`, slot `trigger`; item: `value`, `variant` (default, danger), `disabled` | `ep-select`, `ep-open`, `ep-close` |
 | `<ep-popover>` | Interactive content from a button | `open`, `placement`, `label`, slot `trigger`; `show()`, `hide()` | `ep-open`, `ep-close` |
+| `<ep-table>` | Styling a native `<table>` | `size` (sm, md), `striped`, `sticky-header`, `label`; sort with `aria-sort` on `<th>`, highlight with `aria-selected` on `<tr>` | |
+| `<ep-date-picker>` | A date, typed or picked | `label`, `value` (YYYY-MM-DD), `name`, `min`, `max`, `locale`, `helper-text`, `error-text`, `size`, `required`, `disabled`, `readonly`; `isDateDisabled` property | `change` |
+| `<ep-calendar>` | A month grid on its own | `value`, `min`, `max`, `locale`; `isDateDisabled` property | `change` |
 | `<ep-empty-state>` | Nothing to show yet | `heading`, `heading-level`, `icon`, `size` (sm, md); slots `actions`, `media` | |
 
 Form controls are form-associated: they submit with a surrounding `<form>`, reset with it, and report validity.

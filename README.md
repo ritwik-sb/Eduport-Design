@@ -190,9 +190,10 @@ Publishing only runs when the repository variable `PUBLISH_ENABLED` is `true`. U
 2. ✅ CI (build, contrast check) and releases to npm and GitHub Packages via Changesets
 3. ✅ Web components and React wrappers: a starter set of 18 components, a gallery page and Storybook
 4. ⬜ Icon package (all Tabler icons, tree-shakable), typography styles and a Figma library
-5. ⬜ More components: Link, Menu, Popover, Table, Pagination, Progress, Skeleton, Breadcrumb; component tests
-6. ⬜ Docs site, contribution guide and versioning policy
-7. ⬜ v0.1, then a pilot in an Eduport app, then v1.0
+5. ✅ More components: menu, popover, table, pagination, progress bar, spinner, skeleton, breadcrumbs, accordion, empty state, date picker and calendar, with component tests
+6. ⬜ Next components: link, combobox, file upload, date range picker, drawer
+7. ⬜ Docs site, contribution guide and versioning policy
+8. ⬜ v0.1, then a pilot in an Eduport app, then v1.0
 
 ## License
 
