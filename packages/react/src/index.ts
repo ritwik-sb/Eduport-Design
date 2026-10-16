@@ -33,3 +33,6 @@ export * from './popover.js';
 export * from './menu.js';
 export * from './menu-item.js';
 export * from './menu-divider.js';
+export * from './table.js';
+export * from './calendar.js';
+export * from './date-picker.js';

@@ -26,4 +26,7 @@ export * from './components/empty-state/index.js';
 export * from './components/accordion/index.js';
 export * from './components/popover/index.js';
 export * from './components/menu/index.js';
+export * from './components/table/index.js';
+export * from './components/calendar/index.js';
+export * from './components/date-picker/index.js';
 export type { FeedbackVariant } from './styles/feedback.js';

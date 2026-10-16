@@ -114,6 +114,49 @@ document.addEventListener('click', (event) => {
   event.target.closest('[data-close-popover]')?.closest('ep-popover').hide();
 });
 
+// Sortable table
+const students = [
+  { name: 'Ananya Menon', section: '11 A', score: 92, fee: 'Paid' },
+  { name: 'Rahul Nair', section: '11 A', score: 78, fee: 'Due' },
+  { name: 'Fatima Rasheed', section: '11 B', score: 85, fee: 'Paid' },
+  { name: 'Arjun Pillai', section: '11 B', score: 64, fee: 'Overdue' },
+  { name: 'Diya Krishnan', section: '11 C', score: 88, fee: 'Paid' },
+];
+const feeVariant = { Paid: 'success', Due: 'warning', Overdue: 'danger' };
+const tableDemo = document.getElementById('table-demo');
+let sort = { key: 'name', direction: 'ascending' };
+function renderStudents() {
+  const sorted = [...students].sort((a, b) => {
+    const order = a[sort.key] < b[sort.key] ? -1 : a[sort.key] > b[sort.key] ? 1 : 0;
+    return sort.direction === 'ascending' ? order : -order;
+  });
+  tableDemo.querySelector('tbody').innerHTML = sorted
+    .map(
+      (s) => `<tr>
+        <td>${s.name}</td><td>${s.section}</td><td style="text-align: end">${s.score}</td>
+        <td><ep-badge variant="${feeVariant[s.fee]}">${s.fee}</ep-badge></td>
+        <td style="text-align: end"><ep-icon-button icon="dots-vertical" label="Actions for ${s.name}" size="sm"></ep-icon-button></td>
+      </tr>`,
+    )
+    .join('');
+  for (const button of tableDemo.querySelectorAll('th button')) {
+    const th = button.parentElement;
+    if (button.dataset.sort === sort.key) th.setAttribute('aria-sort', sort.direction);
+    else th.removeAttribute('aria-sort');
+  }
+}
+tableDemo.addEventListener('click', (event) => {
+  const button = event.target.closest('th button');
+  if (!button) return;
+  const key = button.dataset.sort;
+  sort = { key, direction: sort.key === key && sort.direction === 'ascending' ? 'descending' : 'ascending' };
+  renderStudents();
+});
+renderStudents();
+
+// Date picker: no weekends
+document.getElementById('exam-date').isDateDisabled = (date) => date.getDay() === 0 || date.getDay() === 6;
+
 // Example form
 const form = document.getElementById('doubt-form');
 form.addEventListener('submit', (event) => {

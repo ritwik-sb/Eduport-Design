@@ -205,6 +205,18 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - `checked`, `name`, `value`, `helper-text`, `disabled`; default slot is the label. Event: `change`
 - Inside a form that has a Save button, use a checkbox instead.
 
+**`<ep-date-picker>` → `DatePicker`**: a date, typed or picked from a calendar.
+- `label`, `value` (always **`YYYY-MM-DD`**, or empty), `name`, `min`, `max` (both `YYYY-MM-DD`), `locale` (defaults to the page's `lang`)
+- `helper-text`, `error-text`, `size`, `required`, `disabled`, `readonly`. Property `isDateDisabled: (date: Date) => boolean` greys out dates like weekends or holidays.
+- People type in their locale's order (22/11/2026 for `en-IN`, 11/22/2026 for `en-US`); it is checked on blur. Text that isn't a date, or a date outside `min`/`max`, shows an error and sets `validity.badInput`, `rangeUnderflow` or `rangeOverflow`.
+- Event: `change` (`onChange`); read `value`. Set `lang` on `<html>` so the format matches your users.
+
+```html
+<ep-date-picker label="Exam date" name="exam" min="2026-01-01" max="2026-12-31"></ep-date-picker>
+```
+
+**`<ep-calendar>` → `Calendar`**: the month grid on its own, for when it should always show. Same `value`, `min`, `max`, `locale`, `isDateDisabled`; event `change`. Arrows move by day and week, Home/End to the week's ends, Page Up/Down by month (with Shift, by year), Enter picks.
+
 ### Display
 
 **`<ep-badge>` → `Badge`**: a short status or count. Not interactive.
@@ -217,6 +229,24 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 
 **`<ep-avatar>` → `Avatar`**: a person.
 - `name` (used for initials and the accessible name), `src` (image URL), `size`: `xs` | `sm` | **`md`** | `lg` | `xl`
+
+**`<ep-table>` → `Table`**: styles a native `<table>` you write inside it, so any cell content works.
+- `size`: `sm` | **`md`**; `striped`; `sticky-header` (`stickyHeader`; give `<ep-table>` a `max-height`); `label` (name of the scroll area, defaults to the `<caption>`)
+- Write real table markup: `<caption>`, `<thead>`, `<th scope="col">`, `<tbody>`, and `<th scope="row">` for row headers. A header cell for an actions column still needs text: use a visually hidden "Actions".
+- Sorting: put a `<button>` in the `<th>` and set `aria-sort="ascending"` or `"descending"` on the sorted column's `<th>` (remove it from the others). Sort the data yourself on the button's click; the arrow follows `aria-sort`.
+- Selection: put an `<ep-checkbox>` in each row and set `aria-selected="true"` on selected `<tr>`s for the highlight.
+- Right-align numbers with `style="text-align: end"` on their cells. Empty results: an `<ep-empty-state size="sm">` in a `<td colspan>`. Many rows: `<ep-pagination>` under the table.
+- When the table is wider than its container it scrolls sideways and becomes a focusable, named region, so keyboard users can scroll it.
+
+```html
+<ep-table>
+  <table>
+    <caption>Students</caption>
+    <thead><tr><th scope="col" aria-sort="ascending"><button>Name</button></th><th scope="col">Section</th></tr></thead>
+    <tbody><tr><td>Ananya Menon</td><td>11 A</td></tr></tbody>
+  </table>
+</ep-table>
+```
 
 **`<ep-card>` → `Card`**: groups related content.
 - `variant`: **`outlined`** | `elevated` | `filled`
@@ -558,7 +588,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
 
 ## 9. What doesn't exist yet
 
-Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), tables, date pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
+Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), date range pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
 
 ## 10. Add this to your app's agent instructions
 
