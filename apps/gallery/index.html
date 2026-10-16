@@ -95,6 +95,7 @@
           <li><a href="#avatar">Avatar</a></li>
           <li><a href="#card">Card</a></li>
           <li><a href="#icon">Icon</a></li>
+          <li><a href="#accordion">Accordion</a></li>
           <li><a href="#empty-state">Empty state</a></li>
           <li><a href="#skeleton">Skeleton</a></li>
         </ul>
@@ -103,6 +104,7 @@
           <li><a href="#tabs">Tabs</a></li>
           <li><a href="#breadcrumbs">Breadcrumbs</a></li>
           <li><a href="#pagination">Pagination</a></li>
+          <li><a href="#menu">Menu</a></li>
         </ul>
         <h2>Feedback and overlays</h2>
         <ul>
@@ -111,6 +113,7 @@
           <li><a href="#progress-bar">Progress bar</a></li>
           <li><a href="#spinner">Spinner</a></li>
           <li><a href="#tooltip">Tooltip</a></li>
+          <li><a href="#popover">Popover</a></li>
           <li><a href="#modal">Modal</a></li>
         </ul>
         <h2>Brand</h2>
@@ -928,6 +931,36 @@ export class AnyComponent {}</code></pre>
           </div>
         </section>
 
+        <!-- Accordion -->
+        <section class="component" id="accordion" aria-labelledby="accordion-title">
+          <div class="component-header"><h2 id="accordion-title">Accordion</h2><code>&lt;ep-accordion&gt;</code> <code>&lt;ep-accordion-item&gt;</code></div>
+          <p>Collapsible sections for long pages where people look for one part, like an FAQ. Up and Down arrows move between headers.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Default</span>
+              <ep-accordion style="max-width: 640px">
+                <ep-accordion-item heading="How do I join a live class?" open>
+                  Open the course, choose Live classes and select Join. The button turns on five minutes before the start.
+                </ep-accordion-item>
+                <ep-accordion-item heading="Can I download lessons to watch offline?">
+                  Yes, in the mobile app. Downloads stay available for 30 days.
+                </ep-accordion-item>
+                <ep-accordion-item heading="How are test scores calculated?">
+                  Each correct answer earns the marks shown next to it. Wrong answers on entrance tests lose a quarter mark.
+                </ep-accordion-item>
+              </ep-accordion>
+            </div>
+            <div class="demo-row">
+              <span class="label">Single</span>
+              <ep-accordion single style="max-width: 640px">
+                <ep-accordion-item heading="Term 1"><ep-icon slot="prefix" name="calendar"></ep-icon>June to September: units 1 to 4.</ep-accordion-item>
+                <ep-accordion-item heading="Term 2"><ep-icon slot="prefix" name="calendar"></ep-icon>October to December: units 5 to 8.</ep-accordion-item>
+                <ep-accordion-item heading="Term 3"><ep-icon slot="prefix" name="calendar"></ep-icon>January to March: revision and final exams.</ep-accordion-item>
+              </ep-accordion>
+            </div>
+          </div>
+        </section>
+
         <!-- Empty state -->
         <section class="component" id="empty-state" aria-labelledby="empty-state-title">
           <div class="component-header"><h2 id="empty-state-title">Empty state</h2><code>&lt;ep-empty-state&gt;</code></div>
@@ -1019,6 +1052,33 @@ export class AnyComponent {}</code></pre>
             <div class="demo-row">
               <span class="label">Narrow</span>
               <div style="max-width: 320px"><ep-pagination label="Results" page="4" total-pages="12"></ep-pagination></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menu -->
+        <section class="component" id="menu" aria-labelledby="menu-title">
+          <div class="component-header"><h2 id="menu-title">Menu</h2><code>&lt;ep-menu&gt;</code> <code>&lt;ep-menu-item&gt;</code> <code>&lt;ep-menu-divider&gt;</code></div>
+          <p>A list of actions that opens from a button. Arrow keys move, typing a letter jumps, Escape closes. For picking a value in a form, use a select.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Default</span>
+              <div class="row">
+                <ep-menu id="menu-demo">
+                  <ep-button slot="trigger" variant="secondary">Actions<ep-icon slot="suffix" name="chevron-down"></ep-icon></ep-button>
+                  <ep-menu-item value="edit"><ep-icon slot="prefix" name="edit"></ep-icon>Edit</ep-menu-item>
+                  <ep-menu-item value="duplicate"><ep-icon slot="prefix" name="copy"></ep-icon>Duplicate</ep-menu-item>
+                  <ep-menu-item value="archive" disabled><ep-icon slot="prefix" name="folder"></ep-icon>Archive</ep-menu-item>
+                  <ep-menu-divider></ep-menu-divider>
+                  <ep-menu-item value="delete" variant="danger"><ep-icon slot="prefix" name="trash"></ep-icon>Delete</ep-menu-item>
+                </ep-menu>
+                <ep-menu label="Row actions">
+                  <ep-icon-button slot="trigger" icon="dots-vertical" label="Row actions"></ep-icon-button>
+                  <ep-menu-item>View profile</ep-menu-item>
+                  <ep-menu-item>Send message</ep-menu-item>
+                  <ep-menu-item variant="danger">Remove from class</ep-menu-item>
+                </ep-menu>
+              </div>
             </div>
           </div>
         </section>
@@ -1128,6 +1188,28 @@ export class AnyComponent {}</code></pre>
                 <ep-tooltip content="Shown on the left" placement="left"><ep-button variant="secondary">Left</ep-button></ep-tooltip>
                 <ep-tooltip content="Shown on the right" placement="right"><ep-button variant="secondary">Right</ep-button></ep-tooltip>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Popover -->
+        <section class="component" id="popover" aria-labelledby="popover-title">
+          <div class="component-header"><h2 id="popover-title">Popover</h2><code>&lt;ep-popover&gt;</code></div>
+          <p>Interactive content anchored to a button, like a filter form. It doesn't block the page; clicking outside or pressing Escape closes it.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Filters</span>
+              <ep-popover label="Filter students">
+                <ep-button slot="trigger" variant="secondary"><ep-icon slot="prefix" name="filter"></ep-icon>Filters</ep-button>
+                <div class="stack" style="width: 260px">
+                  <ep-select label="Grade" placeholder="Any grade">
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                  </ep-select>
+                  <ep-checkbox>Only students with pending fees</ep-checkbox>
+                  <ep-button size="sm" data-close-popover>Apply</ep-button>
+                </div>
+              </ep-popover>
             </div>
           </div>
         </section>

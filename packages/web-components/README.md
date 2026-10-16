@@ -42,6 +42,9 @@ To keep bundles small, import only what you use: `import '@eduportdesign/web-com
 | `<ep-progress-bar>` | Progress of a task | `label` (required), `value` (unset = indeterminate), `max`, `show-value`, `hide-label`, `helper-text`, `variant` (default, success, danger), `size` (sm, md) | |
 | `<ep-spinner>` | A short wait | `label`, `size` (sm, md, lg) | |
 | `<ep-skeleton>` | Placeholder while loading | `variant` (text, rect, circle), `lines` | |
+| `<ep-accordion>` + `<ep-accordion-item>` | Collapsible sections | accordion: `single`; item: `heading`, `heading-level`, `open`, `disabled` | `ep-open`, `ep-close` |
+| `<ep-menu>` + `<ep-menu-item>` + `<ep-menu-divider>` | Actions from a button | menu: `open`, `placement`, `label`, slot `trigger`; item: `value`, `variant` (default, danger), `disabled` | `ep-select`, `ep-open`, `ep-close` |
+| `<ep-popover>` | Interactive content from a button | `open`, `placement`, `label`, slot `trigger`; `show()`, `hide()` | `ep-open`, `ep-close` |
 | `<ep-empty-state>` | Nothing to show yet | `heading`, `heading-level`, `icon`, `size` (sm, md); slots `actions`, `media` | |
 
 Form controls are form-associated: they submit with a surrounding `<form>`, reset with it, and report validity.

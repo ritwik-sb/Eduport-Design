@@ -4,7 +4,7 @@ import { LitElement, css, html } from 'lit';
  * A spinning indicator for a short wait of unknown length, like a button that is saving.
  * For waits with a known amount of work, use `<ep-progress-bar>`; for loading page content, use `<ep-skeleton>`.
  *
- * It keeps spinning when the user prefers reduced motion, because a still spinner looks frozen.
+ * It keeps spinning under reduced motion, because a still spinner looks frozen.
  *
  * @tag ep-spinner
  * @csspart base - The SVG.
@@ -38,7 +38,9 @@ export class EpSpinner extends LitElement {
     svg {
       width: var(--_size);
       height: var(--_size);
-      animation: spin 0.8s linear infinite;
+      /* One turn a second, the most the motion policy allows. A fixed value on purpose: the duration tokens shrink
+         under reduced motion, and the spinner must keep turning at the same pace. */
+      animation: spin 1s linear infinite;
     }
 
     .track {
@@ -52,13 +54,6 @@ export class EpSpinner extends LitElement {
     @keyframes spin {
       to {
         transform: rotate(360deg);
-      }
-    }
-
-    /* Slower, but still turning, so it never looks frozen. */
-    @media (prefers-reduced-motion: reduce) {
-      svg {
-        animation-duration: 1.6s;
       }
     }
 

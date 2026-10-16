@@ -71,32 +71,47 @@ export class EpProgressBar extends LitElement {
 
       .indicator {
         height: 100%;
-        border-radius: inherit;
         background: var(--_fill);
-        transition: width var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
+        transform: scaleX(var(--_progress, 0));
+        transform-origin: left;
+        transition: transform var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
       }
 
+      :host(:dir(rtl)) .indicator {
+        transform-origin: right;
+      }
+
+      /* A segment that slides across. Its cycle is a multiple of the move token, which is 0 under reduced motion
+         (prefers-reduced-motion or data-motion="reduced"), so the animation stops. */
       .indeterminate .indicator {
-        position: absolute;
         width: 40%;
-        animation: slide 1.4s var(--ep-motion-easing-standard) infinite;
+        transform: none;
+        animation: slide calc(var(--ep-motion-duration-move) * 7) var(--ep-motion-easing-standard) infinite;
       }
 
       @keyframes slide {
         from {
-          left: -40%;
+          transform: translateX(-100%);
         }
         to {
-          left: 100%;
+          transform: translateX(250%);
         }
       }
 
-      /* Reduced motion: a still, half-opacity full bar instead of a moving one. */
+      /* Reduced motion: a still, striped full-width bar instead of a moving segment. The style query follows the
+         token, so it reacts to data-motion="reduced" too; the media query covers browsers without style queries. */
+      @container style(--ep-motion-duration-move: 0ms) {
+        .indeterminate .indicator {
+          width: 100%;
+          background: repeating-linear-gradient(-45deg, var(--_fill) 0 6px, transparent 6px 12px);
+          animation: none;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .indeterminate .indicator {
-          left: 0;
           width: 100%;
-          opacity: 0.5;
+          background: repeating-linear-gradient(-45deg, var(--_fill) 0 6px, transparent 6px 12px);
           animation: none;
         }
       }
@@ -171,7 +186,7 @@ export class EpProgressBar extends LitElement {
         aria-valuenow=${indeterminate ? nothing : value}
         aria-valuetext=${indeterminate ? nothing : `${percent}%`}
       >
-        <div part="indicator" class="indicator" style=${indeterminate ? '' : `width: ${(value / max) * 100}%`}></div>
+        <div part="indicator" class="indicator" style=${indeterminate ? '' : `--_progress: ${value / max}`}></div>
       </div>
       ${this.helperText ? html`<p class="helper" id="helper">${this.helperText}</p>` : nothing}`;
   }

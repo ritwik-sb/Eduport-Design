@@ -23,4 +23,7 @@ export * from './components/progress-bar/index.js';
 export * from './components/spinner/index.js';
 export * from './components/skeleton/index.js';
 export * from './components/empty-state/index.js';
+export * from './components/accordion/index.js';
+export * from './components/popover/index.js';
+export * from './components/menu/index.js';
 export type { FeedbackVariant } from './styles/feedback.js';

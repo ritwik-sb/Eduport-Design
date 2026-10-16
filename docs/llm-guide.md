@@ -233,6 +233,11 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - Slots: default (one or two sentences on why it's empty), `actions` (one primary button), `media` (an illustration instead of the icon)
 - Say why it's empty and what to do next. For "no search results", offer to clear filters.
 
+**`<ep-accordion>` + `<ep-accordion-item>` → `Accordion` + `AccordionItem`**: collapsible sections, like an FAQ.
+- Accordion: `single` (only one section open at a time). Up/Down arrows move between headers, Home/End jump.
+- Item: `heading`, `heading-level` (`headingLevel`, **3**; match the page outline), `open`, `disabled`; slots default (content), `prefix` (icon). Events: `ep-open` (`onOpen`), `ep-close` (`onClose`) when the user toggles it.
+- Don't hide content most people need behind an accordion.
+
 **`<ep-skeleton>` → `Skeleton`**: a placeholder in the shape of loading content.
 - `variant`: **`text`** | `rect` | `circle`; `lines` (**1**, for `text`; the last of several is shorter)
 - Size it with CSS `width`/`height`. Text skeletons follow the surrounding `font-size`.
@@ -266,6 +271,23 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 </ep-breadcrumbs>
 ```
 
+**`<ep-menu>` + `<ep-menu-item>` + `<ep-menu-divider>` → `Menu` + `MenuItem` + `MenuDivider`**: a list of actions that opens from a button.
+- Menu: `open`, `placement` (**`bottom`** | `top` | `left` | `right`; flips when there isn't room), `label` (defaults to the trigger's text). Methods `show()`, `hide()`.
+- Slot `trigger`: an `<ep-button>` or `<ep-icon-button>`. The menu sets `aria-haspopup` and `aria-expanded` on it.
+- Item: `value`, `variant` (**`default`** | `danger`), `disabled`; slots default (label), `prefix` (icon), `suffix` (shortcut hint).
+- Event: `ep-select` (`onSelect`) with `detail: { value, item }`; the menu closes and focus returns to the trigger unless you call `preventDefault()`. Also `ep-open`, `ep-close`.
+- Keyboard: Enter, Space or Down opens on the first item, Up opens on the last; arrows, Home/End and typing a letter move; Escape closes.
+- Menus are for actions. To choose a form value, use `<ep-select>` or a radio group. Put destructive items last, after a divider.
+
+```html
+<ep-menu>
+  <ep-icon-button slot="trigger" icon="dots-vertical" label="Row actions"></ep-icon-button>
+  <ep-menu-item value="edit"><ep-icon slot="prefix" name="edit"></ep-icon>Edit</ep-menu-item>
+  <ep-menu-divider></ep-menu-divider>
+  <ep-menu-item value="delete" variant="danger">Delete</ep-menu-item>
+</ep-menu>
+```
+
 **`<ep-pagination>` → `Pagination`**: move between pages of a long list or table.
 - `page` (1-based), `total-pages` (`totalPages`), `label` (landmark name, **`Pagination`**; name it after the list, like "Students")
 - Event: `change` (`onChange`); read `page` and load that page. It doesn't fetch anything itself.
@@ -293,6 +315,11 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - Opens 500ms after hover (at once on keyboard focus, or when moving from another tooltip). Don't build your own delay.
 - Wrap the trigger element: `<ep-tooltip content="Edit"><ep-icon-button icon="edit" label="Edit"></ep-icon-button></ep-tooltip>`
 - Only plain text. Never put links, buttons or essential information in a tooltip. Don't use it on disabled elements.
+
+**`<ep-popover>` → `Popover`**: interactive content anchored to a button, like a filter form.
+- `open`, `placement` (**`bottom`** | `top` | `left` | `right`), `label` (accessible name of the panel; defaults to the trigger's text). Methods `show()`, `hide()`. Events `ep-open` (`onOpen`), `ep-close` (`onClose`).
+- Slot `trigger` for the button; the default slot is the content. Focus moves to the first control inside on open; Escape, an outside click or tabbing away closes it.
+- Non-modal. For a task that must block the page, use `<ep-modal>`; for plain text on hover, `<ep-tooltip>`; for a list of actions, `<ep-menu>`.
 
 **`<ep-modal>` → `Modal`**: a focused task or decision that blocks the page (native `<dialog>`).
 - `open`, `heading` (required for the accessible name), `size`: `sm` | **`md`** | `lg`
@@ -531,7 +558,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
 
 ## 9. What doesn't exist yet
 
-Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), menus and dropdowns, popovers, tables, accordions, date pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
+Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), tables, date pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
 
 ## 10. Add this to your app's agent instructions
 

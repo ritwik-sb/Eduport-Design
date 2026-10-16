@@ -106,6 +106,14 @@ function showToast(kind) {
   if (toasts[kind]) toast(toasts[kind]);
 }
 
+// Menu and popover demos
+document.getElementById('menu-demo').addEventListener('ep-select', (event) => {
+  toast({ variant: 'info', message: `You chose ${event.detail.value}.` });
+});
+document.addEventListener('click', (event) => {
+  event.target.closest('[data-close-popover]')?.closest('ep-popover').hide();
+});
+
 // Example form
 const form = document.getElementById('doubt-form');
 form.addEventListener('submit', (event) => {
