@@ -6,7 +6,9 @@ import type { EpDatePicker } from '../src/components/date-picker/index.js';
 import type { EpTable } from '../src/components/table/index.js';
 import { expectNoA11yViolations, fixture, settle, shadow } from './helpers.js';
 
-const focusedCell = (calendar: Element) => calendar.shadowRoot!.activeElement?.getAttribute('aria-label');
+// Browsers' ICU versions differ on whether "Thursday 15 October 2026" has a comma after the weekday.
+const plain = (label: string | null | undefined) => label?.replace(/,/g, '');
+const focusedCell = (calendar: Element) => plain(calendar.shadowRoot!.activeElement?.getAttribute('aria-label'));
 
 describe('date parsing', () => {
   it('reads typed dates in the locale order', () => {
@@ -45,7 +47,10 @@ describe('ep-calendar', () => {
     );
     calendar.isDateDisabled = (date) => date.getDay() === 0;
     await settle();
-    const cell = (label: string) => calendar.shadowRoot!.querySelector<HTMLElement>(`[aria-label="${label}"]`)!;
+    const cell = (label: string) =>
+      [...calendar.shadowRoot!.querySelectorAll<HTMLElement>('[aria-label]')].find(
+        (el) => plain(el.getAttribute('aria-label')) === label,
+      )!;
     expect(cell('Friday 9 October 2026').getAttribute('aria-disabled')).toBe('true');
     expect(cell('Sunday 18 October 2026').getAttribute('aria-disabled')).toBe('true');
     cell('Sunday 18 October 2026').click();
