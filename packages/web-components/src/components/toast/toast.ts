@@ -58,7 +58,7 @@ export class EpToast extends LitElement {
         border-radius: var(--ep-radius-container);
         background: var(--ep-color-surface-overlay);
         color: var(--ep-color-text-primary);
-        box-shadow: var(--ep-shadow-lg);
+        box-shadow: var(--ep-shadow-overlay);
         font-size: var(--ep-font-size-200);
         line-height: var(--ep-font-line-height-normal);
         animation: enter var(--ep-motion-duration-slow) var(--ep-motion-easing-enter);

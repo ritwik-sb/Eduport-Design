@@ -50,7 +50,7 @@ export class EpTooltip extends LitElement {
         font-size: var(--ep-font-size-100);
         font-weight: var(--ep-font-weight-medium);
         line-height: var(--ep-font-line-height-snug);
-        box-shadow: var(--ep-shadow-md);
+        box-shadow: var(--ep-shadow-raised);
         pointer-events: auto;
         overflow: visible;
         /* Enters with a fade and a small slide away from the trigger. The slide is 0 under reduced motion. */

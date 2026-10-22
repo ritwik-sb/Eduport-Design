@@ -129,12 +129,12 @@ html { scroll-padding-top: var(--ep-layout-header-height); }
 - Mark the current nav link with `aria-current="page"` and style it with `--ep-color-accent-subtle` background and `--ep-color-text-primary` text, which show up in both themes.
 - Pages use `--ep-color-background-default`; cards, the top bar and side panels use `--ep-color-surface-*` tokens with a `--ep-color-border-default` border to separate them.
 
-### Theme, corners and motion
+### Theme, corners, motion and contrast
 
 Independent attributes on the root element. All are optional and can change at runtime.
 
 ```html
-<html data-theme="dark" data-corners="sharp" data-motion="reduced">
+<html data-theme="dark" data-corners="sharp" data-motion="reduced" data-contrast="more">
 ```
 
 | Attribute | Values | Default (attribute absent) | Needs |
@@ -142,8 +142,11 @@ Independent attributes on the root element. All are optional and can change at r
 | `data-theme` | `light`, `dark` | `light` | `theme-dark` CSS for `dark` |
 | `data-corners` | `soft`, `sharp` | `soft` | `corners-sharp` CSS for `sharp` |
 | `data-motion` | `reduced` | full motion, unless the OS asks for reduced motion | nothing extra |
+| `data-contrast` | `more` | standard contrast, unless the OS asks for more contrast | nothing extra |
 
 Use `data-motion="reduced"` for an in-app "Reduce motion" setting. The OS setting (`prefers-reduced-motion`) already applies on its own, and nothing overrides it.
+
+Increased contrast works the same way: the OS setting (`prefers-contrast: more`, e.g. Increase Contrast on macOS and iOS) applies on its own, and `data-contrast="more"` is for an in-app setting. It turns `--ep-color-border-default` into the 3:1 `border-strong` and feedback borders into their status text color, so dividers and outlines stay visible. Custom UI that uses the semantic border tokens follows it with no extra work.
 
 To follow the OS setting:
 
@@ -533,12 +536,30 @@ Touch density applies on its own on phones and tablets (`pointer: coarse`); `dat
 - Families: `--ep-font-family-sans` (Inter for UI text, falling back to Noto Sans Malayalam for Malayalam), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
 - Sizes: `--ep-font-size-{100..900}` = 12, 14, 16, 18, 20, 24, 28, 32, 40px. Body text is `300` (16px); dense UI and secondary text `200` (14px); captions `100` (12px).
 - Weights: `--ep-font-weight-{regular,medium,semibold,bold}`. Line heights: `--ep-font-line-height-{tight,snug,normal}` (tight for headings, normal for paragraphs).
-- There are no heading components. Use real `<h1>`–`<h6>` elements in order; the base stylesheet (section 2) sizes them. Pick the level for the page outline, not the look; if a heading needs a different size, set `font-size` with these tokens.
+- Type roles: `--ep-font-{role}` are `font` shorthands (weight, size/line height, family), so one declaration sets the whole style. Use them for custom UI instead of combining the size, weight and line-height tokens by hand:
+
+| Token | Size | Use for |
+|---|---|---|
+| `--ep-font-heading-xl` | 32px semibold | Page titles (h1); add `letter-spacing: -0.02em` |
+| `--ep-font-heading-lg` | 24px semibold | Section titles (h2); add `letter-spacing: -0.01em` |
+| `--ep-font-heading-md` | 20px semibold | Subsection and card titles (h3) |
+| `--ep-font-heading-sm` | 18px semibold | Small headings (h4), dialog and panel titles |
+| `--ep-font-heading-xs` | 16px semibold | Group labels inside a section (h5) |
+| `--ep-font-body-lg` / `-md` / `-sm` | 18 / 16 / 14px regular | Lead text / default text / secondary and dense text |
+| `--ep-font-label-md` / `-sm` | 14 / 12px medium | Labels, nav items / badges, captions, metadata |
+| `--ep-font-code-md` | 14px mono | Inline code and IDs |
+
+```css
+.stat-value { font: var(--ep-font-heading-lg); }
+.stat-caption { font: var(--ep-font-label-sm); color: var(--ep-color-text-secondary); }
+```
+
+- There are no heading components. Use real `<h1>`–`<h6>` elements in order; the base stylesheet (section 2) styles them with the heading roles. Pick the level for the page outline, not the look; if a heading needs a different look, set `font` to another role.
 
 ### Borders, shadow, motion
 
 - `--ep-border-width-thin`, `--ep-border-width-thick`
-- `--ep-shadow-sm` (raised), `-md` (popovers, tooltips), `-lg` (modals)
+- `--ep-shadow-raised` (cards, tooltips: things just above the page), `--ep-shadow-overlay` (menus, popovers, dialogs, toasts). Both are tuned per theme: darker and tighter in dark, where a soft gray shadow disappears. Pair them with `--ep-color-surface-raised` and `--ep-color-surface-overlay`. The primitive `--ep-shadow-{sm,md,lg}` stay for compatibility but don't change with the theme.
 - `--ep-motion-duration-fast` (100ms), `-normal` (200ms), `-slow` (300ms), `-slower` (400ms, drawers only), `-move` (200ms, movement inside a control); `--ep-motion-easing-standard`, `-enter`, `-exit`
 - `--ep-motion-distance-sm` (4px, overlay enter offset), `-md` (8px, toast enter offset); `--ep-motion-scale-enter` (0.98, modal)
 - Under reduced motion (OS setting or `data-motion="reduced"`) distances become 0, `-move` becomes 0ms and every duration caps at 100ms, so write `transform: translateY(var(--ep-motion-distance-sm))` and the slide disappears on its own while the fade stays.
@@ -622,7 +643,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
   border: var(--ep-border-width-thin) solid var(--ep-color-border-default);
   border-radius: var(--ep-radius-container);
   padding: var(--ep-space-200);
-  box-shadow: var(--ep-shadow-sm);
+  box-shadow: var(--ep-shadow-raised);
 }
 ```
 

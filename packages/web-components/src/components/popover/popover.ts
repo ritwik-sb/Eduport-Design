@@ -54,7 +54,7 @@ export class EpPopover extends LitElement {
         color: var(--ep-color-text-primary);
         font-size: var(--ep-font-size-200);
         line-height: var(--ep-font-line-height-normal);
-        box-shadow: var(--ep-shadow-lg);
+        box-shadow: var(--ep-shadow-overlay);
         outline: none;
       }
 

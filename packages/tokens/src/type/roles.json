@@ -1,0 +1,112 @@
+{
+  "font": {
+    "$type": "typography",
+    "heading": {
+      "xl": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.800}",
+          "fontWeight": "{font.weight.semibold}",
+          "lineHeight": "{font.line-height.tight}"
+        },
+        "$description": "Page titles (h1). Pair with letter-spacing -0.02em."
+      },
+      "lg": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.600}",
+          "fontWeight": "{font.weight.semibold}",
+          "lineHeight": "{font.line-height.tight}"
+        },
+        "$description": "Section titles (h2). Pair with letter-spacing -0.01em."
+      },
+      "md": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.500}",
+          "fontWeight": "{font.weight.semibold}",
+          "lineHeight": "{font.line-height.tight}"
+        },
+        "$description": "Subsection and card titles (h3)."
+      },
+      "sm": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.400}",
+          "fontWeight": "{font.weight.semibold}",
+          "lineHeight": "{font.line-height.snug}"
+        },
+        "$description": "Small headings (h4), dialog and panel titles."
+      },
+      "xs": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.300}",
+          "fontWeight": "{font.weight.semibold}",
+          "lineHeight": "{font.line-height.snug}"
+        },
+        "$description": "Group labels inside a section (h5)."
+      }
+    },
+    "body": {
+      "lg": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.400}",
+          "fontWeight": "{font.weight.regular}",
+          "lineHeight": "{font.line-height.normal}"
+        },
+        "$description": "Lead paragraphs and reading-heavy pages."
+      },
+      "md": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.300}",
+          "fontWeight": "{font.weight.regular}",
+          "lineHeight": "{font.line-height.normal}"
+        },
+        "$description": "Default text."
+      },
+      "sm": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.200}",
+          "fontWeight": "{font.weight.regular}",
+          "lineHeight": "{font.line-height.normal}"
+        },
+        "$description": "Secondary text, helper text, table cells in dense views."
+      }
+    },
+    "label": {
+      "md": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.200}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.line-height.snug}"
+        },
+        "$description": "Form labels, buttons, navigation items."
+      },
+      "sm": {
+        "$value": {
+          "fontFamily": "{font.family.sans}",
+          "fontSize": "{font.size.100}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.line-height.snug}"
+        },
+        "$description": "Badges, captions, overlines, metadata."
+      }
+    },
+    "code": {
+      "md": {
+        "$value": {
+          "fontFamily": "{font.family.mono}",
+          "fontSize": "{font.size.200}",
+          "fontWeight": "{font.weight.regular}",
+          "lineHeight": "{font.line-height.normal}"
+        },
+        "$description": "Inline code, IDs and values that must align character by character."
+      }
+    }
+  }
+}

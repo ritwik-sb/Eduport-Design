@@ -1,0 +1,33 @@
+{
+  "color": {
+    "$type": "color",
+    "border": {
+      "default": {
+        "$value": "{color.border.strong}",
+        "$description": "Increased contrast: dividers, card and menu outlines reach 3:1 or more."
+      }
+    },
+    "feedback": {
+      "info": {
+        "border": {
+          "$value": "{color.text.info}"
+        }
+      },
+      "success": {
+        "border": {
+          "$value": "{color.text.success}"
+        }
+      },
+      "warning": {
+        "border": {
+          "$value": "{color.text.warning}"
+        }
+      },
+      "danger": {
+        "border": {
+          "$value": "{color.text.danger}"
+        }
+      }
+    }
+  }
+}

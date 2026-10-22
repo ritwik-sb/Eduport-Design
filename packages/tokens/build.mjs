@@ -8,6 +8,9 @@
 // corners-sharp.css  semantic radius overrides under [data-corners="sharp"]
 // base.css           opt-in element styles (body, headings, links, focus), copied from src/base.css
 //
+// Both also carry the increased-contrast block (prefers-contrast: more and [data-contrast="more"]), which re-points
+// border.default and the feedback borders at stronger semantic tokens.
+//
 // tokens.css also carries the motion tokens, with reduced values under prefers-reduced-motion and
 // [data-motion="reduced"]: movement drops to zero and durations cap at 100ms, so fades stay and nothing slides.
 //
@@ -24,7 +27,7 @@ const isLayout = (token) => token.filePath.includes('/layout/');
 const isMotion = (token) => token.filePath.includes('/motion/');
 
 const base = new StyleDictionary({
-  source: ['src/primitives/*.json', 'src/themes/light.json', 'src/corners/soft.json', 'src/density/compact.json', 'src/layout/base.json', 'src/motion/full.json'],
+  source: ['src/primitives/*.json', 'src/type/roles.json', 'src/themes/light.json', 'src/corners/soft.json', 'src/density/compact.json', 'src/layout/base.json', 'src/motion/full.json'],
   usesDtcg: true,
   platforms: {
     css: {
@@ -145,5 +148,36 @@ const colorScheme = (selector, scheme) =>
 await appendFile('dist/css/tokens.css', colorScheme(':root, [data-theme="light"]', 'light'));
 await override('src/themes/dark.json', 'theme-dark.css', '[data-theme="dark"]').buildAllPlatforms();
 await appendFile('dist/css/theme-dark.css', colorScheme('[data-theme="dark"]', 'dark'));
+// Increased contrast re-points a few semantic tokens at stronger ones (var() references), so one block works in every
+// theme. It follows the OS setting (prefers-contrast: more) and data-contrast="more" on the page or any subtree.
+// It is appended to tokens.css and again to theme-dark.css, so it wins over whichever theme block loads last.
+await new StyleDictionary({
+  source: ['src/primitives/*.json', 'src/themes/light.json', 'src/contrast/more.json'],
+  usesDtcg: true,
+  log: { warnings: 'disabled' },
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      prefix: PREFIX,
+      buildPath: 'dist/css/',
+      files: [
+        {
+          destination: 'contrast-more.css',
+          format: 'css/variables',
+          filter: (token) => token.filePath.includes('/contrast/'),
+          options: { selector: '[data-contrast="more"]', outputReferences: true },
+        },
+      ],
+    },
+  },
+}).buildAllPlatforms();
+const contrast = await readFile('dist/css/contrast-more.css', 'utf8');
+await rm('dist/css/contrast-more.css');
+const contrastBody = contrast.slice(contrast.indexOf('{') + 1, contrast.lastIndexOf('}')).replace(/^\s*\n/, '\n').trimEnd();
+const contrastCss =
+  `\n@media (prefers-contrast: more) {\n  :root,\n  [data-theme] {${contrastBody.replace(/\n/g, '\n  ')}\n  }\n}\n\n` +
+  `[data-contrast="more"],\n[data-contrast="more"] [data-theme] {${contrastBody}\n}\n`;
+await appendFile('dist/css/tokens.css', contrastCss);
+await appendFile('dist/css/theme-dark.css', contrastCss);
 await override('src/corners/sharp.json', 'corners-sharp.css', '[data-corners="sharp"]').buildAllPlatforms();
 await copyFile('src/base.css', 'dist/css/base.css');
