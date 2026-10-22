@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { onPrimaryContrastException } from './on-primary-exception.js';
 
 export default { title: 'Date picker' };
 
@@ -23,5 +24,6 @@ export const WithValue = {
 };
 
 export const Calendar = {
+  parameters: onPrimaryContrastException,
   render: () => html`<ep-calendar value="2026-10-15"></ep-calendar>`,
 };

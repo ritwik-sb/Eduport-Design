@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { onPrimaryContrastException } from './on-primary-exception.js';
 import { toast } from '@eduportdesign/web-components';
 
 export default { title: 'Feedback and overlays' };
@@ -62,6 +63,7 @@ export const TooltipToolbar = {
 };
 
 export const Modal = {
+  parameters: onPrimaryContrastException,
   render: () => html`<ep-button @click=${(e) => e.target.nextElementSibling.show()}>Open modal</ep-button>
     <ep-modal heading="Delete this course?" size="sm">
       All its lessons, tests and submissions will be deleted. This can't be undone.

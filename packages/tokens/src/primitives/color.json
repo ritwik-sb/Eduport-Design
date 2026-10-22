@@ -26,11 +26,11 @@
       },
       "55": {
         "$value": "#ea5b0d",
-        "$description": "Hover shade of the brand color. Keeps 5.48:1 with near-black text."
+        "$description": "Hover shade of the brand color. 3.50:1 with white text."
       },
       "57": {
         "$value": "#dc5309",
-        "$description": "Pressed shade of the brand color. Keeps 4.82:1 with near-black text."
+        "$description": "Pressed shade of the brand color. 3.97:1 with white text."
       },
       "60": {
         "$value": "#c64b00"

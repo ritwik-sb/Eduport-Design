@@ -52,8 +52,8 @@
         "$description": "Text and icons on the danger fill. White in both themes."
       },
       "on-primary": {
-        "$value": "{color.gray.100}",
-        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. Near-black in both themes: 6.37:1 on the brand color, where white is only 3.01:1."
+        "$value": "{color.white}",
+        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. White in both themes. 3.01:1 on the brand color: a documented exception to WCAG AA text contrast (docs/foundations.md)."
       },
       "link": {
         "$value": "{color.brand.70}"
@@ -100,7 +100,7 @@
       "primary": {
         "default": {
           "$value": "{color.brand.50}",
-          "$description": "The exact brand color. Pair with text.on-primary (6.37:1)."
+          "$description": "The exact brand color. Pair with text.on-primary (white, 3.01:1)."
         },
         "hover": {
           "$value": "{color.brand.55}"

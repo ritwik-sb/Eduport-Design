@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { onPrimaryContrastException } from './on-primary-exception.js';
 
 export default { title: 'Progress' };
 
@@ -31,6 +32,7 @@ export const Indeterminate = {
 };
 
 export const Spinner = {
+  parameters: onPrimaryContrastException,
   render: () =>
     html`<div class="sb-row">
       <ep-spinner size="sm"></ep-spinner>
