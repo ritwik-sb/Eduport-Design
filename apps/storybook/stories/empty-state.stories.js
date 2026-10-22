@@ -1,10 +1,8 @@
 import { html } from 'lit';
-import { onPrimaryContrastException } from './on-primary-exception.js';
 
 export default { title: 'Empty state' };
 
 export const Default = {
-  parameters: onPrimaryContrastException,
   render: () =>
     html`<ep-empty-state icon="clipboard-list" heading="No assignments yet">
       Assignments your teachers post will show up here.

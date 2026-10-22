@@ -1,10 +1,8 @@
 import { html } from 'lit';
-import { onPrimaryContrastException } from './on-primary-exception.js';
 
 export default {
   title: 'Actions/Button',
   component: 'ep-button',
-  parameters: onPrimaryContrastException,
   args: { label: 'Button', variant: 'primary', size: 'md', disabled: false, loading: false, fullWidth: false },
   argTypes: {
     variant: { control: 'select', options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'] },

@@ -17,7 +17,7 @@ Every hue has ten steps, `10` (lightest) to `100` (darkest), generated in OKLCH 
 | 70 | ≥ 7:1 | AAA for body text. |
 | 40 and lighter | — | Light fills. Pair with step 90–100 text. |
 
-`brand.50` is the exact brand color `#fb6514` (3.01:1 against white).
+`brand.50` is the exact brand color `#fb6514` (3.01:1 against white). Brand also has in-between steps `55`, `57` and `58`; `58` `#d64200` is the primary fill (see below).
 
 | | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -37,21 +37,20 @@ Every hue has ten steps, `10` (lightest) to `100` (darkest), generated in OKLCH 
 
 White text on `#fb6514` is **3.01:1**, which fails WCAG AA for normal text (4.5:1). Options considered:
 
-1. **Darker fill, white text.** Primary buttons use `brand.60` `#c64b00` with white text (4.76:1). Next to the logo, this reads as rust rather than Eduport orange.
-2. **Exact brand fill, dark text.** Primary buttons use `#fb6514` with near-black text (6.37:1). Passes AA, but dark text on orange looked off in real apps.
-3. **Exact brand fill, white text (chosen 2026-10-22).** Primary buttons use `#fb6514` with white text (`text.on-primary`, 3.01:1), in both themes.
+1. **Exact brand fill, dark text.** `#fb6514` with near-black text (6.37:1). Passes AA, but dark text on orange looked off in real apps (2026-10-08 to 2026-10-22).
+2. **Exact brand fill, white text.** Matches the logo, but 3.01:1 fails AA. Rejected.
+3. **Just-dark-enough fill, white text (chosen 2026-10-22).** `brand.58` `#d64200` is the brand color darkened in OKLCH lightness, with the same hue and chroma, stopping at the first value where white text passes: **4.53:1**. It is as close to the logo orange as white text allows, and brighter than `brand.60` `#c64b00` (4.76:1), which read as rust.
 
-Decision: option 3, by Ritwik on 2026-10-22, after seeing apps built with option 2. Option 1 was the choice from 2026-10-07 to 2026-10-08, option 2 from 2026-10-08 to 2026-10-22.
+Decision: option 3, by Ritwik on 2026-10-22. The exact logo orange `brand.50` stays for the logo and brand moments, not for fills that carry text.
 
-**This is a documented exception to WCAG AA.** 3.01:1 meets the 3:1 minimum for large text (18.66px bold or 24px regular) and for non-text marks, but not the 4.5:1 for normal-size labels, which primary button labels are. Every other pair in the system still meets AA. `scripts/check-contrast.mjs` holds the on-primary pairs to 3:1 and says why. If Eduport needs full AA conformance (for example a public-sector or procurement requirement), switch to option 1: change `interactive.primary.*` to `brand.60`/`70`/`80` and no component code changes.
+What it means in practice:
 
-What option 3 means in practice:
-
-- **Labels on orange are white.** Use `text.on-primary` for anything on an `interactive.primary` fill, including checkmarks and switch thumbs. Keep labels short and semibold (the button already is), and never put small or secondary text on the orange.
-- **Hover and pressed shades darken in both themes**, to `brand.55` `#ea5b0d` (3.50:1) and `brand.57` `#dc5309` (3.97:1), so the white label only gains contrast.
+- **Labels on orange are white.** Use `text.on-primary` for anything on an `interactive.primary` fill, including checkmarks and switch thumbs.
+- **Hover and pressed shades darken in both themes**, to `brand.60` `#c64b00` (4.76:1) and `brand.70` `#983800` (7.24:1), so the label only gains contrast.
+- **Never lighten the primary fill.** `brand.58` sits right at the AA line, so any lighter orange behind white text fails. `scripts/check-contrast.mjs` catches it.
 - **Orange text stays darker.** `#fb6514` as text on white is 3.01:1, so links and the tertiary button label keep `text.link` (`brand.70` in light).
-- **Thin marks stay darker in light.** The tab underline, progress bar and the edge of checked controls use `accent.default`, which is `brand.60` in light: the brand color is 2.82:1 on `background.subtle`, under the 3:1 non-text minimum. Checked checkboxes, radios and switches are filled with the brand orange inside that edge. Dark uses the exact brand orange for all of them.
-- **The button against the page** is 3.01:1 on white and 6.37:1 on the dark page.
+- **Thin marks stay darker in light.** The tab underline, progress bar and the edge of checked controls use `accent.default`, which is `brand.60` in light: the brand color is 2.82:1 on `background.subtle`, under the 3:1 non-text minimum. Checked checkboxes, radios and switches are filled with the primary orange inside that edge. Dark uses the exact brand orange for all of them.
+- **The button against the page** is 4.53:1 on white and 4.23:1 on the dark page.
 
 ### Semantic tokens
 
@@ -67,7 +66,7 @@ Components use only these (`--ep-color-*`). Values per theme are in `src/themes/
 | `interactive` | `primary`, `secondary`, `ghost`, `danger` × `default`/`hover`/`active`; `disabled` |
 | `feedback` | `info`, `success`, `warning`, `danger` × `background`/`border` |
 
-`text.on-primary` is white in both themes (3.01:1, the documented exception above) and goes on every primary fill state. `text.on-color` is white in both themes and goes on the danger fill. The secondary button is outlined (`border.strong` edge, `text.primary` label, clear fill), so it never outweighs the primary button and never reads as disabled in dark.
+`text.on-primary` is white in both themes and goes on every primary fill state. `text.on-color` is white in both themes and goes on the danger fill. The secondary button is outlined (`border.strong` edge, `text.primary` label, clear fill), so it never outweighs the primary button and never reads as disabled in dark.
 
 In dark, the three card styles are three distinct steps: outlined is the page color (`gray.100`) with a border, filled is `surface.muted` (`gray.95`), and elevated is `surface.raised` (`gray.90`). Shadows don't show on a dark page, so elevation relies on the lighter surface.
 
@@ -159,6 +158,6 @@ These names become public on release; renaming them later is a breaking change.
 - **Token names.** `--ep-color-accent-*` and `--ep-radius-{indicator,control,container,round}` are new. Role-based names (control, container) are easier to keep stable than size names (sm, md), because a mode can change the value without the name lying.
 - **Primitive step values changed.** `radius.lg` is now 6px and `radius.xl` 10px, and every color primitive has a new value. Pre-release, so no consumer is affected yet.
 - **Corner mode as `data-corners="soft|sharp"`.** An attribute (rather than a JS API or class) works the same in plain HTML, React and SSR, and matches `data-theme`. Adding a third mode later (e.g. `round`) is non-breaking; renaming the attribute or the two values is breaking.
-- **`text.on-primary` and `text.on-color`.** Both are white today, but keep them separate: on-primary is the one that may change if the AA exception for the brand orange is dropped. Custom components that put text on a primary fill must use on-primary.
+- **`text.on-primary` and `text.on-color`.** Both are white today, but keep them separate: on-primary follows whatever the primary fill becomes. Custom components that put text on a primary fill must use on-primary.
 - **Density as `data-density="compact|touch"`.** Same attribute pattern as `data-theme` and `data-corners`. `--ep-size-control-*`, `--ep-size-target-min` and `--ep-font-size-input` are new public names.
 - **Icon names.** If we keep Tabler's names, upstream renames become our breaking changes; pin the Tabler version and treat upgrades as reviewed changes.

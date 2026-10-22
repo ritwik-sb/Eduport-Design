@@ -4,4 +4,4 @@
 "@eduportdesign/react": patch
 ---
 
-Primary fills now take white text: `text.on-primary` is white in both themes on the exact logo orange `#fb6514` (3.01:1, a documented exception to WCAG AA). Hover and pressed shades darken in both themes (`brand.55`, `brand.57`), so dark-theme primary buttons no longer lighten on hover. Checked checkboxes, switch thumbs, the current pagination page and the selected calendar day follow automatically.
+Primary fills now take white text. `interactive.primary.default` is the new `brand.58` `#d64200`, the brand orange darkened in OKLCH lightness just enough for white text to pass WCAG AA (4.53:1); hover and pressed are `brand.60` and `brand.70` in both themes, so dark-theme primary buttons no longer lighten on hover. `text.on-primary` is white in both themes. Checked checkboxes, switch thumbs, the current pagination page and the selected calendar day follow automatically.

@@ -94,14 +94,14 @@
     "interactive": {
       "primary": {
         "default": {
-          "$value": "{color.brand.50}"
+          "$value": "{color.brand.58}"
         },
         "hover": {
-          "$value": "{color.brand.55}",
+          "$value": "{color.brand.60}",
           "$description": "Darker on hover, as in light, so the white label gains contrast instead of losing it."
         },
         "active": {
-          "$value": "{color.brand.57}"
+          "$value": "{color.brand.70}"
         }
       },
       "secondary": {

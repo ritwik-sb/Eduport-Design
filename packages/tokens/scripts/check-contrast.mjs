@@ -32,9 +32,7 @@ const FEEDBACK = ['info', 'success', 'warning', 'danger'];
 const pairs = [
   ...TEXT.flatMap((fg) => BACKGROUNDS.map((bg) => [fg, bg, 4.5])),
   ...NON_TEXT.flatMap((fg) => BACKGROUNDS.map((bg) => [fg, bg, 3])),
-  // Exception (Ritwik, 2026-10-22): white labels on the exact logo orange, 3.01:1. Below AA's 4.5:1 for normal text,
-  // so it is held to 3:1 here and documented in docs/foundations.md. Darker hover and active states only add contrast.
-  ...STATES.map((s) => ['text.on-primary', `interactive.primary.${s}`, 3]),
+  ...STATES.map((s) => ['text.on-primary', `interactive.primary.${s}`, 4.5]),
   ...STATES.map((s) => ['text.on-color', `interactive.danger.${s}`, 4.5]),
   // Labelled buttons don't strictly need a 3:1 boundary (1.4.11), but the primary fill should still stand out on the page.
   ['interactive.primary.default', 'background.default', 3],
@@ -65,4 +63,4 @@ if (failures) {
   console.error(`\n${failures} pair(s) below WCAG 2.1 AA.`);
   process.exit(1);
 }
-console.log('\nAll pairs meet their minimums (WCAG 2.1 AA, plus the documented on-primary exception).');
+console.log('\nAll pairs meet WCAG 2.1 AA.');
