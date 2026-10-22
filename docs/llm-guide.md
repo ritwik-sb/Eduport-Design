@@ -57,7 +57,7 @@ import { Button, TextField } from '@eduportdesign/react';
 
 **Import the base stylesheet.** `tokens.css` only defines variables; it doesn't style any element. `@eduportdesign/tokens/css/base` styles the parts of a page that aren't components, so they match the components:
 
-- `body`: background, text color, Inter, 16px, line height; `color-scheme` follows `data-theme`
+- `body`: background, text color, Inter, 16px, line height (`color-scheme` follows `data-theme` from the token files themselves)
 - `h1`–`h6` on the type scale (32, 24, 20, 18, 16, 14px), semibold, tight line height
 - links in `--ep-color-text-link`, `code`/`pre` in the mono font, `hr`, images that never overflow, a focus ring on native focusable elements
 - `box-sizing: border-box` everywhere, and form elements inherit the font
