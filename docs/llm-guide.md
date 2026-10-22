@@ -40,6 +40,7 @@ import '@fontsource-variable/inter';
 import '@eduportdesign/tokens/css';                // required: all tokens, light theme, soft corners
 import '@eduportdesign/tokens/css/theme-dark';     // optional: enables data-theme="dark"
 import '@eduportdesign/tokens/css/corners-sharp';  // optional: enables data-corners="sharp"
+import '@eduportdesign/tokens/css/base';           // recommended: body, headings, text, links and focus (see below)
 
 // Web components: register every tag…
 import '@eduportdesign/web-components';
@@ -54,7 +55,18 @@ React wrappers register their own web component on import, so a React app only n
 import { Button, TextField } from '@eduportdesign/react';
 ```
 
-The tokens don't style `<body>`. Add this once to the app's global CSS:
+**Import the base stylesheet.** `tokens.css` only defines variables; it doesn't style any element. `@eduportdesign/tokens/css/base` styles the parts of a page that aren't components, so they match the components:
+
+- `body`: background, text color, Inter, 16px, line height; `color-scheme` follows `data-theme`
+- `h1`–`h6` on the type scale (32, 24, 20, 18, 16, 14px), semibold, tight line height
+- links in `--ep-color-text-link`, `code`/`pre` in the mono font, `hr`, images that never overflow, a focus ring on native focusable elements
+- `box-sizing: border-box` everywhere, and form elements inherit the font
+- **Margins on headings, paragraphs and lists are 0.** Space things with `gap` on their parent (section 5 and the page skeleton below). For long-form text (help pages, rich text, terms), wrap it in `<div class="ep-prose">` to get reading spacing and a 68ch line length back.
+- `.ep-visually-hidden` hides text visually but keeps it for screen readers.
+
+It sits in a CSS cascade layer (`@layer ep-base`) with zero specificity, so any rule in your own CSS wins. Without it, text outside components falls back to the browser's serif font and default heading margins, which is the most common reason an app looks off.
+
+If an app can't use it (for example it already has a reset it must keep), add at least this to its global CSS:
 
 ```css
 body {
@@ -66,6 +78,56 @@ body {
   line-height: var(--ep-font-line-height-normal);
 }
 ```
+
+### Page skeleton
+
+Build every screen on this structure. Full rules, with phone behavior and the side nav drawer, are in [docs/layout.md](layout.md#page-structure); read it before building an app shell or a new kind of page.
+
+```html
+<a class="ep-visually-hidden" href="#main">Skip to content</a>
+<header class="app-topbar">…product mark, search, account menu…</header>
+<div class="app-body">
+  <nav class="app-sidenav" aria-label="Main">…</nav>   <!-- inline from 1024px; a drawer below that -->
+  <main id="main" class="page">
+    <div class="page-header">
+      <div class="page-title">
+        <ep-breadcrumbs>…</ep-breadcrumbs>
+        <h1>Students</h1>
+        <p>Everyone enrolled in your classes this term.</p>
+      </div>
+      <div class="page-actions"><ep-button variant="secondary">Export</ep-button><ep-button>Add student</ep-button></div>
+    </div>
+    <section class="section">
+      <h2>Overview</h2>
+      <div class="grid">…cards…</div>
+    </section>
+  </main>
+</div>
+```
+
+```css
+html { scroll-padding-top: var(--ep-layout-header-height); }
+.app-topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: var(--ep-space-200); height: var(--ep-layout-header-height); padding-inline: var(--ep-layout-margin); background: var(--ep-color-surface-default); border-block-end: var(--ep-border-width-thin) solid var(--ep-color-border-default); }
+.app-body { display: flex; }
+.app-sidenav { display: none; }
+@media (min-width: 1024px) { .app-sidenav { display: block; flex: none; width: var(--ep-layout-sidebar-width); } }
+.page { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--ep-layout-section-gap); max-width: calc(var(--ep-layout-width-page) + 2 * var(--ep-layout-margin)); margin-inline: auto; padding: var(--ep-space-300) var(--ep-layout-margin) var(--ep-space-600); }
+.page-header { display: flex; flex-direction: column; gap: var(--ep-space-200); }
+.page-title { display: flex; flex-direction: column; gap: var(--ep-space-100); }
+.page-title p { color: var(--ep-color-text-secondary); }
+.page-actions { display: flex; flex-wrap: wrap; gap: var(--ep-space-100); }
+@media (min-width: 600px) {
+  .page { padding-block-start: var(--ep-space-400); }
+  .page-header { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+}
+.section { display: flex; flex-direction: column; gap: var(--ep-space-200); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: var(--ep-layout-gutter); }
+```
+
+- `min-width: 0` on `.page` stops wide tables from pushing the page sideways; the table scrolls inside itself instead.
+- Below 1024px the side nav is hidden: put a menu `<ep-icon-button>` in the top bar that opens the same links in an `<ep-modal>` or a drawer. On phones with three to five destinations a bottom bar is an alternative; never both.
+- Mark the current nav link with `aria-current="page"` and style it with `--ep-color-accent-subtle` background and `--ep-color-text-primary` text, which show up in both themes.
+- Pages use `--ep-color-background-default`; cards, the top bar and side panels use `--ep-color-surface-*` tokens with a `--ep-color-border-default` border to separate them.
 
 ### Theme, corners and motion
 
@@ -444,7 +506,7 @@ Layout tokens change with viewport width on their own (mobile first, breakpoints
 - CSS variables don't work inside `@media`; write `@media (min-width: 1024px)` or use `$ep-breakpoint-lg` (SCSS) / `BreakpointLg` (JS).
 - Breakpoints decide layout; `pointer: coarse` (density) decides control size. Never use one for the other.
 - Forms are one column. Paragraphs cap at `--ep-layout-width-prose`. Nothing scrolls sideways at 320px wide except data tables.
-- No layout classes or layout components ship yet; write the CSS above in your app.
+- No layout classes or layout components ship yet; write the CSS above in your app, starting from the page skeleton in section 2.
 
 ### Size and density
 
@@ -471,7 +533,7 @@ Touch density applies on its own on phones and tablets (`pointer: coarse`); `dat
 - Families: `--ep-font-family-sans` (Inter for UI text, falling back to Noto Sans Malayalam for Malayalam), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
 - Sizes: `--ep-font-size-{100..900}` = 12, 14, 16, 18, 20, 24, 28, 32, 40px. Body text is `300` (16px); dense UI and secondary text `200` (14px); captions `100` (12px).
 - Weights: `--ep-font-weight-{regular,medium,semibold,bold}`. Line heights: `--ep-font-line-height-{tight,snug,normal}` (tight for headings, normal for paragraphs).
-- There are no heading components yet. Use real `<h1>`–`<h6>` elements in order and style them with these tokens.
+- There are no heading components. Use real `<h1>`–`<h6>` elements in order; the base stylesheet (section 2) sizes them. Pick the level for the page outline, not the look; if a heading needs a different size, set `font-size` with these tokens.
 
 ### Borders, shadow, motion
 
@@ -588,7 +650,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
 
 ## 9. What doesn't exist yet
 
-Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), date range pickers, comboboxes, file upload, and heading/text components. Planned components are listed in the repo README roadmap; check there before building one.
+Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), date range pickers, comboboxes, file upload, and heading/text components, app shell (top bar, side nav) and page header (use the page skeleton in section 2). Planned components are listed in the repo README roadmap; check there before building one.
 
 ## 10. Add this to your app's agent instructions
 
@@ -597,7 +659,9 @@ Paste this into your app's `AGENTS.md`, `CLAUDE.md`, `.cursor/rules` or `.github
 ```md
 ## UI: Eduport Design System
 This app uses the Eduport Design System (@eduportdesign/tokens, @eduportdesign/web-components, @eduportdesign/react).
-Before writing UI, read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md and follow it.
+Before writing UI, read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md and follow it. Before building an app shell or a new kind of page, also read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/layout.md.
+- Import @eduportdesign/tokens/css and @eduportdesign/tokens/css/base once at the entry point, plus @fontsource-variable/inter. Don't add another CSS reset or framework on top.
+- Build screens on the guide's page skeleton (top bar, side nav, main with page header and sections), and space everything with gap and the --ep-space-* / --ep-layout-* tokens. Headings and paragraphs have no margins.
 - Use <ep-*> components (React: @eduportdesign/react) whenever one exists; never invent props or tags.
 - Style custom UI only with semantic --ep-* tokens (color, radius-indicator/control/container/round, space, layout, font, shadow, motion). No hex values, no primitive tokens like --ep-color-brand-60.
 - Every control has an accessible name; WCAG 2.1 AA is required.

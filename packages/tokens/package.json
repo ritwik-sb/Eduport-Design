@@ -27,6 +27,7 @@
     "./css": "./dist/css/tokens.css",
     "./css/theme-dark": "./dist/css/theme-dark.css",
     "./css/corners-sharp": "./dist/css/corners-sharp.css",
+    "./css/base": "./dist/css/base.css",
     "./scss": "./dist/scss/_tokens.scss",
     ".": {
       "types": "./dist/js/tokens.d.ts",

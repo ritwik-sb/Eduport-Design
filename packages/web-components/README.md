@@ -2,6 +2,8 @@
 
 Lit web components for the Eduport Design System. They work in plain HTML and in any framework. For React, use [`@eduportdesign/react`](../react).
 
+> **Building an app, or using an AI coding assistant?** Read the [AI and app guide](https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md) first. It has the full setup, a page skeleton to start every screen from, and every component's API. Layout rules (app shell, page header, sections) are in [docs/layout.md](https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/layout.md).
+
 ```bash
 npm install @eduportdesign/web-components @eduportdesign/tokens
 ```
@@ -10,6 +12,7 @@ npm install @eduportdesign/web-components @eduportdesign/tokens
 import '@eduportdesign/tokens/css';
 import '@eduportdesign/tokens/css/theme-dark';     // optional
 import '@eduportdesign/tokens/css/corners-sharp';  // optional
+import '@eduportdesign/tokens/css/base';           // recommended: body, headings, text, links, focus
 import '@eduportdesign/web-components';             // registers every <ep-*> tag
 ```
 

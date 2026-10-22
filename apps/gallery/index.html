@@ -165,16 +165,13 @@ npm install @fontsource-variable/inter</code></pre>
           <pre><code>import '@fontsource-variable/inter';
 import '@eduportdesign/tokens/css';                 // required: light theme, soft corners
 import '@eduportdesign/tokens/css/theme-dark';      // optional: dark theme
-import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners</code></pre>
-          <p>The tokens don't style the page itself. Add this to your global CSS so the background and text follow the theme:</p>
-          <pre><code>body {
-  margin: 0;
-  background: var(--ep-color-background-default);
-  color: var(--ep-color-text-primary);
-  font-family: var(--ep-font-family-sans);
-  font-size: var(--ep-font-size-300);
-  line-height: var(--ep-font-line-height-normal);
-}</code></pre>
+import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners
+import '@eduportdesign/tokens/css/base';            // recommended: body, headings, text, links, focus</code></pre>
+          <p>
+            The base stylesheet styles the page itself (background, text, headings, links and the focus ring) so
+            everything outside the components matches them. It resets heading and paragraph margins, so space your
+            layout with <code>gap</code>, and any rule in your own CSS overrides it.
+          </p>
 
           <h3>3. Pick a theme and corner style</h3>
           <p>
