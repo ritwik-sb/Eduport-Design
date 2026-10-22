@@ -1,5 +1,15 @@
 # @eduportdesign/react
 
+## 0.4.0
+
+### Patch Changes
+
+- 721e92d: Add an opt-in base stylesheet, `@eduportdesign/tokens/css/base`, that styles `body`, headings, text, links, code and the focus ring with the semantic tokens, so the parts of an app that aren't components match the components. It lives in `@layer ep-base` with zero specificity, resets heading, paragraph and list margins to 0, and adds `.ep-prose` and `.ep-visually-hidden`. Package READMEs now import it and point to the AI and app guide.
+- 68ae93b: Primary fills now take white text. `interactive.primary.default` is the new `brand.58` `#d64200`, the brand orange darkened in OKLCH lightness just enough for white text to pass WCAG AA (4.53:1); hover and pressed are `brand.60` and `brand.70` in both themes, so dark-theme primary buttons no longer lighten on hover. `text.on-primary` is white in both themes. Checked checkboxes, switch thumbs, the current pagination page and the selected calendar day follow automatically.
+- Updated dependencies [721e92d]
+- Updated dependencies [68ae93b]
+  - @eduportdesign/web-components@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes
