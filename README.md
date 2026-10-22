@@ -68,6 +68,7 @@ Import the CSS once, at your app's entry point:
 import '@eduportdesign/tokens/css';                 // primitives, light theme, soft corners
 import '@eduportdesign/tokens/css/theme-dark';      // optional: dark theme
 import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners
+import '@eduportdesign/tokens/css/base';            // recommended: body, headings, text, links, focus
 ```
 
 Then pick the theme and corner mode on the root element. Both attributes are optional and can change at runtime:

@@ -5,13 +5,14 @@
 //                    then layout tokens on :root with md/lg/xl overrides inside min-width media queries
 // theme-dark.css     semantic color overrides under [data-theme="dark"]
 // corners-sharp.css  semantic radius overrides under [data-corners="sharp"]
+// base.css           opt-in element styles (body, headings, links, focus), copied from src/base.css
 //
 // tokens.css also carries the motion tokens, with reduced values under prefers-reduced-motion and
 // [data-motion="reduced"]: movement drops to zero and durations cap at 100ms, so fades stay and nothing slides.
 //
 // Color theme, corner mode and density are independent axes, so any combination works. Layout follows the
 // viewport width only, never the theme, corner mode or pointer.
-import { readFile, rm, appendFile } from 'node:fs/promises';
+import { readFile, rm, appendFile, copyFile } from 'node:fs/promises';
 import StyleDictionary from 'style-dictionary';
 
 const PREFIX = 'ep';
@@ -138,3 +139,4 @@ for (const step of ['md', 'lg', 'xl']) {
 }
 await override('src/themes/dark.json', 'theme-dark.css', '[data-theme="dark"]').buildAllPlatforms();
 await override('src/corners/sharp.json', 'corners-sharp.css', '[data-corners="sharp"]').buildAllPlatforms();
+await copyFile('src/base.css', 'dist/css/base.css');

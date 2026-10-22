@@ -2,15 +2,20 @@
 
 Design tokens for the Eduport Design System, in [DTCG](https://www.designtokens.org/) format, built with Style Dictionary.
 
+> **Building an app, or using an AI coding assistant?** Read the [AI and app guide](https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md) first. It has the full setup, a page skeleton to start every screen from, and every component's API. Layout rules (app shell, page header, sections) are in [docs/layout.md](https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/layout.md).
+
 ```js
 import '@eduportdesign/tokens/css';                 // primitives, light theme, soft corners, compact + touch density
 import '@eduportdesign/tokens/css/theme-dark';      // [data-theme="dark"]
 import '@eduportdesign/tokens/css/corners-sharp';   // [data-corners="sharp"]
+import '@eduportdesign/tokens/css/base';            // opt-in element styles: body, headings, text, links, focus
 ```
 
 ```html
 <html data-theme="dark" data-corners="sharp" data-motion="reduced">
 ```
+
+`base.css` styles bare elements (`body`, `h1`–`h6`, links, `code`, focus ring) with the semantic tokens, inside `@layer ep-base` with zero specificity, so app CSS always wins. It resets heading, paragraph and list margins to 0; wrap long-form text in `.ep-prose` for reading spacing. `.ep-visually-hidden` hides text visually but keeps it for screen readers.
 
 Touch density applies by itself on touch screens (`pointer: coarse`). Set `data-density="touch"` or `"compact"` to force one.
 

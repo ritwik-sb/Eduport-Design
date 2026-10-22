@@ -2,11 +2,12 @@
 
 > Design tokens, Lit web components (`<ep-*>`) and React wrappers for Eduport apps. Packages: @eduportdesign/tokens, @eduportdesign/web-components, @eduportdesign/react. Light/dark themes via `data-theme`, soft/sharp corners via `data-corners`, reduced motion via `data-motion`. Style custom UI only with semantic `--ep-*` tokens; WCAG 2.1 AA is required.
 
-Start with the AI guide. It has setup, every component's tag, props, slots and events, the token list, accessibility rules and do/don't examples in one file.
+Start with the AI guide. It has setup (including the base stylesheet and a page skeleton every screen should start from), every component's tag, props, slots and events, the token list, accessibility rules and do/don't examples in one file.
 
 ## Docs
 
 - [AI coding assistant guide](docs/llm-guide.md): the full reference for generating UI with this design system
+- [Spacing and layout](docs/layout.md): read before building an app shell or a page. Page structure (top bar, side nav, page header, sections), space scale, layout grid, breakpoints and content widths
 - [README](README.md): overview, install from npm or GitHub Packages, development and release
 - [Web components](packages/web-components/README.md): component table and conventions
 - [React](packages/react/README.md): wrapper names, props and event props
@@ -18,7 +19,6 @@ Start with the AI guide. It has setup, every component's tag, props, slots and e
 ## Optional
 
 - [Interaction and motion](docs/motion.md): states, keyboard, feedback timing, motion tokens, reduced motion and the allowed microinteractions
-- [Spacing and layout](docs/layout.md): space scale and when to use each step, layout grid, breakpoints, content widths and page structure
 - [Foundations](docs/foundations.md): how the color scales, type, radius and icon choices were made, with contrast results
 - [Token sources](packages/tokens/src): DTCG JSON for primitives, themes and corner modes
 - [Component sources](packages/web-components/src/components): Lit source with JSDoc `@slot`, `@csspart` and `@fires` tags
