@@ -26,11 +26,15 @@
       },
       "55": {
         "$value": "#ea5b0d",
-        "$description": "Hover shade of the brand color. Keeps 5.48:1 with near-black text."
+        "$description": "Between the brand color and brand.57. 3.50:1 with white text, so not for text fills."
       },
       "57": {
         "$value": "#dc5309",
-        "$description": "Pressed shade of the brand color. Keeps 4.82:1 with near-black text."
+        "$description": "Between brand.55 and brand.58. 3.97:1 with white text, so not for text fills."
+      },
+      "58": {
+        "$value": "#d64200",
+        "$description": "The primary fill: the brand color darkened in OKLCH lightness, keeping its hue and chroma, just far enough for white text to reach 4.5:1 (4.53:1)."
       },
       "60": {
         "$value": "#c64b00"

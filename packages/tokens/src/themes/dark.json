@@ -51,7 +51,7 @@
         "$value": "{color.white}"
       },
       "on-primary": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.white}"
       },
       "link": {
         "$value": "{color.brand.40}"
@@ -94,14 +94,14 @@
     "interactive": {
       "primary": {
         "default": {
-          "$value": "{color.brand.50}"
+          "$value": "{color.brand.58}"
         },
         "hover": {
-          "$value": "{color.brand.40}",
-          "$description": "Lighter on hover in dark, so the button gains emphasis instead of fading into the page."
+          "$value": "{color.brand.60}",
+          "$description": "Darker on hover, as in light, so the white label gains contrast instead of losing it."
         },
         "active": {
-          "$value": "{color.brand.30}"
+          "$value": "{color.brand.70}"
         }
       },
       "secondary": {

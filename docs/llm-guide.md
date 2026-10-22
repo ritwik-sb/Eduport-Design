@@ -458,7 +458,7 @@ All tokens are CSS custom properties on `:root`. Full source: `packages/tokens/s
 
 Pairing rules. These are the pairs the contrast check covers in both themes; stick to them:
 - Text (`text-primary`, `-secondary`, `-link`, and the status colors `-info`, `-success`, `-warning`, `-danger`) on `background-default`, `background-subtle`, `surface-raised`, `surface-overlay` or `surface-muted`.
-- `text-on-primary` (near-black) on `interactive-primary-{default,hover,active}`. Never white text on the brand orange: it is 3.01:1.
+- `text-on-primary` (white) on `interactive-primary-{default,hover,active}` (4.53:1 and up). The primary fill is the brand orange darkened just enough for white text; never put white text on the exact logo orange `--ep-color-brand-50`, which is 3.01:1.
 - `text-on-color` (white) on `interactive-danger-{default,hover,active}`.
 - `text-primary` on `interactive-{secondary,ghost}-{hover,active}`. The secondary button is outlined, with a clear fill.
 - `text-inverse` on `background-inverse`.

@@ -52,8 +52,8 @@
         "$description": "Text and icons on the danger fill. White in both themes."
       },
       "on-primary": {
-        "$value": "{color.gray.100}",
-        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. Near-black in both themes: 6.37:1 on the brand color, where white is only 3.01:1."
+        "$value": "{color.white}",
+        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. White in both themes: 4.53:1 or more on every primary state."
       },
       "link": {
         "$value": "{color.brand.70}"
@@ -99,14 +99,14 @@
     "interactive": {
       "primary": {
         "default": {
-          "$value": "{color.brand.50}",
-          "$description": "The exact brand color. Pair with text.on-primary (6.37:1)."
+          "$value": "{color.brand.58}",
+          "$description": "The brand orange, darkened just enough for white text (text.on-primary, 4.53:1). The exact logo orange is brand.50."
         },
         "hover": {
-          "$value": "{color.brand.55}"
+          "$value": "{color.brand.60}"
         },
         "active": {
-          "$value": "{color.brand.57}"
+          "$value": "{color.brand.70}"
         }
       },
       "secondary": {
