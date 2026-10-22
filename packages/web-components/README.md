@@ -55,6 +55,10 @@ To keep bundles small, import only what you use: `import '@eduportdesign/web-com
 
 Form controls are form-associated: they submit with a surrounding `<form>`, reset with it, and report validity.
 
+## Editor and AI tool support
+
+The package ships a [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest) at `@eduportdesign/web-components/custom-elements.json` (also named in `package.json` under `customElements`). It lists every tag with its attributes, properties, methods, slots, CSS parts and events, generated from the source on each build. Editors and tools that read it give autocomplete and checks for `<ep-*>` markup, and AI coding assistants can read it to get the exact API instead of guessing.
+
 ## Icons
 
 `<ep-icon>` ships with a curated set of [Tabler](https://tabler.io/icons) icons (see `scripts/generate-icons.mjs`). Add more with `registerIcons({ name: '<path d="…"/>' })`, using the inner markup of any Tabler outline icon. A full, tree-shakable icon package is planned.

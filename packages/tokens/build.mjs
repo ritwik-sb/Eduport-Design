@@ -4,6 +4,7 @@
 //                    then touch density under [data-density="touch"] and, unless compact is forced, on coarse pointers,
 //                    then layout tokens on :root with md/lg/xl overrides inside min-width media queries
 // theme-dark.css     semantic color overrides under [data-theme="dark"]
+//                    (tokens.css and theme-dark.css also set color-scheme, so native UI follows the theme)
 // corners-sharp.css  semantic radius overrides under [data-corners="sharp"]
 // base.css           opt-in element styles (body, headings, links, focus), copied from src/base.css
 //
@@ -137,6 +138,12 @@ for (const step of ['md', 'lg', 'xl']) {
     return `${header}@media (min-width: ${breakpoints[step].$value}) {\n${block.replace(/^/gm, '  ').trimEnd()}\n}\n`;
   });
 }
+// color-scheme makes scrollbars, autofill and native controls (date inputs, <select> menus) follow the theme. It sits
+// in the ep-base layer with zero specificity, so an app's own color-scheme rule always wins.
+const colorScheme = (selector, scheme) =>
+  `\n@layer ep-base {\n  :where(${selector}) {\n    color-scheme: ${scheme};\n  }\n}\n`;
+await appendFile('dist/css/tokens.css', colorScheme(':root, [data-theme="light"]', 'light'));
 await override('src/themes/dark.json', 'theme-dark.css', '[data-theme="dark"]').buildAllPlatforms();
+await appendFile('dist/css/theme-dark.css', colorScheme('[data-theme="dark"]', 'dark'));
 await override('src/corners/sharp.json', 'corners-sharp.css', '[data-corners="sharp"]').buildAllPlatforms();
 await copyFile('src/base.css', 'dist/css/base.css');

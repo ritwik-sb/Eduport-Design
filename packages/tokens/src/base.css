@@ -13,14 +13,10 @@
     box-sizing: border-box;
   }
 
+  /* color-scheme comes from tokens.css and theme-dark.css, so native UI follows the theme without this file. */
   :where(:root) {
-    color-scheme: light;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-  }
-
-  :where([data-theme='dark']) {
-    color-scheme: dark;
   }
 
   :where(body) {
@@ -157,6 +153,11 @@
 
   :where(.ep-prose) :where(p, ul, ol, dl, blockquote, pre, figure, table) {
     margin-block: 0 var(--ep-space-200);
+  }
+
+  /* Avoids a single short word on the last line of a paragraph. Browsers without support wrap as usual. */
+  :where(.ep-prose) :where(p, li, blockquote) {
+    text-wrap: pretty;
   }
 
   :where(.ep-prose) :where(h1, h2, h3, h4, h5, h6) {
