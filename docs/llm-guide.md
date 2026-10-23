@@ -129,7 +129,8 @@ Build every screen on `<ep-app-shell>`. It lays out the sticky top bar, the side
 - Mark the page the user is on with `current` on its `<ep-side-nav-item>` (exactly one). Choosing an item in the drawer closes it.
 - On phones the top bar's middle slot (search) is hidden; offer search behind an icon button in `actions` instead.
 - With the base stylesheet, anchor jumps and focused fields stop below the sticky top bar.
-- Pages use `--ep-color-background-default`; cards and panels use `--ep-color-surface-*` tokens with a `--ep-color-border-default` border to separate them.
+- With a sidebar the shell paints `--ep-color-background-canvas` and shows the content on a raised `--ep-color-surface-sheet`. Cards default to `variant="elevated"` (a ring and soft shadow, no border). Custom panels use `--ep-color-surface-raised` with `box-shadow: var(--ep-shadow-raised)`; use `--ep-color-border-default` borders only for dividers and `outlined` cards.
+- Brand moments: `<ep-side-nav appearance="inverse">` is a dark rail in both themes (put the white logo in `slot="header"`; the shell then runs the rail the full height beside the top bar). `<ep-page-header variant="hero">` puts the title on the brand gradient with `eyebrow`, `aside` (stat tiles on `--ep-color-hero-chip`) and `art` (logo mark) slots; its `actions` sit below the hero. Use the hero once, on an app's landing page, not on every page. Keep text off the corner glow.
 
 ### Theme, corners, motion and contrast
 

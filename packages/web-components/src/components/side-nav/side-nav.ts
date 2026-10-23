@@ -11,12 +11,14 @@ import { HasSlotController } from '../../utils/slots.js';
  *
  * @tag ep-side-nav
  * @slot - `<ep-side-nav-item>` and `<ep-side-nav-group>` elements.
+ * @slot header - A logo at the top, mostly with `appearance="inverse"`.
  * @slot footer - Items pinned to the bottom, such as Settings and Help.
  * @csspart base - The `<nav>`.
  */
 export class EpSideNav extends LitElement {
   static properties = {
     label: {},
+    appearance: { reflect: true },
   };
 
   static styles = [
@@ -25,6 +27,27 @@ export class EpSideNav extends LitElement {
       :host {
         display: block;
         height: 100%;
+      }
+
+      /* The dark rail. Items and groups read these private properties, which inherit through the shadow boundary. */
+      :host([appearance='inverse']) {
+        --_nav-text: var(--ep-color-rail-text-secondary);
+        --_nav-text-active: var(--ep-color-rail-text);
+        --_nav-hover: var(--ep-color-rail-hover);
+        --_nav-current: var(--ep-color-rail-current);
+        --_nav-accent: var(--ep-color-rail-accent);
+        --_nav-border: var(--ep-color-rail-border);
+        --_nav-shadow: none;
+        background: var(--ep-color-rail-background);
+        color: var(--ep-color-rail-text);
+      }
+
+      .header {
+        padding: var(--ep-space-100) var(--ep-space-150) 0;
+      }
+
+      .header[hidden] {
+        display: none;
       }
 
       nav {
@@ -50,7 +73,7 @@ export class EpSideNav extends LitElement {
       .footer {
         margin-block-start: auto;
         padding-block-start: var(--ep-space-200);
-        border-block-start: var(--ep-border-width-thin) solid var(--ep-color-border-default);
+        border-block-start: var(--ep-border-width-thin) solid var(--_nav-border, var(--ep-color-border-default));
       }
 
       .footer[hidden] {
@@ -61,16 +84,20 @@ export class EpSideNav extends LitElement {
 
   /** Accessible name of the navigation landmark. Change it only when a page has more than one. */
   declare label: string;
+  /** `inverse` is a dark rail in both themes, where the brand orange marks the current item. Default is `default`. */
+  declare appearance: 'default' | 'inverse';
 
-  #slots = new HasSlotController(this, 'footer');
+  #slots = new HasSlotController(this, 'header', 'footer');
 
   constructor() {
     super();
     this.label = 'Main';
+    this.appearance = 'default';
   }
 
   render() {
     return html`<nav part="base" aria-label=${this.label}>
+      <div class="header" ?hidden=${!this.#slots.test('header')}><slot name="header"></slot></div>
       <div class="list" role="list"><slot></slot></div>
       <div class="footer" role="list" ?hidden=${!this.#slots.test('footer')}><slot name="footer"></slot></div>
     </nav>`;

@@ -23,7 +23,7 @@ export class EpSideNavGroup extends LitElement {
 
       .heading {
         padding: var(--ep-space-100) var(--ep-space-150) var(--ep-space-50);
-        color: var(--ep-color-text-secondary);
+        color: var(--_nav-text, var(--ep-color-text-secondary));
         font: var(--ep-font-label-sm);
         letter-spacing: 0.02em;
         text-transform: uppercase;

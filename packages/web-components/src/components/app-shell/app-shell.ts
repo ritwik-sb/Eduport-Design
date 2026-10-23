@@ -88,6 +88,37 @@ export class EpAppShell extends LitElement {
         display: flex;
       }
 
+      /* A dark rail runs the full height, with the top bar and content beside it. */
+      :host([data-rail]) {
+        display: grid;
+        grid-template-columns: var(--ep-layout-sidebar-width) minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+      }
+
+      :host([data-rail]) .body {
+        display: contents;
+      }
+
+      :host([data-rail]) .top {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      :host([data-rail]) .sidebar {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        inset-block-start: 0;
+        height: 100dvh;
+        background: var(--ep-color-rail-background);
+      }
+
+      :host([data-rail]) main {
+        grid-column: 2;
+        grid-row: 2;
+        min-height: 0;
+        margin-inline-start: var(--ep-space-150);
+      }
+
       .sidebar {
         position: sticky;
         flex: none;
@@ -293,6 +324,10 @@ export class EpAppShell extends LitElement {
     if (changed.has('_wide') && this._wide) this.navOpen = false;
     this.toggleAttribute('data-has-top-bar', this.#slots.test('top-bar'));
     this.toggleAttribute('data-has-sidebar', this._wide && this.#slots.test('nav'));
+    this.toggleAttribute(
+      'data-rail',
+      this._wide && this.querySelector(':scope > [slot="nav"]')?.getAttribute('appearance') === 'inverse',
+    );
   }
 
   updated(changed: Map<string, unknown>) {

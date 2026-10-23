@@ -188,6 +188,60 @@
           "$value": "{color.red.50}"
         }
       }
+    },
+    "rail": {
+      "background": {
+        "$value": "{color.gray.95}",
+        "$description": "A dark navigation rail in both themes (ep-side-nav appearance=\"inverse\"), so the brand orange can glow on it."
+      },
+      "text": {
+        "$value": "{color.white}"
+      },
+      "text-secondary": {
+        "$value": "{color.gray.40}",
+        "$description": "Inactive items and group headings on the rail."
+      },
+      "hover": {
+        "$value": "#ffffff12"
+      },
+      "current": {
+        "$value": "#ffffff1f"
+      },
+      "border": {
+        "$value": "#ffffff1f"
+      },
+      "accent": {
+        "$value": "{color.brand.50}",
+        "$description": "The current-item marker and its glow. The exact logo orange: 5:1 or more on the rail."
+      },
+      "badge": {
+        "$value": "{color.brand.50}",
+        "$description": "Count badges on the rail. Pair with rail.on-badge."
+      },
+      "on-badge": {
+        "$value": "{color.gray.100}"
+      }
+    },
+    "hero": {
+      "start": {
+        "$value": "{color.brand.70}",
+        "$description": "Start of the brand hero gradient (ep-page-header variant=\"hero\")."
+      },
+      "end": {
+        "$value": "{color.brand.58}",
+        "$description": "End of the hero gradient. White text stays at 4.5:1 or more on both ends."
+      },
+      "glow": {
+        "$value": "{color.brand.50}",
+        "$description": "Radial highlight in the hero's top-right corner. Keep text off it, or put the text on a chip."
+      },
+      "text": {
+        "$value": "{color.white}"
+      },
+      "chip": {
+        "$value": "#0000004d",
+        "$description": "Translucent dark tile for stats on the hero."
+      }
     }
   },
   "shadow": {
