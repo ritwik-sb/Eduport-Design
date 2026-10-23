@@ -41,7 +41,7 @@ export class EpCard extends LitElement {
       :host([variant='elevated']) .base {
         border-color: transparent;
         background: var(--ep-color-surface-raised);
-        box-shadow: var(--ep-shadow-md);
+        box-shadow: var(--ep-shadow-raised);
       }
 
       :host([variant='filled']) .base {

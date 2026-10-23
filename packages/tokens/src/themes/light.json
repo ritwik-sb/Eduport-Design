@@ -181,5 +181,16 @@
         }
       }
     }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised": {
+      "$value": "{shadow.md}",
+      "$description": "Cards, tooltips and other surfaces that sit just above the page. Use with color.surface.raised."
+    },
+    "overlay": {
+      "$value": "{shadow.lg}",
+      "$description": "Menus, popovers, dialogs, toasts: anything that floats over content. Use with color.surface.overlay."
+    }
   }
 }

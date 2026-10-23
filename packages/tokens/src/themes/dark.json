@@ -175,5 +175,46 @@
         }
       }
     }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised": {
+      "$value": [
+        {
+          "color": "#000000a3",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "3px",
+          "spread": "0px"
+        },
+        {
+          "color": "#000000cc",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Darker and tighter than light: a soft gray shadow disappears on a dark page, so the surface color does most of the lifting."
+    },
+    "overlay": {
+      "$value": [
+        {
+          "color": "#00000099",
+          "offsetX": "0px",
+          "offsetY": "12px",
+          "blur": "24px",
+          "spread": "-4px"
+        },
+        {
+          "color": "#000000cc",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Darker than light, with a 1px contact shadow so the overlay's edge stays crisp on a dark page."
+    }
   }
 }

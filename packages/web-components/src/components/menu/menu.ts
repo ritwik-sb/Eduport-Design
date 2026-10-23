@@ -51,7 +51,7 @@ export class EpMenu extends LitElement {
         border: var(--ep-border-width-thin) solid var(--ep-color-border-default);
         border-radius: var(--ep-radius-container);
         background: var(--ep-color-surface-overlay);
-        box-shadow: var(--ep-shadow-lg);
+        box-shadow: var(--ep-shadow-overlay);
       }
 
       .panel:not(:popover-open) {

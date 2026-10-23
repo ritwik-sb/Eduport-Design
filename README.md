@@ -119,11 +119,12 @@ Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch
 | | |
 |---|---|
 | **Color** | Six 10–100 scales (brand, gray, red, green, amber, blue). Step 60 of every hue takes white text at AA contrast. Primary actions use `#d64200`, the brand orange `#fb6514` darkened just enough for white text to pass AA (4.53:1). |
-| **Type** | [Inter](https://rsms.me/inter/) for UI text, Noto Sans Malayalam for Malayalam, JetBrains Mono for code and IDs. |
+| **Type** | [Inter](https://rsms.me/inter/) for UI text, Noto Sans Malayalam for Malayalam, JetBrains Mono for code and IDs. Type roles (`heading`, `body`, `label`, `code`) set a whole text style in one token. |
 | **Radius** | Semantic tokens `indicator`, `control`, `container` and `round`, set by the corner mode. |
 | **Density** | Compact for mouse and trackpad, touch (44px controls, 16px input text) for phones and tablets. Touch turns on by itself on touch screens; `data-density` overrides it. |
 | **Spacing and layout** | 4px-based space scale; a 4 / 8 / 12 column grid whose margin, gutter and section gap grow at the `md` (600px), `lg` (1024px) and `xl` (1440px) breakpoints. See [docs/layout.md](docs/layout.md). |
 | **Motion** | 100 / 200 / 300ms durations, enter offsets and a modal scale that drop to zero under reduced motion (the OS setting or `data-motion="reduced"`), so fades stay and nothing slides. Tooltips open after 500ms, button spinners wait 400ms, toasts stay 6s. See [docs/motion.md](docs/motion.md). |
+| **Elevation and contrast** | `shadow.raised` and `shadow.overlay` change with the theme, so surfaces still lift in dark. Increased contrast (the OS setting or `data-contrast="more"`) strengthens dividers and outlines to 3:1. |
 | **Icons** | Tabler Icons (MIT, 5,000+ icons). |
 
 Components use **semantic tokens** for color, radius, control heights and icon sizes (`--ep-color-text-primary`, `--ep-radius-control`, `--ep-size-control-md`), never raw color or radius primitives. That rule is what makes themes, corner modes and touch density work. Fixed geometry that belongs to one component, like avatar diameters or the switch track, stays in that component.

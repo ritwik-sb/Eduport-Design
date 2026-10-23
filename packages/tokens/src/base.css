@@ -23,53 +23,47 @@
     margin: 0;
     background: var(--ep-color-background-default);
     color: var(--ep-color-text-primary);
-    font-family: var(--ep-font-family-sans);
-    font-size: var(--ep-font-size-300);
-    line-height: var(--ep-font-line-height-normal);
+    font: var(--ep-font-body-md);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   /*
-   * Headings: one type scale for every app. Sizes step down from 32px; h5 and h6 stay at body sizes.
+   * Headings: one type scale for every app, from the font.heading.* type roles. h6 stays at label size.
    * Slotted headings (<h3 slot="heading"> in a card) are skipped: page styles beat ::slotted(), so the
    * component's own heading style would otherwise lose.
    */
   :where(h1, h2, h3, h4, h5, h6):where(:not([slot])) {
     margin: 0;
     color: var(--ep-color-text-primary);
-    font-weight: var(--ep-font-weight-semibold);
-    line-height: var(--ep-font-line-height-tight);
     text-wrap: balance;
   }
 
   :where(h1:not([slot])) {
-    font-size: var(--ep-font-size-800);
+    font: var(--ep-font-heading-xl);
     letter-spacing: -0.02em;
   }
 
   :where(h2:not([slot])) {
-    font-size: var(--ep-font-size-600);
+    font: var(--ep-font-heading-lg);
     letter-spacing: -0.01em;
   }
 
   :where(h3:not([slot])) {
-    font-size: var(--ep-font-size-500);
+    font: var(--ep-font-heading-md);
   }
 
   :where(h4:not([slot])) {
-    font-size: var(--ep-font-size-400);
-    line-height: var(--ep-font-line-height-snug);
+    font: var(--ep-font-heading-sm);
   }
 
   :where(h5:not([slot])) {
-    font-size: var(--ep-font-size-300);
-    line-height: var(--ep-font-line-height-snug);
+    font: var(--ep-font-heading-xs);
   }
 
   :where(h6:not([slot])) {
-    font-size: var(--ep-font-size-200);
-    line-height: var(--ep-font-line-height-snug);
+    font: var(--ep-font-label-md);
+    font-weight: var(--ep-font-weight-semibold);
   }
 
   :where(p, ul, ol, dl, dd, figure, blockquote, pre) {
