@@ -71,6 +71,7 @@ export class EpSideNavItem extends LitElement {
         width: 3px;
         border-radius: var(--ep-radius-round);
         background: var(--_nav-accent, var(--ep-color-accent-default));
+        box-shadow: var(--_nav-glow, none);
       }
 
       :host([current]) a ep-icon {

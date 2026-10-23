@@ -38,6 +38,7 @@ export class EpSideNav extends LitElement {
         --_nav-accent: var(--ep-color-rail-accent);
         --_nav-border: var(--ep-color-rail-border);
         --_nav-shadow: none;
+        --_nav-glow: 0 0 12px 1px color-mix(in srgb, var(--ep-color-rail-accent) 60%, transparent);
         background: var(--ep-color-rail-background);
         color: var(--ep-color-rail-text);
       }

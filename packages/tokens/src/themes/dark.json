@@ -361,6 +361,32 @@
         }
       ],
       "$description": "Darker than light, with a 1px contact shadow so the overlay's edge stays crisp on a dark page."
+    },
+    "raised-hover": {
+      "$value": [
+        {
+          "color": "#000000cc",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "10px",
+          "spread": "0px"
+        },
+        {
+          "color": "#000000e6",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        },
+        {
+          "color": "#ffffff1a",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "1px"
+        }
+      ],
+      "$description": "Hover state of a raised surface in dark: a brighter edge and deeper shadow, no movement."
     }
   }
 }
