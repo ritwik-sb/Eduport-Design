@@ -112,7 +112,7 @@ import { Button, TextField } from '@eduportdesign/react';
 
 ## Components
 
-Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch, Badge, Tag, Avatar, Card, Icon, Tabs, Alert, Toast, Tooltip and Modal. See [packages/web-components](packages/web-components/README.md) for the tag names and APIs.
+App shell (top bar, side nav, page header), Button, Icon button, Text field, Textarea, Select, Checkbox, Radio group, Switch, Date picker, Badge, Tag, Avatar, Card, Table, Icon, Accordion, Empty state, Skeleton, Tabs, Breadcrumbs, Pagination, Menu, Alert, Toast, Progress bar, Spinner, Tooltip, Popover and Modal. See [packages/web-components](packages/web-components/README.md) for the tag names and APIs.
 
 ## Foundations
 

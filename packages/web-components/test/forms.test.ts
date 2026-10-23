@@ -90,6 +90,15 @@ describe('ep-text-field', () => {
     expect(input.getAttribute('aria-invalid')).toBe('true');
     expect(field.validity.customError).toBe(true);
   });
+
+  it('keeps a hidden label as the accessible name', async () => {
+    const field = await fixture<EpTextField>('<ep-text-field label="Search" hide-label type="search"></ep-text-field>');
+    const label = shadow(field, 'label');
+    expect(label.classList.contains('visually-hidden')).toBe(true);
+    expect(label.getBoundingClientRect().width).toBeLessThanOrEqual(1);
+    expect((shadow(field, 'input') as HTMLInputElement).labels?.[0]).toBe(label);
+    await expectNoA11yViolations();
+  });
 });
 
 describe('ep-textarea', () => {

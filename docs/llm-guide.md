@@ -81,53 +81,55 @@ body {
 
 ### Page skeleton
 
-Build every screen on this structure. Full rules, with phone behavior and the side nav drawer, are in [docs/layout.md](layout.md#page-structure); read it before building an app shell or a new kind of page.
+Build every screen on `<ep-app-shell>`. It lays out the sticky top bar, the side navigation (inline from 1024px, a drawer opened from the top bar below that) and the content area, and it adds the skip link, the `<main>` landmark, the page margin and the content width cap. Full rules are in [docs/layout.md](layout.md#page-structure).
 
 ```html
-<a class="ep-visually-hidden" href="#main">Skip to content</a>
-<header class="app-topbar">…product mark, search, account menu…</header>
-<div class="app-body">
-  <nav class="app-sidenav" aria-label="Main">…</nav>   <!-- inline from 1024px; a drawer below that -->
-  <main id="main" class="page">
-    <div class="page-header">
-      <div class="page-title">
-        <ep-breadcrumbs>…</ep-breadcrumbs>
-        <h1>Students</h1>
-        <p>Everyone enrolled in your classes this term.</p>
-      </div>
-      <div class="page-actions"><ep-button variant="secondary">Export</ep-button><ep-button>Add student</ep-button></div>
-    </div>
+<ep-app-shell>
+  <ep-top-bar slot="top-bar">
+    <a slot="brand" href="/">Eduport Teach</a>
+    <ep-text-field label="Search" hide-label type="search" placeholder="Search students" size="sm">
+      <ep-icon slot="prefix" name="search"></ep-icon>
+    </ep-text-field>
+    <ep-icon-button slot="actions" icon="bell" label="Notifications"></ep-icon-button>
+    <ep-menu slot="actions" label="Account">…</ep-menu>
+  </ep-top-bar>
+
+  <ep-side-nav slot="nav">
+    <ep-side-nav-item href="/" icon="home">Home</ep-side-nav-item>
+    <ep-side-nav-item href="/students" icon="users" current>Students</ep-side-nav-item>
+    <ep-side-nav-group heading="Assessment">
+      <ep-side-nav-item href="/grades" icon="certificate">Grades</ep-side-nav-item>
+    </ep-side-nav-group>
+    <ep-side-nav-item slot="footer" href="/settings" icon="settings">Settings</ep-side-nav-item>
+  </ep-side-nav>
+
+  <ep-page-header heading="Students">
+    <ep-breadcrumbs slot="breadcrumbs">…</ep-breadcrumbs>
+    Everyone enrolled in your classes this term.
+    <ep-button slot="actions" variant="secondary">Export</ep-button>
+    <ep-button slot="actions">Add student</ep-button>
+  </ep-page-header>
+  <div class="page">
     <section class="section">
       <h2>Overview</h2>
       <div class="grid">…cards…</div>
     </section>
-  </main>
-</div>
+  </div>
+</ep-app-shell>
 ```
 
 ```css
-html { scroll-padding-top: var(--ep-layout-header-height); }
-.app-topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: var(--ep-space-200); height: var(--ep-layout-header-height); padding-inline: var(--ep-layout-margin); background: var(--ep-color-surface-default); border-block-end: var(--ep-border-width-thin) solid var(--ep-color-border-default); }
-.app-body { display: flex; }
-.app-sidenav { display: none; }
-@media (min-width: 1024px) { .app-sidenav { display: block; flex: none; width: var(--ep-layout-sidebar-width); } }
-.page { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--ep-layout-section-gap); max-width: calc(var(--ep-layout-width-page) + 2 * var(--ep-layout-margin)); margin-inline: auto; padding: var(--ep-space-300) var(--ep-layout-margin) var(--ep-space-600); }
-.page-header { display: flex; flex-direction: column; gap: var(--ep-space-200); }
-.page-title { display: flex; flex-direction: column; gap: var(--ep-space-100); }
-.page-title p { color: var(--ep-color-text-secondary); }
-.page-actions { display: flex; flex-wrap: wrap; gap: var(--ep-space-100); }
-@media (min-width: 600px) {
-  .page { padding-block-start: var(--ep-space-400); }
-  .page-header { flex-direction: row; align-items: flex-start; justify-content: space-between; }
-}
+.page { display: flex; flex-direction: column; gap: var(--ep-layout-section-gap); }
 .section { display: flex; flex-direction: column; gap: var(--ep-space-200); }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: var(--ep-layout-gutter); }
 ```
 
-- `min-width: 0` on `.page` stops wide tables from pushing the page sideways; the table scrolls inside itself instead.
-- Below 1024px the side nav is hidden: put a menu `<ep-icon-button>` in the top bar that opens the same links in an `<ep-modal>` or a drawer. On phones with three to five destinations a bottom bar is an alternative; never both.
-- Mark the current nav link with `aria-current="page"` and style it with `--ep-color-accent-subtle` background and `--ep-color-text-primary` text, which show up in both themes.
-- Pages use `--ep-color-background-default`; cards, the top bar and side panels use `--ep-color-surface-*` tokens with a `--ep-color-border-default` border to separate them.
+- Don't add your own `<main>`, skip link, page padding or `max-width`: the shell does all four. Use `full-width` on `<ep-app-shell>` for data-heavy screens (gradebooks, timetables) that need the whole width.
+- `<ep-page-header>` comes first and already includes the space below it, so put it outside the `.page` wrapper and give the first section no margin. It is the page's `h1`.
+- Mark the page the user is on with `current` on its `<ep-side-nav-item>` (exactly one). Choosing an item in the drawer closes it.
+- On phones the top bar's middle slot (search) is hidden; offer search behind an icon button in `actions` instead.
+- With the base stylesheet, anchor jumps and focused fields stop below the sticky top bar.
+- Pages use `--ep-color-background-default`; cards and panels use `--ep-color-surface-*` tokens with a `--ep-color-border-default` border to separate them.
 
 ### Theme, corners, motion and contrast
 
@@ -234,6 +236,7 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - `label`, `value`, `name`, `type` (**`text`** | `email` | `password` | `search` | `tel` | `url` | `number`), `placeholder`, `autocomplete`
 - `helper-text`, `error-text` (non-empty = invalid), `size` (`sm` | **`md`** | `lg`)
 - `required`, `disabled`, `readonly`
+- `hide-label` (`hideLabel`): keeps `label` for screen readers but hides it on screen. Only for fields whose purpose is obvious without it, such as top bar search with a search icon
 - Slots: `prefix`, `suffix`. Events: `input` (each keystroke), `change` (committed)
 
 **`<ep-textarea>` → `Textarea`**: multi-line text.
@@ -339,6 +342,23 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - Skeletons are hidden from screen readers. Put `aria-busy="true"` on the region that is loading and remove it when the content arrives.
 
 ### Navigation
+
+**`<ep-app-shell>` → `AppShell`**: the frame of every screen (see the page skeleton in section 2).
+- Props: `nav-open` (the drawer below 1024px; the top bar's menu button toggles it), `full-width` (no content width cap)
+- Slots: `top-bar` (an `<ep-top-bar>`), `nav` (an `<ep-side-nav>`), default (the page). Parts: `main`, `content`, `drawer`
+
+**`<ep-top-bar>` → `TopBar`**: the bar across the top. Height is `--ep-layout-header-height`.
+- Slots: `brand` (logo and product name), default (search or other global tools; hidden on phones), `actions` (icon buttons, account menu)
+- `menu-button` and `menu-expanded` are set by `<ep-app-shell>`. Event: `ep-nav-toggle` (React `onNavToggle`) when its menu button is pressed
+
+**`<ep-side-nav>` + `<ep-side-nav-item>` + `<ep-side-nav-group>` → `SideNav` + `SideNavItem` + `SideNavGroup`**: the app's main navigation.
+- Side nav: `label` (landmark name, default **`Main`**); slots default (items and groups), `footer` (pinned to the bottom: Settings, Help)
+- Item: `href` (required: items are always links), `icon`, `current` (the page the user is on); slots default (one or two words), `suffix` (a count, e.g. `<ep-badge>`)
+- Group: `heading`; holds items. Use groups once there are more than about seven destinations
+
+**`<ep-page-header>` → `PageHeader`**: the top of a page.
+- Props: `heading` (the `h1`), `heading-level` (default 1)
+- Slots: `breadcrumbs`, default (one-sentence description), `actions` (primary action last). Actions sit beside the title when there is room and below the description on narrow screens
 
 **`<ep-tabs>` + `<ep-tab>` + `<ep-tab-panel>` → `Tabs` + `Tab` + `TabPanel`**: switch between views in place.
 - Tabs: `value` (name of the selected panel), `label` (accessible name of the tab list). Event: `change` (read `value`)
@@ -671,7 +691,7 @@ The components handle keyboard support, focus rings, ARIA roles and `forced-colo
 
 ## 9. What doesn't exist yet
 
-Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), date range pickers, comboboxes, file upload, and heading/text components, app shell (top bar, side nav) and page header (use the page skeleton in section 2). Planned components are listed in the repo README roadmap; check there before building one.
+Build these from native elements plus tokens, and keep them accessible: links (style `<a>` with `--ep-color-text-link`), date range pickers, comboboxes, file upload, heading/text components, and a bottom tab bar for phones. Planned components are listed in the repo README roadmap; check there before building one.
 
 ## 10. Add this to your app's agent instructions
 
@@ -682,7 +702,7 @@ Paste this into your app's `AGENTS.md`, `CLAUDE.md`, `.cursor/rules` or `.github
 This app uses the Eduport Design System (@eduportdesign/tokens, @eduportdesign/web-components, @eduportdesign/react).
 Before writing UI, read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md and follow it. Before building an app shell or a new kind of page, also read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/layout.md.
 - Import @eduportdesign/tokens/css and @eduportdesign/tokens/css/base once at the entry point, plus @fontsource-variable/inter. Don't add another CSS reset or framework on top.
-- Build screens on the guide's page skeleton (top bar, side nav, main with page header and sections), and space everything with gap and the --ep-space-* / --ep-layout-* tokens. Headings and paragraphs have no margins.
+- Build every screen on <ep-app-shell> with <ep-top-bar>, <ep-side-nav> and an <ep-page-header> first in the content (the guide's page skeleton), and space everything with gap and the --ep-space-* / --ep-layout-* tokens. Headings and paragraphs have no margins.
 - Use <ep-*> components (React: @eduportdesign/react) whenever one exists; never invent props or tags.
 - Style custom UI only with semantic --ep-* tokens (color, radius-indicator/control/container/round, space, layout, font, shadow, motion). No hex values, no primitive tokens like --ep-color-brand-60.
 - Every control has an accessible name; WCAG 2.1 AA is required.

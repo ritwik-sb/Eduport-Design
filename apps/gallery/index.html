@@ -103,6 +103,7 @@
         </ul>
         <h2>Navigation</h2>
         <ul>
+          <li><a href="#app-shell">App shell</a></li>
           <li><a href="#tabs">Tabs</a></li>
           <li><a href="#breadcrumbs">Breadcrumbs</a></li>
           <li><a href="#pagination">Pagination</a></li>
@@ -1061,6 +1062,74 @@ export class AnyComponent {}</code></pre>
               </div>
             </div>
           </div>
+        </section>
+
+        <!-- App shell -->
+        <section class="component" id="app-shell" aria-labelledby="app-shell-title">
+          <div class="component-header"><h2 id="app-shell-title">App shell</h2><code>&lt;ep-app-shell&gt;</code> <code>&lt;ep-top-bar&gt;</code> <code>&lt;ep-side-nav&gt;</code> <code>&lt;ep-page-header&gt;</code></div>
+          <p>
+            The frame every screen sits in: a sticky top bar, the side navigation and the content area, spaced as the
+            <a href="#page-structure">page structure</a> describes. From 1024px the navigation sits beside the content;
+            below that it moves into a drawer that the top bar's menu button opens. The shell adds the skip link, the
+            <code>&lt;main&gt;</code> landmark, the page margin and the content width cap. See it full screen in
+            <a href="./storybook/?path=/story/app-shell--default">Storybook</a>.
+          </p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Top bar</span>
+              <ep-top-bar style="flex: 1; border: 1px solid var(--ep-color-border-default)">
+                <span slot="brand">Eduport Teach</span>
+                <ep-text-field label="Search" hide-label type="search" placeholder="Search courses and students" size="sm" style="width: min(100%, 320px)">
+                  <ep-icon slot="prefix" name="search"></ep-icon>
+                </ep-text-field>
+                <ep-icon-button slot="actions" icon="bell" label="Notifications"></ep-icon-button>
+                <ep-avatar slot="actions" name="Anjali Menon" size="sm"></ep-avatar>
+              </ep-top-bar>
+            </div>
+            <div class="demo-row">
+              <span class="label">Side nav</span>
+              <div style="width: 256px; height: 440px; border: 1px solid var(--ep-color-border-default)">
+                <ep-side-nav label="Gallery example">
+                  <ep-side-nav-item href="#app-shell" icon="home">Home</ep-side-nav-item>
+                  <ep-side-nav-item href="#app-shell" icon="book" current>Courses</ep-side-nav-item>
+                  <ep-side-nav-item href="#app-shell" icon="calendar">Timetable</ep-side-nav-item>
+                  <ep-side-nav-group heading="Assessment">
+                    <ep-side-nav-item href="#app-shell" icon="clipboard-list">Assignments <ep-badge slot="suffix" variant="accent">4</ep-badge></ep-side-nav-item>
+                    <ep-side-nav-item href="#app-shell" icon="certificate">Grades</ep-side-nav-item>
+                  </ep-side-nav-group>
+                  <ep-side-nav-item slot="footer" href="#app-shell" icon="settings">Settings</ep-side-nav-item>
+                </ep-side-nav>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Page header</span>
+              <ep-page-header heading="Courses" heading-level="3" style="flex: 1">
+                <ep-breadcrumbs slot="breadcrumbs">
+                  <ep-breadcrumb-item href="#app-shell">Home</ep-breadcrumb-item>
+                  <ep-breadcrumb-item>Courses</ep-breadcrumb-item>
+                </ep-breadcrumbs>
+                Everything you teach this term.
+                <ep-button slot="actions" variant="secondary">Import</ep-button>
+                <ep-button slot="actions">New course</ep-button>
+              </ep-page-header>
+            </div>
+          </div>
+          <pre><code>&lt;ep-app-shell&gt;
+  &lt;ep-top-bar slot="top-bar"&gt;
+    &lt;a slot="brand" href="/"&gt;Eduport Teach&lt;/a&gt;
+    &lt;ep-icon-button slot="actions" icon="bell" label="Notifications"&gt;&lt;/ep-icon-button&gt;
+  &lt;/ep-top-bar&gt;
+  &lt;ep-side-nav slot="nav"&gt;
+    &lt;ep-side-nav-item href="/" icon="home"&gt;Home&lt;/ep-side-nav-item&gt;
+    &lt;ep-side-nav-item href="/courses" icon="book" current&gt;Courses&lt;/ep-side-nav-item&gt;
+  &lt;/ep-side-nav&gt;
+
+  &lt;ep-page-header heading="Courses"&gt;
+    Everything you teach this term.
+    &lt;ep-button slot="actions"&gt;New course&lt;/ep-button&gt;
+  &lt;/ep-page-header&gt;
+  &lt;!-- sections --&gt;
+&lt;/ep-app-shell&gt;</code></pre>
         </section>
 
         <!-- Tabs -->

@@ -22,9 +22,13 @@ To keep bundles small, import only what you use: `import '@eduportdesign/web-com
 
 | Tag | What it's for | Key attributes | Events |
 |---|---|---|---|
+| `<ep-app-shell>` | The frame of every screen: top bar, side nav, content | `nav-open`, `full-width`; slots `top-bar`, `nav` | |
+| `<ep-top-bar>` | The bar across the top | slots `brand`, default, `actions` | `ep-nav-toggle` |
+| `<ep-side-nav>` + `<ep-side-nav-item>` + `<ep-side-nav-group>` | Main navigation | nav: `label`, slot `footer`; item: `href`, `icon`, `current`, slot `suffix`; group: `heading` | |
+| `<ep-page-header>` | Title, breadcrumbs, description and actions at the top of a page | `heading`, `heading-level`; slots `breadcrumbs`, `actions` | |
 | `<ep-button>` | Starting an action | `variant` (primary, secondary, tertiary, ghost, danger), `size` (sm, md, lg), `type`, `disabled`, `full-width` | `click` |
 | `<ep-icon-button>` | An action shown as an icon only | `icon`, `label` (required), `variant`, `size`, `disabled` | `click` |
-| `<ep-text-field>` | Single-line text | `label`, `value`, `name`, `type`, `placeholder`, `helper-text`, `error-text`, `size`, `required`, `disabled`, `readonly` | `input`, `change` |
+| `<ep-text-field>` | Single-line text | `label`, `hide-label`, `value`, `name`, `type`, `placeholder`, `helper-text`, `error-text`, `size`, `required`, `disabled`, `readonly` | `input`, `change` |
 | `<ep-textarea>` | Multi-line text | `label`, `value`, `rows`, `maxlength` (shows a count), `helper-text`, `error-text`, `resize` | `input`, `change` |
 | `<ep-select>` | Picking one option (native select) | `label`, `value`, `placeholder`, `helper-text`, `error-text`, `size`; `<option>` children | `change` |
 | `<ep-checkbox>` | On/off, or several from a list | `checked`, `indeterminate`, `name`, `value`, `helper-text`, `required`, `disabled` | `change` |

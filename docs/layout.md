@@ -126,6 +126,8 @@ Most Eduport screens follow one shell. From the outside in:
 
 ### App shell
 
+`<ep-app-shell>` with `<ep-top-bar>`, `<ep-side-nav>` and `<ep-page-header>` implements everything in this section; the rules below are what they do, and what to follow if you build a frame by hand.
+
 - **Top bar.** Height `--ep-layout-header-height` (56px on phones, 64px from `md`). Holds the product mark, global search and the account menu. When sticky, set `scroll-padding-top: var(--ep-layout-header-height)` on `html` so anchor links and focused fields don't land underneath it.
 - **Side navigation.** Shows inline at `--ep-layout-sidebar-width` (256px) from `lg`. Below `lg` it becomes a modal drawer opened from a menu button in the top bar. On phones, apps with three to five top-level destinations can use a bottom bar instead; never both.
 - **Content area.** Takes the remaining width, applies the page margin, and caps content at `--ep-layout-width-page` unless the screen is data-heavy.
@@ -188,5 +190,5 @@ These names become public on release; renaming them later is a breaking change.
 - **Breakpoint names `md`, `lg`, `xl`.** Size names rather than device names (`tablet`, `desktop`), because device names stop being true (a landscape phone is `md`). Adding a step later (for example `xxl`) is non-breaking; renaming or moving a step changes every page that uses it.
 - **Layout tokens are global (`:root` only).** They follow the viewport, so they are not overridden by `data-theme`, `data-corners` or `data-density`. Nested regions that need different spacing should use container queries, not a different set of layout tokens.
 - **No semantic spacing tokens for component insides** (no `--ep-space-inset-md` or `--ep-space-stack-lg`). Components use the space scale directly and this guide says which step to use. That keeps the public surface small. If we later find a value that must change per mode (for example roomier padding at touch density), we add a role-named token then; adding one is non-breaking, removing one is not.
-- **No layout utility classes or layout components yet.** The CSS snippets above are recipes, not shipped API. Classes like `.ep-grid` or elements like `<ep-stack>` would be public names to support forever, so they are worth a separate decision once a pilot app shows which ones are actually needed.
+- **App-level layout components, but no layout primitives.** Pilot apps showed the frame was the hard part, so `<ep-app-shell>`, `<ep-top-bar>`, `<ep-side-nav>` and `<ep-page-header>` ship (2026-10). Grid and stack helpers (`.ep-grid`, `<ep-stack>`) still don't: the CSS snippets above are recipes, not shipped API.
 - **`--ep-layout-width-prose` is in `ch`.** It follows the font size, which is what makes it a good line length, but design tools that only accept px will show it as an approximation (roughly 650 to 700px at 16px Inter).
