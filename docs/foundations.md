@@ -87,6 +87,10 @@ The dark end of the gray scale (80, 90, the extra `gray.95` step, and 100) is ke
 
 Alternatives considered: **Geist** (more character, smaller language coverage) and **IBM Plex Sans** (more distinctive, wider, heavier for dense UIs). Either is a one-line change to `font.family.sans`.
 
+**Display face.** Headings (`font.heading.xl`, `lg`, `md`) use **Bricolage Grotesque** (`font.family.display`) at bold, with tighter tracking; body text, labels and controls stay on Inter. Load it with `@fontsource-variable/bricolage-grotesque/opsz.css`; the optical-size axis is what gives large headings their character. If it isn't loaded, the stack falls through to Inter, so nothing breaks. It has no Malayalam glyphs, so Malayalam headings use Noto Sans Malayalam.
+
+**Depth.** `color.background.canvas` is the page, `color.surface.sheet` is the main content sheet on it, and `shadow.raised` is a 1px ring plus two soft layers, so raised surfaces (cards, the current nav item, the sheet) separate without borders. `ep-app-shell` uses all three when a sidebar is present.
+
 Mono: **JetBrains Mono** for code and IDs. The token stacks fall back to system fonts, so nothing breaks if a font isn't loaded.
 
 **Malayalam.** Inter covers Latin, Cyrillic, Greek and Vietnamese only. The sans stack names **Noto Sans Malayalam** right after Inter, so Malayalam text uses it glyph by glyph while Latin text stays in Inter. Apps with Malayalam content load it with `@fontsource-variable/noto-sans-malayalam`. It was checked in buttons and tags at the 1.2 button line height, with no clipping.

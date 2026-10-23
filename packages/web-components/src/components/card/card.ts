@@ -32,7 +32,6 @@ export class EpCard extends LitElement {
         overflow: hidden;
         border: var(--ep-border-width-thin) solid var(--ep-color-border-default);
         border-radius: var(--ep-radius-container);
-        background: var(--ep-color-surface-default);
         color: var(--ep-color-text-primary);
         font-size: var(--ep-font-size-200);
         line-height: var(--ep-font-line-height-normal);
@@ -42,6 +41,10 @@ export class EpCard extends LitElement {
         border-color: transparent;
         background: var(--ep-color-surface-raised);
         box-shadow: var(--ep-shadow-raised);
+      }
+
+      :host([variant='outlined']) .base {
+        background: var(--ep-color-surface-default);
       }
 
       :host([variant='filled']) .base {
@@ -99,14 +102,14 @@ export class EpCard extends LitElement {
     `,
   ];
 
-  /** `outlined` has a border, `elevated` a lifted surface and a shadow, `filled` a tinted background. Each is a distinct step in both themes. */
+  /** `elevated` (default) has a lifted surface with a ring and soft shadow, `outlined` a border, `filled` a tinted background. Each is a distinct step in both themes. */
   declare variant: 'outlined' | 'elevated' | 'filled';
 
   #slots = new HasSlotController(this, 'media', 'heading', 'header-actions', 'footer');
 
   constructor() {
     super();
-    this.variant = 'outlined';
+    this.variant = 'elevated';
   }
 
   render() {

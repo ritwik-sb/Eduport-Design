@@ -39,8 +39,8 @@ export class EpTopBar extends LitElement {
         height: var(--ep-layout-header-height);
         padding-inline: max(var(--ep-layout-margin), env(safe-area-inset-left))
           max(var(--ep-layout-margin), env(safe-area-inset-right));
-        border-block-end: var(--ep-border-width-thin) solid var(--ep-color-border-default);
-        background: var(--ep-color-surface-default);
+        border-block-end: var(--ep-border-width-thin) solid var(--_bar-border, var(--ep-color-border-default));
+        background: var(--_bar-bg, var(--ep-color-surface-default));
         color: var(--ep-color-text-primary);
       }
 

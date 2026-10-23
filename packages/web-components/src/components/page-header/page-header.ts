@@ -41,7 +41,7 @@ export class EpPageHeader extends LitElement {
       .heading {
         margin: 0;
         font: var(--ep-font-heading-lg);
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
         text-wrap: balance;
       }
 

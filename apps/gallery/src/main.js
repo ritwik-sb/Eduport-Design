@@ -1,4 +1,5 @@
 import '@fontsource-variable/inter';
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
 import '@fontsource-variable/noto-sans-malayalam';
 import '@eduportdesign/tokens/css';
 import '@eduportdesign/tokens/css/theme-dark';

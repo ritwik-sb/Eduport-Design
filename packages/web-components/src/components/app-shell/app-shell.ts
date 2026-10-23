@@ -42,8 +42,15 @@ export class EpAppShell extends LitElement {
         --_top: 0px;
         display: block;
         min-height: 100dvh;
-        background: var(--ep-color-background-default);
+        background: var(--ep-color-surface-sheet);
         color: var(--ep-color-text-primary);
+      }
+
+      /* With the sidebar beside it, the page becomes a canvas and the content a raised sheet. */
+      :host([data-has-sidebar]) {
+        --_bar-bg: var(--ep-color-background-canvas);
+        --_bar-border: transparent;
+        background: var(--ep-color-background-canvas);
       }
 
       :host([data-has-top-bar]) {
@@ -89,8 +96,7 @@ export class EpAppShell extends LitElement {
         height: calc(100dvh - var(--_top));
         overflow-y: auto;
         overscroll-behavior: contain;
-        border-inline-end: var(--ep-border-width-thin) solid var(--ep-color-border-default);
-        background: var(--ep-color-surface-default);
+        background: var(--ep-color-background-canvas);
       }
 
       .sidebar[hidden] {
@@ -100,6 +106,21 @@ export class EpAppShell extends LitElement {
       main {
         flex: 1;
         min-width: 0;
+      }
+
+      :host([data-has-sidebar]) main {
+        min-height: calc(100dvh - var(--_top) - var(--ep-space-150));
+        margin-inline-end: var(--ep-space-150);
+        margin-block-end: var(--ep-space-150);
+        border-radius: var(--ep-radius-container);
+        background: var(--ep-color-surface-sheet);
+        box-shadow: var(--ep-shadow-raised);
+      }
+
+      @media (forced-colors: active) {
+        :host([data-has-sidebar]) main {
+          border: 1px solid CanvasText;
+        }
       }
 
       main:focus {
@@ -271,6 +292,7 @@ export class EpAppShell extends LitElement {
   willUpdate(changed: Map<string, unknown>) {
     if (changed.has('_wide') && this._wide) this.navOpen = false;
     this.toggleAttribute('data-has-top-bar', this.#slots.test('top-bar'));
+    this.toggleAttribute('data-has-sidebar', this._wide && this.#slots.test('nav'));
   }
 
   updated(changed: Map<string, unknown>) {

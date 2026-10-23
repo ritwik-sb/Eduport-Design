@@ -5,6 +5,10 @@
       "default": {
         "$value": "{color.white}"
       },
+      "canvas": {
+        "$value": "{color.gray.15}",
+        "$description": "The page behind the content sheet and cards. A step darker than the sheet, so raised surfaces separate without borders."
+      },
       "subtle": {
         "$value": "{color.gray.10}"
       },
@@ -19,6 +23,10 @@
     "surface": {
       "default": {
         "$value": "{color.white}"
+      },
+      "sheet": {
+        "$value": "{color.white}",
+        "$description": "The main content sheet that sits on background.canvas."
       },
       "raised": {
         "$value": "{color.white}"
@@ -185,8 +193,30 @@
   "shadow": {
     "$type": "shadow",
     "raised": {
-      "$value": "{shadow.md}",
-      "$description": "Cards, tooltips and other surfaces that sit just above the page. Use with color.surface.raised."
+      "$value": [
+        {
+          "color": "#0000000f",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "1px"
+        },
+        {
+          "color": "#0000000d",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        },
+        {
+          "color": "#00000014",
+          "offsetX": "0px",
+          "offsetY": "8px",
+          "blur": "16px",
+          "spread": "-8px"
+        }
+      ],
+      "$description": "Cards, tooltips and other surfaces that sit just above the page: a 1px ring plus two soft layers, so cards need no border. Use with color.surface.raised."
     },
     "overlay": {
       "$value": "{shadow.lg}",
