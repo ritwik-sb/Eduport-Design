@@ -201,6 +201,7 @@ Microinteractions are allowed **only from this list**. A new one needs a proposa
 | Loading button | Busy | Spinner fades in after 400ms (see §4). | Spinner keeps rotating |
 | Skeleton | Loading content | Subtle shimmer, 1.5s per cycle, low contrast. | Static |
 | Progress bar | Progress | Width moves with `transform: scaleX`, 200ms. Indeterminate: sliding segment. | Determinate jumps; indeterminate becomes a static striped bar with text |
+| Interactive card | Hover / focus | `shadow.raised` to `shadow.raised-hover` in 100ms `standard`. A state change: the card does not move or scale. | Same |
 | Table row | Hover / select | Background to `background.subtle` 100ms; selected uses `accent.subtle` plus a checkbox. | Same |
 | Drag to reorder | Lift / drop | Lifted item gets `shadow.md`, others shift 200ms. **A keyboard alternative is required** (move up/down buttons or `Space` to pick up, arrows to move). | Items jump |
 | Inline save | Saved | "Saved" text with check fades in next to the field, fades out after 2s. | Same |

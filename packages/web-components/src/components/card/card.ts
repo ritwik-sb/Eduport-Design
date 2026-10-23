@@ -17,6 +17,7 @@ export class EpCard extends LitElement {
   static properties = {
     variant: { reflect: true },
     tone: { reflect: true },
+    interactive: { type: Boolean, reflect: true },
   };
 
   static styles = [
@@ -43,6 +44,21 @@ export class EpCard extends LitElement {
         border-color: transparent;
         background: var(--ep-color-surface-raised);
         box-shadow: var(--ep-shadow-raised);
+      }
+
+      /* Hover is a state change only: the shadow deepens, nothing moves (docs/motion.md, section 6). */
+      @media (hover: hover) {
+        :host([interactive][variant='elevated']) .base:hover {
+          box-shadow: var(--ep-shadow-raised-hover);
+        }
+      }
+
+      :host([interactive][variant='elevated']) .base:focus-within {
+        box-shadow: var(--ep-shadow-raised-hover);
+      }
+
+      :host([interactive]) .base {
+        transition: box-shadow var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
       }
 
       :host([variant='outlined']) .base {
@@ -119,12 +135,16 @@ export class EpCard extends LitElement {
   /** `1` to `6`: tints the media area with a categorical color and exposes `--ep-tone-*` to the content in it. */
   declare tone: '' | '1' | '2' | '3' | '4' | '5' | '6';
 
+  /** Marks a card whose whole surface leads somewhere (stretch its heading link over it), so it responds to hover and focus. */
+  declare interactive: boolean;
+
   #slots = new HasSlotController(this, 'media', 'heading', 'header-actions', 'footer');
 
   constructor() {
     super();
     this.variant = 'elevated';
     this.tone = '';
+    this.interactive = false;
   }
 
   render() {
