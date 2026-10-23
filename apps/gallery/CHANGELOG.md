@@ -1,5 +1,20 @@
 # @eduportdesign/gallery
 
+## 0.5.0
+
+### Patch Changes
+
+- Updated dependencies [3822a78]
+- Updated dependencies [22532e9]
+- Updated dependencies [78af0ed]
+- Updated dependencies [58d79c0]
+- Updated dependencies [4d29dc5]
+- Updated dependencies [f673a32]
+- Updated dependencies [c20fb87]
+  - @eduportdesign/web-components@0.5.0
+  - @eduportdesign/tokens@0.5.0
+  - @eduportdesign/logos@0.5.0
+
 ## 0.4.0
 
 ### Patch Changes
