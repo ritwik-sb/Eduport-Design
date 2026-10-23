@@ -19,6 +19,11 @@
     text-size-adjust: 100%;
   }
 
+  /* With <ep-app-shell>'s sticky top bar, anchor jumps and focused fields stop below it (WCAG 2.4.11). */
+  :where(html:has(ep-app-shell)) {
+    scroll-padding-block-start: calc(var(--ep-layout-header-height) + var(--ep-space-100));
+  }
+
   :where(body) {
     margin: 0;
     background: var(--ep-color-background-default);

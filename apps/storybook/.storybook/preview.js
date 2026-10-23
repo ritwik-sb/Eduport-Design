@@ -20,14 +20,20 @@ export default {
       description: 'Motion (reduced sets data-motion="reduced")',
       toolbar: { title: 'Motion', icon: 'play', items: ['full', 'reduced'], dynamicTitle: true },
     },
+    contrast: {
+      description: 'Contrast (more sets data-contrast="more")',
+      toolbar: { title: 'Contrast', icon: 'contrast', items: ['standard', 'more'], dynamicTitle: true },
+    },
   },
-  initialGlobals: { theme: 'light', corners: 'soft', motion: 'full' },
+  initialGlobals: { theme: 'light', corners: 'soft', motion: 'full', contrast: 'standard' },
   decorators: [
     (story, { globals }) => {
       document.documentElement.dataset.theme = globals.theme;
       document.documentElement.dataset.corners = globals.corners;
       if (globals.motion === 'reduced') document.documentElement.dataset.motion = 'reduced';
       else delete document.documentElement.dataset.motion;
+      if (globals.contrast === 'more') document.documentElement.dataset.contrast = 'more';
+      else delete document.documentElement.dataset.contrast;
       return story();
     },
   ],

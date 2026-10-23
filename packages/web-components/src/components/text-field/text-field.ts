@@ -1,6 +1,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { live } from 'lit/directives/live.js';
-import { baseStyles, fieldStyles } from '../../styles/shared.js';
+import { baseStyles, fieldStyles, visuallyHidden } from '../../styles/shared.js';
 import { inputStyles } from '../../styles/input.js';
 import '../icon/index.js';
 
@@ -25,6 +25,7 @@ export class EpTextField extends LitElement {
 
   static properties = {
     label: {},
+    hideLabel: { type: Boolean, reflect: true, attribute: 'hide-label' },
     value: {},
     name: { reflect: true },
     type: {},
@@ -38,10 +39,13 @@ export class EpTextField extends LitElement {
     required: { type: Boolean, reflect: true },
   };
 
-  static styles = [baseStyles, fieldStyles, inputStyles];
+  static styles = [baseStyles, fieldStyles, inputStyles, visuallyHidden];
 
   /** Visible label. Required for accessibility. */
   declare label: string;
+  /** Hides the label visually but keeps it for screen readers. Only where the purpose is obvious without it, such
+   * as a search field in the top bar with a search icon. */
+  declare hideLabel: boolean;
   declare value: string;
   declare name: string;
   declare type: TextFieldType;
@@ -62,6 +66,7 @@ export class EpTextField extends LitElement {
   constructor() {
     super();
     this.label = '';
+    this.hideLabel = false;
     this.value = '';
     this.name = '';
     this.type = 'text';
@@ -149,7 +154,7 @@ export class EpTextField extends LitElement {
     const describedBy = [this.helperText && 'helper', invalid && 'error'].filter(Boolean).join(' ');
     return html`<div class="field">
       ${this.label
-        ? html`<label class="label" for="input"
+        ? html`<label class="label ${this.hideLabel ? 'visually-hidden' : ''}" for="input"
             >${this.label}${this.required ? html`<span class="required" aria-hidden="true">*</span>` : nothing}</label
           >`
         : nothing}

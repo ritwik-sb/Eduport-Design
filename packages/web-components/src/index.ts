@@ -29,4 +29,8 @@ export * from './components/menu/index.js';
 export * from './components/table/index.js';
 export * from './components/calendar/index.js';
 export * from './components/date-picker/index.js';
+export * from './components/app-shell/index.js';
+export * from './components/top-bar/index.js';
+export * from './components/side-nav/index.js';
+export * from './components/page-header/index.js';
 export type { FeedbackVariant } from './styles/feedback.js';
