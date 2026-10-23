@@ -97,6 +97,92 @@
         "$value": "{color.brand.100}"
       }
     },
+    "category": {
+      "1": {
+        "subtle": {
+          "$value": "{color.blue.90}"
+        },
+        "bold": {
+          "$value": "{color.blue.40}"
+        },
+        "on-bold": {
+          "$value": "{color.gray.100}"
+        },
+        "text": {
+          "$value": "{color.blue.30}"
+        }
+      },
+      "2": {
+        "subtle": {
+          "$value": "{color.violet.90}"
+        },
+        "bold": {
+          "$value": "{color.violet.40}"
+        },
+        "on-bold": {
+          "$value": "{color.gray.100}"
+        },
+        "text": {
+          "$value": "{color.violet.30}"
+        }
+      },
+      "3": {
+        "subtle": {
+          "$value": "{color.teal.90}"
+        },
+        "bold": {
+          "$value": "{color.teal.40}"
+        },
+        "on-bold": {
+          "$value": "{color.gray.100}"
+        },
+        "text": {
+          "$value": "{color.teal.30}"
+        }
+      },
+      "4": {
+        "subtle": {
+          "$value": "{color.green.90}"
+        },
+        "bold": {
+          "$value": "{color.green.40}"
+        },
+        "on-bold": {
+          "$value": "{color.gray.100}"
+        },
+        "text": {
+          "$value": "{color.green.30}"
+        }
+      },
+      "5": {
+        "subtle": {
+          "$value": "{color.amber.90}"
+        },
+        "bold": {
+          "$value": "{color.amber.40}"
+        },
+        "on-bold": {
+          "$value": "{color.gray.100}"
+        },
+        "text": {
+          "$value": "{color.amber.30}"
+        }
+      },
+      "6": {
+        "subtle": {
+          "$value": "{color.pink.90}"
+        },
+        "bold": {
+          "$value": "{color.pink.40}"
+        },
+        "on-bold": {
+          "$value": "{color.gray.100}"
+        },
+        "text": {
+          "$value": "{color.pink.30}"
+        }
+      }
+    },
     "interactive": {
       "primary": {
         "default": {

@@ -46,6 +46,14 @@ const pairs = [
   ['rail.on-badge', 'rail.badge', 4.5],
   ['hero.text', 'hero.start', 4.5],
   ['hero.text', 'hero.end', 4.5],
+  // Categorical colors: a label on the tint, marks on the solid fill, and the fill against the tint (rings, icon tiles).
+  ...[1, 2, 3, 4, 5, 6].flatMap((n) => [
+    [`category.${n}.text`, `category.${n}.subtle`, 4.5],
+    [`category.${n}.on-bold`, `category.${n}.bold`, 4.5],
+    [`category.${n}.bold`, `category.${n}.subtle`, 3],
+    [`category.${n}.bold`, 'surface.raised', 3],
+    [`category.${n}.text`, 'surface.raised', 4.5],
+  ]),
   // Accent tint: tertiary button hover, accent badge and tag, avatar initials.
   ['text.link', 'accent.subtle', 4.5],
   ['text.primary', 'accent.subtle', 4.5],

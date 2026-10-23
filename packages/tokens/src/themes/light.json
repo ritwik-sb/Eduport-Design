@@ -104,6 +104,92 @@
         "$description": "Selected or highlighted rows and cards."
       }
     },
+    "category": {
+      "1": {
+        "subtle": {
+          "$value": "{color.blue.20}"
+        },
+        "bold": {
+          "$value": "{color.blue.60}"
+        },
+        "on-bold": {
+          "$value": "{color.white}"
+        },
+        "text": {
+          "$value": "{color.blue.70}"
+        }
+      },
+      "2": {
+        "subtle": {
+          "$value": "{color.violet.20}"
+        },
+        "bold": {
+          "$value": "{color.violet.60}"
+        },
+        "on-bold": {
+          "$value": "{color.white}"
+        },
+        "text": {
+          "$value": "{color.violet.70}"
+        }
+      },
+      "3": {
+        "subtle": {
+          "$value": "{color.teal.20}"
+        },
+        "bold": {
+          "$value": "{color.teal.60}"
+        },
+        "on-bold": {
+          "$value": "{color.white}"
+        },
+        "text": {
+          "$value": "{color.teal.70}"
+        }
+      },
+      "4": {
+        "subtle": {
+          "$value": "{color.green.20}"
+        },
+        "bold": {
+          "$value": "{color.green.60}"
+        },
+        "on-bold": {
+          "$value": "{color.white}"
+        },
+        "text": {
+          "$value": "{color.green.70}"
+        }
+      },
+      "5": {
+        "subtle": {
+          "$value": "{color.amber.20}"
+        },
+        "bold": {
+          "$value": "{color.amber.60}"
+        },
+        "on-bold": {
+          "$value": "{color.white}"
+        },
+        "text": {
+          "$value": "{color.amber.70}"
+        }
+      },
+      "6": {
+        "subtle": {
+          "$value": "{color.pink.20}"
+        },
+        "bold": {
+          "$value": "{color.pink.60}"
+        },
+        "on-bold": {
+          "$value": "{color.white}"
+        },
+        "text": {
+          "$value": "{color.pink.70}"
+        }
+      }
+    },
     "interactive": {
       "primary": {
         "default": {

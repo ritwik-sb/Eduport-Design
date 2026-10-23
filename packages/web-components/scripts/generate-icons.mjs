@@ -22,6 +22,8 @@ const ICONS = [
   'star', 'heart', 'bookmark', 'flag', 'tag', 'eye', 'eye-off', 'refresh', 'arrow-left', 'arrow-right',
   'arrow-up', 'arrow-down', 'sun', 'moon', 'world', 'map-pin', 'chart-bar', 'chart-pie', 'trophy',
   'help-circle', 'question-mark', 'bulb', 'sparkles', 'cloud-upload', 'printer', 'credit-card', 'wallet',
+  // Subjects and trends
+  'atom', 'flask', 'math-function', 'leaf', 'language', 'palette', 'music', 'ball-football', 'trending-up',
 ];
 
 // The package's exports map hides package.json, so read it from node_modules directly.
