@@ -1,5 +1,43 @@
 # @eduportdesign/react
 
+## 0.5.0
+
+### Minor Changes
+
+- 3822a78: Add the app shell: `<ep-app-shell>` (sticky top bar, side navigation that becomes a drawer below 1024px, skip link, `<main>`, page margin and width cap), `<ep-top-bar>`, `<ep-side-nav>` with `<ep-side-nav-item>` and `<ep-side-nav-group>`, and `<ep-page-header>`. React: `AppShell`, `TopBar`, `SideNav`, `SideNavItem`, `SideNavGroup`, `PageHeader`.
+
+  `<ep-text-field>` gains `hide-label` for fields whose purpose is clear without a visible label, such as top bar search. The base stylesheet keeps anchor jumps and focused fields clear of the shell's sticky top bar.
+
+- 22532e9: Quiet hover feedback within the motion policy. New token `shadow.raised-hover`; `ep-card` gets an `interactive` property whose elevated surface deepens its shadow on hover and focus (no lift, no scale); the current item on the dark rail gets a soft glow on its marker. The new row is in the motion catalog.
+- 78af0ed: Categorical color and four dashboard patterns, all new.
+
+  Tokens: `color.category.{1..6}.{subtle,bold,on-bold,text}` for telling things apart (never for status), and the `violet`, `teal` and `pink` primitive scales. Every pair is in the CI contrast check, in both themes.
+
+  Components: `ep-stat`, `ep-progress-ring`, `ep-avatar-group` and `ep-icon-tile`, each with a React wrapper. `ep-card` gets `tone="1"` to `"6"`, which tints its `media` area and exposes `--ep-tone-*` to the content in it. Ten icons for subjects and trends are added to the built-in set (atom, flask, math-function, leaf, language, palette, music, ball-football, trending-up).
+
+- f673a32: Brand moments, both opt-in. `ep-side-nav` gets `appearance="inverse"` (a dark rail in both themes, with a `header` slot for the logo; inside `ep-app-shell` the rail then runs the full height). `ep-page-header` gets `variant="hero"` (the title on the brand gradient) with `eyebrow`, `aside` and `art` slots; its actions sit below the hero.
+
+  New tokens: `color.rail.{background,text,text-secondary,hover,current,border,accent,badge,on-badge}` and `color.hero.{start,end,glow,text,chip}`. Contrast pairs for both are checked in CI.
+
+- c20fb87: A first pass of visual depth. Everything is additive except the look of three defaults.
+
+  New tokens: `color.gray.15`, `color.background.canvas`, `color.surface.sheet`, and `font.family.display` (Bricolage Grotesque, falling back to Inter). The `font.heading.xl/lg/md` roles now use the display face at bold weight, and base heading tracking is tighter. Load the font with `@fontsource-variable/bricolage-grotesque/opsz.css`.
+
+  `shadow.raised` is now a 1px ring plus two soft layers in light, so cards need no border.
+
+  Visual changes you will see on upgrade: `ep-card` now defaults to `variant="elevated"` (use `variant="outlined"` for the old look); `ep-app-shell` with a sidebar shows the content as a raised sheet on a canvas, with no hairlines around the top bar and sidebar; the current `ep-side-nav-item` is a raised pill instead of a tint.
+
+### Patch Changes
+
+- Updated dependencies [3822a78]
+- Updated dependencies [22532e9]
+- Updated dependencies [78af0ed]
+- Updated dependencies [58d79c0]
+- Updated dependencies [4d29dc5]
+- Updated dependencies [f673a32]
+- Updated dependencies [c20fb87]
+  - @eduportdesign/web-components@0.5.0
+
 ## 0.4.0
 
 ### Patch Changes
