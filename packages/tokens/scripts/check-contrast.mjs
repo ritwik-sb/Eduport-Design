@@ -39,6 +39,13 @@ const pairs = [
   // Outlined secondary: text.primary on the page or on its hover and active tints, inside a border.strong edge.
   ...['ghost', 'secondary'].flatMap((v) => ['hover', 'active'].map((s) => ['text.primary', `interactive.${v}.${s}`, 4.5])),
   ['text.inverse', 'background.inverse', 4.5],
+  // Navigation rail and brand hero: dark surfaces that stay dark in both themes.
+  ['rail.text', 'rail.background', 4.5],
+  ['rail.text-secondary', 'rail.background', 4.5],
+  ['rail.accent', 'rail.background', 3],
+  ['rail.on-badge', 'rail.badge', 4.5],
+  ['hero.text', 'hero.start', 4.5],
+  ['hero.text', 'hero.end', 4.5],
   // Accent tint: tertiary button hover, accent badge and tag, avatar initials.
   ['text.link', 'accent.subtle', 4.5],
   ['text.primary', 'accent.subtle', 4.5],

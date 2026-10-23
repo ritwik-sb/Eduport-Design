@@ -34,30 +34,31 @@ export class EpSideNavItem extends LitElement {
         min-height: var(--ep-size-control-md);
         padding: var(--ep-space-100) var(--ep-space-150);
         border-radius: var(--ep-radius-control);
-        color: var(--ep-color-text-secondary);
+        color: var(--_nav-text, var(--ep-color-text-secondary));
         font: var(--ep-font-label-md);
         text-decoration: none;
         transition: background-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
       }
 
       a:hover {
-        background: var(--ep-color-interactive-ghost-hover);
-        color: var(--ep-color-text-primary);
+        background: var(--_nav-hover, var(--ep-color-interactive-ghost-hover));
+        color: var(--_nav-text-active, var(--ep-color-text-primary));
       }
 
       a:active {
-        background: var(--ep-color-interactive-ghost-active);
+        background: var(--_nav-current, var(--ep-color-interactive-ghost-active));
       }
 
       a:focus-visible {
         ${focusRing}
+        outline-color: var(--_nav-accent, var(--ep-color-border-focus));
         outline-offset: -2px;
       }
 
       :host([current]) a {
-        background: var(--ep-color-surface-sheet);
-        box-shadow: var(--ep-shadow-raised);
-        color: var(--ep-color-text-primary);
+        background: var(--_nav-current, var(--ep-color-surface-sheet));
+        box-shadow: var(--_nav-shadow, var(--ep-shadow-raised));
+        color: var(--_nav-text-active, var(--ep-color-text-primary));
         font-weight: var(--ep-font-weight-semibold);
       }
 
@@ -69,7 +70,11 @@ export class EpSideNavItem extends LitElement {
         inset-inline-start: 0;
         width: 3px;
         border-radius: var(--ep-radius-round);
-        background: var(--ep-color-accent-default);
+        background: var(--_nav-accent, var(--ep-color-accent-default));
+      }
+
+      :host([current]) a ep-icon {
+        color: var(--_nav-accent, inherit);
       }
 
       ep-icon {

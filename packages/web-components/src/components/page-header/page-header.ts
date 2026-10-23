@@ -14,12 +14,16 @@ import { HasSlotController } from '../../utils/slots.js';
  * @slot breadcrumbs - An `<ep-breadcrumbs>` trail above the title.
  * @slot - The description: one short sentence about the page.
  * @slot actions - Page-level buttons, primary action last.
+ * @slot eyebrow - A short overline above the title, such as the term or date (`variant="hero"`).
+ * @slot aside - Stat tiles or a summary beside the title (`variant="hero"`).
+ * @slot art - Decoration, such as the logo mark, behind the hero in the top-right corner (`variant="hero"`).
  * @csspart heading - The page title.
  */
 export class EpPageHeader extends LitElement {
   static properties = {
     heading: {},
     headingLevel: { type: Number, attribute: 'heading-level' },
+    variant: { reflect: true },
   };
 
   static styles = [
@@ -60,8 +64,114 @@ export class EpPageHeader extends LitElement {
 
       .breadcrumbs[hidden],
       .description[hidden],
-      .actions[hidden] {
+      .actions[hidden],
+      .eyebrow[hidden],
+      .aside[hidden],
+      .art[hidden] {
         display: none;
+      }
+
+      /* Hero: the title on the brand gradient, with the actions below it on the page. */
+      .hero {
+        display: contents;
+      }
+
+      :host([variant='hero']) .hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--ep-space-100) var(--ep-space-300);
+        align-items: end;
+        padding: var(--ep-space-300);
+        overflow: hidden;
+        border-radius: var(--ep-radius-container);
+        background:
+          radial-gradient(120% 140% at 100% 0%, var(--ep-color-hero-glow) 0%, transparent 55%),
+          linear-gradient(135deg, var(--ep-color-hero-start), var(--ep-color-hero-end));
+        color: var(--ep-color-hero-text);
+      }
+
+      :host([variant='hero']) .heading {
+        font: var(--ep-font-heading-xl);
+        font-size: var(--ep-font-size-900);
+        letter-spacing: -0.035em;
+      }
+
+      :host([variant='hero']) .description {
+        color: inherit;
+      }
+
+      .eyebrow {
+        font: var(--ep-font-label-sm);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .aside {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--ep-space-100);
+        z-index: 1;
+      }
+
+      .art {
+        position: absolute;
+        inset-block-start: calc(-1 * var(--ep-space-600));
+        inset-inline-end: calc(-1 * var(--ep-space-500));
+        width: 16rem;
+        opacity: 0.12;
+        transform: rotate(-8deg);
+        pointer-events: none;
+      }
+
+      .art ::slotted(*) {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      :host([variant='hero']) .text {
+        position: relative;
+        display: grid;
+        gap: var(--ep-space-100);
+      }
+
+      .text {
+        display: contents;
+      }
+
+      :host(:not([variant='hero'])) :is(.eyebrow, .aside, .art) {
+        display: none;
+      }
+
+      @container (min-width: 600px) {
+        :host([variant='hero']) .hero {
+          grid-template-columns: minmax(0, 1fr) auto;
+        }
+
+        :host([variant='hero']) :is(.heading, .description, .breadcrumbs) {
+          grid-column: auto;
+          grid-row: auto;
+        }
+
+        :host([variant='hero']) .base {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        :host([variant='hero']) .actions {
+          grid-column: 1;
+          grid-row: auto;
+          justify-content: flex-start;
+          margin-block-start: var(--ep-space-100);
+        }
+      }
+
+      @media (forced-colors: active) {
+        :host([variant='hero']) .hero {
+          border: 1px solid CanvasText;
+          background: Canvas;
+          color: CanvasText;
+        }
       }
 
       @container (min-width: 600px) {
@@ -96,12 +206,12 @@ export class EpPageHeader extends LitElement {
           margin-block-start: 0;
         }
 
-        .breadcrumbs[hidden] ~ .heading,
-        .breadcrumbs[hidden] ~ .actions {
+        :host(:not([variant='hero'])) .base:has(.breadcrumbs[hidden]) .heading,
+        :host(:not([variant='hero'])) .base:has(.breadcrumbs[hidden]) .actions {
           grid-row: 1;
         }
 
-        .breadcrumbs[hidden] ~ .description {
+        :host(:not([variant='hero'])) .base:has(.breadcrumbs[hidden]) .description {
           grid-row: 2;
         }
       }
@@ -112,21 +222,31 @@ export class EpPageHeader extends LitElement {
   declare heading: string;
   /** Heading level of the title, 1 to 6. Leave it at 1 unless the header sits inside another titled region. */
   declare headingLevel: number;
+  /** `hero` puts the title on the brand gradient, for a dashboard's landing page. Use it once, on the first page of an app. */
+  declare variant: 'default' | 'hero';
 
-  #slots = new HasSlotController(this, 'breadcrumbs', '[default]', 'actions');
+  #slots = new HasSlotController(this, 'breadcrumbs', '[default]', 'actions', 'eyebrow', 'aside', 'art');
 
   constructor() {
     super();
     this.heading = '';
     this.headingLevel = 1;
+    this.variant = 'default';
   }
 
   render() {
     const level = Math.min(6, Math.max(1, Math.floor(this.headingLevel) || 1));
     return html`<div class="base">
       <div class="breadcrumbs" ?hidden=${!this.#slots.test('breadcrumbs')}><slot name="breadcrumbs"></slot></div>
-      <div part="heading" class="heading" role="heading" aria-level=${level}>${this.heading}</div>
-      <div class="description" ?hidden=${!this.#slots.test('[default]')}><slot></slot></div>
+      <div class="hero">
+        <div class="art" aria-hidden="true" ?hidden=${!this.#slots.test('art')}><slot name="art"></slot></div>
+        <div class="text">
+          <div class="eyebrow" ?hidden=${!this.#slots.test('eyebrow')}><slot name="eyebrow"></slot></div>
+          <div part="heading" class="heading" role="heading" aria-level=${level}>${this.heading}</div>
+          <div class="description" ?hidden=${!this.#slots.test('[default]')}><slot></slot></div>
+        </div>
+        <div class="aside" ?hidden=${!this.#slots.test('aside')}><slot name="aside"></slot></div>
+      </div>
       <div class="actions" ?hidden=${!this.#slots.test('actions')}><slot name="actions"></slot></div>
     </div>`;
   }

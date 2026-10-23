@@ -10,6 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@eduportdesign/logos": "workspace:^",
     "@eduportdesign/tokens": "workspace:^",
     "@eduportdesign/web-components": "workspace:^",
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
