@@ -46,16 +46,17 @@
 
   :where(h1:not([slot])) {
     font: var(--ep-font-heading-xl);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 
   :where(h2:not([slot])) {
     font: var(--ep-font-heading-lg);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
 
   :where(h3:not([slot])) {
     font: var(--ep-font-heading-md);
+    letter-spacing: -0.01em;
   }
 
   :where(h4:not([slot])) {

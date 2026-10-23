@@ -4,30 +4,30 @@
     "heading": {
       "xl": {
         "$value": {
-          "fontFamily": "{font.family.sans}",
+          "fontFamily": "{font.family.display}",
           "fontSize": "{font.size.800}",
-          "fontWeight": "{font.weight.semibold}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.line-height.tight}"
         },
-        "$description": "Page titles (h1). Pair with letter-spacing -0.02em."
+        "$description": "Page titles (h1). Display face. Pair with letter-spacing -0.03em."
       },
       "lg": {
         "$value": {
-          "fontFamily": "{font.family.sans}",
+          "fontFamily": "{font.family.display}",
           "fontSize": "{font.size.600}",
-          "fontWeight": "{font.weight.semibold}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.line-height.tight}"
         },
-        "$description": "Section titles (h2). Pair with letter-spacing -0.01em."
+        "$description": "Section titles (h2). Display face. Pair with letter-spacing -0.02em."
       },
       "md": {
         "$value": {
-          "fontFamily": "{font.family.sans}",
+          "fontFamily": "{font.family.display}",
           "fontSize": "{font.size.500}",
-          "fontWeight": "{font.weight.semibold}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.line-height.tight}"
         },
-        "$description": "Subsection and card titles (h3)."
+        "$description": "Subsection and card titles (h3). Display face. Pair with letter-spacing -0.01em."
       },
       "sm": {
         "$value": {

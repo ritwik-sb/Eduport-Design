@@ -317,7 +317,7 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 ```
 
 **`<ep-card>` → `Card`**: groups related content.
-- `variant`: **`outlined`** | `elevated` | `filled`
+- `variant`: `outlined` | **`elevated`** | `filled` (elevated is the default: a ring plus soft shadow on `surface-raised`, no border)
 - Slots: default (body), `media`, `heading`, `header-actions`, `footer`
 - Put a real heading in the heading slot: `<h3 slot="heading">`.
 
@@ -553,7 +553,7 @@ Touch density applies on its own on phones and tablets (`pointer: coarse`); `dat
 
 ### Typography
 
-- Families: `--ep-font-family-sans` (Inter for UI text, falling back to Noto Sans Malayalam for Malayalam), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
+- Families: `--ep-font-family-sans` (Inter for UI text, falling back to Noto Sans Malayalam for Malayalam), `--ep-font-family-display` (Bricolage Grotesque, used by the heading roles `heading-xl/lg/md`; load it with `import '@fontsource-variable/bricolage-grotesque/opsz.css'`, and headings fall back to Inter if you don't), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
 - Sizes: `--ep-font-size-{100..900}` = 12, 14, 16, 18, 20, 24, 28, 32, 40px. Body text is `300` (16px); dense UI and secondary text `200` (14px); captions `100` (12px).
 - Weights: `--ep-font-weight-{regular,medium,semibold,bold}`. Line heights: `--ep-font-line-height-{tight,snug,normal}` (tight for headings, normal for paragraphs).
 - Type roles: `--ep-font-{role}` are `font` shorthands (weight, size/line height, family), so one declaration sets the whole style. Use them for custom UI instead of combining the size, weight and line-height tokens by hand:

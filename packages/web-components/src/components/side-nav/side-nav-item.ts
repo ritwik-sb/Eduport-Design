@@ -55,7 +55,8 @@ export class EpSideNavItem extends LitElement {
       }
 
       :host([current]) a {
-        background: var(--ep-color-accent-subtle);
+        background: var(--ep-color-surface-sheet);
+        box-shadow: var(--ep-shadow-raised);
         color: var(--ep-color-text-primary);
         font-weight: var(--ep-font-weight-semibold);
       }
