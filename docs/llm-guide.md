@@ -132,6 +132,12 @@ Build every screen on `<ep-app-shell>`. It lays out the sticky top bar, the side
 - With a sidebar the shell paints `--ep-color-background-canvas` and shows the content on a raised `--ep-color-surface-sheet`. Cards default to `variant="elevated"` (a ring and soft shadow, no border). Custom panels use `--ep-color-surface-raised` with `box-shadow: var(--ep-shadow-raised)`; use `--ep-color-border-default` borders only for dividers and `outlined` cards.
 - Brand moments: `<ep-side-nav appearance="inverse">` is a dark rail in both themes (put the white logo in `slot="header"`; the shell then runs the rail the full height beside the top bar). `<ep-page-header variant="hero">` puts the title on the brand gradient with `eyebrow`, `aside` (stat tiles on `--ep-color-hero-chip`) and `art` (logo mark) slots; its `actions` sit below the hero. Use the hero once, on an app's landing page, not on every page. Keep text off the corner glow.
 
+### Categorical color and dashboard patterns
+
+- `--ep-color-category-{1..6}-{subtle,bold,on-bold,text}` tell things apart (a subject, a team, a calendar). They never mean good or bad; use the feedback and `text-success/danger` tokens for status. Map your own meanings to the numbers once and reuse them everywhere (Physics is always `1`).
+- `tone="1"` to `tone="6"` is accepted by `ep-card` (tints its `media` area), `ep-icon-tile`, `ep-progress-ring` and `ep-stat`. Inside a toned card's `media` slot, content can read `--ep-tone-subtle`, `--ep-tone-bold`, `--ep-tone-on-bold` and `--ep-tone-text`.
+- `ep-stat` (label, value, `note` slot; `variant="hero"` on the brand hero), `ep-progress-ring` (value 0 to max, `label` required), `ep-avatar-group` (`max`, `label`), `ep-icon-tile` (icon, tone, size). A course card is: toned `ep-card`, a row with an `ep-icon-tile` and an `ep-progress-ring` in `media`, the title in `heading`, and an `ep-avatar-group` plus an `ep-badge` in `footer`.
+
 ### Theme, corners, motion and contrast
 
 Independent attributes on the root element. All are optional and can change at runtime.

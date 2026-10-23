@@ -1,5 +1,5 @@
 import { LitElement, css, html } from 'lit';
-import { baseStyles } from '../../styles/shared.js';
+import { baseStyles, toneStyles } from '../../styles/shared.js';
 import { HasSlotController } from '../../utils/slots.js';
 
 /**
@@ -16,10 +16,12 @@ import { HasSlotController } from '../../utils/slots.js';
 export class EpCard extends LitElement {
   static properties = {
     variant: { reflect: true },
+    tone: { reflect: true },
   };
 
   static styles = [
     baseStyles,
+    toneStyles,
     css`
       :host {
         display: block;
@@ -50,6 +52,15 @@ export class EpCard extends LitElement {
       :host([variant='filled']) .base {
         border-color: transparent;
         background: var(--ep-color-surface-muted);
+      }
+
+      /* A toned card turns its media area into a tinted cover. Slotted content reads the --ep-tone-* properties. */
+      :host([tone]) .media {
+        margin: var(--ep-space-100);
+        padding: var(--ep-space-150);
+        border-radius: var(--ep-radius-control);
+        background: var(--ep-tone-subtle);
+        color: var(--ep-tone-text);
       }
 
       .media ::slotted(*) {
@@ -105,11 +116,15 @@ export class EpCard extends LitElement {
   /** `elevated` (default) has a lifted surface with a ring and soft shadow, `outlined` a border, `filled` a tinted background. Each is a distinct step in both themes. */
   declare variant: 'outlined' | 'elevated' | 'filled';
 
+  /** `1` to `6`: tints the media area with a categorical color and exposes `--ep-tone-*` to the content in it. */
+  declare tone: '' | '1' | '2' | '3' | '4' | '5' | '6';
+
   #slots = new HasSlotController(this, 'media', 'heading', 'header-actions', 'footer');
 
   constructor() {
     super();
     this.variant = 'elevated';
+    this.tone = '';
   }
 
   render() {

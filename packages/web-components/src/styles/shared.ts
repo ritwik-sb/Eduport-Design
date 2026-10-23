@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css, unsafeCSS } from 'lit';
 
 /**
  * Applied to every component: box sizing, the system font, and `hidden` support on the host.
@@ -88,4 +88,30 @@ export const fieldStyles = css`
   :host(:is([disabled], :disabled)) .label {
     color: var(--ep-color-text-disabled);
   }
+`;
+
+/**
+ * Maps `tone="1"` to `tone="6"` onto the categorical color tokens, as `--ep-tone-subtle`, `--ep-tone-bold`,
+ * `--ep-tone-on-bold` and `--ep-tone-text`. These inherit into slotted content, so a card's cover can use them.
+ * Without a tone they are the neutral surface and text colors.
+ */
+export const toneStyles = css`
+  :host {
+    --ep-tone-subtle: var(--ep-color-surface-muted);
+    --ep-tone-bold: var(--ep-color-text-primary);
+    --ep-tone-on-bold: var(--ep-color-text-inverse);
+    --ep-tone-text: var(--ep-color-text-primary);
+  }
+  ${unsafeCSS(
+    [1, 2, 3, 4, 5, 6]
+      .map(
+        (n) => `:host([tone='${n}']) {
+    --ep-tone-subtle: var(--ep-color-category-${n}-subtle);
+    --ep-tone-bold: var(--ep-color-category-${n}-bold);
+    --ep-tone-on-bold: var(--ep-color-category-${n}-on-bold);
+    --ep-tone-text: var(--ep-color-category-${n}-text);
+  }`,
+      )
+      .join('\n'),
+  )}
 `;
