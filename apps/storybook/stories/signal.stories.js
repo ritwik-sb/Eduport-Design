@@ -89,3 +89,36 @@ export const InteractiveCard = {
     </ep-card>
   </div>`,
 };
+
+const patterns = ['waves', 'rings', 'dots', 'blocks', 'orbit', 'mesh'];
+
+/** Generated artwork for course tiles and empty states. The same `seed` always draws the same picture. */
+export const Cover = {
+  render: () => html`<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--ep-space-200)">
+    ${patterns.map(
+      (pattern, i) => html`<ep-card>
+        <ep-cover slot="media" pattern=${pattern} tone=${String((i % 6) + 1)} seed=${i + 3} style="--ep-cover-radius: 0"></ep-cover>
+        <h3 slot="heading">${pattern}</h3>
+        <span>tone ${(i % 6) + 1}, seed ${i + 3}</span>
+      </ep-card>`,
+    )}
+  </div>`,
+};
+
+/** A trend with no axes. Always give it a label that says what it shows. */
+export const Sparkline = {
+  render: () => html`<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--ep-space-150)">
+    <ep-stat label="Submissions" value="63">
+      <span slot="note">+12 this week</span>
+      <ep-sparkline slot="chart" values="12, 18, 15, 24, 31, 28, 40, 52, 63" label="Submissions, last 9 days"></ep-sparkline>
+    </ep-stat>
+    <ep-stat label="Avg. score" value="78%">
+      <span slot="note">+3 points</span>
+      <ep-sparkline slot="chart" tone="2" variant="line" values="60, 64, 63, 70, 72, 71, 78" label="Average score, last 7 tests"></ep-sparkline>
+    </ep-stat>
+    <ep-stat label="Attendance" value="94%">
+      <span slot="note">Steady</span>
+      <ep-sparkline slot="chart" tone="3" variant="bars" values="9, 8, 10, 7, 9, 10, 9" label="Students present, last 7 days"></ep-sparkline>
+    </ep-stat>
+  </div>`,
+};

@@ -16,6 +16,8 @@ export * from './avatar-group.js';
 export * from './icon-tile.js';
 export * from './progress-ring.js';
 export * from './stat.js';
+export * from './sparkline.js';
+export * from './cover.js';
 export * from './alert.js';
 export * from './card.js';
 export * from './tabs.js';

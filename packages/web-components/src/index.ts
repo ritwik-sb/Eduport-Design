@@ -15,6 +15,8 @@ export * from './components/avatar-group/index.js';
 export * from './components/icon-tile/index.js';
 export * from './components/progress-ring/index.js';
 export * from './components/stat/index.js';
+export * from './components/sparkline/index.js';
+export * from './components/cover/index.js';
 export * from './components/alert/index.js';
 export * from './components/card/index.js';
 export * from './components/tabs/index.js';
