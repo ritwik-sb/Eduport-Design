@@ -34,41 +34,23 @@
     </script>
   </head>
   <body>
-    <header class="topbar">
-      <div class="brand">
-        <img class="logo" src="./favicon.svg" alt="" />
-        <span>Eduport<span class="long"> Design System</span> <small>Components</small></span>
-        <a
-          class="version"
-          href="https://www.npmjs.com/package/@eduportdesign/web-components/v/%EP_VERSION%"
-          aria-label="Version %EP_VERSION% on npm"
-        >v%EP_VERSION%</a>
-      </div>
-      <div class="controls">
-        <div class="segmented" role="group" aria-label="Theme">
-          <button type="button" data-set-theme="light" aria-pressed="true">
-            <ep-icon name="sun"></ep-icon><span class="text">Light</span>
-          </button>
-          <button type="button" data-set-theme="dark" aria-pressed="false">
-            <ep-icon name="moon"></ep-icon><span class="text">Dark</span>
-          </button>
-        </div>
-        <div class="segmented" role="group" aria-label="Corners">
-          <button type="button" data-set-corners="soft" aria-pressed="true">Soft</button>
-          <button type="button" data-set-corners="sharp" aria-pressed="false">Sharp</button>
-        </div>
-      </div>
-    </header>
-
     <div class="layout">
       <nav class="toc" aria-label="Components">
+        <a class="rail-brand" href="#top" aria-label="Eduport Design System, top of page">
+          <img class="logo" src="./favicon.svg" alt="" />
+          <span>Eduport<small>Design System</small></span>
+        </a>
         <h2>Overview</h2>
         <ul>
           <li><a href="#getting-started">Use it in your project</a></li>
+          <li><a href="#dashboard">Live dashboard</a></li>
           <li><a href="#example">Example screen</a></li>
         </ul>
         <h2>Foundations</h2>
         <ul>
+          <li><a href="#color">Color</a></li>
+          <li><a href="#typography">Typography</a></li>
+          <li><a href="#elevation">Elevation</a></li>
           <li><a href="#spacing">Spacing</a></li>
           <li><a href="#layout-grid">Layout grid</a></li>
           <li><a href="#page-structure">Page structure</a></li>
@@ -95,6 +77,12 @@
           <li><a href="#tag">Tag</a></li>
           <li><a href="#avatar">Avatar</a></li>
           <li><a href="#card">Card</a></li>
+          <li><a href="#cover">Cover art</a></li>
+          <li><a href="#stat">Stat</a></li>
+          <li><a href="#sparkline">Sparkline</a></li>
+          <li><a href="#progress-ring">Progress ring</a></li>
+          <li><a href="#avatar-group">Avatar group</a></li>
+          <li><a href="#icon-tile">Icon tile</a></li>
           <li><a href="#table">Table</a></li>
           <li><a href="#icon">Icon</a></li>
           <li><a href="#accordion">Accordion</a></li>
@@ -125,15 +113,63 @@
         </ul>
       </nav>
 
-      <main>
-        <div class="intro">
-          <h1>Eduport Design System</h1>
-          <p>
-            Accessible web components, React wrappers and design tokens for Eduport products. Every component on this
-            page is live, so you can click, type and tab through it. Switch the theme and corner style at the top to see
-            how each one adapts.
-          </p>
+      <div class="content">
+        <header class="topbar">
+      <div class="brand">
+        <img class="logo" src="./favicon.svg" alt="" />
+        <span>Eduport<span class="long"> Design System</span> <small>Components</small></span>
+        <a
+          class="version"
+          href="https://www.npmjs.com/package/@eduportdesign/web-components/v/%EP_VERSION%"
+          aria-label="Version %EP_VERSION% on npm"
+        >v%EP_VERSION%</a>
+      </div>
+      <div class="controls">
+        <div class="segmented" role="group" aria-label="Theme">
+          <button type="button" data-set-theme="light" aria-pressed="true">
+            <ep-icon name="sun"></ep-icon><span class="text">Light</span>
+          </button>
+          <button type="button" data-set-theme="dark" aria-pressed="false">
+            <ep-icon name="moon"></ep-icon><span class="text">Dark</span>
+          </button>
         </div>
+        <div class="segmented" role="group" aria-label="Corners">
+          <button type="button" data-set-corners="soft" aria-pressed="true">Soft</button>
+          <button type="button" data-set-corners="sharp" aria-pressed="false">Sharp</button>
+        </div>
+      </div>
+    </header>
+
+      <main id="top">
+        <!-- Landing -->
+        <ep-page-header class="landing" variant="hero" heading="Calm, accessible, a pleasure to look at.">
+          <span slot="eyebrow">Eduport Design System · v%EP_VERSION%</span>
+          Web components, React wrappers and design tokens for Eduport products. Every component on this page is live:
+          click it, type in it, tab through it, then flip the theme.
+          <div class="landing-actions">
+            <code class="install"><span aria-hidden="true">$</span> npm i @eduportdesign/tokens @eduportdesign/web-components
+              <button type="button" class="copy" data-copy="npm i @eduportdesign/tokens @eduportdesign/web-components" aria-label="Copy install command">
+                <ep-icon name="copy"></ep-icon>
+              </button>
+            </code>
+            <ep-button variant="secondary" id="see-dashboard">See it in use<ep-icon slot="suffix" name="arrow-down"></ep-icon></ep-button>
+          </div>
+          <div slot="aside" class="collage" aria-hidden="true">
+            <ep-card class="collage-card c1" tone="1">
+              <div slot="media" class="collage-media">
+                <ep-icon-tile tone="1" icon="atom"></ep-icon-tile>
+                <ep-progress-ring tone="1" value="68" label="Physics completion"></ep-progress-ring>
+              </div>
+              <h3 slot="heading">Physics</h3>
+              Class 11 · 32 students
+            </ep-card>
+            <ep-stat class="collage-card c2" label="Submissions" value="63">
+              <span slot="note">+12 this week</span>
+              <ep-sparkline slot="chart" values="12, 18, 15, 24, 31, 28, 40, 52, 63" label="Submissions"></ep-sparkline>
+            </ep-stat>
+            <div class="collage-card c3"><ep-switch checked tabindex="-1">Reminders</ep-switch></div>
+          </div>
+        </ep-page-header>
 
         <!-- Getting started -->
         <section id="getting-started" class="getting-started" aria-labelledby="getting-started-title">
@@ -286,6 +322,60 @@ export class AnyComponent {}</code></pre>
           </p>
         </section>
 
+        <!-- Live dashboard -->
+        <section id="dashboard" class="showcase" aria-labelledby="dashboard-title">
+          <div class="component-header"><h2 id="dashboard-title">A dashboard, built from the system</h2></div>
+          <p>
+            Nothing here is custom: the rail, hero, cards, covers, rings, sparklines and avatars are the published
+            components. Switch the theme or corners at the top and the whole screen follows.
+          </p>
+          <div class="window" role="group" aria-label="Example teacher dashboard">
+            <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i><span>teach.eduport.app</span></div>
+            <div class="window-body">
+              <div class="window-rail">
+                <ep-side-nav appearance="inverse" label="Example navigation">
+                  <span slot="header" class="wordmark" role="img" aria-label="Eduport"></span>
+                  <ep-side-nav-item href="#dashboard" icon="home">Home</ep-side-nav-item>
+                  <ep-side-nav-item href="#dashboard" icon="book" current>Courses</ep-side-nav-item>
+                  <ep-side-nav-item href="#dashboard" icon="calendar">Timetable</ep-side-nav-item>
+                  <ep-side-nav-group heading="Assessment">
+                    <ep-side-nav-item href="#dashboard" icon="clipboard-list">Assignments <ep-badge slot="suffix" variant="accent">4</ep-badge></ep-side-nav-item>
+                    <ep-side-nav-item href="#dashboard" icon="certificate">Grades</ep-side-nav-item>
+                  </ep-side-nav-group>
+                  <ep-side-nav-item slot="footer" href="#dashboard" icon="settings">Settings</ep-side-nav-item>
+                </ep-side-nav>
+              </div>
+              <div class="window-main">
+                <ep-page-header variant="hero" heading="Good morning, Anjali" heading-level="3">
+                  <span slot="eyebrow">Thursday · Term 2, week 7</span>
+                  Physics 11 starts at 10:30. You have 16 submissions waiting.
+                  <div slot="aside" class="hero-stats">
+                    <ep-stat variant="hero" label="Classes today" value="3"></ep-stat>
+                    <ep-stat variant="hero" label="To grade" value="16"></ep-stat>
+                    <ep-stat variant="hero" label="Avg. progress" value="64%"></ep-stat>
+                  </div>
+                </ep-page-header>
+                <div class="course-grid" id="course-grid"></div>
+                <div class="lower-grid">
+                  <ep-card>
+                    <h4 slot="heading">Today</h4>
+                    <ul class="schedule">
+                      <li><time>10:30</time><span class="bar" style="--bar: var(--ep-color-category-1-bold)"></span><span>Physics 11 · Optics<small>Lab 2</small></span></li>
+                      <li><time>12:15</time><span class="bar" style="--bar: var(--ep-color-category-3-bold)"></span><span>Mathematics 10 · Quadratics<small>Room 14</small></span></li>
+                      <li><time>14:00</time><span class="bar" style="--bar: var(--ep-color-category-2-bold)"></span><span>Chemistry 12 · Titration<small>Lab 1</small></span></li>
+                    </ul>
+                  </ep-card>
+                  <ep-card>
+                    <h4 slot="heading">Submissions this week</h4>
+                    <ep-badge slot="header-actions" variant="accent">63</ep-badge>
+                    <ep-sparkline class="big-chart" variant="bars" values="14, 22, 18, 41, 25, 9, 63" label="Submissions per day, last 7 days"></ep-sparkline>
+                  </ep-card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- Example screen -->
         <section id="example" aria-labelledby="example-title">
           <div class="component-header"><h2 id="example-title">Example screen</h2></div>
@@ -298,7 +388,7 @@ export class AnyComponent {}</code></pre>
                 Course registration closes on Friday. Pick your electives before then.
               </ep-alert>
               <ep-card variant="elevated">
-                <div slot="media" class="course-media"></div>
+                <ep-cover slot="media" pattern="orbit" tone="1" seed="7" style="--ep-cover-radius: 0; --ep-cover-ratio: 21 / 8"></ep-cover>
                 <h3 slot="heading">Physics for Class 11</h3>
                 <ep-badge slot="header-actions" variant="success" dot>Enrolled</ep-badge>
                 Motion, forces and energy, with weekly practice tests and live doubt-clearing sessions.
@@ -307,7 +397,7 @@ export class AnyComponent {}</code></pre>
                   <span><ep-icon name="clock"></ep-icon>18 hours</span>
                   <span><ep-icon name="users"></ep-icon>1,240 students</span>
                 </div>
-                <div class="progress" role="progressbar" aria-label="Course progress" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"><span></span></div>
+                <ep-progress-bar value="64" label="Course progress" hide-label size="sm"></ep-progress-bar>
                 <div slot="footer" class="people">
                   <ep-avatar size="sm" name="Anjali Menon"></ep-avatar>
                   <ep-avatar size="sm" name="Rahul Nair"></ep-avatar>
@@ -335,6 +425,70 @@ export class AnyComponent {}</code></pre>
                 </div>
               </form>
             </ep-card>
+          </div>
+        </section>
+
+        <!-- Color -->
+        <section class="component" id="color" aria-labelledby="color-title">
+          <div class="component-header"><h2 id="color-title">Color</h2><code>--ep-color-*</code></div>
+          <p>
+            One brand orange, true neutrals, and six category colors that tell things apart without saying good or bad.
+            Components only read the semantic tokens, which change with the theme. Each swatch shows the text color that
+            passes WCAG AA on it, and its contrast ratio.
+          </p>
+          <div class="demo swatches-demo">
+            <div class="demo-row full">
+              <div><h3 class="swatch-title">Brand</h3><div class="swatches" id="swatches-brand"></div></div>
+            </div>
+            <div class="demo-row full">
+              <div><h3 class="swatch-title">Neutral</h3><div class="swatches" id="swatches-gray"></div></div>
+            </div>
+            <div class="demo-row full">
+              <div>
+                <h3 class="swatch-title">Category colors <small>subtle · bold · text, per tone</small></h3>
+                <div class="swatches categories" id="swatches-category"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Typography -->
+        <section class="component" id="typography" aria-labelledby="typography-title">
+          <div class="component-header"><h2 id="typography-title">Typography</h2><code>--ep-font-*</code></div>
+          <p>
+            Inter for everything you read, Bricolage Grotesque for the big headings, JetBrains Mono for code. Use the
+            role tokens (<code>--ep-font-heading-lg</code>, <code>--ep-font-body-md</code>) instead of picking a size and weight.
+          </p>
+          <div class="demo">
+            <div class="demo-row full type-specimen">
+              <div class="type-line"><span class="role">heading-xl</span><span style="font: var(--ep-font-heading-xl)">Good morning, Anjali</span></div>
+              <div class="type-line"><span class="role">heading-lg</span><span style="font: var(--ep-font-heading-lg)">Your courses this term</span></div>
+              <div class="type-line"><span class="role">heading-md</span><span style="font: var(--ep-font-heading-md)">Submissions waiting for review</span></div>
+              <div class="type-line"><span class="role">heading-sm</span><span style="font: var(--ep-font-heading-sm)">Physics 11 · Optics practical</span></div>
+              <div class="type-line"><span class="role">body-lg</span><span style="font: var(--ep-font-body-lg)">Motion, forces and energy, with weekly practice tests.</span></div>
+              <div class="type-line"><span class="role">body-md</span><span style="font: var(--ep-font-body-md)">Motion, forces and energy, with weekly practice tests and live doubt-clearing sessions.</span></div>
+              <div class="type-line"><span class="role">label-md</span><span style="font: var(--ep-font-label-md)">Assignments due this week</span></div>
+              <div class="type-line"><span class="role">code-md</span><span style="font: var(--ep-font-code-md)">const tone = course.subject.tone;</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Elevation -->
+        <section class="component" id="elevation" aria-labelledby="elevation-title">
+          <div class="component-header"><h2 id="elevation-title">Elevation</h2><code>--ep-shadow-*</code></div>
+          <p>
+            Surfaces rise in steps: the canvas, the sheet on it, raised cards on the sheet, then overlays that float
+            above everything. In dark mode the surface color does most of the lifting, with a brighter edge instead of a
+            bigger shadow.
+          </p>
+          <div class="demo">
+            <div class="demo-row full elevation-stage">
+              <div class="elev" style="box-shadow: var(--ep-shadow-inset); background: var(--ep-color-surface-default)"><b>inset</b><span>Inputs</span></div>
+              <div class="elev" style="box-shadow: var(--ep-shadow-control); background: var(--ep-color-surface-default)"><b>control</b><span>Secondary buttons</span></div>
+              <div class="elev" style="box-shadow: var(--ep-shadow-raised); background: var(--ep-color-surface-raised)"><b>raised</b><span>Cards, stats</span></div>
+              <div class="elev" style="box-shadow: var(--ep-shadow-raised-hover); background: var(--ep-color-surface-raised)"><b>raised-hover</b><span>Cards under the pointer</span></div>
+              <div class="elev" style="box-shadow: var(--ep-shadow-overlay); background: var(--ep-color-surface-overlay)"><b>overlay</b><span>Menus, dialogs, toasts</span></div>
+            </div>
           </div>
         </section>
 
@@ -937,6 +1091,119 @@ export class AnyComponent {}</code></pre>
         </section>
 
         <!-- Table -->
+        <!-- Cover -->
+        <section class="component" id="cover" aria-labelledby="cover-title">
+          <div class="component-header"><h2 id="cover-title">Cover art</h2><code>&lt;ep-cover&gt;</code></div>
+          <p>
+            Generated artwork for course tiles and empty states, in a category color. The same <code>seed</code> always
+            draws the same picture, so give each course its own. It is decorative and hidden from screen readers.
+          </p>
+          <div class="demo">
+            <div class="demo-row full">
+              <div class="cover-grid" id="cover-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stat -->
+        <section class="component" id="stat" aria-labelledby="stat-title">
+          <div class="component-header"><h2 id="stat-title">Stat</h2><code>&lt;ep-stat&gt;</code></div>
+          <p>One headline number with its label and an optional note or chart. Use a few in a row at the top of a dashboard.</p>
+          <div class="demo">
+            <div class="demo-row full subtle">
+              <div class="grid-3">
+                <ep-stat label="Students" value="128"><span slot="note">+6 this week</span></ep-stat>
+                <ep-stat label="To grade" value="16" tone="5"><span slot="note">Oldest: 3 days</span></ep-stat>
+                <ep-stat label="Avg. progress" value="64%" tone="4"></ep-stat>
+                <ep-stat label="Classes today" value="3" tone="1"></ep-stat>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sparkline -->
+        <section class="component" id="sparkline" aria-labelledby="sparkline-title">
+          <div class="component-header"><h2 id="sparkline-title">Sparkline</h2><code>&lt;ep-sparkline&gt;</code></div>
+          <p>A trend with no axes, as a line, a line with an area, or bars. The last value is marked. Always give it a label.</p>
+          <div class="demo">
+            <div class="demo-row full subtle">
+              <div class="grid-3">
+                <ep-stat label="Submissions" value="63">
+                  <span slot="note">+12 this week</span>
+                  <ep-sparkline slot="chart" values="12, 18, 15, 24, 31, 28, 40, 52, 63" label="Submissions, last 9 days"></ep-sparkline>
+                </ep-stat>
+                <ep-stat label="Avg. score" value="78%">
+                  <span slot="note">+3 points</span>
+                  <ep-sparkline slot="chart" tone="2" variant="line" values="60, 64, 63, 70, 72, 71, 78" label="Average score, last 7 tests"></ep-sparkline>
+                </ep-stat>
+                <ep-stat label="Attendance" value="94%">
+                  <span slot="note">Steady</span>
+                  <ep-sparkline slot="chart" tone="3" variant="bars" values="9, 8, 10, 7, 9, 10, 9" label="Students present, last 7 days"></ep-sparkline>
+                </ep-stat>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress ring -->
+        <section class="component" id="progress-ring" aria-labelledby="progress-ring-title">
+          <div class="component-header"><h2 id="progress-ring-title">Progress ring</h2><code>&lt;ep-progress-ring&gt;</code></div>
+          <p>A circular completion indicator with the percentage in the middle. Always determinate.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Tones and sizes</span>
+              <div class="row">
+                <ep-progress-ring size="sm" tone="1" value="68" label="Physics completion"></ep-progress-ring>
+                <ep-progress-ring tone="2" value="54" label="Chemistry completion"></ep-progress-ring>
+                <ep-progress-ring size="lg" tone="3" value="81" label="Mathematics completion"></ep-progress-ring>
+                <ep-progress-ring value="30" label="Overall completion"></ep-progress-ring>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Avatar group -->
+        <section class="component" id="avatar-group" aria-labelledby="avatar-group-title">
+          <div class="component-header"><h2 id="avatar-group-title">Avatar group</h2><code>&lt;ep-avatar-group&gt;</code></div>
+          <p>Overlapping avatars that collapse into a count past <code>max</code>.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Max 3</span>
+              <ep-avatar-group label="Students in Physics 11" max="3">
+                <ep-avatar name="Rahul Kumar"></ep-avatar><ep-avatar name="Sana Noor"></ep-avatar><ep-avatar name="Arun Joseph"></ep-avatar>
+                <ep-avatar name="Meera Varma"></ep-avatar><ep-avatar name="Priya Thomas"></ep-avatar><ep-avatar name="Faisal Ali"></ep-avatar>
+              </ep-avatar-group>
+            </div>
+          </div>
+        </section>
+
+        <!-- Icon tile -->
+        <section class="component" id="icon-tile" aria-labelledby="icon-tile-title">
+          <div class="component-header"><h2 id="icon-tile-title">Icon tile</h2><code>&lt;ep-icon-tile&gt;</code></div>
+          <p>A rounded square holding an icon in a category tone: the identity mark for a subject, a team or a calendar.</p>
+          <div class="demo">
+            <div class="demo-row">
+              <span class="label">Tones</span>
+              <div class="row">
+                <ep-icon-tile tone="1" icon="atom"></ep-icon-tile>
+                <ep-icon-tile tone="2" icon="flask"></ep-icon-tile>
+                <ep-icon-tile tone="3" icon="math-function"></ep-icon-tile>
+                <ep-icon-tile tone="4" icon="leaf"></ep-icon-tile>
+                <ep-icon-tile tone="5" icon="book"></ep-icon-tile>
+                <ep-icon-tile tone="6" icon="palette"></ep-icon-tile>
+              </div>
+            </div>
+            <div class="demo-row">
+              <span class="label">Sizes</span>
+              <div class="row">
+                <ep-icon-tile size="sm" tone="2" icon="flask"></ep-icon-tile>
+                <ep-icon-tile tone="2" icon="flask"></ep-icon-tile>
+                <ep-icon-tile size="lg" tone="2" icon="flask"></ep-icon-tile>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="component" id="table" aria-labelledby="table-title">
           <div class="component-header"><h2 id="table-title">Table</h2><code>&lt;ep-table&gt;</code></div>
           <p>Styles a native <code>&lt;table&gt;</code> you write, so any cell content works. A button in a header plus <code>aria-sort</code> makes a sortable column; <code>aria-selected</code> on a row highlights it. It scrolls sideways on narrow screens.</p>
@@ -1393,6 +1660,7 @@ export class AnyComponent {}</code></pre>
           <a href="https://github.com/ritwik-sb/Eduport-Design">GitHub</a> · Icons by <a href="https://tabler.io/icons">Tabler</a> (MIT)
         </footer>
       </main>
+      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>

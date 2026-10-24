@@ -6,6 +6,7 @@ import '@eduportdesign/tokens/css/theme-dark';
 import '@eduportdesign/tokens/css/corners-sharp';
 import { iconNames, toast } from '@eduportdesign/web-components';
 import logoManifest from '@eduportdesign/logos/logos.json';
+import wordmarkWhite from '@eduportdesign/logos/wordmark-white.svg?raw';
 import './gallery.css';
 
 const root = document.documentElement;
@@ -286,7 +287,7 @@ for (const [, query] of breakpoints) query.addEventListener('change', updateGrid
 updateGrid();
 
 // Highlight the section in view
-const links = new Map([...document.querySelectorAll('.toc a')].map((a) => [a.hash.slice(1), a]));
+const links = new Map([...document.querySelectorAll('.toc li a')].map((a) => [a.hash.slice(1), a]));
 const observer = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
@@ -301,3 +302,90 @@ for (const id of links.keys()) {
   const section = document.getElementById(id);
   if (section) observer.observe(section);
 }
+
+// Landing: copy the install command, jump to the dashboard
+document.querySelector('.copy')?.addEventListener('click', async (event) => {
+  const button = event.currentTarget;
+  try {
+    await navigator.clipboard.writeText(button.dataset.copy);
+    toast({ variant: 'success', message: 'Install command copied.' });
+  } catch {
+    toast({ variant: 'warning', message: 'Could not copy. Select the command and copy it.' });
+  }
+});
+document.getElementById('see-dashboard')?.addEventListener('click', () => {
+  document.getElementById('dashboard').scrollIntoView({ block: 'start' });
+});
+
+// Dashboard
+for (const el of document.querySelectorAll('.wordmark')) el.innerHTML = wordmarkWhite;
+const courses = [
+  { tone: '1', icon: 'atom', name: 'Physics', meta: 'Class 11 · 32 students', value: 68, due: 4, pattern: 'orbit', seed: 7, people: ['Rahul Kumar', 'Sana Noor', 'Arun Joseph', 'Meera Varma', 'Priya Thomas'] },
+  { tone: '2', icon: 'flask', name: 'Chemistry', meta: 'Class 12 · 29 students', value: 54, due: 6, pattern: 'rings', seed: 12, people: ['Faisal Ali', 'Priya Thomas', 'Sana Noor', 'Arun Joseph'] },
+  { tone: '3', icon: 'math-function', name: 'Mathematics', meta: 'Class 10 · 35 students', value: 81, due: 2, pattern: 'blocks', seed: 21, people: ['Meera Varma', 'Rahul Kumar', 'Faisal Ali', 'Sana Noor', 'Arun Joseph', 'Priya Thomas'] },
+  { tone: '4', icon: 'leaf', name: 'Biology', meta: 'Class 9 · 32 students', value: 47, due: 4, pattern: 'waves', seed: 4, people: ['Priya Thomas', 'Arun Joseph', 'Rahul Kumar'] },
+];
+document.getElementById('course-grid').innerHTML = courses
+  .map(
+    (c) => `<ep-card class="course" tone="${c.tone}" interactive>
+      <ep-cover slot="media" pattern="${c.pattern}" tone="${c.tone}" seed="${c.seed}">
+        <span class="cover-row">
+          <ep-icon-tile tone="${c.tone}" icon="${c.icon}"></ep-icon-tile>
+          <ep-progress-ring tone="${c.tone}" value="${c.value}" label="${c.name} completion"></ep-progress-ring>
+        </span>
+      </ep-cover>
+      <h4 slot="heading"><a href="#dashboard">${c.name}</a></h4>
+      ${c.meta}
+      <div slot="footer" class="course-foot">
+        <ep-avatar-group label="Students in ${c.name}" max="3">${c.people.map((p) => `<ep-avatar name="${p}"></ep-avatar>`).join('')}</ep-avatar-group>
+        <ep-badge variant="accent">${c.due} due</ep-badge>
+      </div>
+    </ep-card>`,
+  )
+  .join('');
+
+// Cover art gallery
+const coverHost = document.getElementById('cover-grid');
+['waves', 'rings', 'dots', 'blocks', 'orbit', 'mesh'].forEach((pattern, i) => {
+  const figure = document.createElement('figure');
+  figure.innerHTML = `<ep-cover pattern="${pattern}" tone="${(i % 6) + 1}" seed="${i * 5 + 3}"></ep-cover><figcaption><code>${pattern}</code> tone ${(i % 6) + 1}</figcaption>`;
+  coverHost.append(figure);
+});
+
+// Color swatches. Each shows the text color that passes AA on it, so the page doubles as a contrast table.
+function toRgb(value) {
+  const probe = Object.assign(document.createElement('span'), { style: `color: ${value}; display: none` });
+  document.body.append(probe);
+  const [r, g, b] = getComputedStyle(probe).color.match(/[\d.]+/g).map(Number);
+  probe.remove();
+  return [r, g, b];
+}
+const luminance = ([r, g, b]) => {
+  const f = (c) => ((c /= 255) <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+};
+const ratio = (a, b) => {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+};
+const hex = (rgb) => '#' + rgb.map((c) => Math.round(c).toString(16).padStart(2, '0')).join('');
+function swatch(token, label = token) {
+  const rgb = toRgb(`var(--ep-color-${token})`);
+  const onWhite = ratio(rgb, [255, 255, 255]);
+  const onBlack = ratio(rgb, [0, 0, 0]);
+  const dark = onBlack > onWhite;
+  const best = Math.max(onWhite, onBlack);
+  return `<figure class="swatch" style="background: var(--ep-color-${token}); color: ${dark ? '#000' : '#fff'}">
+    <b>${label}</b><span>${hex(rgb)}</span><span class="aa">Aa ${best.toFixed(1)}${best >= 4.5 ? '' : ' (large text)'}</span></figure>`;
+}
+function renderSwatches() {
+  const steps = ['10', '20', '30', '40', '50', '55', '57', '58', '60', '70', '80', '90', '100'];
+  document.getElementById('swatches-brand').innerHTML = steps.map((s) => swatch(`brand-${s}`, s)).join('');
+  const grays = ['10', '15', '20', '30', '40', '50', '60', '70', '80', '90', '95', '100'];
+  document.getElementById('swatches-gray').innerHTML = grays.map((s) => swatch(`gray-${s}`, s)).join('');
+  document.getElementById('swatches-category').innerHTML = [1, 2, 3, 4, 5, 6]
+    .map((n) => `<div class="swatch-tone">${['subtle', 'bold', 'text'].map((k) => swatch(`category-${n}-${k}`, `${n} ${k}`)).join('')}</div>`)
+    .join('');
+}
+renderSwatches();
+new MutationObserver(renderSwatches).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
