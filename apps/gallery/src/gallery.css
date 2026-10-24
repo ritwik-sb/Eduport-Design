@@ -1624,3 +1624,65 @@ section.component {
     overflow-wrap: anywhere;
   }
 }
+
+/* Contents drawer on phones */
+.nav-toggle {
+  display: none;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: var(--ep-radius-control);
+  background: var(--ep-color-surface-sheet);
+  box-shadow: var(--ep-shadow-control);
+  color: var(--ep-color-text-primary);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--ep-color-border-focus);
+  outline-offset: 2px;
+}
+
+.nav-scrim {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: grid;
+  }
+
+  nav.toc {
+    display: block;
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 30;
+    width: min(18rem, 86vw);
+    height: 100dvh;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition:
+      transform var(--ep-motion-duration-slower) var(--ep-motion-easing-standard),
+      visibility 0s linear var(--ep-motion-duration-slower);
+  }
+
+  [data-nav-open] nav.toc {
+    transform: none;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .nav-scrim:not([hidden]) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: var(--ep-color-background-scrim);
+  }
+
+  [data-nav-open] {
+    overflow: hidden;
+  }
+}

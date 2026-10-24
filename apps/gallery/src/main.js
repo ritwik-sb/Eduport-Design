@@ -389,3 +389,26 @@ function renderSwatches() {
 }
 renderSwatches();
 new MutationObserver(renderSwatches).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+// Phones: the contents rail becomes a drawer behind a menu button
+{
+  const toggle = document.querySelector('.nav-toggle');
+  const toc = document.getElementById('toc');
+  const scrim = document.querySelector('.nav-scrim');
+  const setOpen = (open, restoreFocus = true) => {
+    document.body.toggleAttribute('data-nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    scrim.hidden = !open;
+    if (open) toc.querySelector('li a')?.focus();
+    else if (restoreFocus) toggle.focus();
+  };
+  toggle.addEventListener('click', () => setOpen(!document.body.hasAttribute('data-nav-open')));
+  scrim.addEventListener('click', () => setOpen(false));
+  toc.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setOpen(false, false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.body.hasAttribute('data-nav-open')) setOpen(false);
+  });
+  matchMedia('(min-width: 901px)').addEventListener('change', (event) => event.matches && setOpen(false, false));
+}
