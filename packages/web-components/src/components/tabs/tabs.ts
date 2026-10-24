@@ -90,11 +90,17 @@ export class EpTabs extends LitElement {
     super.connectedCallback();
     this.#resize = new ResizeObserver(() => this.#placeIndicator());
     this.#resize.observe(this);
+    this.#observeTabs();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#resize?.disconnect();
+  }
+
+  /** A tab whose label changes ("Inbox (3)" to "Inbox (12)") resizes on its own, so the tabs are observed too. */
+  #observeTabs() {
+    for (const tab of this.#tabs) this.#resize?.observe(tab);
   }
 
   /** Moves the sliding bar under the selected tab. The first placement doesn't animate. */
@@ -106,10 +112,12 @@ export class EpTabs extends LitElement {
       bar?.classList.remove('placed');
       return;
     }
+    // Measured in the list's own pixels, so an ancestor's transform (a modal scaling in) doesn't skew the bar.
     const listBox = list.getBoundingClientRect();
     const tabBox = tab.getBoundingClientRect();
-    bar.style.width = `${tabBox.width}px`;
-    bar.style.transform = `translateX(${tabBox.left - listBox.left + list.scrollLeft}px)`;
+    const scale = listBox.width / list.offsetWidth || 1;
+    bar.style.width = `${tabBox.width / scale}px`;
+    bar.style.transform = `translateX(${(tabBox.left - listBox.left) / scale + list.scrollLeft}px)`;
     const first = !bar.classList.contains('placed');
     bar.classList.add('placed');
     if (first) requestAnimationFrame(() => bar.classList.add('animated'));
@@ -167,6 +175,7 @@ export class EpTabs extends LitElement {
       tab.tabIndex = tab.selected ? 0 : -1;
     }
     for (const panel of panels) panel.active = panel.name === value;
+    this.#observeTabs();
     // The selected tab turns semibold, which changes its width, so measure after the tabs have rendered.
     void Promise.all(tabs.map((t) => t.updateComplete)).then(() => this.#placeIndicator());
   }

@@ -31,9 +31,8 @@ export class EpStat extends LitElement {
       .base {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        column-gap: var(--ep-space-150);
         align-items: end;
-        gap: var(--ep-space-25);
+        gap: var(--ep-space-25) var(--ep-space-150);
         height: 100%;
         padding: var(--ep-space-150) var(--ep-space-200);
         border-radius: var(--ep-radius-container);

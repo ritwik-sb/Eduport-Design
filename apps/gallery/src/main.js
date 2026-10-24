@@ -399,6 +399,8 @@ new MutationObserver(renderSwatches).observe(root, { attributes: true, attribute
     document.body.toggleAttribute('data-nav-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     scrim.hidden = !open;
+    // Behind the open drawer nothing is reachable, so Tab stays inside it.
+    for (const el of [document.querySelector('.content'), toggle]) el.inert = open;
     if (open) toc.querySelector('li a')?.focus();
     else if (restoreFocus) toggle.focus();
   };
