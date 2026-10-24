@@ -71,7 +71,8 @@ export class EpProgressBar extends LitElement {
 
       .indicator {
         height: 100%;
-        background: var(--_fill);
+        /* A soft top highlight makes the fill read as a lit bar rather than a flat strip. */
+        background: linear-gradient(to bottom, rgb(255 255 255 / 0.18), transparent 60%), var(--_fill);
         transform: scaleX(var(--_progress, 0));
         transform-origin: left;
         transition: transform var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);

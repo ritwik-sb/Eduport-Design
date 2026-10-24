@@ -25,8 +25,8 @@ Every interactive component implements the states that apply to it, in this prio
 | State | Trigger | Visual rule | Tokens |
 |---|---|---|---|
 | Rest | — | Base appearance. Control boundary ≥ 3:1 against its background. | `border.strong`, `interactive.*.default` |
-| Hover | Pointer over, only under `@media (hover: hover)` | Fill or border shifts one step. No movement, no size change. | `interactive.*.hover` |
-| Active / pressed | Pointer down or key down | One step darker than hover. No scale-down. | `interactive.*.active` |
+| Hover | Pointer over, only under `@media (hover: hover)` | Fill or border shifts one step. Filled and bordered buttons and interactive cards also rise `distance-lift` (2px) as their shadow deepens. | `interactive.*.hover`, `motion.distance.lift` |
+| Active / pressed | Pointer down or key down | One step darker than hover; buttons also scale to `scale-press` (0.98) and spring back on release. | `interactive.*.active`, `motion.scale.press` |
 | Focus-visible | Keyboard focus only (`:focus-visible`) | The shared `focusRing`: 2px `border.focus` outline, 2px offset. Never removed, never animated. | `border.focus` |
 | Selected / checked | Persistent choice | `accent.default` indicator plus a non-color cue (check, weight, underline). | `accent.default`, `accent.subtle` |
 | Invalid | Failed validation | `border.danger` plus an icon and error text. Color alone is never the signal. | `border.danger`, `text.danger` |
@@ -153,8 +153,8 @@ Rules:
 - **Nothing in a component lasts longer than 300ms.** Page-level transitions (a full drawer) may use up to 400ms (`--ep-motion-duration-slower`).
 - **Exits are faster than entries.** The user already decided; get out of the way.
 - **Animate `opacity` and `transform` only.** Never animate width, height, top/left or margin, which cause layout jank. For expanding sections, animate `grid-template-rows: 0fr → 1fr` or skip the animation.
-- **Small distances.** Enter offsets are 4px (overlays) or 8px (toasts, drawers excepted). Scale, if used, starts at 0.98, never smaller.
-- **No bounce, overshoot or elastic easing.** They read as playful and slow down repeated tasks.
+- **Small distances.** Enter offsets are 4px (overlays) or 8px (toasts, drawers excepted). Scale, if used, starts at 0.98, never smaller. The exceptions are small marks that pop in (`scale-pop`, 0.5).
+- **Overshoot only on small things that settle.** The `spring` easing (a 1.4 control point) is for the switch thumb, the checkbox tick, the radio dot, a button letting go and a card landing. Never for fades, overlays or anything larger than a control. Under reduced motion every distance and scale is neutral, so nothing overshoots.
 - **Stagger is capped:** at most 5 items, 30ms apart. Lists longer than that appear together.
 - **No infinite loops** other than progress indicators, and those stop the moment the work finishes.
 - **The focus ring is never animated.** It must appear instantly where focus lands.
@@ -185,11 +185,11 @@ Microinteractions are allowed **only from this list**. A new one needs a proposa
 
 | Component / pattern | Microinteraction | Spec | Reduced motion |
 |---|---|---|---|
-| Button, icon button | Press feedback | Fill shifts to `active`, 100ms `standard`. No scale, no ripple. | Same (color only) |
-| Text field, select, textarea | Focus | Border to `border.focus` 100ms; focus ring appears instantly. | Same |
-| Checkbox | Check | Fill 100ms; check icon fades in (opacity 0→1), no draw-on. Indeterminate dash same. | Same |
-| Radio | Select | Inner dot scales 0.5→1 with fade, 100ms. | Fade only |
-| Switch | Toggle | Thumb slides 200ms `standard`; track fill 100ms. | Thumb jumps, fill changes |
+| Button, icon button | Hover, press | Hover: fill to `hover`, rises `distance-lift`, shadow deepens, 200ms `standard`. Press: fill to `active`, scales to `scale-press`, 50ms; release springs back in 200ms. No ripple. | Color only |
+| Text field, select, textarea | Focus | Border to `border.focus` 100ms; focus ring appears instantly; a 4px halo fades in around it over 200ms. | Same |
+| Checkbox | Check | Fill 100ms; check icon pops in from `scale-pop` with `spring`, 200ms. Indeterminate dash same. | Fade only |
+| Radio | Select | The dot grows with `spring`, `duration-move`. | Jumps |
+| Switch | Toggle | Thumb slides with `spring`, `duration-move`, and stretches `distance-sm` while pressed; track fill 100ms. | Thumb jumps, fill changes |
 | Tabs | Select | Indicator slides between tabs 200ms `standard`. | Indicator jumps |
 | Tooltip | Show / hide | **Open after 500ms hover**, instantly on keyboard focus; fade + 4px offset, 100ms. Once one tooltip is open, neighbors open with no delay for 300ms. Hide after 100ms. | Fade only |
 | Menu, popover, select list | Open / close | Fade + 4px offset from the trigger side, 150ms `enter`; close 100ms `exit`. | Fade only |
@@ -201,7 +201,7 @@ Microinteractions are allowed **only from this list**. A new one needs a proposa
 | Loading button | Busy | Spinner fades in after 400ms (see §4). | Spinner keeps rotating |
 | Skeleton | Loading content | Subtle shimmer, 1.5s per cycle, low contrast. | Static |
 | Progress bar | Progress | Width moves with `transform: scaleX`, 200ms. Indeterminate: sliding segment. | Determinate jumps; indeterminate becomes a static striped bar with text |
-| Interactive card | Hover / focus | `shadow.raised` to `shadow.raised-hover` in 100ms `standard`. A state change: the card does not move or scale. | Same |
+| Interactive card | Hover / focus | `shadow.raised` to `shadow.raised-hover`, rises `distance-lift`, 200ms. Focus-within gets the shadow without the lift. | Shadow only |
 | Table row | Hover / select | Background to `background.subtle` 100ms; selected uses `accent.subtle` plus a checkbox. | Same |
 | Drag to reorder | Lift / drop | Lifted item gets `shadow.md`, others shift 200ms. **A keyboard alternative is required** (move up/down buttons or `Space` to pick up, arrows to move). | Items jump |
 | Inline save | Saved | "Saved" text with check fades in next to the field, fades out after 2s. | Same |
@@ -209,8 +209,8 @@ Microinteractions are allowed **only from this list**. A new one needs a proposa
 ### Not allowed
 
 - **Shake on error.** It's a vestibular trigger and carries no information a screen reader gets. Use the invalid state and error text.
-- **Ripple effects, press scale-down, hover lift.** They add motion to the most frequent actions in the product.
-- **Bounce, spring, overshoot easing.**
+- **Ripple effects.**
+- **Bounce on anything bigger than a control.** Modals, menus, popovers, toasts and page content never overshoot.
 - **Animated number counters** for data values. They show wrong numbers mid-animation and are slow to read.
 - **Parallax, auto-playing carousels, background video.**
 - **Confetti and celebration animations** in components. If a product wants one for a rare milestone, it's the product's decision, must respect reduced motion, and must never block input.
@@ -233,9 +233,13 @@ Every transition and animation uses `--ep-motion-*` tokens. Never write raw `ms`
 | `--ep-motion-distance-sm` | 4px | **0px** | Enter offset for tooltip, menu, popover |
 | `--ep-motion-distance-md` | 8px | **0px** | Enter offset for toasts and larger surfaces |
 | `--ep-motion-scale-enter` | 0.98 | **1** | Starting scale for a modal entering |
+| `--ep-motion-scale-press` | 0.98 | **1** | Scale of a pressed button |
+| `--ep-motion-scale-pop` | 0.5 | **1** | Starting scale of a tick or dot popping in |
+| `--ep-motion-distance-lift` | 2px | **0px** | Hover rise of buttons and interactive cards |
 | `--ep-motion-easing-standard` | `cubic-bezier(0.2, 0, 0, 1)` | same | State changes |
 | `--ep-motion-easing-enter` | `cubic-bezier(0, 0, 0, 1)` | same | Things appearing |
 | `--ep-motion-easing-exit` | `cubic-bezier(0.3, 0, 1, 1)` | same | Things leaving |
+| `--ep-motion-easing-spring` | `cubic-bezier(0.34, 1.4, 0.64, 1)` | same | Small marks and controls settling: switch thumb, tick, dot, button release, card lift |
 
 `tokens.css` switches to the reduced values in two cases:
 

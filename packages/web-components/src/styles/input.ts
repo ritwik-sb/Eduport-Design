@@ -32,8 +32,11 @@ export const inputStyles = css`
     border: var(--ep-border-width-thin) solid var(--ep-color-border-strong);
     border-radius: var(--ep-radius-control);
     background: var(--ep-color-surface-default);
+    box-shadow: var(--ep-shadow-inset);
     color: var(--ep-color-text-primary);
-    transition: border-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
+    transition:
+      border-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard),
+      box-shadow var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
   }
 
   .box:hover {
@@ -44,13 +47,24 @@ export const inputStyles = css`
     ${focusRing}
     outline-offset: 0;
     border-color: var(--ep-color-border-focus);
+    /* A soft halo outside the ring, so the active field is the brightest thing on the page. */
+    box-shadow:
+      var(--ep-shadow-inset),
+      0 0 0 4px color-mix(in srgb, var(--ep-color-border-focus) 20%, transparent);
   }
 
   .box.invalid {
     border-color: var(--ep-color-border-danger);
   }
 
+  .box.invalid:focus-within {
+    box-shadow:
+      var(--ep-shadow-inset),
+      0 0 0 4px color-mix(in srgb, var(--ep-color-border-danger) 20%, transparent);
+  }
+
   .box.disabled {
+    box-shadow: none;
     border-color: var(--ep-color-border-default);
     background: var(--ep-color-interactive-disabled);
     color: var(--ep-color-text-disabled);

@@ -13,14 +13,46 @@
     },
     "distance": {
       "$type": "dimension",
-      "sm": { "$value": "4px", "$description": "Enter offset for small overlays: tooltip, menu, popover." },
-      "md": { "$value": "8px", "$description": "Enter offset for toasts and other larger surfaces." }
+      "sm": {
+        "$value": "4px",
+        "$description": "Enter offset for small overlays: tooltip, menu, popover."
+      },
+      "md": {
+        "$value": "8px",
+        "$description": "Enter offset for toasts and other larger surfaces."
+      },
+      "lift": {
+        "$value": "2px",
+        "$description": "How far an interactive card or button rises on hover."
+      }
     },
     "scale": {
       "enter": {
         "$type": "number",
         "$value": 0.98,
         "$description": "Starting scale for a modal entering. Never smaller."
+      },
+      "press": {
+        "$type": "number",
+        "$value": 0.98,
+        "$description": "Scale of a pressed button. Releases with the spring easing."
+      },
+      "pop": {
+        "$type": "number",
+        "$value": 0.5,
+        "$description": "Starting scale for a tick or dot popping in (checkbox, radio). Settles with the spring easing."
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "spring": {
+        "$value": [
+          0.34,
+          1.4,
+          0.64,
+          1
+        ],
+        "$description": "A small overshoot for things that settle: switch thumb, checkbox tick, a pressed button letting go. Never for fades or large surfaces."
       }
     }
   }

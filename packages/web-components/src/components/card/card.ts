@@ -46,10 +46,12 @@ export class EpCard extends LitElement {
         box-shadow: var(--ep-shadow-raised);
       }
 
-      /* Hover is a state change only: the shadow deepens, nothing moves (docs/motion.md, section 6). */
+      /* A card that leads somewhere rises a couple of pixels and its shadow deepens. The lift is 0 under reduced
+         motion, so there the shadow change is all that's left. */
       @media (hover: hover) {
         :host([interactive][variant='elevated']) .base:hover {
           box-shadow: var(--ep-shadow-raised-hover);
+          transform: translateY(calc(-1 * var(--ep-motion-distance-lift)));
         }
       }
 
@@ -58,7 +60,9 @@ export class EpCard extends LitElement {
       }
 
       :host([interactive]) .base {
-        transition: box-shadow var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
+        transition:
+          box-shadow var(--ep-motion-duration-normal) var(--ep-motion-easing-standard),
+          transform var(--ep-motion-duration-normal) var(--ep-motion-easing-spring);
       }
 
       :host([variant='outlined']) .base {

@@ -59,7 +59,10 @@ export class EpSwitch extends LitElement {
         border: var(--ep-border-width-thin) solid var(--ep-color-border-strong);
         border-radius: var(--ep-radius-round);
         background: var(--ep-color-surface-default);
-        transition: background-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
+        box-shadow: var(--ep-shadow-inset);
+        transition:
+          background-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard),
+          box-shadow var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
       }
 
       .thumb {
@@ -70,17 +73,30 @@ export class EpSwitch extends LitElement {
         height: 14px;
         border-radius: var(--ep-radius-round);
         background: var(--ep-color-border-strong);
-        transition: transform var(--ep-motion-duration-move) var(--ep-motion-easing-standard);
+        transition:
+          transform var(--ep-motion-duration-move) var(--ep-motion-easing-spring),
+          width var(--ep-motion-duration-move) var(--ep-motion-easing-standard);
       }
 
       .base[aria-checked='true'] .track {
         border-color: var(--ep-color-accent-default);
         background: var(--ep-color-interactive-primary-default);
+        box-shadow: var(--ep-shadow-sheen), 0 3px 8px -3px color-mix(in srgb, var(--ep-color-interactive-primary-default) 60%, transparent);
       }
 
       .base[aria-checked='true'] .thumb {
         transform: translateX(16px);
         background: var(--ep-color-text-on-primary);
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+      }
+
+      /* The thumb stretches under the finger, then springs to its place. */
+      .base:not(:disabled):active .thumb {
+        width: calc(14px + var(--ep-motion-distance-sm));
+      }
+
+      .base[aria-checked='true']:not(:disabled):active .thumb {
+        transform: translateX(calc(16px - var(--ep-motion-distance-sm)));
       }
 
       .base:hover .track {
@@ -113,11 +129,13 @@ export class EpSwitch extends LitElement {
       }
 
       .base:disabled .track {
+        box-shadow: none;
         border-color: var(--ep-color-border-default);
         background: var(--ep-color-interactive-disabled);
       }
 
       .base:disabled .thumb {
+        box-shadow: none;
         background: var(--ep-color-text-disabled);
       }
 

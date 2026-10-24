@@ -80,7 +80,7 @@ export const CourseCards = {
   </div>`,
 };
 
-/** For a card whose whole surface is a link: the shadow deepens on hover and focus. Nothing moves. */
+/** For a card whose whole surface is a link: the shadow deepens on hover and focus, and on hover the card rises 2px. */
 export const InteractiveCard = {
   render: () => html`<div style="max-width: 280px">
     <ep-card interactive>

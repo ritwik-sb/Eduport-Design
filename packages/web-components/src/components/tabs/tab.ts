@@ -41,14 +41,6 @@ export class EpTab extends LitElement {
         transition: color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
       }
 
-      .base::after {
-        content: '';
-        position: absolute;
-        inset: auto 0 0;
-        height: 2px;
-        background: transparent;
-      }
-
       :host(:hover) .base {
         color: var(--ep-color-text-primary);
         background: var(--ep-color-interactive-ghost-hover);
@@ -57,10 +49,6 @@ export class EpTab extends LitElement {
       :host([selected]) .base {
         color: var(--ep-color-text-primary);
         font-weight: var(--ep-font-weight-semibold);
-      }
-
-      :host([selected]) .base::after {
-        background: var(--ep-color-accent-default);
       }
 
       :host(:focus-visible) .base {
@@ -81,11 +69,6 @@ export class EpTab extends LitElement {
         font-size: var(--ep-size-icon-md);
       }
 
-      @media (forced-colors: active) {
-        :host([selected]) .base::after {
-          background: Highlight;
-        }
-      }
     `,
   ];
 
