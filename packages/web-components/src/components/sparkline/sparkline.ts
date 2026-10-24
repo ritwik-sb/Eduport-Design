@@ -21,9 +21,11 @@ function smooth(points: [number, number][]): string {
     dx.push(points[i + 1][0] - points[i][0]);
     slope.push((points[i + 1][1] - points[i][1]) / dx[i]);
   }
+  // Tangents are clamped (Fritsch-Carlson) so a steep step can't make the curve dip outside the data.
+  const clamp = (v: number, a: number, b: number) => Math.sign(v) * Math.min(Math.abs(v), 3 * Math.min(Math.abs(a), Math.abs(b)));
   const t = [slope[0]];
   for (let i = 1; i < n - 1; i++) {
-    t.push(slope[i - 1] * slope[i] <= 0 ? 0 : (slope[i - 1] + slope[i]) / 2);
+    t.push(slope[i - 1] * slope[i] <= 0 ? 0 : clamp((slope[i - 1] + slope[i]) / 2, slope[i - 1], slope[i]));
   }
   t.push(slope[n - 2]);
   let d = `M${points[0][0]} ${points[0][1]}`;
@@ -101,7 +103,7 @@ export class EpSparkline extends LitElement {
 
       .bar {
         fill: var(--_ink);
-        fill-opacity: 0.32;
+        fill-opacity: 0.7;
       }
 
       .bar.last {

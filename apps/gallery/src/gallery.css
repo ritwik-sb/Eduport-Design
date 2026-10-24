@@ -16,7 +16,7 @@ html {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html {
+  html:not([data-motion='reduced']) {
     scroll-behavior: smooth;
   }
 }
@@ -1661,17 +1661,33 @@ section.component {
     z-index: 30;
     width: min(18rem, 86vw);
     height: 100dvh;
-    transform: translateX(-100%);
+    opacity: 0;
     visibility: hidden;
     transition:
-      transform var(--ep-motion-duration-slower) var(--ep-motion-easing-standard),
-      visibility 0s linear var(--ep-motion-duration-slower);
+      opacity var(--ep-motion-duration-normal) var(--ep-motion-easing-standard),
+      visibility 0s linear var(--ep-motion-duration-normal);
   }
 
   [data-nav-open] nav.toc {
-    transform: none;
+    opacity: 1;
     visibility: visible;
     transition-delay: 0s;
+  }
+
+  /* It slides in only when motion is wanted; otherwise it just fades. */
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion='reduced']) nav.toc {
+      transform: translateX(-100%);
+      transition:
+        transform var(--ep-motion-duration-slower) var(--ep-motion-easing-standard),
+        opacity var(--ep-motion-duration-normal) var(--ep-motion-easing-standard),
+        visibility 0s linear var(--ep-motion-duration-slower);
+    }
+
+    html:not([data-motion='reduced']) [data-nav-open] nav.toc {
+      transform: none;
+      transition-delay: 0s;
+    }
   }
 
   .nav-scrim:not([hidden]) {

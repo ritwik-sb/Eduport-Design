@@ -71,10 +71,6 @@ export class EpPageHeader extends LitElement {
         display: none;
       }
 
-      :host(:not([variant='hero'])) .spot {
-        display: none;
-      }
-
       /* Hero: the title on the brand gradient, with the actions below it on the page. */
       .hero {
         display: contents;
@@ -97,7 +93,7 @@ export class EpPageHeader extends LitElement {
       }
 
       /* Two slow blobs of color on the right, behind the stat chips. Text stays on the plain gradient. They only
-         drift when the move token is above zero, so reduced motion leaves them still. */
+         drift for 5 seconds when the move token is above zero, then rest, so reduced motion leaves them still and nothing loops. */
       :host([variant='hero']) .hero::before {
         content: '';
         position: absolute;
@@ -107,7 +103,7 @@ export class EpPageHeader extends LitElement {
           radial-gradient(circle at 55% 85%, var(--ep-color-hero-aurora-1) 0, transparent 42%),
           radial-gradient(circle at 100% 70%, var(--ep-color-hero-aurora-2) 0, transparent 38%);
         opacity: 0.9;
-        animation: aurora calc(var(--ep-motion-duration-move) * 50) ease-in-out infinite alternate;
+        animation: aurora calc(var(--ep-motion-duration-move) * 25) var(--ep-motion-easing-standard) both;
         pointer-events: none;
       }
 
@@ -117,25 +113,11 @@ export class EpPageHeader extends LitElement {
         position: absolute;
         inset: 0;
         z-index: -1;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        mix-blend-mode: soft-light;
-        opacity: 0.7;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        /* Overlay with mid-gray noise darkens as much as it lightens, so it never lowers text contrast. */
+        mix-blend-mode: overlay;
+        opacity: 0.22;
         pointer-events: none;
-      }
-
-      /* A soft light that follows the pointer. Added by script only on devices with a hovering pointer. */
-      .spot {
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background: radial-gradient(20rem circle at var(--_mx, 50%) var(--_my, 0%), rgb(255 255 255 / 0.2), transparent 70%);
-        opacity: 0;
-        transition: opacity var(--ep-motion-duration-slow) var(--ep-motion-easing-standard);
-        pointer-events: none;
-      }
-
-      .hero.lit .spot {
-        opacity: 1;
       }
 
       @keyframes aurora {
@@ -143,7 +125,7 @@ export class EpPageHeader extends LitElement {
           transform: translate3d(-3%, 2%, 0) rotate(-4deg) scale(1);
         }
         to {
-          transform: translate3d(4%, -3%, 0) rotate(5deg) scale(1.08);
+          transform: translate3d(2%, -1.5%, 0) rotate(2deg) scale(1.04);
         }
       }
 
@@ -225,9 +207,6 @@ export class EpPageHeader extends LitElement {
       @media (forced-colors: active) {
         :host([variant='hero']) .hero::before,
         :host([variant='hero']) .hero::after,
-        .spot {
-          display: none;
-        }
 
         :host([variant='hero']) .hero {
           border: 1px solid CanvasText;
@@ -296,27 +275,11 @@ export class EpPageHeader extends LitElement {
     this.variant = 'default';
   }
 
-  #onPointerMove(event: PointerEvent) {
-    if (event.pointerType !== 'mouse' || this.variant !== 'hero') return;
-    // The light is decoration that follows the pointer, so it is off under reduced motion (the OS setting or data-motion).
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || this.closest('[data-motion="reduced"]')) return;
-    const hero = event.currentTarget as HTMLElement;
-    const box = hero.getBoundingClientRect();
-    hero.style.setProperty('--_mx', `${event.clientX - box.left}px`);
-    hero.style.setProperty('--_my', `${event.clientY - box.top}px`);
-    hero.classList.add('lit');
-  }
-
-  #onPointerLeave(event: PointerEvent) {
-    (event.currentTarget as HTMLElement).classList.remove('lit');
-  }
-
   render() {
     const level = Math.min(6, Math.max(1, Math.floor(this.headingLevel) || 1));
     return html`<div class="base">
       <div class="breadcrumbs" ?hidden=${!this.#slots.test('breadcrumbs')}><slot name="breadcrumbs"></slot></div>
-      <div class="hero" @pointermove=${this.#onPointerMove} @pointerleave=${this.#onPointerLeave}>
-        <div class="spot" aria-hidden="true"></div>
+      <div class="hero">
         <div class="art" aria-hidden="true" ?hidden=${!this.#slots.test('art')}><slot name="art"></slot></div>
         <div class="text">
           <div class="eyebrow" ?hidden=${!this.#slots.test('eyebrow')}><slot name="eyebrow"></slot></div>
