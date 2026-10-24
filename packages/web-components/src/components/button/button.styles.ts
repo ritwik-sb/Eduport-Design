@@ -15,6 +15,18 @@ export const buttonStyles = css`
     --_bg-active: var(--ep-color-interactive-primary-active);
     --_fg: var(--ep-color-text-on-primary);
     --_border: transparent;
+    /* Solid fills (primary, danger) get a rim light and a glow tinted by their own color; the rest stay flat. */
+    --_shadow: none;
+    --_shade: none;
+    --_lift: 0px;
+    --_glow: color-mix(in srgb, var(--_bg) 60%, transparent);
+  }
+
+  :host(:is(:not([variant]), [variant='primary'], [variant='danger'])) {
+    --_lift: var(--ep-motion-distance-lift);
+    --_shade: linear-gradient(to bottom, transparent 35%, rgb(0 0 0 / 0.07));
+    --_shadow: var(--ep-shadow-sheen), 0 1px 2px rgb(0 0 0 / 0.16), 0 4px 10px -4px var(--_glow);
+    --_shadow-hover: var(--ep-shadow-sheen), 0 1px 2px rgb(0 0 0 / 0.16), 0 8px 18px -6px var(--_glow);
   }
 
   :host([full-width]) {
@@ -39,7 +51,9 @@ export const buttonStyles = css`
     --_bg-hover: var(--ep-color-interactive-secondary-hover);
     --_bg-active: var(--ep-color-interactive-secondary-active);
     --_fg: var(--ep-color-text-primary);
-    --_border: var(--ep-color-border-strong);
+    --_border: var(--ep-color-border-default);
+    --_shadow: var(--ep-shadow-control);
+    --_lift: var(--ep-motion-distance-lift);
   }
 
   :host([variant='tertiary']) {
@@ -75,7 +89,8 @@ export const buttonStyles = css`
     padding: 0 var(--_padding);
     border: var(--ep-border-width-thin) solid var(--_border);
     border-radius: var(--ep-radius-control);
-    background: var(--_bg);
+    background: var(--_shade), var(--_bg);
+    box-shadow: var(--_shadow);
     color: var(--_fg);
     font: inherit;
     font-size: var(--_font-size);
@@ -84,9 +99,12 @@ export const buttonStyles = css`
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
+    /* Letting go springs back; pressing in is instant (see :active). Both distances are zero under reduced motion. */
     transition:
       background-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard),
-      border-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
+      border-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard),
+      box-shadow var(--ep-motion-duration-normal) var(--ep-motion-easing-standard),
+      transform var(--ep-motion-duration-normal) var(--ep-motion-easing-spring);
   }
 
   /* Extends the hit area of buttons shorter than the minimum target, without changing their size. */
@@ -97,11 +115,24 @@ export const buttonStyles = css`
   }
 
   .button:hover {
-    background: var(--_bg-hover);
+    background: var(--_shade), var(--_bg-hover);
+  }
+
+  @media (hover: hover) {
+    .button:not(:disabled):hover {
+      transform: translateY(calc(-1 * var(--_lift)));
+      box-shadow: var(--_shadow-hover, var(--_shadow));
+    }
   }
 
   .button:active {
-    background: var(--_bg-active);
+    background: var(--_shade), var(--_bg-active);
+  }
+
+  .button:not(:disabled):active {
+    transform: scale(var(--ep-motion-scale-press));
+    box-shadow: var(--_shadow);
+    transition-duration: 50ms;
   }
 
   .button:focus-visible {
@@ -111,6 +142,7 @@ export const buttonStyles = css`
   /* Disabled keeps each variant's shape: filled buttons stay filled, outlined stay outlined, ghost stays clear. */
   .button:disabled {
     background: var(--ep-color-interactive-disabled);
+    box-shadow: none;
     border-color: transparent;
     color: var(--ep-color-text-disabled);
     cursor: not-allowed;
@@ -166,6 +198,7 @@ export const buttonStyles = css`
   @media (forced-colors: active) {
     .button {
       border-color: ButtonText;
+      background-image: none;
     }
 
     .button:disabled {

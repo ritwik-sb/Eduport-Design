@@ -590,7 +590,7 @@ Touch density applies on its own on phones and tablets (`pointer: coarse`); `dat
 - `--ep-motion-duration-fast` (100ms), `-normal` (200ms), `-slow` (300ms), `-slower` (400ms, drawers only), `-move` (200ms, movement inside a control); `--ep-motion-easing-standard`, `-enter`, `-exit`
 - `--ep-motion-distance-sm` (4px, overlay enter offset), `-md` (8px, toast enter offset); `--ep-motion-scale-enter` (0.98, modal)
 - Under reduced motion (OS setting or `data-motion="reduced"`) distances become 0, `-move` becomes 0ms and every duration caps at 100ms, so write `transform: translateY(var(--ep-motion-distance-sm))` and the slide disappears on its own while the fade stays.
-- Motion only explains a change: state change, enter/exit, spatial continuity or progress. No bounce, shake, ripple, press scale-down, hover lift or animated counters. Full rules: [docs/motion.md](motion.md).
+- Motion only explains a change: state change, enter/exit, spatial continuity or progress. Buttons and interactive cards rise 2px on hover and buttons press to 0.98 (both are zero under reduced motion); small marks (switch thumb, tick, dot) may overshoot. No shake, ripple, bounce on anything larger, or animated counters. Full rules: [docs/motion.md](motion.md).
 
 ## 6. Icons
 

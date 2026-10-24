@@ -40,7 +40,10 @@ export class EpRadio extends LitElement {
         border: var(--ep-border-width-thin) solid var(--ep-color-border-strong);
         border-radius: var(--ep-radius-round);
         background: var(--ep-color-surface-default);
-        transition: border-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
+        box-shadow: var(--ep-shadow-inset);
+        transition:
+          border-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard),
+          border-width var(--ep-motion-duration-move) var(--ep-motion-easing-spring);
       }
 
       :host(:hover) .control {
@@ -49,7 +52,9 @@ export class EpRadio extends LitElement {
 
       :host([checked]) .control {
         border: 5px solid var(--ep-color-interactive-primary-default);
-        box-shadow: 0 0 0 var(--ep-border-width-thin) var(--ep-color-accent-default);
+        box-shadow:
+          0 0 0 var(--ep-border-width-thin) var(--ep-color-accent-default),
+          0 3px 8px -3px color-mix(in srgb, var(--ep-color-interactive-primary-default) 60%, transparent);
       }
 
       :host(:focus-visible) .control {

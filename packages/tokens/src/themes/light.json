@@ -387,6 +387,59 @@
         }
       ],
       "$description": "Raised surfaces that respond to the pointer (a card that is a link). Same position, a stronger ring and deeper shadow: the surface doesn't move."
+    },
+    "sheen": {
+      "$value": [
+        {
+          "color": "#ffffff40",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#0000001a",
+          "offsetX": "0px",
+          "offsetY": "-1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        }
+      ],
+      "$description": "Rim light and base shade inside a solid fill (primary, danger button): the edge catches light, so the fill reads as a physical key. Add a colored drop shadow beside it."
+    },
+    "control": {
+      "$value": [
+        {
+          "color": "#0000000f",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        },
+        {
+          "color": "#0000000a",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Resting shadow for bordered controls: secondary button, segmented control, select trigger. Pair with border.default."
+    },
+    "inset": {
+      "$value": [
+        {
+          "color": "#0000000d",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px",
+          "inset": true
+        }
+      ],
+      "$description": "A faint inner shadow in the top edge of text inputs, so the field reads as a recess."
     }
   }
 }

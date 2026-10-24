@@ -61,7 +61,10 @@ export class EpCheckbox extends LitElement {
         border-radius: var(--ep-radius-indicator);
         background: var(--ep-color-surface-default);
         cursor: inherit;
-        transition: background-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard);
+        box-shadow: var(--ep-shadow-inset);
+        transition:
+          background-color var(--ep-motion-duration-fast) var(--ep-motion-easing-standard),
+          box-shadow var(--ep-motion-duration-normal) var(--ep-motion-easing-standard);
       }
 
       input:hover {
@@ -72,6 +75,7 @@ export class EpCheckbox extends LitElement {
       input:indeterminate {
         border-color: var(--ep-color-accent-default);
         background: var(--ep-color-interactive-primary-default);
+        box-shadow: var(--ep-shadow-sheen), 0 3px 8px -3px color-mix(in srgb, var(--ep-color-interactive-primary-default) 60%, transparent);
       }
 
       input:focus-visible {
@@ -86,6 +90,14 @@ export class EpCheckbox extends LitElement {
         color: var(--ep-color-text-on-primary);
         pointer-events: none;
         --ep-icon-stroke-width: 3;
+        animation: pop var(--ep-motion-duration-normal) var(--ep-motion-easing-spring);
+      }
+
+      @keyframes pop {
+        from {
+          opacity: 0;
+          transform: scale(var(--ep-motion-scale-pop));
+        }
       }
 
       .text {
@@ -105,6 +117,7 @@ export class EpCheckbox extends LitElement {
       }
 
       :host(:is([disabled], :disabled)) input {
+        box-shadow: none;
         border-color: var(--ep-color-border-default);
         background: var(--ep-color-interactive-disabled);
       }

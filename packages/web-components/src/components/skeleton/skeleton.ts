@@ -45,10 +45,16 @@ export class EpSkeleton extends LitElement {
         height: 1em;
         border-radius: var(--ep-radius-indicator);
         /* border-default rather than surface-muted, which is nearly invisible on the dark page. */
-        background: var(--ep-color-border-default);
-        /* 1.6s normally. The move token is 0 under reduced motion (OS setting or data-motion="reduced"), which
-           stops the pulse and leaves a static skeleton. */
-        animation: pulse calc(var(--ep-motion-duration-move) * 8) var(--ep-motion-easing-standard) infinite;
+        background: linear-gradient(
+            100deg,
+            var(--ep-color-border-default) 30%,
+            color-mix(in srgb, var(--ep-color-border-default) 45%, var(--ep-color-surface-default)) 50%,
+            var(--ep-color-border-default) 70%
+          )
+          0 0 / 300% 100%;
+        /* A highlight sweeps across, 2s normally. The move token is 0 under reduced motion (OS setting or
+           data-motion="reduced"), which stops the sweep and leaves a static skeleton. */
+        animation: sweep calc(var(--ep-motion-duration-move) * 10) linear infinite;
       }
 
       .line:last-child:not(:first-child) {
@@ -65,9 +71,12 @@ export class EpSkeleton extends LitElement {
         border-radius: var(--ep-radius-round);
       }
 
-      @keyframes pulse {
-        50% {
-          opacity: 0.5;
+      @keyframes sweep {
+        from {
+          background-position: 100% 0;
+        }
+        to {
+          background-position: 0 0;
         }
       }
 

@@ -387,6 +387,60 @@
         }
       ],
       "$description": "Hover state of a raised surface in dark: a brighter edge and deeper shadow, no movement."
+    },
+    "sheen": {
+      "$value": [
+        {
+          "color": "#ffffff33",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#00000040",
+          "offsetX": "0px",
+          "offsetY": "-1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        }
+      ],
+      "$description": "Rim light and base shade inside a solid fill (primary, danger button): the edge catches light, so the fill reads as a physical key. Add a colored drop shadow beside it."
+    },
+    "control": {
+      "$value": [
+        {
+          "color": "#ffffff0f",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#00000066",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Resting shadow for bordered controls: secondary button, segmented control, select trigger. Pair with border.default."
+    },
+    "inset": {
+      "$value": [
+        {
+          "color": "#00000066",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px",
+          "inset": true
+        }
+      ],
+      "$description": "A faint inner shadow in the top edge of text inputs, so the field reads as a recess."
     }
   }
 }

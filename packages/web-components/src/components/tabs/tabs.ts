@@ -36,10 +36,39 @@ export class EpTabs extends LitElement {
       }
 
       .tablist {
+        position: relative;
         display: flex;
         overflow-x: auto;
         border-bottom: var(--ep-border-width-thin) solid var(--ep-color-border-default);
         scrollbar-width: thin;
+      }
+
+      /* One bar that slides to the selected tab, so the change reads as movement rather than a swap. */
+      .indicator {
+        position: absolute;
+        inset: auto auto 0 0;
+        height: 2px;
+        border-radius: 2px 2px 0 0;
+        background: var(--ep-color-accent-default);
+        box-shadow: 0 0 10px color-mix(in srgb, var(--ep-color-accent-default) 55%, transparent);
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .indicator.placed {
+        opacity: 1;
+      }
+
+      .indicator.animated {
+        transition:
+          transform var(--ep-motion-duration-move) var(--ep-motion-easing-standard),
+          width var(--ep-motion-duration-move) var(--ep-motion-easing-standard);
+      }
+
+      @media (forced-colors: active) {
+        .indicator {
+          background: Highlight;
+        }
       }
     `,
   ];
@@ -53,6 +82,37 @@ export class EpTabs extends LitElement {
     super();
     this.value = '';
     this.label = '';
+  }
+
+  #resize?: ResizeObserver;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#resize = new ResizeObserver(() => this.#placeIndicator());
+    this.#resize.observe(this);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#resize?.disconnect();
+  }
+
+  /** Moves the sliding bar under the selected tab. The first placement doesn't animate. */
+  #placeIndicator() {
+    const list = this.renderRoot.querySelector<HTMLElement>('.tablist');
+    const bar = this.renderRoot.querySelector<HTMLElement>('.indicator');
+    const tab = this.#tabs.find((t) => t.selected);
+    if (!list || !bar || !tab) {
+      bar?.classList.remove('placed');
+      return;
+    }
+    const listBox = list.getBoundingClientRect();
+    const tabBox = tab.getBoundingClientRect();
+    bar.style.width = `${tabBox.width}px`;
+    bar.style.transform = `translateX(${tabBox.left - listBox.left + list.scrollLeft}px)`;
+    const first = !bar.classList.contains('placed');
+    bar.classList.add('placed');
+    if (first) requestAnimationFrame(() => bar.classList.add('animated'));
   }
 
   get #tabs(): EpTab[] {
@@ -107,6 +167,8 @@ export class EpTabs extends LitElement {
       tab.tabIndex = tab.selected ? 0 : -1;
     }
     for (const panel of panels) panel.active = panel.name === value;
+    // The selected tab turns semibold, which changes its width, so measure after the tabs have rendered.
+    void Promise.all(tabs.map((t) => t.updateComplete)).then(() => this.#placeIndicator());
   }
 
   render() {
@@ -119,6 +181,7 @@ export class EpTabs extends LitElement {
         @keydown=${this.#onKeyDown}
       >
         <slot name="nav" @slotchange=${() => this.requestUpdate()}></slot>
+        <span class="indicator" part="indicator" aria-hidden="true"></span>
       </div>
       <slot @slotchange=${() => this.requestUpdate()}></slot>`;
   }
