@@ -35,7 +35,7 @@
   </head>
   <body>
     <div class="layout">
-      <nav class="toc" aria-label="Components">
+      <nav class="toc" id="toc" aria-label="Components">
         <a class="rail-brand" href="#top" aria-label="Eduport Design System, top of page">
           <img class="logo" src="./favicon.svg" alt="" />
           <span>Eduport<small>Design System</small></span>
@@ -113,8 +113,12 @@
         </ul>
       </nav>
 
+      <div class="nav-scrim" hidden></div>
       <div class="content">
         <header class="topbar">
+      <button type="button" class="nav-toggle" aria-controls="toc" aria-expanded="false" aria-label="Contents">
+        <ep-icon name="menu-2"></ep-icon>
+      </button>
       <div class="brand">
         <img class="logo" src="./favicon.svg" alt="" />
         <span>Eduport<span class="long"> Design System</span> <small>Components</small></span>
