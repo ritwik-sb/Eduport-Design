@@ -327,6 +327,14 @@
       "chip": {
         "$value": "#0000004d",
         "$description": "Translucent dark tile for stats on the hero."
+      },
+      "aurora-1": {
+        "$value": "{color.pink.60}",
+        "$description": "First drifting blob in the hero, low and to the right. Text stays on the gradient, never on the blobs."
+      },
+      "aurora-2": {
+        "$value": "{color.violet.70}",
+        "$description": "Second drifting blob in the hero, behind the stat chips."
       }
     }
   },

@@ -8,6 +8,7 @@ import { HasSlotController } from '../../utils/slots.js';
  *
  * @tag ep-stat
  * @slot note - A short comparison or trend, like "+6 this week".
+ * @slot chart - An `<ep-sparkline>` beside the number.
  * @csspart base - The tile.
  * @csspart value - The number.
  */
@@ -29,6 +30,9 @@ export class EpStat extends LitElement {
 
       .base {
         display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: var(--ep-space-150);
+        align-items: end;
         gap: var(--ep-space-25);
         height: 100%;
         padding: var(--ep-space-150) var(--ep-space-200);
@@ -44,14 +48,30 @@ export class EpStat extends LitElement {
         color: var(--ep-color-hero-text);
       }
 
-      :host([tone]) .base {
+      :host([tone]:not([tone=''])) .base {
         background: var(--ep-tone-subtle);
         box-shadow: none;
         color: var(--ep-tone-text);
       }
 
+      .label,
+      .value,
+      .note {
+        grid-column: 1;
+      }
+
       .label {
         font: var(--ep-font-label-md);
+      }
+
+      .chart {
+        grid-column: 2;
+        grid-row: 2 / span 2;
+        align-self: center;
+      }
+
+      .chart[hidden] {
+        display: none;
       }
 
       .value {
@@ -86,7 +106,7 @@ export class EpStat extends LitElement {
   /** `hero` is a translucent tile for use on the brand hero. */
   declare variant: 'default' | 'hero';
 
-  #slots = new HasSlotController(this, 'note');
+  #slots = new HasSlotController(this, 'note', 'chart');
 
   constructor() {
     super();
@@ -101,6 +121,7 @@ export class EpStat extends LitElement {
       <span class="label">${this.label}</span>
       <p part="value" class="value">${this.value}</p>
       <span class="note" ?hidden=${!this.#slots.test('note')}><slot name="note"></slot></span>
+      <div class="chart" ?hidden=${!this.#slots.test('chart')}><slot name="chart"></slot></div>
     </div>`;
   }
 }

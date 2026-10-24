@@ -75,7 +75,7 @@ export class EpCard extends LitElement {
       }
 
       /* A toned card turns its media area into a tinted cover. Slotted content reads the --ep-tone-* properties. */
-      :host([tone]) .media {
+      :host([tone]:not([tone=''])) .media {
         margin: var(--ep-space-100);
         padding: var(--ep-space-150);
         border-radius: var(--ep-radius-control);
