@@ -228,6 +228,7 @@ All components: `@eduportdesign/web-components` tag → `@eduportdesign/react` n
 - `size`: `sm` (32px) | **`md`** (40px) | `lg` (48px)
 - `type`: **`button`** | `submit` | `reset`
 - `disabled`, `full-width` (`fullWidth`)
+- `aria-label`: the accessible name of a button with no text. It is passed to the inner `<button>`.
 - `loading`: set while the action runs. Presses are ignored, `aria-busy` is set, and a spinner replaces the `prefix` icon if loading lasts over 400ms (then stays at least 500ms). Keep the label, or change it to a verb like "Saving…". Announce the result with `toast()` or inline text, not on the button. Prefer `loading` over `disabled` for in-progress actions.
 - Slots: default (label), `prefix`, `suffix` (for `<ep-icon>`)
 - Event: native `click`

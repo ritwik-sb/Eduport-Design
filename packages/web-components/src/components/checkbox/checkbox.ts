@@ -187,7 +187,9 @@ export class EpCheckbox extends LitElement {
 
   formDisabledCallback(disabled: boolean) {
     this.#formDisabled = disabled;
-    this.requestUpdate();
+    // The browser can call this partway through an update, when requestUpdate() is ignored and the render that
+    // just ran has missed the change. Ask again once that update is over.
+    queueMicrotask(() => this.requestUpdate());
   }
 
   get #isDisabled() {

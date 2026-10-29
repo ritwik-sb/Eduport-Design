@@ -160,6 +160,26 @@ describe('ep-button', () => {
   });
 });
 
+describe('ep-button accessible name', () => {
+  it('passes aria-label to the native button, so an icon-only button has a name', async () => {
+    const button = await fixture<EpButton>('<ep-button aria-label="Remove Anjali"><span slot="prefix">×</span></ep-button>');
+    expect(shadow(button, 'button').getAttribute('aria-label')).toBe('Remove Anjali');
+
+    button.setAttribute('aria-label', 'Remove Rahul');
+    await button.updateComplete;
+    expect(shadow(button, 'button').getAttribute('aria-label')).toBe('Remove Rahul');
+
+    button.removeAttribute('aria-label');
+    await button.updateComplete;
+    expect(shadow(button, 'button').hasAttribute('aria-label')).toBe(false);
+  });
+
+  it('has no accessibility violations with an aria-label', async () => {
+    const button = await fixture<EpButton>('<ep-button aria-label="Close"><span slot="prefix">×</span></ep-button>');
+    await expectNoA11yViolations(button.parentElement!);
+  });
+});
+
 describe('disabled fieldsets', () => {
   const controls = (attrs = '') => `
     <ep-text-field label="Name" ${attrs}></ep-text-field>
@@ -217,6 +237,45 @@ describe('disabled fieldsets', () => {
     await settle(fieldset);
     expect(radios.some((r) => r.hasAttribute('aria-disabled'))).toBe(false);
     expect(group.disabled).toBe(false);
+  });
+});
+
+describe('re-enabling a control', () => {
+  const controls = `
+    <ep-text-field label="Name"></ep-text-field>
+    <ep-textarea label="Notes"></ep-textarea>
+    <ep-select label="Year"><option>1</option><option>2</option></ep-select>
+    <ep-checkbox>Agree</ep-checkbox>
+    <ep-switch>Alerts</ep-switch>
+    <ep-button>Save</ep-button>`;
+  const inner = (el: Element) => shadow(el, 'input, textarea, select, button') as HTMLInputElement;
+  const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+  it('enables the native control again when `disabled` goes back to false', async () => {
+    const wrapper = await fixture<HTMLDivElement>(`<div>${controls}</div>`);
+    const elements = [...wrapper.children] as (HTMLElement & { disabled: boolean })[];
+
+    for (const el of elements) el.disabled = true;
+    await settle(wrapper);
+    await tick();
+    for (const el of elements) expect(inner(el).disabled, el.localName).toBe(true);
+
+    for (const el of elements) el.disabled = false;
+    await settle(wrapper);
+    await tick();
+    await settle(wrapper);
+    for (const el of elements) expect(inner(el).disabled, el.localName).toBe(false);
+  });
+
+  it('enables a button again when `disabled` is set and cleared back to back', async () => {
+    const button = await fixture<EpButton>('<ep-button>Save</ep-button>');
+    button.disabled = true;
+    await button.updateComplete;
+    button.disabled = false;
+    await button.updateComplete;
+    await tick();
+    await button.updateComplete;
+    expect(shadow(button, 'button').hasAttribute('disabled')).toBe(false);
   });
 });
 
