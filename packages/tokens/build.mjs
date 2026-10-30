@@ -14,9 +14,13 @@
 // tokens.css also carries the motion tokens, with reduced values under prefers-reduced-motion and
 // [data-motion="reduced"]: movement drops to zero and durations cap at 100ms, so fades stay and nothing slides.
 //
+// style-playground.css  the Playground style under [data-style="playground"]: type, border width, corner radii, hard
+//                    edges and press movement, plus its own light and dark colors and shadows. Load it after tokens.css
+//                    (and after theme-dark.css to use it in dark).
+//
 // Color theme, corner mode and density are independent axes, so any combination works. Layout follows the
 // viewport width only, never the theme, corner mode or pointer.
-import { readFile, rm, appendFile, copyFile } from 'node:fs/promises';
+import { readFile, rm, appendFile, copyFile, writeFile } from 'node:fs/promises';
 import StyleDictionary from 'style-dictionary';
 
 const PREFIX = 'ep';
@@ -181,3 +185,57 @@ await appendFile('dist/css/tokens.css', contrastCss);
 await appendFile('dist/css/theme-dark.css', contrastCss);
 await override('src/corners/sharp.json', 'corners-sharp.css', '[data-corners="sharp"]').buildAllPlatforms();
 await copyFile('src/base.css', 'dist/css/base.css');
+
+// Playground: a style on top of the standard tokens. It is its own axis (data-style), so it combines with data-theme,
+// data-corners, data-density and data-motion. Light colors sit on [data-style="playground"]; the dark block is more
+// specific, so it wins when the theme is dark, whether data-theme sits on the same element, above it or below it.
+const PLAYGROUND = '[data-style="playground"]';
+const playgroundDark = [
+  `${PLAYGROUND}[data-theme="dark"]`,
+  `${PLAYGROUND} [data-theme="dark"]`,
+  `[data-theme="dark"] ${PLAYGROUND}`,
+].join(',\n');
+// The type roles are re-emitted here: they reference the weight and family tokens, and a custom property that
+// references another resolves where it is declared, so data-style on a subtree needs its own copy.
+await new StyleDictionary({
+  source: ['src/primitives/*.json', 'src/type/roles.json', 'src/styles/playground.json'],
+  usesDtcg: true,
+  log: { warnings: 'disabled' },
+  platforms: {
+    css: {
+      transformGroup: 'css',
+      prefix: PREFIX,
+      buildPath: 'dist/css/',
+      files: [
+        {
+          destination: 'playground-style.css',
+          format: 'css/variables',
+          filter: (token) => token.filePath.includes('/styles/') || token.filePath.includes('/type/'),
+          options: { selector: PLAYGROUND, outputReferences: true },
+        },
+      ],
+    },
+  },
+}).buildAllPlatforms();
+await override('src/styles/playground-corners.json', 'playground-corners.css', `${PLAYGROUND}:not([data-corners="sharp"])`).buildAllPlatforms();
+await override('src/styles/playground-light.json', 'playground-light.css', PLAYGROUND).buildAllPlatforms();
+await override('src/styles/playground-dark.json', 'playground-dark.css', playgroundDark).buildAllPlatforms();
+// The press moves a button down by the height of its edge. Reduced motion drops the movement, so these re-assert it
+// after the style block, which would otherwise outrank the :root values from motion-reduced.
+const playgroundReduced = `@media (prefers-reduced-motion: reduce) {
+  ${PLAYGROUND} {
+    --ep-motion-distance-press: 0px;
+  }
+}
+
+${PLAYGROUND}[data-motion="reduced"],
+[data-motion="reduced"] ${PLAYGROUND} {
+  --ep-motion-distance-press: 0px;
+}
+`;
+const playgroundParts = [];
+for (const part of ['style', 'corners', 'light', 'dark']) {
+  playgroundParts.push(await readFile(`dist/css/playground-${part}.css`, 'utf8'));
+  await rm(`dist/css/playground-${part}.css`);
+}
+await writeFile('dist/css/style-playground.css', playgroundParts.join('\n') + '\n' + playgroundReduced);

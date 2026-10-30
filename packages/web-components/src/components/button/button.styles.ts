@@ -16,15 +16,22 @@ export const buttonStyles = css`
     --_fg: var(--ep-color-text-on-primary);
     --_border: transparent;
     /* Solid fills (primary, danger) get a rim light and a glow tinted by their own color; the rest stay flat. */
-    --_shadow: none;
+    --_shadow: 0 0 0 0 transparent;
     --_shade: none;
     --_lift: 0px;
-    --_glow: color-mix(in srgb, var(--_bg) 60%, transparent);
+    --_glow: color-mix(in srgb, var(--_bg) calc(var(--ep-effect-glow-strength) * 100%), transparent);
+    /* A hard edge under the button when the style asks for one (effect.depth-control). Pressing moves the button
+       down by motion.distance.press, which covers the edge, so a pressed button sits flat. */
+    --_depth: var(--ep-effect-depth-control);
+    --_edge: color-mix(in srgb, var(--_bg) 60%, black);
+    --_press: min(var(--_depth), var(--ep-motion-distance-press));
+    --_edge-shadow: 0 var(--_depth) 0 var(--_edge);
+    --_edge-pressed: 0 calc(var(--_depth) - var(--_press)) 0 var(--_edge);
   }
 
   :host(:is(:not([variant]), [variant='primary'], [variant='danger'])) {
     --_lift: var(--ep-motion-distance-lift);
-    --_shade: linear-gradient(to bottom, transparent 35%, rgb(0 0 0 / 0.07));
+    --_shade: linear-gradient(to bottom, transparent 35%, rgb(0 0 0 / calc(0.07 * var(--ep-effect-sheen-strength))));
     --_shadow: var(--ep-shadow-sheen), 0 1px 2px rgb(0 0 0 / 0.16), 0 4px 10px -4px var(--_glow);
     --_shadow-hover: var(--ep-shadow-sheen), 0 1px 2px rgb(0 0 0 / 0.16), 0 8px 18px -6px var(--_glow);
   }
@@ -52,6 +59,7 @@ export const buttonStyles = css`
     --_bg-active: var(--ep-color-interactive-secondary-active);
     --_fg: var(--ep-color-text-primary);
     --_border: var(--ep-color-border-default);
+    --_edge: var(--_border);
     --_shadow: var(--ep-shadow-control);
     --_lift: var(--ep-motion-distance-lift);
   }
@@ -62,6 +70,7 @@ export const buttonStyles = css`
     --_bg-active: var(--ep-color-accent-subtle);
     --_fg: var(--ep-color-text-link);
     --_border: var(--ep-color-interactive-primary-default);
+    --_edge: var(--_border);
   }
 
   :host([variant='ghost']) {
@@ -69,6 +78,7 @@ export const buttonStyles = css`
     --_bg-hover: var(--ep-color-interactive-ghost-hover);
     --_bg-active: var(--ep-color-interactive-ghost-active);
     --_fg: var(--ep-color-text-primary);
+    --_depth: 0px;
   }
 
   :host([variant='danger']) {
@@ -90,7 +100,7 @@ export const buttonStyles = css`
     border: var(--ep-border-width-thin) solid var(--_border);
     border-radius: var(--ep-radius-control);
     background: var(--_shade), var(--_bg);
-    box-shadow: var(--_shadow);
+    box-shadow: var(--_edge-shadow), var(--_shadow);
     color: var(--_fg);
     font: inherit;
     font-size: var(--_font-size);
@@ -121,7 +131,7 @@ export const buttonStyles = css`
   @media (hover: hover) {
     .button:not(:disabled):hover {
       transform: translateY(calc(-1 * var(--_lift)));
-      box-shadow: var(--_shadow-hover, var(--_shadow));
+      box-shadow: var(--_edge-shadow), var(--_shadow-hover, var(--_shadow));
     }
   }
 
@@ -130,8 +140,8 @@ export const buttonStyles = css`
   }
 
   .button:not(:disabled):active {
-    transform: scale(var(--ep-motion-scale-press));
-    box-shadow: var(--_shadow);
+    transform: translateY(var(--_press)) scale(var(--ep-motion-scale-press));
+    box-shadow: var(--_edge-pressed), var(--_shadow);
     transition-duration: 50ms;
   }
 

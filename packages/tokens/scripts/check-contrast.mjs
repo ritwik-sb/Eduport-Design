@@ -63,9 +63,24 @@ const pairs = [
   ]),
 ];
 
+const merge = (base, over) => {
+  if (over?.$value !== undefined || typeof over !== 'object') return over;
+  const out = { ...base };
+  for (const [k, v] of Object.entries(over)) out[k] = typeof v === 'object' && base?.[k] ? merge(base[k], v) : v;
+  return out;
+};
+
+// The Playground style overrides colors on top of each theme, so it is checked as that theme plus its overrides.
+const themes = [
+  ...readdirSync(new URL('../src/themes', import.meta.url)).map((file) => [file, read(`../src/themes/${file}`)]),
+  ...['light', 'dark'].map((mode) => [
+    `playground (${mode})`,
+    merge(read(`../src/themes/${mode}.json`), read(`../src/styles/playground-${mode}.json`)),
+  ]),
+];
+
 let failures = 0;
-for (const file of readdirSync(new URL('../src/themes', import.meta.url))) {
-  const theme = read(`../src/themes/${file}`);
+for (const [file, theme] of themes) {
   console.log(`\n${file}`);
   for (const [fg, bg, min] of pairs) {
     const ratio = contrast(resolve(theme, `color.${fg}`), resolve(theme, `color.${bg}`));

@@ -22,6 +22,8 @@
     "md": { "$value": "4px" },
     "lg": { "$value": "6px" },
     "xl": { "$value": "10px" },
+    "2xl": { "$value": "14px" },
+    "3xl": { "$value": "22px" },
     "full": { "$value": "9999px" }
   },
   "border-width": {

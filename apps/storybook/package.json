@@ -15,6 +15,7 @@
     "@eduportdesign/web-components": "workspace:^",
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/nunito": "^5.3.0",
     "lit": "^3.3.0"
   },
   "devDependencies": {

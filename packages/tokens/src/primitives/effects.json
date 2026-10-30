@@ -5,6 +5,29 @@
     "md": { "$value": { "color": "#0f0f0f29", "offsetX": "0px", "offsetY": "4px", "blur": "8px", "spread": "-2px" } },
     "lg": { "$value": { "color": "#0f0f0f33", "offsetX": "0px", "offsetY": "12px", "blur": "24px", "spread": "-4px" } }
   },
+  "effect": {
+    "$description": "Style knobs that components read. The defaults give the standard look; a style (data-style) changes them.",
+    "depth-control": {
+      "$type": "dimension",
+      "$value": "0px",
+      "$description": "Height of the hard edge under a button. 0 for the standard look. A pressed button moves down by motion.distance.press, so the edge disappears when it is pushed in."
+    },
+    "sheen-strength": {
+      "$type": "number",
+      "$value": 1,
+      "$description": "Strength of the soft shading at the bottom of solid buttons. 0 gives a flat fill. The rim light comes from shadow.sheen."
+    },
+    "glow-strength": {
+      "$type": "number",
+      "$value": 0.6,
+      "$description": "Opacity of the colored glow under solid buttons, checkboxes and switches. 0 turns it off."
+    },
+    "tone-fill": {
+      "$type": "number",
+      "$value": 0,
+      "$description": "0 tints only the media area of a toned card; 1 fills the whole card with the tone."
+    }
+  },
   "motion": {
     "duration": {
       "$type": "duration",

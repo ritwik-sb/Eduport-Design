@@ -24,6 +24,10 @@
       "lift": {
         "$value": "2px",
         "$description": "How far an interactive card or button rises on hover."
+      },
+      "press": {
+        "$value": "0px",
+        "$description": "How far a pressed button moves down. 0 by default; a style that gives buttons a hard edge sets it to the edge height."
       }
     },
     "scale": {

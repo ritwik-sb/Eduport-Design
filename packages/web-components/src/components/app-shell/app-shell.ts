@@ -145,7 +145,7 @@ export class EpAppShell extends LitElement {
         margin-block-end: var(--ep-space-150);
         border-radius: var(--ep-radius-container);
         background: var(--ep-color-surface-sheet);
-        box-shadow: var(--ep-shadow-raised);
+        box-shadow: var(--ep-shadow-sheet);
       }
 
       @media (forced-colors: active) {

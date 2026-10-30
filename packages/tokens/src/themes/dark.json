@@ -449,6 +449,22 @@
         }
       ],
       "$description": "A faint inner shadow in the top edge of text inputs, so the field reads as a recess."
+    },
+    "sheet": {
+      "$value": "{shadow.raised}",
+      "$description": "The main content sheet on background.canvas (ep-app-shell). Same as shadow.raised by default; a style can drop it when the sheet and canvas share a color."
+    },
+    "toned": {
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Stat tiles on a categorical tint. Flat by default: the tint is the separation."
     }
   }
 }

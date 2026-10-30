@@ -1,0 +1,279 @@
+{
+  "color": {
+    "$type": "color",
+    "background": {
+      "default": {
+        "$value": "#1c110a"
+      },
+      "canvas": {
+        "$value": "#1c110a"
+      },
+      "subtle": {
+        "$value": "#261810"
+      },
+      "inverse": {
+        "$value": "#fff3ea"
+      },
+      "scrim": {
+        "$value": "#000000b8"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "#1c110a"
+      },
+      "sheet": {
+        "$value": "#1c110a"
+      },
+      "raised": {
+        "$value": "#2e1d13"
+      },
+      "overlay": {
+        "$value": "#2e1d13"
+      },
+      "sunken": {
+        "$value": "#170d07"
+      },
+      "muted": {
+        "$value": "#3a261a"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "#fff3ea"
+      },
+      "secondary": {
+        "$value": "#d4b8a5"
+      },
+      "disabled": {
+        "$value": "#86695a"
+      },
+      "inverse": {
+        "$value": "#1c110a"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "#4a3022"
+      },
+      "strong": {
+        "$value": "#a88671"
+      }
+    },
+    "accent": {
+      "subtle": {
+        "$value": "#3d1f10"
+      }
+    },
+    "category": {
+      "1": {
+        "subtle": {
+          "$value": "#1d3a5c"
+        },
+        "text": {
+          "$value": "#cfe6ff"
+        }
+      },
+      "2": {
+        "subtle": {
+          "$value": "#3a2a63"
+        },
+        "text": {
+          "$value": "#e6dcff"
+        }
+      },
+      "3": {
+        "subtle": {
+          "$value": "#14473a"
+        },
+        "text": {
+          "$value": "#c6f3e1"
+        }
+      },
+      "4": {
+        "subtle": {
+          "$value": "#3b4a14"
+        },
+        "text": {
+          "$value": "#e3f5b8"
+        }
+      },
+      "5": {
+        "subtle": {
+          "$value": "#5a4310"
+        },
+        "text": {
+          "$value": "#ffe7a8"
+        }
+      },
+      "6": {
+        "subtle": {
+          "$value": "#5e2440"
+        },
+        "text": {
+          "$value": "#ffd6e4"
+        }
+      }
+    },
+    "interactive": {
+      "secondary": {
+        "hover": {
+          "$value": "#2e1d13"
+        },
+        "active": {
+          "$value": "#3a261a"
+        }
+      },
+      "ghost": {
+        "hover": {
+          "$value": "#2e1d13"
+        },
+        "active": {
+          "$value": "#3a261a"
+        }
+      },
+      "disabled": {
+        "$value": "#34241a"
+      }
+    },
+    "rail": {
+      "background": {
+        "$value": "#2a1a10"
+      },
+      "text-secondary": {
+        "$value": "#d9bfae"
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised": {
+      "$value": [
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "2px"
+        },
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "5px",
+          "blur": "0px",
+          "spread": "2px"
+        }
+      ],
+      "$description": "Playground: a 2px outline with a hard 5px base, so a card reads as a sticker. Works without a border."
+    },
+    "raised-hover": {
+      "$value": [
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "2px"
+        },
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "5px",
+          "blur": "0px",
+          "spread": "2px"
+        }
+      ]
+    },
+    "overlay": {
+      "$value": [
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "2px"
+        },
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "6px",
+          "blur": "0px",
+          "spread": "2px"
+        },
+        {
+          "color": "#00000066",
+          "offsetX": "0px",
+          "offsetY": "16px",
+          "blur": "32px",
+          "spread": "-12px"
+        }
+      ]
+    },
+    "sheen": {
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        }
+      ]
+    },
+    "control": {
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ]
+    },
+    "inset": {
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        }
+      ]
+    },
+    "sheet": {
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "The content sheet blends into the canvas, so it carries no outline."
+    },
+    "toned": {
+      "$value": [
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "2px"
+        },
+        {
+          "color": "#7a5842",
+          "offsetX": "0px",
+          "offsetY": "5px",
+          "blur": "0px",
+          "spread": "2px"
+        }
+      ],
+      "$description": "Stat tiles on a categorical tint get the same sticker outline as cards."
+    }
+  }
+}

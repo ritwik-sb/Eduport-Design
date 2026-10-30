@@ -28,6 +28,7 @@
     "./css/theme-dark": "./dist/css/theme-dark.css",
     "./css/corners-sharp": "./dist/css/corners-sharp.css",
     "./css/base": "./dist/css/base.css",
+    "./css/style-playground": "./dist/css/style-playground.css",
     "./scss": "./dist/scss/_tokens.scss",
     ".": {
       "types": "./dist/js/tokens.d.ts",

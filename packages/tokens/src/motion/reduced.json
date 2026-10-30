@@ -29,6 +29,9 @@
       },
       "lift": {
         "$value": "0px"
+      },
+      "press": {
+        "$value": "0px"
       }
     },
     "scale": {
