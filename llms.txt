@@ -8,6 +8,7 @@ Start with the AI guide. It has setup (including the base stylesheet and a page 
 
 - [AI coding assistant guide](docs/llm-guide.md): the full reference for generating UI with this design system
 - [Spacing and layout](docs/layout.md): read before building an app shell or a page. Page structure (top bar, side nav, page header, sections), space scale, layout grid, breakpoints and content widths
+- [Playground style](docs/playground.md): an opt-in second look (`data-style="playground"`) for student-facing apps, same components
 - [README](README.md): overview, install from npm or GitHub Packages, development and release
 - [Web components](packages/web-components/README.md): component table and conventions
 - Custom Elements Manifest: `node_modules/@eduportdesign/web-components/dist/custom-elements.json` in an installed app. Machine-readable list of every tag's attributes, properties, slots, CSS parts and events

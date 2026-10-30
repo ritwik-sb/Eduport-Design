@@ -40,6 +40,7 @@ import '@fontsource-variable/inter';
 import '@eduportdesign/tokens/css';                // required: all tokens, light theme, soft corners
 import '@eduportdesign/tokens/css/theme-dark';     // optional: enables data-theme="dark"
 import '@eduportdesign/tokens/css/corners-sharp';  // optional: enables data-corners="sharp"
+import '@eduportdesign/tokens/css/style-playground'; // optional: enables data-style="playground"
 import '@eduportdesign/tokens/css/base';           // recommended: body, headings, text, links and focus (see below)
 
 // Web components: register every tag…
@@ -150,8 +151,11 @@ Independent attributes on the root element. All are optional and can change at r
 |---|---|---|---|
 | `data-theme` | `light`, `dark` | `light` | `theme-dark` CSS for `dark` |
 | `data-corners` | `soft`, `sharp` | `soft` | `corners-sharp` CSS for `sharp` |
+| `data-style` | `playground` | the standard style (Signal) | `style-playground` CSS, and Nunito (`@fontsource-variable/nunito`) |
 | `data-motion` | `reduced` | full motion, unless the OS asks for reduced motion | nothing extra |
 | `data-contrast` | `more` | standard contrast, unless the OS asks for more contrast | nothing extra |
+
+`data-style="playground"` switches to the Playground look (bold Nunito, 2px outlines, hard-edged shadows, buttons that press down, bright subject tints) with the same components and the same markup; use it for student-facing apps, and leave the attribute off for staff tools. Details in `docs/playground.md`.
 
 Use `data-motion="reduced"` for an in-app "Reduce motion" setting. The OS setting (`prefers-reduced-motion`) already applies on its own, and nothing overrides it.
 

@@ -54,7 +54,7 @@ export class EpRadio extends LitElement {
         border: 5px solid var(--ep-color-interactive-primary-default);
         box-shadow:
           0 0 0 var(--ep-border-width-thin) var(--ep-color-accent-default),
-          0 3px 8px -3px color-mix(in srgb, var(--ep-color-interactive-primary-default) 60%, transparent);
+          0 3px 8px -3px color-mix(in srgb, var(--ep-color-interactive-primary-default) calc(var(--ep-effect-glow-strength) * 100%), transparent);
       }
 
       :host(:focus-visible) .control {

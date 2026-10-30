@@ -75,7 +75,7 @@ export class EpCheckbox extends LitElement {
       input:indeterminate {
         border-color: var(--ep-color-accent-default);
         background: var(--ep-color-interactive-primary-default);
-        box-shadow: var(--ep-shadow-sheen), 0 3px 8px -3px color-mix(in srgb, var(--ep-color-interactive-primary-default) 60%, transparent);
+        box-shadow: var(--ep-shadow-sheen), 0 3px 8px -3px color-mix(in srgb, var(--ep-color-interactive-primary-default) calc(var(--ep-effect-glow-strength) * 100%), transparent);
       }
 
       input:focus-visible {

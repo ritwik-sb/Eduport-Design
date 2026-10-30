@@ -49,7 +49,7 @@ export class EpStat extends LitElement {
 
       :host([tone]:not([tone=''])) .base {
         background: var(--ep-tone-subtle);
-        box-shadow: none;
+        box-shadow: var(--ep-shadow-toned);
         color: var(--ep-tone-text);
       }
 

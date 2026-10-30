@@ -32,6 +32,9 @@ importers:
       '@fontsource-variable/noto-sans-malayalam':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource-variable/nunito':
+        specifier: ^5.3.0
+        version: 5.3.0
     devDependencies:
       vite:
         specifier: ^8.0.0
@@ -55,6 +58,9 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0
       '@fontsource-variable/inter':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource-variable/nunito':
         specifier: ^5.3.0
         version: 5.3.0
       lit:
@@ -417,6 +423,9 @@ packages:
 
   '@fontsource-variable/noto-sans-malayalam@5.3.0':
     resolution: {integrity: sha512-SKo5dwznLLyLC97M3d8FVmgUylNzI3TkVUshjFM1InaRvRI9S/GGRfWzSs2DlL/9tZU1/fU1GsQi+PjkQlMQGQ==}
+
+  '@fontsource-variable/nunito@5.3.0':
+    resolution: {integrity: sha512-tw0ch7evIDSwoeUy+0XzocYHfbRWLeCRPJy22KgbrLjDLAbNw/fErBiil10Ssrs3Sjr55zaZrr36a975j8cBkQ==}
 
   '@github/catalyst@1.8.1':
     resolution: {integrity: sha512-dnN4WWpbeuQvA17LvsGdlXEueJdBk9y+I+WO5pdNpoHNOXPsFcz3hJrq1iRmdsNgQOf4S8e83axtwIxvG62eWA==}
@@ -2720,6 +2729,8 @@ snapshots:
   '@fontsource-variable/inter@5.3.0': {}
 
   '@fontsource-variable/noto-sans-malayalam@5.3.0': {}
+
+  '@fontsource-variable/nunito@5.3.0': {}
 
   '@github/catalyst@1.8.1': {}
 

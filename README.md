@@ -15,6 +15,7 @@ A reusable design system for Eduport products, in the spirit of IBM Carbon and t
 - **Built on the Eduport brand.** Every color scale is generated from the brand orange `#fb6514`.
 - **Light and dark themes**, switched with one attribute.
 - **Soft or sharp corners**, a separate switch that works with either theme.
+- **Two styles**: Signal (the default) and Playground, a bolder, friendlier look for student-facing apps. One attribute, same components. See [docs/playground.md](docs/playground.md).
 - **Accessible by default.** The target is WCAG 2.1 AA. A contrast check covers every key color pair in both themes.
 - **Framework-agnostic.** Lit web components with `@lit/react` wrappers, so there's one codebase to maintain.
 
@@ -68,6 +69,7 @@ Import the CSS once, at your app's entry point:
 import '@eduportdesign/tokens/css';                 // primitives, light theme, soft corners
 import '@eduportdesign/tokens/css/theme-dark';      // optional: dark theme
 import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners
+import '@eduportdesign/tokens/css/style-playground'; // optional: the Playground style (data-style="playground")
 import '@eduportdesign/tokens/css/base';            // recommended: body, headings, text, links, focus
 ```
 

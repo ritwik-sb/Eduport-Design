@@ -74,12 +74,21 @@ export class EpCard extends LitElement {
         background: var(--ep-color-surface-muted);
       }
 
-      /* A toned card turns its media area into a tinted cover. Slotted content reads the --ep-tone-* properties. */
+      /* A toned card turns its media area into a tinted cover. Slotted content reads the --ep-tone-* properties.
+         A style can fill the whole card with the tone (effect.tone-fill = 1): the tone goes over the variant's fill,
+         and the cover lightens so it still reads as a panel. At 0, only the cover is tinted. */
+      :host([tone]:not([tone=''])) .base {
+        --_tone-fill: color-mix(in srgb, var(--ep-tone-subtle) calc(var(--ep-effect-tone-fill) * 100%), transparent);
+        background-image: linear-gradient(var(--_tone-fill), var(--_tone-fill));
+        color: color-mix(in srgb, var(--ep-tone-text) calc(var(--ep-effect-tone-fill) * 100%), var(--ep-color-text-primary));
+      }
+
       :host([tone]:not([tone=''])) .media {
+        --_cover-lift: color-mix(in srgb, var(--ep-color-surface-raised) calc(var(--ep-effect-tone-fill) * 60%), transparent);
         margin: var(--ep-space-100);
         padding: var(--ep-space-150);
         border-radius: var(--ep-radius-control);
-        background: var(--ep-tone-subtle);
+        background: linear-gradient(var(--_cover-lift), var(--_cover-lift)), var(--ep-tone-subtle);
         color: var(--ep-tone-text);
       }
 
