@@ -1,5 +1,27 @@
 # @eduportdesign/react
 
+## 0.6.0
+
+### Minor Changes
+
+- ce478c5: New `ep-cover`: generated artwork (waves, rings, dots, blocks, orbit, mesh) in a category color, seeded so each course keeps its own picture. New `ep-sparkline`: a smooth line, area or bar trend with no axes, with a marker on the last value; `ep-stat` gets a `chart` slot for it.
+
+  The brand hero gains two slow blobs of color (new tokens `color.hero.aurora-1` and `aurora-2`), film grain, and a soft light that follows a mouse pointer. The drift and the light are off under reduced motion.
+
+  Fix: a card or stat with no `tone` no longer gets the neutral tone tint (an empty `tone=""` attribute matched `:host([tone])`), so card media is edge to edge again and a plain stat is a white tile.
+
+- 5243641: Controls now feel physical. Primary and danger buttons get a rim light, a faint base shade and a glow tinted by their own color; secondary buttons rest on a soft shadow. Text fields, selects and textareas sit in a faint recess and open a soft halo on focus. The switch thumb springs and stretches under the finger, the checkbox tick and radio dot pop in, the tab indicator is one bar that slides, the progress fill is lit from above, and skeletons sweep instead of pulsing.
+
+  Motion policy change, on purpose: buttons and interactive cards rise 2px on hover and buttons press to 0.98. New tokens `shadow.sheen`, `shadow.control`, `shadow.inset`, `motion.easing.spring`, `motion.distance.lift`, `motion.scale.press` and `motion.scale.pop`. All distances and scales are neutral under reduced motion. `docs/motion.md` is updated to match.
+
+### Patch Changes
+
+- Updated dependencies [ce478c5]
+- Updated dependencies [e7beb5a]
+- Updated dependencies [f9c2f73]
+- Updated dependencies [5243641]
+  - @eduportdesign/web-components@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes
