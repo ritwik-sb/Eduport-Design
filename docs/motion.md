@@ -26,7 +26,7 @@ Every interactive component implements the states that apply to it, in this prio
 |---|---|---|---|
 | Rest | — | Base appearance. Control boundary ≥ 3:1 against its background. | `border.strong`, `interactive.*.default` |
 | Hover | Pointer over, only under `@media (hover: hover)` | Fill or border shifts one step. Filled and bordered buttons and interactive cards also rise `distance-lift` (2px) as their shadow deepens. | `interactive.*.hover`, `motion.distance.lift` |
-| Active / pressed | Pointer down or key down | One step darker than hover; buttons also scale to `scale-press` (0.98) and spring back on release. | `interactive.*.active`, `motion.scale.press` |
+| Active / pressed | Pointer down or key down | One step darker than hover; buttons also scale to `scale-press` (0.98) and spring back on release. In the Playground style they move down `distance-press` onto their hard edge instead. | `interactive.*.active`, `motion.scale.press`, `motion.distance.press` |
 | Focus-visible | Keyboard focus only (`:focus-visible`) | The shared `focusRing`: 2px `border.focus` outline, 2px offset. Never removed, never animated. | `border.focus` |
 | Selected / checked | Persistent choice | `accent.default` indicator plus a non-color cue (check, weight, underline). | `accent.default`, `accent.subtle` |
 | Invalid | Failed validation | `border.danger` plus an icon and error text. Color alone is never the signal. | `border.danger`, `text.danger` |
@@ -236,6 +236,7 @@ Every transition and animation uses `--ep-motion-*` tokens. Never write raw `ms`
 | `--ep-motion-scale-press` | 0.98 | **1** | Scale of a pressed button |
 | `--ep-motion-scale-pop` | 0.5 | **1** | Starting scale of a tick or dot popping in |
 | `--ep-motion-distance-lift` | 2px | **0px** | Hover rise of buttons and interactive cards |
+| `--ep-motion-distance-press` | 0px (4px in the Playground style) | **0px** | How far a pressed button moves down onto its hard edge |
 | `--ep-motion-easing-standard` | `cubic-bezier(0.2, 0, 0, 1)` | same | State changes |
 | `--ep-motion-easing-enter` | `cubic-bezier(0, 0, 0, 1)` | same | Things appearing |
 | `--ep-motion-easing-exit` | `cubic-bezier(0.3, 0, 1, 1)` | same | Things leaving |

@@ -1,6 +1,6 @@
 {
   "name": "@eduportdesign/storybook",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "description": "Storybook workbench for the Eduport web components.",
   "type": "module",
@@ -15,6 +15,7 @@
     "@eduportdesign/web-components": "workspace:^",
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/nunito": "^5.3.0",
     "lit": "^3.3.0"
   },
   "devDependencies": {

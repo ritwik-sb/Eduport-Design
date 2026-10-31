@@ -8,6 +8,7 @@ Design tokens for the Eduport Design System, in [DTCG](https://www.designtokens.
 import '@eduportdesign/tokens/css';                 // primitives, light theme, soft corners, compact + touch density
 import '@eduportdesign/tokens/css/theme-dark';      // [data-theme="dark"]
 import '@eduportdesign/tokens/css/corners-sharp';   // [data-corners="sharp"]
+import '@eduportdesign/tokens/css/style-playground'; // [data-style="playground"], see docs/playground.md
 import '@eduportdesign/tokens/css/base';            // opt-in element styles: body, headings, text, links, focus
 ```
 
@@ -30,6 +31,7 @@ Type roles (`--ep-font-heading-{xl,lg,md,sm,xs}`, `--ep-font-body-{lg,md,sm}`, `
 - `src/type/` type roles (composite typography tokens).
 - `src/contrast/` the increased-contrast overrides, written as references to other semantic tokens so they work in every theme.
 - `src/corners/` semantic radius tokens per corner mode.
+- `src/styles/` the Playground style: type, border width, radii and effects (`playground.json`, `playground-corners.json`) and its light and dark colors and shadows. See [docs/playground.md](../../docs/playground.md).
 - `src/density/` control heights, minimum target size and input text size per density.
 - `src/motion/` motion tokens beyond the primitives (move duration, enter distances and scale), with `reduced.json` holding the reduced-motion values.
 - `src/layout/` breakpoints, grid columns, page margin, gutter, section gap and content widths. `base.json` is the phone value; `md.json`, `lg.json` and `xl.json` override it inside `min-width` media queries.

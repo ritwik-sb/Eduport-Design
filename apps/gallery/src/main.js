@@ -1,9 +1,11 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource-variable/nunito';
 import '@fontsource-variable/noto-sans-malayalam';
 import '@eduportdesign/tokens/css';
 import '@eduportdesign/tokens/css/theme-dark';
 import '@eduportdesign/tokens/css/corners-sharp';
+import '@eduportdesign/tokens/css/style-playground';
 import { iconNames, toast } from '@eduportdesign/web-components';
 import logoManifest from '@eduportdesign/logos/logos.json';
 import wordmarkWhite from '@eduportdesign/logos/wordmark-white.svg?raw';
@@ -11,7 +13,7 @@ import './gallery.css';
 
 const root = document.documentElement;
 
-// Theme and corner switches, remembered between visits.
+// Theme, style and corner switches, remembered between visits.
 const store = {
   get: (key) => {
     try {
@@ -39,6 +41,7 @@ function apply(attr, value) {
 
 const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
 apply('theme', store.get('ep-gallery-theme') ?? root.dataset.theme ?? (prefersDark ? 'dark' : 'light'));
+apply('style', store.get('ep-gallery-style') ?? 'signal');
 apply('corners', store.get('ep-gallery-corners') ?? 'soft');
 
 // Turning it off removes the attribute, so the OS reduced-motion setting still applies underneath.
@@ -54,12 +57,13 @@ reduceMotion.addEventListener('change', () => applyMotion(reduceMotion.checked))
 
 document.addEventListener('click', (event) => {
   const target = event.target.closest(
-    '[data-set-theme], [data-set-corners], [data-open], [data-close], [data-toast], [data-toast-undo], [data-fake-save]',
+    '[data-set-theme], [data-set-style], [data-set-corners], [data-open], [data-close], [data-toast], [data-toast-undo], [data-fake-save]',
   );
   if (!target) return;
   if (target.dataset.setTheme) apply('theme', target.dataset.setTheme);
   if (target.dataset.fakeSave) fakeSave(target, Number(target.dataset.fakeSave));
   if (target.hasAttribute('data-toast-undo')) showUndoToast();
+  if (target.dataset.setStyle) apply('style', target.dataset.setStyle);
   if (target.dataset.setCorners) apply('corners', target.dataset.setCorners);
   if (target.dataset.open) document.getElementById(target.dataset.open).show();
   if (target.hasAttribute('data-close')) target.closest('ep-modal').close();
