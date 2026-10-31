@@ -34,6 +34,7 @@ export class EpButton extends LitElement {
     disabled: { type: Boolean, reflect: true },
     loading: { type: Boolean, reflect: true },
     fullWidth: { type: Boolean, reflect: true, attribute: 'full-width' },
+    ariaLabel: { attribute: 'aria-label' },
     _spinning: { state: true },
   };
 
@@ -49,6 +50,8 @@ export class EpButton extends LitElement {
   declare loading: boolean;
   /** Stretches the button to the width of its container. */
   declare fullWidth: boolean;
+  /** Accessible name for a button with no text, such as an icon-only one. Passed on to the native `<button>`. */
+  declare ariaLabel: string | null;
   declare _spinning: boolean;
 
   #internals = this.attachInternals();
@@ -63,6 +66,7 @@ export class EpButton extends LitElement {
     this.disabled = false;
     this.fullWidth = false;
     this.loading = false;
+    this.ariaLabel = null;
     this._spinning = false;
     // Capture on the host runs before any listener the app adds, so a press while loading never reaches them.
     this.addEventListener(
@@ -104,7 +108,9 @@ export class EpButton extends LitElement {
 
   formDisabledCallback(disabled: boolean) {
     this.#formDisabled = disabled;
-    this.requestUpdate();
+    // The browser can call this partway through an update, when requestUpdate() is ignored and the render that
+    // just ran has missed the change. Ask again once that update is over.
+    queueMicrotask(() => this.requestUpdate());
   }
 
   get #isDisabled() {
@@ -124,6 +130,7 @@ export class EpButton extends LitElement {
       class="button"
       type="button"
       ?disabled=${this.#isDisabled}
+      aria-label=${this.ariaLabel ?? nothing}
       aria-busy=${this.loading ? 'true' : nothing}
       @click=${this.#onClick}
     >
