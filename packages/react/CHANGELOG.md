@@ -1,5 +1,12 @@
 # @eduportdesign/react
 
+## 0.6.1
+
+### Patch Changes
+
+- Updated dependencies [e01f623]
+  - @eduportdesign/web-components@0.6.1
+
 ## 0.6.0
 
 ### Minor Changes
