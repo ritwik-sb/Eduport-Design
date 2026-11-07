@@ -14,6 +14,9 @@
 // tokens.css also carries the motion tokens, with reduced values under prefers-reduced-motion and
 // [data-motion="reduced"]: movement drops to zero and durations cap at 100ms, so fades stay and nothing slides.
 //
+// palette-sage.css  the Sage & Sand palette under [data-palette="sage"]: the Signal style's colors and shadows in sage
+//                    and sand instead of the default Clay. Light and dark. Load it after tokens.css and theme-dark.css.
+//
 // style-playground.css  the Playground style under [data-style="playground"]: type, border width, corner radii, hard
 //                    edges and press movement, plus its own light and dark colors and shadows. Load it after tokens.css
 //                    (and after theme-dark.css to use it in dark).
@@ -239,3 +242,19 @@ for (const part of ['style', 'corners', 'light', 'dark']) {
   await rm(`dist/css/playground-${part}.css`);
 }
 await writeFile('dist/css/style-playground.css', playgroundParts.join('\n') + '\n' + playgroundReduced);
+
+// Palettes recolor the Signal style (the default look). Clay is built into tokens.css and theme-dark.css; other
+// palettes are their own axis (data-palette), loaded on demand. As with Playground, the dark block is more specific,
+// so it wins when the theme is dark wherever data-theme sits. Playground keeps its own colors: use one or the other.
+for (const palette of ['sage']) {
+  const selector = `[data-palette="${palette}"]`;
+  const dark = [`${selector}[data-theme="dark"]`, `${selector} [data-theme="dark"]`, `[data-theme="dark"] ${selector}`].join(',\n');
+  await override(`src/palettes/${palette}-light.json`, `palette-${palette}-light.css`, selector).buildAllPlatforms();
+  await override(`src/palettes/${palette}-dark.json`, `palette-${palette}-dark.css`, dark).buildAllPlatforms();
+  const parts = [];
+  for (const mode of ['light', 'dark']) {
+    parts.push(await readFile(`dist/css/palette-${palette}-${mode}.css`, 'utf8'));
+    await rm(`dist/css/palette-${palette}-${mode}.css`);
+  }
+  await writeFile(`dist/css/palette-${palette}.css`, parts.join('\n'));
+}

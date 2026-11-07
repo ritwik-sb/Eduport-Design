@@ -3,29 +3,29 @@
     "$type": "color",
     "background": {
       "default": {
-        "$value": "{color.white}"
+        "$value": "{color.clay.10}"
       },
       "canvas": {
-        "$value": "{color.gray.15}",
+        "$value": "{color.clay.15}",
         "$description": "The page behind the content sheet and cards. A step darker than the sheet, so raised surfaces separate without borders."
       },
       "subtle": {
-        "$value": "{color.gray.10}"
+        "$value": "{color.clay.20}"
       },
       "inverse": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.clay.95}"
       },
       "scrim": {
-        "$value": "#0f0f0fa3",
+        "$value": "#28211ca3",
         "$description": "Backdrop behind modal dialogs."
       }
     },
     "surface": {
       "default": {
-        "$value": "{color.white}"
+        "$value": "{color.clay.10}"
       },
       "sheet": {
-        "$value": "{color.white}",
+        "$value": "{color.clay.10}",
         "$description": "The main content sheet that sits on background.canvas."
       },
       "raised": {
@@ -35,36 +35,36 @@
         "$value": "{color.white}"
       },
       "sunken": {
-        "$value": "{color.gray.10}"
+        "$value": "{color.clay.20}"
       },
       "muted": {
-        "$value": "{color.gray.20}",
+        "$value": "{color.clay.25}",
         "$description": "Tinted fill that stays visible on the page: filled cards, avatars."
       }
     },
     "text": {
       "primary": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.clay.95}"
       },
       "secondary": {
-        "$value": "{color.gray.70}"
+        "$value": "{color.clay.70}"
       },
       "disabled": {
-        "$value": "{color.gray.50}"
+        "$value": "{color.clay.50}"
       },
       "inverse": {
-        "$value": "{color.white}"
+        "$value": "{color.clay.10}"
       },
       "on-color": {
         "$value": "{color.white}",
         "$description": "Text and icons on the danger fill. White in both themes."
       },
       "on-primary": {
-        "$value": "{color.white}",
-        "$description": "Text and icons on the primary (brand orange) fill, including checked checkboxes and switches. White in both themes: 4.53:1 or more on every primary state."
+        "$value": "{color.coral.100}",
+        "$description": "Text and icons on the primary (coral) fill, including checked checkboxes and switches. Dark in both themes: coral carries dark text at 4.9:1 or more on every primary state."
       },
       "link": {
-        "$value": "{color.brand.70}"
+        "$value": "{color.coral.70}"
       },
       "info": {
         "$value": "{color.blue.70}"
@@ -81,14 +81,14 @@
     },
     "border": {
       "default": {
-        "$value": "{color.gray.30}"
+        "$value": "{color.clay.30}"
       },
       "strong": {
-        "$value": "{color.gray.60}",
+        "$value": "{color.clay.60}",
         "$description": "Meets 3:1 against backgrounds. Use for input and control boundaries."
       },
       "focus": {
-        "$value": "{color.brand.60}"
+        "$value": "{color.coral.60}"
       },
       "danger": {
         "$value": "{color.red.60}"
@@ -96,11 +96,11 @@
     },
     "accent": {
       "default": {
-        "$value": "{color.brand.60}",
-        "$description": "Non-text marks and the boundary of checked controls: progress, active tab underline, checkbox and radio edges. brand.60 in light, because the brand color itself is under 3:1 on tinted backgrounds; dark uses the exact brand orange."
+        "$value": "{color.coral.60}",
+        "$description": "Non-text marks and the boundary of checked controls: progress, active tab underline, checkbox and radio edges. A deeper coral than the primary fill, so thin marks keep 3:1 on tinted backgrounds."
       },
       "subtle": {
-        "$value": "{color.brand.10}",
+        "$value": "{color.coral.20}",
         "$description": "Selected or highlighted rows and cards."
       }
     },
@@ -193,14 +193,14 @@
     "interactive": {
       "primary": {
         "default": {
-          "$value": "{color.brand.58}",
-          "$description": "The brand orange, darkened just enough for white text (text.on-primary, 4.53:1). The exact logo orange is brand.50."
+          "$value": "{color.coral.55}",
+          "$description": "Coral, deep enough to stand out 3:1 from the page while carrying dark text (text.on-primary). Hover lightens to coral.50."
         },
         "hover": {
-          "$value": "{color.brand.60}"
+          "$value": "{color.coral.50}"
         },
         "active": {
-          "$value": "{color.brand.70}"
+          "$value": "{color.coral.58}"
         }
       },
       "secondary": {
@@ -209,10 +209,10 @@
           "$description": "Secondary buttons are outlined: a border.strong edge and text.primary label on a clear fill, so they never outweigh the primary button and never read as disabled."
         },
         "hover": {
-          "$value": "{color.gray.20}"
+          "$value": "{color.clay.20}"
         },
         "active": {
-          "$value": "{color.gray.30}"
+          "$value": "{color.clay.25}"
         }
       },
       "ghost": {
@@ -220,10 +220,10 @@
           "$value": "#ffffff00"
         },
         "hover": {
-          "$value": "{color.gray.20}"
+          "$value": "{color.clay.20}"
         },
         "active": {
-          "$value": "{color.gray.30}"
+          "$value": "{color.clay.25}"
         }
       },
       "danger": {
@@ -238,7 +238,7 @@
         }
       },
       "disabled": {
-        "$value": "{color.gray.20}"
+        "$value": "{color.clay.20}"
       }
     },
     "feedback": {
@@ -277,14 +277,14 @@
     },
     "rail": {
       "background": {
-        "$value": "{color.gray.95}",
-        "$description": "A dark navigation rail in both themes (ep-side-nav appearance=\"inverse\"), so the brand orange can glow on it."
+        "$value": "{color.clay.95}",
+        "$description": "A dark cocoa navigation rail in both themes (ep-side-nav appearance=\"inverse\"), so the coral marker glows on it."
       },
       "text": {
         "$value": "{color.white}"
       },
       "text-secondary": {
-        "$value": "{color.gray.40}",
+        "$value": "{color.clay.40}",
         "$description": "Inactive items and group headings on the rail."
       },
       "hover": {
@@ -297,28 +297,28 @@
         "$value": "#ffffff1f"
       },
       "accent": {
-        "$value": "{color.brand.50}",
-        "$description": "The current-item marker and its glow. The exact logo orange: 5:1 or more on the rail."
+        "$value": "{color.coral.50}",
+        "$description": "The current-item marker and its glow: 3:1 or more on the rail."
       },
       "badge": {
-        "$value": "{color.brand.50}",
+        "$value": "{color.coral.50}",
         "$description": "Count badges on the rail. Pair with rail.on-badge."
       },
       "on-badge": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.coral.100}"
       }
     },
     "hero": {
       "start": {
-        "$value": "{color.brand.70}",
-        "$description": "Start of the brand hero gradient (ep-page-header variant=\"hero\")."
+        "$value": "#3a2741",
+        "$description": "Start of the hero gradient (ep-page-header variant=\"hero\"): a deep plum, so coral and pastel accents glow on it."
       },
       "end": {
-        "$value": "{color.brand.58}",
+        "$value": "#5e3347",
         "$description": "End of the hero gradient. White text stays at 4.5:1 or more on both ends."
       },
       "glow": {
-        "$value": "{color.brand.50}",
+        "$value": "{color.coral.50}",
         "$description": "Radial highlight in the hero's top-right corner. Keep text off it, or put the text on a chip."
       },
       "text": {
@@ -329,11 +329,11 @@
         "$description": "Translucent dark tile for stats on the hero."
       },
       "aurora-1": {
-        "$value": "{color.pink.60}",
+        "$value": "{color.coral.40}",
         "$description": "First drifting blob in the hero, low and to the right. Text stays on the gradient, never on the blobs."
       },
       "aurora-2": {
-        "$value": "{color.violet.70}",
+        "$value": "{color.violet.50}",
         "$description": "Second drifting blob in the hero, behind the stat chips."
       }
     }
@@ -343,55 +343,93 @@
     "raised": {
       "$value": [
         {
-          "color": "#0000000f",
+          "color": "#78503c14",
           "offsetX": "0px",
           "offsetY": "0px",
           "blur": "0px",
           "spread": "1px"
         },
         {
-          "color": "#0000000d",
+          "color": "#78503c0f",
+          "offsetX": "0px",
+          "offsetY": "-3px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#78503c12",
           "offsetX": "0px",
           "offsetY": "1px",
           "blur": "2px",
           "spread": "0px"
         },
         {
-          "color": "#00000014",
+          "color": "#78503c3d",
           "offsetX": "0px",
-          "offsetY": "8px",
-          "blur": "16px",
-          "spread": "-8px"
+          "offsetY": "12px",
+          "blur": "24px",
+          "spread": "-12px"
         }
       ],
-      "$description": "Cards, tooltips and other surfaces that sit just above the page: a 1px ring plus two soft layers, so cards need no border. Use with color.surface.raised."
+      "$description": "Cards, tooltips and other surfaces that sit just above the page: a faint ring, a soft pressed edge along the bottom (the clay look) and a warm drop shadow, so cards need no border. Use with color.surface.raised."
     },
     "overlay": {
-      "$value": "{shadow.lg}",
-      "$description": "Menus, popovers, dialogs, toasts: anything that floats over content. Use with color.surface.overlay."
-    },
-    "raised-hover": {
       "$value": [
         {
-          "color": "#00000026",
+          "color": "#78503c1a",
           "offsetX": "0px",
           "offsetY": "0px",
           "blur": "0px",
           "spread": "1px"
         },
         {
-          "color": "#00000012",
+          "color": "#78503c14",
           "offsetX": "0px",
           "offsetY": "2px",
-          "blur": "4px",
+          "blur": "6px",
           "spread": "0px"
         },
         {
-          "color": "#00000033",
+          "color": "#78503c52",
           "offsetX": "0px",
-          "offsetY": "14px",
-          "blur": "24px",
-          "spread": "-10px"
+          "offsetY": "24px",
+          "blur": "48px",
+          "spread": "-16px"
+        }
+      ],
+      "$description": "Menus, popovers, dialogs, toasts: anything that floats over content. Use with color.surface.overlay."
+    },
+    "raised-hover": {
+      "$value": [
+        {
+          "color": "#78503c24",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "1px"
+        },
+        {
+          "color": "#78503c12",
+          "offsetX": "0px",
+          "offsetY": "-3px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#78503c1a",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "8px",
+          "spread": "0px"
+        },
+        {
+          "color": "#78503c52",
+          "offsetX": "0px",
+          "offsetY": "18px",
+          "blur": "32px",
+          "spread": "-12px"
         }
       ],
       "$description": "Raised surfaces that respond to the pointer (a card that is a link). Same position, a stronger ring and deeper shadow: the surface doesn't move."
@@ -399,39 +437,40 @@
     "sheen": {
       "$value": [
         {
-          "color": "#ffffff40",
+          "color": "#ffffff59",
           "offsetX": "0px",
-          "offsetY": "1px",
+          "offsetY": "1.5px",
           "blur": "0px",
           "spread": "0px",
           "inset": true
         },
         {
-          "color": "#0000001a",
+          "color": "#0000001f",
           "offsetX": "0px",
-          "offsetY": "-1px",
+          "offsetY": "-3px",
           "blur": "0px",
           "spread": "0px",
           "inset": true
         }
       ],
-      "$description": "Rim light and base shade inside a solid fill (primary, danger button): the edge catches light, so the fill reads as a physical key. Add a colored drop shadow beside it."
+      "$description": "Rim light along the top and a pressed edge along the bottom, inside a solid fill (primary, danger button): the fill reads as a soft clay key. Add a colored drop shadow beside it."
     },
     "control": {
       "$value": [
         {
-          "color": "#0000000f",
+          "color": "#78503c14",
           "offsetX": "0px",
           "offsetY": "1px",
           "blur": "2px",
           "spread": "0px"
         },
         {
-          "color": "#0000000a",
+          "color": "#78503c0f",
           "offsetX": "0px",
-          "offsetY": "0px",
+          "offsetY": "-2px",
           "blur": "0px",
-          "spread": "0px"
+          "spread": "0px",
+          "inset": true
         }
       ],
       "$description": "Resting shadow for bordered controls: secondary button, segmented control, select trigger. Pair with border.default."
@@ -456,14 +495,22 @@
     "toned": {
       "$value": [
         {
-          "color": "#00000000",
+          "color": "#78503c0f",
           "offsetX": "0px",
-          "offsetY": "0px",
+          "offsetY": "-3px",
           "blur": "0px",
-          "spread": "0px"
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#78503c33",
+          "offsetX": "0px",
+          "offsetY": "10px",
+          "blur": "20px",
+          "spread": "-12px"
         }
       ],
-      "$description": "Stat tiles on a categorical tint. Flat by default: the tint is the separation."
+      "$description": "Stat tiles on a categorical tint: the same soft pressed edge and warm drop as raised surfaces, without the ring."
     }
   }
 }

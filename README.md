@@ -12,10 +12,10 @@ A reusable design system for Eduport products, in the spirit of IBM Carbon and t
 
 ## Highlights
 
-- **Built on the Eduport brand.** Every color scale is generated from the brand orange `#fb6514`.
+- **Soft palettes.** Clay (warm coral on warm off-white) by default, and Sage & Sand as a one-attribute alternative (`data-palette="sage"`). The logo orange `#fb6514` stays in the logo.
 - **Light and dark themes**, switched with one attribute.
 - **Soft or sharp corners**, a separate switch that works with either theme.
-- **Two styles**: Signal (the default) and Playground, a bolder, friendlier look for student-facing apps. One attribute, same components. See [docs/playground.md](docs/playground.md).
+- **Two styles**: Signal (the default, in either palette) and Playground, a bolder, friendlier look for student-facing apps. One attribute, same components. See [docs/playground.md](docs/playground.md).
 - **Accessible by default.** The target is WCAG 2.1 AA. A contrast check covers every key color pair in both themes.
 - **Framework-agnostic.** Lit web components with `@lit/react` wrappers, so there's one codebase to maintain.
 
@@ -69,14 +69,15 @@ Import the CSS once, at your app's entry point:
 import '@eduportdesign/tokens/css';                 // primitives, light theme, soft corners
 import '@eduportdesign/tokens/css/theme-dark';      // optional: dark theme
 import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners
+import '@eduportdesign/tokens/css/palette-sage';    // optional: the Sage & Sand palette (data-palette="sage")
 import '@eduportdesign/tokens/css/style-playground'; // optional: the Playground style (data-style="playground")
 import '@eduportdesign/tokens/css/base';            // recommended: body, headings, text, links, focus
 ```
 
-Then pick the theme and corner mode on the root element. Both attributes are optional and can change at runtime:
+Load the fonts too (`npm install @fontsource-variable/onest @fontsource-variable/gabarito`, then import both). Then pick the theme, palette and corner mode on the root element. All attributes are optional and can change at runtime:
 
 ```html
-<html data-theme="dark" data-corners="sharp">
+<html data-theme="dark" data-palette="sage" data-corners="sharp">
 ```
 
 Style your own UI with the semantic tokens:
@@ -120,8 +121,8 @@ App shell (top bar, side nav, page header), Button, Icon button, Text field, Tex
 
 | | |
 |---|---|
-| **Color** | Six 10–100 scales (brand, gray, red, green, amber, blue). Step 60 of every hue takes white text at AA contrast. Primary actions use `#d64200`, the brand orange `#fb6514` darkened just enough for white text to pass AA (4.53:1). |
-| **Type** | [Inter](https://rsms.me/inter/) for UI text, Noto Sans Malayalam for Malayalam, JetBrains Mono for code and IDs. Type roles (`heading`, `body`, `label`, `code`) set a whole text style in one token. |
+| **Color** | Two palettes on the same semantic tokens: **Clay** (default; `coral` key color, `clay` neutrals) and **Sage & Sand** (`data-palette="sage"`; `sage` key color, `sand` neutrals). Status and category hues (red, green, amber, blue, violet, teal, pink) are shared. Every pair is checked for WCAG AA in both palettes and both themes. |
+| **Type** | [Onest](https://fonts.google.com/specimen/Onest) for UI text, [Gabarito](https://fonts.google.com/specimen/Gabarito) for headings, Noto Sans Malayalam for Malayalam, JetBrains Mono for code and IDs. Type roles (`heading`, `body`, `label`, `code`) set a whole text style in one token. |
 | **Radius** | Semantic tokens `indicator`, `control`, `container` and `round`, set by the corner mode. |
 | **Density** | Compact for mouse and trackpad, touch (44px controls, 16px input text) for phones and tablets. Touch turns on by itself on touch screens; `data-density` overrides it. |
 | **Spacing and layout** | 4px-based space scale; a 4 / 8 / 12 column grid whose margin, gutter and section gap grow at the `md` (600px), `lg` (1024px) and `xl` (1440px) breakpoints. See [docs/layout.md](docs/layout.md). |

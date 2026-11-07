@@ -1,10 +1,11 @@
-import '@fontsource-variable/inter';
-import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource-variable/onest';
+import '@fontsource-variable/gabarito';
 import '@fontsource-variable/nunito';
 import '@fontsource-variable/noto-sans-malayalam';
 import '@eduportdesign/tokens/css';
 import '@eduportdesign/tokens/css/theme-dark';
 import '@eduportdesign/tokens/css/corners-sharp';
+import '@eduportdesign/tokens/css/palette-sage';
 import '@eduportdesign/tokens/css/style-playground';
 import { iconNames, toast } from '@eduportdesign/web-components';
 import logoManifest from '@eduportdesign/logos/logos.json';
@@ -42,6 +43,7 @@ function apply(attr, value) {
 const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
 apply('theme', store.get('ep-gallery-theme') ?? root.dataset.theme ?? (prefersDark ? 'dark' : 'light'));
 apply('style', store.get('ep-gallery-style') ?? 'signal');
+apply('palette', store.get('ep-gallery-palette') ?? 'clay');
 apply('corners', store.get('ep-gallery-corners') ?? 'soft');
 
 // Turning it off removes the attribute, so the OS reduced-motion setting still applies underneath.
@@ -57,13 +59,14 @@ reduceMotion.addEventListener('change', () => applyMotion(reduceMotion.checked))
 
 document.addEventListener('click', (event) => {
   const target = event.target.closest(
-    '[data-set-theme], [data-set-style], [data-set-corners], [data-open], [data-close], [data-toast], [data-toast-undo], [data-fake-save]',
+    '[data-set-theme], [data-set-style], [data-set-palette], [data-set-corners], [data-open], [data-close], [data-toast], [data-toast-undo], [data-fake-save]',
   );
   if (!target) return;
   if (target.dataset.setTheme) apply('theme', target.dataset.setTheme);
   if (target.dataset.fakeSave) fakeSave(target, Number(target.dataset.fakeSave));
   if (target.hasAttribute('data-toast-undo')) showUndoToast();
   if (target.dataset.setStyle) apply('style', target.dataset.setStyle);
+  if (target.dataset.setPalette) apply('palette', target.dataset.setPalette);
   if (target.dataset.setCorners) apply('corners', target.dataset.setCorners);
   if (target.dataset.open) document.getElementById(target.dataset.open).show();
   if (target.hasAttribute('data-close')) target.closest('ep-modal').close();
@@ -383,16 +386,23 @@ function swatch(token, label = token) {
     <b>${label}</b><span>${hex(rgb)}</span><span class="aa">Aa ${best.toFixed(1)}${best >= 4.5 ? '' : ' (large text)'}</span></figure>`;
 }
 function renderSwatches() {
-  const steps = ['10', '20', '30', '40', '50', '55', '57', '58', '60', '70', '80', '90', '100'];
-  document.getElementById('swatches-brand').innerHTML = steps.map((s) => swatch(`brand-${s}`, s)).join('');
-  const grays = ['10', '15', '20', '30', '40', '50', '60', '70', '80', '90', '95', '100'];
-  document.getElementById('swatches-gray').innerHTML = grays.map((s) => swatch(`gray-${s}`, s)).join('');
+  // The key and neutral scales follow the palette: coral and clay by default, sage and sand under data-palette="sage".
+  const sage = root.dataset.palette === 'sage';
+  const [key, neutral] = sage ? ['sage', 'sand'] : ['coral', 'clay'];
+  const keySteps = sage
+    ? ['10', '20', '30', '40', '50', '55', '60', '70', '80', '90', '100']
+    : ['10', '20', '30', '40', '50', '55', '58', '60', '70', '80', '90', '100'];
+  document.getElementById('swatches-brand').innerHTML = keySteps.map((s) => swatch(`${key}-${s}`, s)).join('');
+  document.getElementById('swatch-key-name').textContent = sage ? 'Sage' : 'Coral';
+  document.getElementById('swatch-neutral-name').textContent = sage ? 'Sand' : 'Clay';
+  const neutrals = ['10', '15', '20', '25', '30', '40', '50', '60', '70', '80', '90', '95', '100'];
+  document.getElementById('swatches-gray').innerHTML = neutrals.map((s) => swatch(`${neutral}-${s}`, s)).join('');
   document.getElementById('swatches-category').innerHTML = [1, 2, 3, 4, 5, 6]
     .map((n) => `<div class="swatch-tone">${['subtle', 'bold', 'text'].map((k) => swatch(`category-${n}-${k}`, `${n} ${k}`)).join('')}</div>`)
     .join('');
 }
 renderSwatches();
-new MutationObserver(renderSwatches).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+new MutationObserver(renderSwatches).observe(root, { attributes: true, attributeFilter: ['data-theme', 'data-palette', 'data-style'] });
 
 // Phones: the contents rail becomes a drawer behind a menu button
 {

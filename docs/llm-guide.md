@@ -29,17 +29,19 @@ npm install @eduportdesign/tokens @eduportdesign/web-components
 # React
 npm install @eduportdesign/tokens @eduportdesign/react
 
-# The font (recommended; the tokens fall back to the system font without it)
-npm install @fontsource-variable/inter
+# The fonts (recommended; the tokens fall back to the system font without them)
+npm install @fontsource-variable/onest @fontsource-variable/gabarito
 ```
 
 Import the CSS once, at the app entry point, before any component is used. Without `tokens.css` the components render with no colors.
 
 ```js
-import '@fontsource-variable/inter';
-import '@eduportdesign/tokens/css';                // required: all tokens, light theme, soft corners
+import '@fontsource-variable/onest';                // text font
+import '@fontsource-variable/gabarito';             // heading font
+import '@eduportdesign/tokens/css';                // required: all tokens, light theme, Clay palette, soft corners
 import '@eduportdesign/tokens/css/theme-dark';     // optional: enables data-theme="dark"
 import '@eduportdesign/tokens/css/corners-sharp';  // optional: enables data-corners="sharp"
+import '@eduportdesign/tokens/css/palette-sage';   // optional: enables data-palette="sage" (Sage & Sand)
 import '@eduportdesign/tokens/css/style-playground'; // optional: enables data-style="playground"
 import '@eduportdesign/tokens/css/base';           // recommended: body, headings, text, links and focus (see below)
 
@@ -58,7 +60,7 @@ import { Button, TextField } from '@eduportdesign/react';
 
 **Import the base stylesheet.** `tokens.css` only defines variables; it doesn't style any element. `@eduportdesign/tokens/css/base` styles the parts of a page that aren't components, so they match the components:
 
-- `body`: background, text color, Inter, 16px, line height (`color-scheme` follows `data-theme` from the token files themselves)
+- `body`: background, text color, Onest, 16px, line height (`color-scheme` follows `data-theme` from the token files themselves)
 - `h1`–`h6` on the type scale (32, 24, 20, 18, 16, 14px), semibold, tight line height
 - links in `--ep-color-text-link`, `code`/`pre` in the mono font, `hr`, images that never overflow, a focus ring on native focusable elements
 - `box-sizing: border-box` everywhere, and form elements inherit the font
@@ -144,16 +146,19 @@ Build every screen on `<ep-app-shell>`. It lays out the sticky top bar, the side
 Independent attributes on the root element. All are optional and can change at runtime.
 
 ```html
-<html data-theme="dark" data-corners="sharp" data-motion="reduced" data-contrast="more">
+<html data-theme="dark" data-palette="sage" data-corners="sharp" data-motion="reduced" data-contrast="more">
 ```
 
 | Attribute | Values | Default (attribute absent) | Needs |
 |---|---|---|---|
 | `data-theme` | `light`, `dark` | `light` | `theme-dark` CSS for `dark` |
 | `data-corners` | `soft`, `sharp` | `soft` | `corners-sharp` CSS for `sharp` |
+| `data-palette` | `sage` | Clay (warm coral and clay) | `palette-sage` CSS |
 | `data-style` | `playground` | the standard style (Signal) | `style-playground` CSS, and Nunito (`@fontsource-variable/nunito`) |
 | `data-motion` | `reduced` | full motion, unless the OS asks for reduced motion | nothing extra |
 | `data-contrast` | `more` | standard contrast, unless the OS asks for more contrast | nothing extra |
+
+`data-palette="sage"` switches the Signal style from Clay (warm coral on warm off-white) to Sage & Sand (sage green on sand). Same tokens, same components; only the values change. Pick one palette per app and set it on `<html>`. It has no effect under `data-style="playground"`.
 
 `data-style="playground"` switches to the Playground look (bold Nunito, 2px outlines, hard-edged shadows, buttons that press down, bright subject tints) with the same components and the same markup; use it for student-facing apps, and leave the attribute off for staff tools. Details in `docs/playground.md`.
 
@@ -485,7 +490,7 @@ All tokens are CSS custom properties on `:root`. Full source: `packages/tokens/s
 |---|---|
 | Page background | `--ep-color-background-default`, `-subtle`, `-inverse`, `-scrim` (modal backdrop) |
 | Surfaces (cards, panels, menus) | `--ep-color-surface-default`, `-raised`, `-sunken`, `-overlay`, `-muted` (tinted fill) |
-| Text | `--ep-color-text-primary`, `-secondary`, `-disabled`, `-inverse`, `-on-primary` (on the brand-orange primary fill), `-on-color` (on the danger fill), `-link`, `-info`, `-success`, `-warning`, `-danger` |
+| Text | `--ep-color-text-primary`, `-secondary`, `-disabled`, `-inverse`, `-on-primary` (on the primary fill; dark in Clay, white in Sage light), `-on-color` (on the danger fill), `-link`, `-info`, `-success`, `-warning`, `-danger` |
 | Borders | `--ep-color-border-default`, `-strong`, `-focus`, `-danger` |
 | Interactive fills | `--ep-color-interactive-{primary,secondary,ghost,danger}-{default,hover,active}`, `--ep-color-interactive-disabled` |
 | Feedback boxes | `--ep-color-feedback-{info,success,warning,danger}-{background,border}` |
@@ -493,7 +498,7 @@ All tokens are CSS custom properties on `:root`. Full source: `packages/tokens/s
 
 Pairing rules. These are the pairs the contrast check covers in both themes; stick to them:
 - Text (`text-primary`, `-secondary`, `-link`, and the status colors `-info`, `-success`, `-warning`, `-danger`) on `background-default`, `background-subtle`, `surface-raised`, `surface-overlay` or `surface-muted`.
-- `text-on-primary` (white) on `interactive-primary-{default,hover,active}` (4.53:1 and up). The primary fill is the brand orange darkened just enough for white text; never put white text on the exact logo orange `--ep-color-brand-50`, which is 3.01:1.
+- `text-on-primary` on `interactive-primary-{default,hover,active}`. Its value depends on the palette (dark text on Clay's coral, white on Sage light), so never hard-code white on a primary fill. Never use the logo orange `--ep-color-brand-50` as a fill.
 - `text-on-color` (white) on `interactive-danger-{default,hover,active}`.
 - `text-primary` on `interactive-{secondary,ghost}-{hover,active}`. The secondary button is outlined, with a clear fill.
 - `text-inverse` on `background-inverse`.
@@ -558,14 +563,14 @@ Touch density applies on its own on phones and tablets (`pointer: coarse`); `dat
 
 | Token | Use for | Soft | Sharp |
 |---|---|---|---|
-| `--ep-radius-indicator` | Small marks: checkbox, tag, badge, tooltip | 4px | 0 |
-| `--ep-radius-control` | Buttons, inputs, menu items | 6px | 0 |
-| `--ep-radius-container` | Cards, popovers, modals, toasts, panels | 10px | 0 |
+| `--ep-radius-indicator` | Small marks: checkbox, tag, badge, tooltip | 6px | 0 |
+| `--ep-radius-control` | Buttons, inputs, menu items | 14px | 0 |
+| `--ep-radius-container` | Cards, popovers, modals, toasts, panels | 22px | 0 |
 | `--ep-radius-round` | Always round: avatars, pills, dots | 9999px | 9999px |
 
 ### Typography
 
-- Families: `--ep-font-family-sans` (Inter for UI text, falling back to Noto Sans Malayalam for Malayalam), `--ep-font-family-display` (Bricolage Grotesque, used by the heading roles `heading-xl/lg/md`; load it with `import '@fontsource-variable/bricolage-grotesque/opsz.css'`, and headings fall back to Inter if you don't), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
+- Families: `--ep-font-family-sans` (Onest for UI text, falling back to Noto Sans Malayalam for Malayalam), `--ep-font-family-display` (Gabarito, used by the heading roles `heading-xl/lg/md`; load it with `import '@fontsource-variable/gabarito'`, and headings fall back to Onest if you don't), `--ep-font-family-mono` (JetBrains Mono, code and IDs).
 - Sizes: `--ep-font-size-{100..900}` = 12, 14, 16, 18, 20, 24, 28, 32, 40px. Body text is `300` (16px); dense UI and secondary text `200` (14px); captions `100` (12px).
 - Weights: `--ep-font-weight-{regular,medium,semibold,bold}`. Line heights: `--ep-font-line-height-{tight,snug,normal}` (tight for headings, normal for paragraphs).
 - Type roles: `--ep-font-{role}` are `font` shorthands (weight, size/line height, family), so one declaration sets the whole style. Use them for custom UI instead of combining the size, weight and line-height tokens by hand:
@@ -713,7 +718,7 @@ Paste this into your app's `AGENTS.md`, `CLAUDE.md`, `.cursor/rules` or `.github
 ## UI: Eduport Design System
 This app uses the Eduport Design System (@eduportdesign/tokens, @eduportdesign/web-components, @eduportdesign/react).
 Before writing UI, read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md and follow it. Before building an app shell or a new kind of page, also read https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/layout.md.
-- Import @eduportdesign/tokens/css and @eduportdesign/tokens/css/base once at the entry point, plus @fontsource-variable/inter. Don't add another CSS reset or framework on top.
+- Import @eduportdesign/tokens/css and @eduportdesign/tokens/css/base once at the entry point, plus @fontsource-variable/onest and @fontsource-variable/gabarito. Don't add another CSS reset or framework on top.
 - Build every screen on <ep-app-shell> with <ep-top-bar>, <ep-side-nav> and an <ep-page-header> first in the content (the guide's page skeleton), and space everything with gap and the --ep-space-* / --ep-layout-* tokens. Headings and paragraphs have no margins.
 - Use <ep-*> components (React: @eduportdesign/react) whenever one exists; never invent props or tags.
 - Style custom UI only with semantic --ep-* tokens (color, radius-indicator/control/container/round, space, layout, font, shadow, motion). No hex values, no primitive tokens like --ep-color-brand-60.

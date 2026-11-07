@@ -70,12 +70,18 @@ const merge = (base, over) => {
   return out;
 };
 
-// The Playground style overrides colors on top of each theme, so it is checked as that theme plus its overrides.
+// The Playground style and the palettes override colors on top of each theme, so each is checked as that theme plus
+// its overrides.
 const themes = [
   ...readdirSync(new URL('../src/themes', import.meta.url)).map((file) => [file, read(`../src/themes/${file}`)]),
   ...['light', 'dark'].map((mode) => [
     `playground (${mode})`,
     merge(read(`../src/themes/${mode}.json`), read(`../src/styles/playground-${mode}.json`)),
+  ]),
+  // Palettes recolor the Signal style the same way.
+  ...['light', 'dark'].map((mode) => [
+    `sage palette (${mode})`,
+    merge(read(`../src/themes/${mode}.json`), read(`../src/palettes/sage-${mode}.json`)),
   ]),
 ];
 

@@ -141,6 +141,10 @@
           <button type="button" data-set-style="signal" aria-pressed="true">Signal</button>
           <button type="button" data-set-style="playground" aria-pressed="false">Playground</button>
         </div>
+        <div class="segmented" role="group" aria-label="Palette">
+          <button type="button" data-set-palette="clay" aria-pressed="true">Clay</button>
+          <button type="button" data-set-palette="sage" aria-pressed="false">Sage &amp; Sand</button>
+        </div>
         <div class="segmented" role="group" aria-label="Corners">
           <button type="button" data-set-corners="soft" aria-pressed="true">Soft</button>
           <button type="button" data-set-corners="sharp" aria-pressed="false">Sharp</button>
@@ -199,17 +203,19 @@ npm install @eduportdesign/tokens @eduportdesign/web-components
 # React (the wrappers bring the web components with them)
 npm install @eduportdesign/tokens @eduportdesign/react
 
-# The Inter font (recommended; without it text falls back to the system font)
-npm install @fontsource-variable/inter</code></pre>
+# The Onest and Gabarito fonts (recommended; without them text falls back to the system font)
+npm install @fontsource-variable/onest @fontsource-variable/gabarito</code></pre>
 
           <h3>2. Load the CSS once</h3>
           <p>
             Import these at your app's entry point (<code>main.js</code>, <code>main.tsx</code> or similar), before any
             component renders. Without <code>tokens.css</code> the components have no colors.
           </p>
-          <pre><code>import '@fontsource-variable/inter';
-import '@eduportdesign/tokens/css';                 // required: light theme, soft corners
+          <pre><code>import '@fontsource-variable/onest';
+import '@fontsource-variable/gabarito';
+import '@eduportdesign/tokens/css';                 // required: light theme, Clay palette, soft corners
 import '@eduportdesign/tokens/css/theme-dark';      // optional: dark theme
+import '@eduportdesign/tokens/css/palette-sage';    // optional: Sage &amp; Sand palette
 import '@eduportdesign/tokens/css/corners-sharp';   // optional: sharp corners
 import '@eduportdesign/tokens/css/base';            // recommended: body, headings, text, links, focus</code></pre>
           <p>
@@ -218,13 +224,14 @@ import '@eduportdesign/tokens/css/base';            // recommended: body, headin
             layout with <code>gap</code>, and any rule in your own CSS overrides it.
           </p>
 
-          <h3>3. Pick a theme and corner style</h3>
+          <h3>3. Pick a theme, palette and corner style</h3>
           <p>
-            Set <code>data-theme</code> (<code>light</code> or <code>dark</code>) and <code>data-corners</code>
-            (<code>soft</code> or <code>sharp</code>) on the root element. Both are optional, default to light and soft,
-            and can change at runtime.
+            Set <code>data-theme</code> (<code>light</code> or <code>dark</code>), <code>data-palette</code>
+            (<code>clay</code> or <code>sage</code>) and <code>data-corners</code> (<code>soft</code> or
+            <code>sharp</code>) on the root element. All are optional, default to light, Clay and soft, and can change
+            at runtime. The Sage &amp; Sand palette needs <code>palette-sage</code> loaded.
           </p>
-          <pre><code>&lt;html data-theme="dark" data-corners="sharp"&gt;</code></pre>
+          <pre><code>&lt;html data-theme="dark" data-palette="sage" data-corners="sharp"&gt;</code></pre>
           <p>To follow the operating system's light or dark setting:</p>
           <pre><code>const dark = matchMedia('(prefers-color-scheme: dark)');
 const apply = () =&gt; (document.documentElement.dataset.theme = dark.matches ? 'dark' : 'light');
@@ -440,16 +447,16 @@ export class AnyComponent {}</code></pre>
         <section class="component" id="color" aria-labelledby="color-title">
           <div class="component-header"><h2 id="color-title">Color</h2><code>--ep-color-*</code></div>
           <p>
-            One brand orange, true neutrals, and six category colors that tell things apart without saying good or bad.
+            Two palettes for the Signal style: Clay (coral on warm clay, the default) and Sage &amp; Sand. Each has one key color and its own neutrals, and both share six category colors that tell things apart without saying good or bad. Switch palettes at the top of the page.
             Components only read the semantic tokens, which change with the theme. Each swatch shows the text color that
             passes WCAG AA on it, and its contrast ratio.
           </p>
           <div class="demo swatches-demo">
             <div class="demo-row full">
-              <div><h3 class="swatch-title">Brand</h3><div class="swatches" id="swatches-brand"></div></div>
+              <div><h3 class="swatch-title">Key color · <span id="swatch-key-name">Coral</span></h3><div class="swatches" id="swatches-brand"></div></div>
             </div>
             <div class="demo-row full">
-              <div><h3 class="swatch-title">Neutral</h3><div class="swatches" id="swatches-gray"></div></div>
+              <div><h3 class="swatch-title">Neutral · <span id="swatch-neutral-name">Clay</span></h3><div class="swatches" id="swatches-gray"></div></div>
             </div>
             <div class="demo-row full">
               <div>
@@ -464,7 +471,7 @@ export class AnyComponent {}</code></pre>
         <section class="component" id="typography" aria-labelledby="typography-title">
           <div class="component-header"><h2 id="typography-title">Typography</h2><code>--ep-font-*</code></div>
           <p>
-            Inter for everything you read, Bricolage Grotesque for the big headings, JetBrains Mono for code. Use the
+            Onest for everything you read, Gabarito for the big headings, JetBrains Mono for code. Use the
             role tokens (<code>--ep-font-heading-lg</code>, <code>--ep-font-body-md</code>) instead of picking a size and weight.
           </p>
           <div class="demo">

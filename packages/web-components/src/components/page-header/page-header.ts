@@ -168,10 +168,20 @@ export class EpPageHeader extends LitElement {
         height: auto;
       }
 
+      /* The text sits on the dark gradient in every theme and palette, so neutral buttons and links slotted into the
+         description take the hero text color instead of the page's. */
       :host([variant='hero']) .text {
         position: relative;
         display: grid;
         gap: var(--ep-space-100);
+        --ep-color-text-primary: var(--ep-color-hero-text);
+        --ep-color-text-link: var(--ep-color-hero-text);
+        --ep-color-border-default: color-mix(in srgb, var(--ep-color-hero-text) 55%, transparent);
+        --ep-color-interactive-secondary-default: transparent;
+        --ep-color-interactive-secondary-hover: color-mix(in srgb, var(--ep-color-hero-text) 14%, transparent);
+        --ep-color-interactive-secondary-active: color-mix(in srgb, var(--ep-color-hero-text) 22%, transparent);
+        --ep-color-interactive-ghost-hover: color-mix(in srgb, var(--ep-color-hero-text) 14%, transparent);
+        --ep-color-interactive-ghost-active: color-mix(in srgb, var(--ep-color-hero-text) 22%, transparent);
       }
 
       .text {
