@@ -17,6 +17,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      # Component and Storybook tests run in headless Chromium.
-      - run: pnpm --filter @eduportdesign/web-components exec playwright install --with-deps chromium
+      # Component and Storybook tests run in headless Chromium; Safari-sensitive layout tests also run in WebKit.
+      - run: pnpm --filter @eduportdesign/web-components exec playwright install --with-deps chromium webkit
       - run: pnpm test
