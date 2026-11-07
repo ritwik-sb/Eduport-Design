@@ -1,6 +1,6 @@
 # Foundations
 
-Proposed foundations for the Eduport Design System: color, typography, radius (with a soft/sharp corner switch) and icons. The only fixed input is the brand primary, **#fb6514**. Everything else here is a proposal.
+Foundations for the Eduport Design System: color, typography, radius (with a soft/sharp corner switch) and icons. The logo orange **#fb6514** stays in the logo; the interface uses the soft palettes below (since 2026-11-07).
 
 Tokens live in [`packages/tokens`](../packages/tokens). Run `npm test` inside the package to re-check contrast.
 
@@ -17,40 +17,48 @@ Every hue has ten steps, `10` (lightest) to `100` (darkest), generated in OKLCH 
 | 70 | ≥ 7:1 | AAA for body text. |
 | 40 and lighter | — | Light fills. Pair with step 90–100 text. |
 
-`brand.50` is the exact brand color `#fb6514` (3.01:1 against white). Brand also has in-between steps `55`, `57` and `58`; `58` `#d64200` is the primary fill (see below).
+The Signal style has two palettes. Both use the same semantic token names, so components never change; the palette only swaps values.
 
-| | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| brand | `#fff6f3` | `#ffe7de` | `#ffcbb7` | `#ff9f79` | `#fb6514` | `#c64b00` | `#983800` | `#762900` | `#561b00` | `#2b0a00` |
-| gray | `#f8f8f8` | `#ececec` | `#d6d6d6` | `#b7b7b7` | `#929292` | `#737373` | `#575757` | `#3b3b3b` | `#242424` | `#0f0f0f` |
-| red | `#fff6f5` | `#ffe6e3` | `#ffcac3` | `#ff9d92` | `#fe5950` | `#d73431` | `#a9201f` | `#811a19` | `#5c1311` | `#310303` |
-| green | `#ebfded` | `#d1f5d6` | `#a4e5af` | `#6ccb80` | `#31a753` | `#0d853a` | `#08652a` | `#044d1e` | `#023613` | `#011906` |
-| amber | `#fff8e5` | `#fdeabf` | `#f6d283` | `#e7ae2c` | `#c08800` | `#996a00` | `#774f00` | `#5d3b00` | `#442800` | `#221000` |
-| blue | `#f4f8ff` | `#e2ecfe` | `#c1d7ff` | `#90b7ff` | `#568ffa` | `#3b6ed0` | `#2a53a4` | `#1f3f7e` | `#152c59` | `#051331` |
+| Palette | Attribute | Key color | Neutrals | Feel |
+|---|---|---|---|---|
+| **Clay** (default) | none | `coral` | `clay` (warm off-white to warm brown-black) | warm, soft, the default for every app |
+| **Sage & Sand** | `data-palette="sage"` | `sage` | `sand` (green-grey paper) | calm, quieter, for apps that want less warmth |
 
-- **Gray** is true neutral, with no tint. An earlier warm gray, tinted toward the brand hue, made whites and greys look dingy on screen (changed 2026-10-09). Gray also has an extra `gray.95` step (`#1a1a1a`) for dark-theme surfaces.
-- **Red, green and blue** are standard hues. **Amber** leans yellow so warnings never read as brand orange.
-- **Brand color is used with intent**: primary actions, accent marks such as the tab underline and progress, selected states and `accent.subtle` highlights. It is never a tint on every surface.
-- **Blue** is new: the brief had no info hue, and orange, red and amber are too close to carry "info" as well.
+Load Sage & Sand with `import '@eduportdesign/tokens/css/palette-sage'` and set `data-palette="sage"` on `<html>` (or any subtree). It combines with `data-theme`, `data-corners`, `data-density`, `data-motion` and `data-contrast`. It does not apply to the Playground style, which has its own colors.
 
-### The brand-orange accessibility problem
+| | 10 | 20 | 30 | 40 | 50 | 55 | 58 | 60 | 70 | 80 | 90 | 100 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| coral | `#fff3ee` | `#ffddd1` | `#ffb8a1` | `#ff9776` | `#fc815a` | `#ea653a` | `#e16037` | `#d15227` | `#aa3e19` | `#7e2c10` | `#4a2419` | `#2c120a` |
+| sage | `#f2f9f2` | `#ddeddf` | `#c0d9c3` | `#a3c1a6` | `#82a285` | `#6a8a6e` | | `#59785d` | `#48634b` | `#344836` | `#213023` | `#121b13` |
 
-White text on `#fb6514` is **3.01:1**, which fails WCAG AA for normal text (4.5:1). Options considered:
+| | 10 | 15 | 20 | 25 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 95 | 100 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| clay | `#fff9f5` | `#f8eee7` | `#f2e6de` | `#eaddd4` | `#e4d6cd` | `#c2b4ac` | `#a3958d` | `#867971` | `#6a5e56` | `#483d37` | `#322924` | `#28211c` | `#1e1814` |
+| sand | `#fbfaf6` | `#eeede4` | `#e8e7dc` | `#e0ded3` | `#dad8cb` | `#b9b8ac` | `#9a998e` | `#7d7c73` | `#626158` | `#414039` | `#272721` | `#1f1e19` | `#171612` |
 
-1. **Exact brand fill, dark text.** `#fb6514` with near-black text (6.37:1). Passes AA, but dark text on orange looked off in real apps (2026-10-08 to 2026-10-22).
-2. **Exact brand fill, white text.** Matches the logo, but 3.01:1 fails AA. Rejected.
-3. **Just-dark-enough fill, white text (chosen 2026-10-22).** `brand.58` `#d64200` is the brand color darkened in OKLCH lightness, with the same hue and chroma, stopping at the first value where white text passes: **4.53:1**. It is as close to the logo orange as white text allows, and brighter than `brand.60` `#c64b00` (4.76:1), which read as rust.
+The status and category hues (`red`, `green`, `amber`, `blue`, `violet`, `teal`, `pink`) and the older `brand` and `gray` scales are unchanged and shared by both palettes. `brand.50` `#fb6514` is still the logo orange; it is no longer the primary fill.
 
-Decision: option 3, by Ritwik on 2026-10-22. The exact logo orange `brand.50` stays for the logo and brand moments, not for fills that carry text.
+- **Neutrals are tinted, never grey.** Clay leans warm, sand leans green. Pure grey next to a soft key color looks dirty.
+- **Surfaces step, shadows are tinted.** The page (`background.canvas`), the sheet and raised cards are a few lightness steps apart, and shadows use the palette's own dark tone (`#78503c` in Clay, `#3c4a3a` in Sage) at low alpha, so depth reads as soft rather than grey.
+- **The key color is used with intent**: primary actions, accent marks such as the tab underline and progress, selected states and `accent.subtle` highlights. It is never a tint on every surface.
+
+### Primary fills
+
+The key color is a soft mid-tone, so the label color is chosen per palette, not fixed to white:
+
+| | Clay light | Clay dark | Sage light | Sage dark |
+|---|---|---|---|---|
+| Fill (default / hover / active) | `coral.55` / `50` / `58` | `coral.40` / `30` / `20` | `sage.60` / `70` / `80` | `sage.40` / `30` / `20` |
+| Label (`text.on-primary`) | `coral.100` (dark) | `coral.100` (dark) | white | `sand.100` (dark) |
+| Label contrast (default) | 5.36:1 | 8.3:1 | 4.92:1 | 9.26:1 |
+| Fill vs page | 3.13:1 | 8.31:1 | 4.71:1 | 9.26:1 |
 
 What it means in practice:
 
-- **Labels on orange are white.** Use `text.on-primary` for anything on an `interactive.primary` fill, including checkmarks and switch thumbs.
-- **Hover and pressed shades darken in both themes**, to `brand.60` `#c64b00` (4.76:1) and `brand.70` `#983800` (7.24:1), so the label only gains contrast.
-- **Never lighten the primary fill.** `brand.58` sits right at the AA line, so any lighter orange behind white text fails. `scripts/check-contrast.mjs` catches it.
-- **Orange text stays darker.** `#fb6514` as text on white is 3.01:1, so links and the tertiary button label keep `text.link` (`brand.70` in light).
-- **Thin marks stay darker in light.** The tab underline, progress bar and the edge of checked controls use `accent.default`, which is `brand.60` in light: the brand color is 2.82:1 on `background.subtle`, under the 3:1 non-text minimum. Checked checkboxes, radios and switches are filled with the primary orange inside that edge. Dark uses the exact brand orange for all of them.
-- **The button against the page** is 4.53:1 on white and 4.23:1 on the dark page.
+- **Always use `text.on-primary`** for anything on an `interactive.primary` fill, including checkmarks and switch thumbs. Never hard-code white: in Clay the label is dark.
+- **The primary fill must stay ≥3:1 against `background.default`**, so the button is visible as a control, not just its label. Coral at its brightest (`coral.50`) is 2.4:1, so the resting fill is `coral.55`; `coral.50` is used only as the hover, where the label gains contrast.
+- **Links and thin marks are darker in light**: `text.link` is `coral.70` / `sage.70`, and `accent.default` (tab underline, progress, checked control edges) is `coral.60` / `sage.60`.
+- `scripts/check-contrast.mjs` checks every pair in Clay light and dark, Sage light and dark, and Playground light and dark, and fails the build on any miss.
 
 ### Semantic tokens
 
@@ -66,34 +74,31 @@ Components use only these (`--ep-color-*`). Values per theme are in `src/themes/
 | `interactive` | `primary`, `secondary`, `ghost`, `danger` × `default`/`hover`/`active`; `disabled` |
 | `feedback` | `info`, `success`, `warning`, `danger` × `background`/`border` |
 
-`text.on-primary` is white in both themes and goes on every primary fill state. `text.on-color` is white in both themes and goes on the danger fill. The secondary button is outlined (`border.strong` edge, `text.primary` label, clear fill), so it never outweighs the primary button and never reads as disabled in dark.
+`text.on-primary` goes on every primary fill state; its value depends on the palette (see Primary fills). `text.on-color` is white in both themes and goes on the danger fill. The secondary button is outlined (`border.strong` edge, `text.primary` label, clear fill), so it never outweighs the primary button and never reads as disabled in dark.
 
-In dark, the three card styles are three distinct steps: outlined is the page color (`gray.100`) with a border, filled is `surface.muted` (`gray.95`), and elevated is `surface.raised` (`gray.90`). Shadows don't show on a dark page, so elevation relies on the lighter surface.
+In dark, the three card styles are three distinct steps: outlined is the page color (`clay.100`) with a border, filled is `surface.muted` (`clay.95`), and elevated is `surface.raised` (`clay.90`); Sage uses the matching `sand` steps. Shadows don't show on a dark page, so elevation relies on the lighter surface.
 
-The dark end of the gray scale (80, 90, the extra `gray.95` step, and 100) is kept close together, because big jumps between dark surfaces look flat and grey, especially on phones (changed 2026-10-08).
+The dark end of the neutral scales (80, 90, 95 and 100) is kept close together, because big jumps between dark surfaces look flat and grey, especially on phones (changed 2026-10-08).
 
 ### Contrast results
 
-`scripts/check-contrast.mjs` checks 77 pairs per theme (every text token on every background, non-text tokens at 3:1, on-primary and on-color text on every fill state, text on the secondary and ghost hover tints, feedback text on feedback backgrounds). All pass in light and dark. It exits non-zero on a failure, so it can run in CI.
+`scripts/check-contrast.mjs` checks every pair per theme and palette (every text token on every background, non-text tokens at 3:1, on-primary and on-color text on every fill state, text on the secondary and ghost hover tints, feedback text on feedback backgrounds). All pass in Clay, Sage & Sand and Playground, light and dark. It exits non-zero on a failure, so it can run in CI.
 
 ## Typography
 
-**Recommendation: keep Inter** (Inter Variable), self-hosted with `@fontsource-variable/inter`.
+**Text: [Onest](https://fonts.google.com/specimen/Onest)** (Onest Variable), self-hosted with `@fontsource-variable/onest`. **Headings: [Gabarito](https://fonts.google.com/specimen/Gabarito)**, with `@fontsource-variable/gabarito`. Chosen 2026-11-07, replacing Inter and Bricolage Grotesque.
 
-- It is built for UI at small sizes, which is what internal apps mostly are: dense tables, forms, 12–14px labels.
-- It has tabular figures (`font-variant-numeric: tabular-nums`) for numbers in tables, and a large character set.
-- It matches the Eduport website, so internal tools feel related to the public brand for free.
-- SIL Open Font License, free for any use.
-
-Alternatives considered: **Geist** (more character, smaller language coverage) and **IBM Plex Sans** (more distinctive, wider, heavier for dense UIs). Either is a one-line change to `font.family.sans`.
-
-**Display face.** Headings (`font.heading.xl`, `lg`, `md`) use **Bricolage Grotesque** (`font.family.display`) at bold, with tighter tracking; body text, labels and controls stay on Inter. Load it with `@fontsource-variable/bricolage-grotesque/opsz.css`; the optical-size axis is what gives large headings their character. If it isn't loaded, the stack falls through to Inter, so nothing breaks. It has no Malayalam glyphs, so Malayalam headings use Noto Sans Malayalam.
+- Onest is a calm, open grotesque built for screens: clear at 12–14px in dense tables and forms, with tabular figures (`font-variant-numeric: tabular-nums`). It is far less common than Inter in generated UIs, so apps don't look templated.
+- Gabarito is round and friendly at bold weights, which suits the soft palettes; it is used only by the heading roles (`font.heading.xl`, `lg`, `md`, `font.family.display`).
+- Both are SIL Open Font License and variable, so one file per family covers every weight.
+- Neither has italics; browsers synthesise a slant, so keep italics rare.
+- If either isn't loaded, the stacks fall through to system fonts, so nothing breaks. Neither has Malayalam glyphs (see below).
 
 **Depth.** `color.background.canvas` is the page, `color.surface.sheet` is the main content sheet on it, and `shadow.raised` is a 1px ring plus two soft layers, so raised surfaces (cards, the current nav item, the sheet) separate without borders. `ep-app-shell` uses all three when a sidebar is present.
 
 Mono: **JetBrains Mono** for code and IDs. The token stacks fall back to system fonts, so nothing breaks if a font isn't loaded.
 
-**Malayalam.** Inter covers Latin, Cyrillic, Greek and Vietnamese only. The sans stack names **Noto Sans Malayalam** right after Inter, so Malayalam text uses it glyph by glyph while Latin text stays in Inter. Apps with Malayalam content load it with `@fontsource-variable/noto-sans-malayalam`. It was checked in buttons and tags at the 1.2 button line height, with no clipping.
+**Malayalam.** Onest and Gabarito have no Malayalam. The sans and display stacks name **Noto Sans Malayalam** right after them, so Malayalam text uses it glyph by glyph while Latin text stays in Onest. Apps with Malayalam content load it with `@fontsource-variable/noto-sans-malayalam`. It was checked in buttons and tags at the 1.2 button line height, with no clipping.
 
 ## Density
 
@@ -119,9 +124,9 @@ Components never use raw radius values. They use four **semantic** radius tokens
 
 | Token | Used for | Soft (default) | Sharp |
 |---|---|---|---|
-| `--ep-radius-indicator` | checkbox, tag, badge, tooltip | 4px | 0 |
-| `--ep-radius-control` | button, text field, select, menu item | 6px | 0 |
-| `--ep-radius-container` | card, popover, modal, toast | 10px | 0 |
+| `--ep-radius-indicator` | checkbox, tag, badge, tooltip | 6px | 0 |
+| `--ep-radius-control` | button, text field, select, menu item | 14px | 0 |
+| `--ep-radius-container` | card, popover, modal, toast | 22px | 0 |
 | `--ep-radius-round` | avatar, radio, switch | full | full |
 
 Switch modes with an attribute, on `<html>` or any subtree:
@@ -143,7 +148,7 @@ Corner mode is a separate axis from color theme, so light/dark × soft/sharp all
 **Recommendation: [Tabler Icons](https://tabler.io/icons)** (MIT).
 
 - The largest free set with one consistent style: roughly 5,000+ icons on a 24px grid with 2px strokes, plus filled variants for many of them (count approximate, as of 2025; it grows every release).
-- The stroke weight and geometry pair well with Inter.
+- The stroke weight and geometry pair well with Onest.
 - Plain SVGs, so we can generate our own `@eduportdesign/icons` package rather than depend on their framework wrappers.
 
 | Set | License | Size (approx.) | Notes |

@@ -3,16 +3,16 @@
     "$type": "color",
     "background": {
       "default": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.clay.100}"
       },
       "canvas": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.clay.100}"
       },
       "subtle": {
-        "$value": "{color.gray.95}"
+        "$value": "{color.clay.95}"
       },
       "inverse": {
-        "$value": "{color.gray.10}"
+        "$value": "{color.clay.15}"
       },
       "scrim": {
         "$value": "#000000b8",
@@ -21,46 +21,46 @@
     },
     "surface": {
       "default": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.clay.100}"
       },
       "sheet": {
-        "$value": "{color.gray.95}"
+        "$value": "{color.clay.95}"
       },
       "raised": {
-        "$value": "{color.gray.90}",
+        "$value": "{color.clay.90}",
         "$description": "Elevated cards. Two steps above the page, because shadows don't show on a dark page."
       },
       "overlay": {
-        "$value": "{color.gray.90}"
+        "$value": "{color.clay.90}"
       },
       "sunken": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.clay.100}"
       },
       "muted": {
-        "$value": "{color.gray.95}"
+        "$value": "{color.clay.95}"
       }
     },
     "text": {
       "primary": {
-        "$value": "{color.gray.10}"
+        "$value": "{color.clay.15}"
       },
       "secondary": {
-        "$value": "{color.gray.40}"
+        "$value": "{color.clay.40}"
       },
       "disabled": {
-        "$value": "{color.gray.60}"
+        "$value": "{color.clay.60}"
       },
       "inverse": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.clay.100}"
       },
       "on-color": {
         "$value": "{color.white}"
       },
       "on-primary": {
-        "$value": "{color.white}"
+        "$value": "{color.coral.100}"
       },
       "link": {
-        "$value": "{color.brand.40}"
+        "$value": "{color.coral.30}"
       },
       "info": {
         "$value": "{color.blue.40}"
@@ -77,13 +77,13 @@
     },
     "border": {
       "default": {
-        "$value": "{color.gray.80}"
+        "$value": "{color.clay.80}"
       },
       "strong": {
-        "$value": "{color.gray.50}"
+        "$value": "{color.clay.50}"
       },
       "focus": {
-        "$value": "{color.brand.40}"
+        "$value": "{color.coral.40}"
       },
       "danger": {
         "$value": "{color.red.40}"
@@ -91,10 +91,10 @@
     },
     "accent": {
       "default": {
-        "$value": "{color.brand.50}"
+        "$value": "{color.coral.40}"
       },
       "subtle": {
-        "$value": "{color.brand.100}"
+        "$value": "{color.coral.90}"
       }
     },
     "category": {
@@ -186,14 +186,14 @@
     "interactive": {
       "primary": {
         "default": {
-          "$value": "{color.brand.58}"
+          "$value": "{color.coral.40}"
         },
         "hover": {
-          "$value": "{color.brand.60}",
+          "$value": "{color.coral.30}",
           "$description": "Darker on hover, as in light, so the white label gains contrast instead of losing it."
         },
         "active": {
-          "$value": "{color.brand.70}"
+          "$value": "{color.coral.20}"
         }
       },
       "secondary": {
@@ -201,10 +201,10 @@
           "$value": "#ffffff00"
         },
         "hover": {
-          "$value": "{color.gray.90}"
+          "$value": "{color.clay.90}"
         },
         "active": {
-          "$value": "{color.gray.80}"
+          "$value": "{color.clay.80}"
         }
       },
       "ghost": {
@@ -212,10 +212,10 @@
           "$value": "#ffffff00"
         },
         "hover": {
-          "$value": "{color.gray.90}"
+          "$value": "{color.clay.90}"
         },
         "active": {
-          "$value": "{color.gray.80}"
+          "$value": "{color.clay.80}"
         }
       },
       "danger": {
@@ -230,7 +230,7 @@
         }
       },
       "disabled": {
-        "$value": "{color.gray.90}"
+        "$value": "{color.clay.90}"
       }
     },
     "feedback": {
@@ -269,14 +269,14 @@
     },
     "rail": {
       "background": {
-        "$value": "{color.black}",
+        "$value": "#120e0c",
         "$description": "A dark navigation rail in both themes (ep-side-nav appearance=\"inverse\"), so the brand orange can glow on it."
       },
       "text": {
         "$value": "{color.white}"
       },
       "text-secondary": {
-        "$value": "{color.gray.40}",
+        "$value": "{color.clay.40}",
         "$description": "Inactive items and group headings on the rail."
       },
       "hover": {
@@ -289,28 +289,28 @@
         "$value": "#ffffff1f"
       },
       "accent": {
-        "$value": "{color.brand.50}",
+        "$value": "{color.coral.40}",
         "$description": "The current-item marker and its glow. The exact logo orange: 5:1 or more on the rail."
       },
       "badge": {
-        "$value": "{color.brand.50}",
+        "$value": "{color.coral.40}",
         "$description": "Count badges on the rail. Pair with rail.on-badge."
       },
       "on-badge": {
-        "$value": "{color.gray.100}"
+        "$value": "{color.coral.100}"
       }
     },
     "hero": {
       "start": {
-        "$value": "{color.brand.90}",
+        "$value": "#2a1c30",
         "$description": "Start of the brand hero gradient (ep-page-header variant=\"hero\")."
       },
       "end": {
-        "$value": "{color.brand.80}",
+        "$value": "#45263a",
         "$description": "End of the hero gradient. White text stays at 4.5:1 or more on both ends."
       },
       "glow": {
-        "$value": "{color.brand.50}",
+        "$value": "{color.coral.40}",
         "$description": "Radial highlight in the hero's top-right corner. Keep text off it, or put the text on a chip."
       },
       "text": {
@@ -321,11 +321,11 @@
         "$description": "Translucent dark tile for stats on the hero."
       },
       "aurora-1": {
-        "$value": "{color.pink.70}",
+        "$value": "{color.coral.60}",
         "$description": "First drifting blob in the hero, low and to the right. Text stays on the gradient, never on the blobs."
       },
       "aurora-2": {
-        "$value": "{color.violet.80}",
+        "$value": "{color.violet.70}",
         "$description": "Second drifting blob in the hero, behind the stat chips."
       }
     }
@@ -335,7 +335,23 @@
     "raised": {
       "$value": [
         {
-          "color": "#000000a3",
+          "color": "#ffffff0d",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#00000059",
+          "offsetX": "0px",
+          "offsetY": "-3px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#00000099",
           "offsetX": "0px",
           "offsetY": "1px",
           "blur": "3px",
@@ -399,17 +415,17 @@
     "sheen": {
       "$value": [
         {
-          "color": "#ffffff33",
+          "color": "#ffffff66",
           "offsetX": "0px",
-          "offsetY": "1px",
+          "offsetY": "1.5px",
           "blur": "0px",
           "spread": "0px",
           "inset": true
         },
         {
-          "color": "#00000040",
+          "color": "#00000029",
           "offsetX": "0px",
-          "offsetY": "-1px",
+          "offsetY": "-3px",
           "blur": "0px",
           "spread": "0px",
           "inset": true

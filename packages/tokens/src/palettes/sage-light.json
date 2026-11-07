@@ -1,0 +1,282 @@
+{
+  "$description": "Sage & Sand palette, light theme: overrides the Clay colors under [data-palette=\"sage\"]. Categorical and feedback colors are shared with Clay.",
+  "color": {
+    "background": {
+      "default": {
+        "$value": "{color.sand.10}"
+      },
+      "canvas": {
+        "$value": "{color.sand.15}"
+      },
+      "subtle": {
+        "$value": "{color.sand.20}"
+      },
+      "inverse": {
+        "$value": "{color.sand.90}"
+      },
+      "scrim": {
+        "$value": "#272721a3"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.sand.10}"
+      },
+      "sheet": {
+        "$value": "{color.sand.10}"
+      },
+      "raised": {
+        "$value": "{color.white}"
+      },
+      "overlay": {
+        "$value": "{color.white}"
+      },
+      "sunken": {
+        "$value": "{color.sand.20}"
+      },
+      "muted": {
+        "$value": "{color.sand.25}"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{color.sand.90}"
+      },
+      "secondary": {
+        "$value": "{color.sand.70}"
+      },
+      "disabled": {
+        "$value": "{color.sand.50}"
+      },
+      "inverse": {
+        "$value": "{color.sand.10}"
+      },
+      "on-primary": {
+        "$value": "{color.white}"
+      },
+      "link": {
+        "$value": "{color.sage.70}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.sand.30}"
+      },
+      "strong": {
+        "$value": "{color.sand.60}"
+      },
+      "focus": {
+        "$value": "{color.sage.60}"
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "{color.sage.60}"
+      },
+      "subtle": {
+        "$value": "{color.sage.20}"
+      }
+    },
+    "interactive": {
+      "primary": {
+        "default": {
+          "$value": "{color.sage.60}"
+        },
+        "hover": {
+          "$value": "{color.sage.70}"
+        },
+        "active": {
+          "$value": "{color.sage.80}"
+        }
+      },
+      "secondary": {
+        "hover": {
+          "$value": "{color.sand.20}"
+        },
+        "active": {
+          "$value": "{color.sand.25}"
+        }
+      },
+      "ghost": {
+        "hover": {
+          "$value": "{color.sand.20}"
+        },
+        "active": {
+          "$value": "{color.sand.25}"
+        }
+      },
+      "disabled": {
+        "$value": "{color.sand.20}"
+      }
+    },
+    "rail": {
+      "background": {
+        "$value": "{color.sage.90}"
+      },
+      "text": {
+        "$value": "{color.white}"
+      },
+      "text-secondary": {
+        "$value": "{color.sage.30}"
+      },
+      "accent": {
+        "$value": "{color.sage.40}"
+      },
+      "badge": {
+        "$value": "{color.sage.40}"
+      },
+      "on-badge": {
+        "$value": "{color.sage.100}"
+      }
+    },
+    "hero": {
+      "start": {
+        "$value": "{color.sage.80}"
+      },
+      "end": {
+        "$value": "{color.sage.70}"
+      },
+      "glow": {
+        "$value": "{color.sage.40}"
+      },
+      "aurora-1": {
+        "$value": "{color.sage.40}"
+      },
+      "aurora-2": {
+        "$value": "{color.teal.50}"
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised": {
+      "$value": [
+        {
+          "color": "#3c4a3a14",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "1px"
+        },
+        {
+          "color": "#3c4a3a0f",
+          "offsetX": "0px",
+          "offsetY": "-3px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#3c4a3a12",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        },
+        {
+          "color": "#3c4a3a38",
+          "offsetX": "0px",
+          "offsetY": "12px",
+          "blur": "24px",
+          "spread": "-12px"
+        }
+      ]
+    },
+    "overlay": {
+      "$value": [
+        {
+          "color": "#3c4a3a1a",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "1px"
+        },
+        {
+          "color": "#3c4a3a14",
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "6px",
+          "spread": "0px"
+        },
+        {
+          "color": "#3c4a3a4d",
+          "offsetX": "0px",
+          "offsetY": "24px",
+          "blur": "48px",
+          "spread": "-16px"
+        }
+      ]
+    },
+    "raised-hover": {
+      "$value": [
+        {
+          "color": "#3c4a3a24",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "1px"
+        },
+        {
+          "color": "#3c4a3a12",
+          "offsetX": "0px",
+          "offsetY": "-3px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#3c4a3a1a",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "8px",
+          "spread": "0px"
+        },
+        {
+          "color": "#3c4a3a4d",
+          "offsetX": "0px",
+          "offsetY": "18px",
+          "blur": "32px",
+          "spread": "-12px"
+        }
+      ]
+    },
+    "control": {
+      "$value": [
+        {
+          "color": "#3c4a3a14",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        },
+        {
+          "color": "#3c4a3a0f",
+          "offsetX": "0px",
+          "offsetY": "-2px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        }
+      ]
+    },
+    "toned": {
+      "$value": [
+        {
+          "color": "#3c4a3a0f",
+          "offsetX": "0px",
+          "offsetY": "-3px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#3c4a3a2e",
+          "offsetX": "0px",
+          "offsetY": "10px",
+          "blur": "20px",
+          "spread": "-12px"
+        }
+      ]
+    }
+  }
+}

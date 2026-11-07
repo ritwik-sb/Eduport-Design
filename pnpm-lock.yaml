@@ -23,10 +23,7 @@ importers:
       '@eduportdesign/web-components':
         specifier: workspace:^
         version: link:../../packages/web-components
-      '@fontsource-variable/bricolage-grotesque':
-        specifier: ^5.3.0
-        version: 5.3.0
-      '@fontsource-variable/inter':
+      '@fontsource-variable/gabarito':
         specifier: ^5.3.0
         version: 5.3.0
       '@fontsource-variable/noto-sans-malayalam':
@@ -35,6 +32,9 @@ importers:
       '@fontsource-variable/nunito':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource-variable/onest':
+        specifier: ^5.3.1
+        version: 5.3.1
     devDependencies:
       vite:
         specifier: ^8.0.0
@@ -54,15 +54,15 @@ importers:
       '@eduportdesign/web-components':
         specifier: workspace:^
         version: link:../../packages/web-components
-      '@fontsource-variable/bricolage-grotesque':
-        specifier: ^5.3.0
-        version: 5.3.0
-      '@fontsource-variable/inter':
+      '@fontsource-variable/gabarito':
         specifier: ^5.3.0
         version: 5.3.0
       '@fontsource-variable/nunito':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource-variable/onest':
+        specifier: ^5.3.1
+        version: 5.3.1
       lit:
         specifier: ^3.3.0
         version: 3.3.3
@@ -415,17 +415,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource-variable/bricolage-grotesque@5.3.0':
-    resolution: {integrity: sha512-TLi9Q4hJjS2UvoTMRSS2nHu6c4R56lAw60NR9QYtVRCHn0XtsFpiEhNffZ8Glsoxu6wEEwLKBP8lb94J52PNBA==}
-
-  '@fontsource-variable/inter@5.3.0':
-    resolution: {integrity: sha512-OupL48va4JNofb97w6NYeF9S7W/kHNKM0Er8Dem5nqi4jeOLrVJDoE8tZEpnMJmtkvNbB1EIPPwHcdkF6b1oUA==}
+  '@fontsource-variable/gabarito@5.3.0':
+    resolution: {integrity: sha512-p7ROuY70ufLI5/hVvdgo4iJo17Dz2OfQXgdkaeS0U/B2wMqNIPt+/2WWWaAzrUYvcrNquL7farT2MY/vVo2ENw==}
 
   '@fontsource-variable/noto-sans-malayalam@5.3.0':
     resolution: {integrity: sha512-SKo5dwznLLyLC97M3d8FVmgUylNzI3TkVUshjFM1InaRvRI9S/GGRfWzSs2DlL/9tZU1/fU1GsQi+PjkQlMQGQ==}
 
   '@fontsource-variable/nunito@5.3.0':
     resolution: {integrity: sha512-tw0ch7evIDSwoeUy+0XzocYHfbRWLeCRPJy22KgbrLjDLAbNw/fErBiil10Ssrs3Sjr55zaZrr36a975j8cBkQ==}
+
+  '@fontsource-variable/onest@5.3.1':
+    resolution: {integrity: sha512-xaaw6G4HDB2/RczsWLD/2bnib4ykmQlTlBUN3GOEOiyErilZukQWVJG95h9zwAy0i8KY+QzDa+COPfqhI72Acw==}
 
   '@github/catalyst@1.8.1':
     resolution: {integrity: sha512-dnN4WWpbeuQvA17LvsGdlXEueJdBk9y+I+WO5pdNpoHNOXPsFcz3hJrq1iRmdsNgQOf4S8e83axtwIxvG62eWA==}
@@ -2724,13 +2724,13 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@fontsource-variable/bricolage-grotesque@5.3.0': {}
-
-  '@fontsource-variable/inter@5.3.0': {}
+  '@fontsource-variable/gabarito@5.3.0': {}
 
   '@fontsource-variable/noto-sans-malayalam@5.3.0': {}
 
   '@fontsource-variable/nunito@5.3.0': {}
+
+  '@fontsource-variable/onest@5.3.1': {}
 
   '@github/catalyst@1.8.1': {}
 

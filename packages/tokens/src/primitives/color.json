@@ -319,6 +319,165 @@
       "100": {
         "$value": "#2d051a"
       }
+    },
+    "clay": {
+      "$description": "Warm clay neutrals: the Clay palette's canvas, surfaces, text and borders.",
+      "10": {
+        "$value": "#fff9f5"
+      },
+      "15": {
+        "$value": "#f8eee7"
+      },
+      "20": {
+        "$value": "#f2e6de"
+      },
+      "25": {
+        "$value": "#eaddd4"
+      },
+      "30": {
+        "$value": "#e4d6cd"
+      },
+      "40": {
+        "$value": "#c2b4ac"
+      },
+      "50": {
+        "$value": "#a3958d"
+      },
+      "60": {
+        "$value": "#867971"
+      },
+      "70": {
+        "$value": "#6a5e56"
+      },
+      "80": {
+        "$value": "#483d37"
+      },
+      "90": {
+        "$value": "#322924"
+      },
+      "95": {
+        "$value": "#28211c"
+      },
+      "100": {
+        "$value": "#1e1814"
+      }
+    },
+    "coral": {
+      "$description": "Coral: the Clay palette's key colour. Fills carry dark text (coral.100); 55 is the primary fill.",
+      "10": {
+        "$value": "#fff3ee"
+      },
+      "20": {
+        "$value": "#ffddd1"
+      },
+      "30": {
+        "$value": "#ffb8a1"
+      },
+      "40": {
+        "$value": "#ff9776"
+      },
+      "50": {
+        "$value": "#fc815a"
+      },
+      "55": {
+        "$value": "#ea653a"
+      },
+      "58": {
+        "$value": "#e16037"
+      },
+      "60": {
+        "$value": "#d15227"
+      },
+      "70": {
+        "$value": "#aa3e19"
+      },
+      "80": {
+        "$value": "#7e2c10"
+      },
+      "90": {
+        "$value": "#4a2419"
+      },
+      "100": {
+        "$value": "#2c120a"
+      }
+    },
+    "sand": {
+      "$description": "Sand neutrals with a faint olive cast: the Sage & Sand palette's canvas, surfaces, text and borders.",
+      "10": {
+        "$value": "#fbfaf6"
+      },
+      "15": {
+        "$value": "#eeede4"
+      },
+      "20": {
+        "$value": "#e8e7dc"
+      },
+      "25": {
+        "$value": "#e0ded3"
+      },
+      "30": {
+        "$value": "#dad8cb"
+      },
+      "40": {
+        "$value": "#b9b8ac"
+      },
+      "50": {
+        "$value": "#9a998e"
+      },
+      "60": {
+        "$value": "#7d7c73"
+      },
+      "70": {
+        "$value": "#626158"
+      },
+      "80": {
+        "$value": "#414039"
+      },
+      "90": {
+        "$value": "#272721"
+      },
+      "95": {
+        "$value": "#1f1e19"
+      },
+      "100": {
+        "$value": "#171612"
+      }
+    },
+    "sage": {
+      "$description": "Sage green: the Sage & Sand palette's key colour. 60 and darker carry white text.",
+      "10": {
+        "$value": "#f2f9f2"
+      },
+      "20": {
+        "$value": "#ddeddf"
+      },
+      "30": {
+        "$value": "#c0d9c3"
+      },
+      "40": {
+        "$value": "#a3c1a6"
+      },
+      "50": {
+        "$value": "#82a285"
+      },
+      "55": {
+        "$value": "#6a8a6e"
+      },
+      "60": {
+        "$value": "#59785d"
+      },
+      "70": {
+        "$value": "#48634b"
+      },
+      "80": {
+        "$value": "#344836"
+      },
+      "90": {
+        "$value": "#213023"
+      },
+      "100": {
+        "$value": "#121b13"
+      }
     }
   }
 }

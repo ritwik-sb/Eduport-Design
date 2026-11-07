@@ -5,15 +5,16 @@ Design tokens for the Eduport Design System, in [DTCG](https://www.designtokens.
 > **Building an app, or using an AI coding assistant?** Read the [AI and app guide](https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/llm-guide.md) first. It has the full setup, a page skeleton to start every screen from, and every component's API. Layout rules (app shell, page header, sections) are in [docs/layout.md](https://github.com/ritwik-sb/Eduport-Design/blob/main/docs/layout.md).
 
 ```js
-import '@eduportdesign/tokens/css';                 // primitives, light theme, soft corners, compact + touch density
+import '@eduportdesign/tokens/css';                 // primitives, light theme, Clay palette, soft corners, compact + touch density
 import '@eduportdesign/tokens/css/theme-dark';      // [data-theme="dark"]
 import '@eduportdesign/tokens/css/corners-sharp';   // [data-corners="sharp"]
+import '@eduportdesign/tokens/css/palette-sage';    // [data-palette="sage"], the Sage & Sand palette of the Signal style
 import '@eduportdesign/tokens/css/style-playground'; // [data-style="playground"], see docs/playground.md
 import '@eduportdesign/tokens/css/base';            // opt-in element styles: body, headings, text, links, focus
 ```
 
 ```html
-<html data-theme="dark" data-corners="sharp" data-motion="reduced" data-contrast="more">
+<html data-theme="dark" data-palette="sage" data-corners="sharp" data-motion="reduced" data-contrast="more">
 ```
 
 `base.css` styles bare elements (`body`, `h1`–`h6`, links, `code`, focus ring) with the semantic tokens, inside `@layer ep-base` with zero specificity, so app CSS always wins. It resets heading, paragraph and list margins to 0; wrap long-form text in `.ep-prose` for reading spacing. `.ep-visually-hidden` hides text visually but keeps it for screen readers.
@@ -27,7 +28,8 @@ Increased contrast also applies by itself when the OS asks for it (`prefers-cont
 Type roles (`--ep-font-heading-{xl,lg,md,sm,xs}`, `--ep-font-body-{lg,md,sm}`, `--ep-font-label-{md,sm}`, `--ep-font-code-md`) are `font` shorthands, so `font: var(--ep-font-heading-lg)` sets the whole style. Elevation uses `--ep-shadow-raised` and `--ep-shadow-overlay`, which change with the theme.
 
 - `src/primitives/` raw values (color scales, space, radius, type, shadow, motion). Components never use these directly.
-- `src/themes/` semantic color and shadow tokens per theme.
+- `src/themes/` semantic color and shadow tokens per theme (the Clay palette).
+- `src/palettes/` overrides for other palettes (`sage-light.json`, `sage-dark.json`), built to `palette-sage.css`.
 - `src/type/` type roles (composite typography tokens).
 - `src/contrast/` the increased-contrast overrides, written as references to other semantic tokens so they work in every theme.
 - `src/corners/` semantic radius tokens per corner mode.

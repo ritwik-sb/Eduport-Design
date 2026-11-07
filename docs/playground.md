@@ -7,7 +7,7 @@ Use it for surfaces where the audience is students or a first-time user and frie
 ## Turn it on
 
 ```js
-import '@fontsource-variable/nunito';                  // the font is self-hosted by the app, like Inter
+import '@fontsource-variable/nunito';                  // the font is self-hosted by the app, like Onest
 import '@eduportdesign/tokens/css';
 import '@eduportdesign/tokens/css/theme-dark';          // only if you offer dark
 import '@eduportdesign/tokens/css/style-playground';    // load after the two above
@@ -23,7 +23,7 @@ import '@eduportdesign/tokens/css/style-playground';    // load after the two ab
 
 | Part | Signal | Playground |
 |---|---|---|
-| Font | Inter, Bricolage Grotesque for headings | Nunito everywhere; weights 500, 600, 800, 900 |
+| Font | Onest, Gabarito for headings | Nunito everywhere; weights 500, 600, 800, 900 |
 | Canvas | Gray page, white sheet | Warm cream page and sheet, white cards |
 | Borders | 1px | 2px (`border-width.thin`), focus ring 3px |
 | Corners | 6px controls, 10px containers | 14px controls, 22px containers (sharp corners still win) |
@@ -62,9 +62,10 @@ A pressed button moves down by `motion.distance.press` (4px) onto its hard edge,
 
 ## Limits in this first version
 
-- The current item in `ep-side-nav` is a raised pill, not an orange fill. A filled current item needs a nav token set, and is a follow-up.
+- The current item in `ep-side-nav` is a raised pill, not a filled one. A filled current item needs a nav token set, and is a follow-up.
 - Roles and a few colors are re-emitted so `data-style` works on a subtree, but `data-corners="sharp"` has to be on the root for sharp corners to win over Playground radii.
-- Nunito has no Malayalam. The stack falls back to Inter, then Noto Sans Malayalam, as in Signal.
+- Playground has its own colors, so `data-palette` has no effect under it. Palettes (Clay, Sage & Sand) belong to Signal.
+- Nunito has no Malayalam. The stack falls back to Onest, then Noto Sans Malayalam, as in Signal.
 
 ## Moving it out later
 

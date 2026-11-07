@@ -1,0 +1,260 @@
+{
+  "$description": "Sage & Sand palette, dark theme: overrides the Clay colors under [data-palette=\"sage\"]. Categorical and feedback colors are shared with Clay.",
+  "color": {
+    "background": {
+      "default": {
+        "$value": "{color.sand.100}"
+      },
+      "canvas": {
+        "$value": "{color.sand.100}"
+      },
+      "subtle": {
+        "$value": "{color.sand.95}"
+      },
+      "inverse": {
+        "$value": "{color.sand.15}"
+      },
+      "scrim": {
+        "$value": "#000000b8"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.sand.100}"
+      },
+      "sheet": {
+        "$value": "{color.sand.95}"
+      },
+      "raised": {
+        "$value": "{color.sand.90}"
+      },
+      "overlay": {
+        "$value": "{color.sand.90}"
+      },
+      "sunken": {
+        "$value": "{color.sand.100}"
+      },
+      "muted": {
+        "$value": "{color.sand.95}"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{color.sand.15}"
+      },
+      "secondary": {
+        "$value": "{color.sand.40}"
+      },
+      "disabled": {
+        "$value": "{color.sand.60}"
+      },
+      "inverse": {
+        "$value": "{color.sand.100}"
+      },
+      "on-primary": {
+        "$value": "{color.sand.100}"
+      },
+      "link": {
+        "$value": "{color.sage.30}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.sand.80}"
+      },
+      "strong": {
+        "$value": "{color.sand.50}"
+      },
+      "focus": {
+        "$value": "{color.sage.40}"
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "{color.sage.40}"
+      },
+      "subtle": {
+        "$value": "{color.sage.90}"
+      }
+    },
+    "interactive": {
+      "primary": {
+        "default": {
+          "$value": "{color.sage.40}"
+        },
+        "hover": {
+          "$value": "{color.sage.30}"
+        },
+        "active": {
+          "$value": "{color.sage.20}"
+        }
+      },
+      "secondary": {
+        "hover": {
+          "$value": "{color.sand.90}"
+        },
+        "active": {
+          "$value": "{color.sand.80}"
+        }
+      },
+      "ghost": {
+        "hover": {
+          "$value": "{color.sand.90}"
+        },
+        "active": {
+          "$value": "{color.sand.80}"
+        }
+      },
+      "disabled": {
+        "$value": "{color.sand.90}"
+      }
+    },
+    "rail": {
+      "background": {
+        "$value": "#0f120e"
+      },
+      "text": {
+        "$value": "{color.white}"
+      },
+      "text-secondary": {
+        "$value": "{color.sand.40}"
+      },
+      "accent": {
+        "$value": "{color.sage.40}"
+      },
+      "badge": {
+        "$value": "{color.sage.40}"
+      },
+      "on-badge": {
+        "$value": "{color.sage.100}"
+      }
+    },
+    "hero": {
+      "start": {
+        "$value": "{color.sage.100}"
+      },
+      "end": {
+        "$value": "{color.sage.90}"
+      },
+      "glow": {
+        "$value": "{color.sage.40}"
+      },
+      "aurora-1": {
+        "$value": "{color.sage.60}"
+      },
+      "aurora-2": {
+        "$value": "{color.teal.70}"
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised": {
+      "$value": [
+        {
+          "color": "#ffffff0d",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#00000059",
+          "offsetX": "0px",
+          "offsetY": "-3px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#00000099",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "3px",
+          "spread": "0px"
+        },
+        {
+          "color": "#000000cc",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        }
+      ]
+    },
+    "overlay": {
+      "$value": [
+        {
+          "color": "#00000099",
+          "offsetX": "0px",
+          "offsetY": "12px",
+          "blur": "24px",
+          "spread": "-4px"
+        },
+        {
+          "color": "#000000cc",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        }
+      ]
+    },
+    "raised-hover": {
+      "$value": [
+        {
+          "color": "#000000cc",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "10px",
+          "spread": "0px"
+        },
+        {
+          "color": "#000000e6",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        },
+        {
+          "color": "#ffffff1a",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "1px"
+        }
+      ]
+    },
+    "control": {
+      "$value": [
+        {
+          "color": "#ffffff0f",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "0px",
+          "spread": "0px",
+          "inset": true
+        },
+        {
+          "color": "#00000066",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        }
+      ]
+    },
+    "toned": {
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ]
+    }
+  }
+}

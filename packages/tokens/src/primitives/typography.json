@@ -4,8 +4,8 @@
       "$type": "fontFamily",
       "sans": {
         "$value": [
-          "Inter Variable",
-          "Inter",
+          "Onest Variable",
+          "Onest",
           "Noto Sans Malayalam Variable",
           "Noto Sans Malayalam",
           "system-ui",
@@ -16,7 +16,7 @@
           "Arial",
           "sans-serif"
         ],
-        "$description": "Inter, self-hosted by the app (e.g. @fontsource-variable/inter). Inter has no Malayalam, so Malayalam text falls through to Noto Sans Malayalam (@fontsource-variable/noto-sans-malayalam), which apps with Malayalam content should load too. Then the platform UI font."
+        "$description": "Onest, self-hosted by the app (@fontsource-variable/onest): open, rounded and very readable at UI sizes, with tabular figures. It has no Malayalam, so Malayalam text falls through to Noto Sans Malayalam (@fontsource-variable/noto-sans-malayalam), which apps with Malayalam content should load too. Then the platform UI font. Onest has no italic: browsers slant it."
       },
       "mono": {
         "$value": [
@@ -31,10 +31,10 @@
       },
       "display": {
         "$value": [
-          "Bricolage Grotesque Variable",
-          "Bricolage Grotesque",
-          "Inter Variable",
-          "Inter",
+          "Gabarito Variable",
+          "Gabarito",
+          "Onest Variable",
+          "Onest",
           "Noto Sans Malayalam Variable",
           "Noto Sans Malayalam",
           "system-ui",
@@ -45,7 +45,7 @@
           "Arial",
           "sans-serif"
         ],
-        "$description": "Headings, hero titles and big numbers. Bricolage Grotesque, self-hosted by the app: import @fontsource-variable/bricolage-grotesque/opsz.css, whose optical-size axis gives large headings their character. If it isn't loaded, the stack falls through to Inter, so nothing breaks. Body text and controls stay on font.family.sans."
+        "$description": "Headings, hero titles and big numbers. Gabarito, self-hosted by the app (@fontsource-variable/gabarito): a soft, chunky geometric that gives headings the Clay character. If it isn't loaded, the stack falls through to Onest, so nothing breaks. Body text and controls stay on font.family.sans."
       }
     },
     "size": {
