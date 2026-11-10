@@ -94,8 +94,17 @@ export class EpModal extends LitElement {
         line-height: var(--ep-font-line-height-tight);
       }
 
+      header,
+      footer {
+        flex-shrink: 0;
+      }
+
+      /* Size the body from its content (flex-basis auto) and let it shrink to scroll once the dialog reaches its
+         max height. A 0% basis (flex: 1) collapses it to its padding in WebKit, where the dialog has no definite
+         height. */
       .body {
-        flex: 1;
+        flex: 1 1 auto;
+        min-height: 0;
         overflow-y: auto;
         padding: var(--ep-space-200) var(--ep-space-300) var(--ep-space-300);
       }
