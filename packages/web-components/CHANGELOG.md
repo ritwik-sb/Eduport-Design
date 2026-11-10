@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 5b0ea2b: ep-modal: fix the body collapsing to a one-line strip in iPhone Safari. Short modals stay compact; tall ones grow to the max height and scroll once inside the body.
+- 5b0ea2b: ep-modal: likely fix for the body collapsing to a one-line strip in iPhone Safari. The body now sizes from its content (short modals stay compact; tall ones grow to the max height and scroll once inside the body). Not yet confirmed on a physical iPhone.
   - @eduportdesign/tokens@0.7.1
 
 ## 0.7.0
